@@ -44,6 +44,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ExecutionException;
 
+import ij3d.segmentation.SegmentationListener;
+
 public class Image3DUniverse extends DefaultAnimatableUniverse {
 
 	public static ArrayList<Image3DUniverse> universes =
@@ -144,9 +146,12 @@ public class Image3DUniverse extends DefaultAnimatableUniverse {
 					IJ.showStatus("");
 			}
 		});
+
 		canvas.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				if (e.isConsumed())
+					return;
 				Content c = picker.getPickedContent(
 						e.getX(), e.getY());
 				select(c);

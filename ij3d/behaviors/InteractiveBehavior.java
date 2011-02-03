@@ -94,8 +94,8 @@ public class InteractiveBehavior extends Behavior {
 		WakeupOnAWTEvent wakeup;
 		AWTEvent[] events;
 		while(criteria.hasMoreElements()) {
-			wakeup = (WakeupOnAWTEvent)criteria.nextElement();
-			events = (AWTEvent[])wakeup.getAWTEvent();
+			WakeupOnAWTEvent wakeup = (WakeupOnAWTEvent)criteria.nextElement();
+			AWTEvent[] events = (AWTEvent[])wakeup.getAWTEvent();
 			for(AWTEvent evt : events) {
 				if(evt instanceof MouseEvent)
 					doProcess((MouseEvent)evt);
@@ -144,6 +144,7 @@ public class InteractiveBehavior extends Behavior {
 	 * @param e
 	 */
 	protected void doProcess(KeyEvent e) {
+		int toolID = Toolbar.getToolId();
 		int id = e.getID();
 
 		if(id == KeyEvent.KEY_RELEASED || id == KeyEvent.KEY_TYPED)
@@ -262,6 +263,7 @@ public class InteractiveBehavior extends Behavior {
 	 * @param e
 	 */
 	protected void doProcess(MouseEvent e) {
+		int toolID = Toolbar.getToolId();
 		int id = e.getID();
 		int mask = e.getModifiersEx();
 		Content c = univ.getSelected();
@@ -281,8 +283,8 @@ public class InteractiveBehavior extends Behavior {
 			if(shouldTranslate(mask)) {
 				if(c != null && !c.isLocked()) contentTransformer.translate(e);
 				else viewTransformer.translate(e);
-			} else if(shouldRotate(mask)) {
-				if(c != null && !c.isLocked()) contentTransformer.rotate(e);
+			} else if(shouldRotate(mask, toolID)) {
+				if(c != null && !c.isLocked() && (MouseEvent.BUTTON1_DOWN_MASK == (mask & MouseEvent.BUTTON1_DOWN_MASK))) contentTransformer.rotate(e);
 				else viewTransformer.rotate(e);
 			} else if(shouldZoom(mask))
 				viewTransformer.zoom(e);
