@@ -57,6 +57,11 @@
 		</dependency>
 	</dependencies>
 
+	<ciManagement>
+		<system>Jenkins</system>
+		<url>http://jenkins.imagej.net/job/3D_Viewer/</url>
+	</ciManagement>
+
 	<scm>
 		<connection>scm:git:git://github.com/fiji/3D_Viewer</connection>
 		<developerConnection>scm:git:git@github.com:fiji/3D_Viewer</developerConnection>
