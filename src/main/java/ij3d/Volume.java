@@ -47,7 +47,7 @@ public class Volume {
 	protected ImagePlus imp;
 
 	/** Wraping the ImagePlus */
-	protected Img image;
+	protected InputImage image;
 
 	/** The loader, initialized depending on the data type */
 	protected Loader loader;
@@ -463,14 +463,14 @@ public class Volume {
 	/**
 	 * Abstract interface for the input image.
 	 */
-	protected interface Img {
+	protected interface InputImage {
 		public int get(int x, int y, int z);
 		public void get(int x, int y, int z, int[] c);
 		public byte getAverage(int x, int y, int z);
 		public void set(int x, int y, int z, int v);
 	}
 
-	protected final class ByteImage implements Img {
+	protected final class ByteImage implements InputImage {
 		protected byte[][] fData;
 		private int w;
 
@@ -501,7 +501,7 @@ public class Volume {
 		}
 	}
 
-	protected final class IntImage implements Img {
+	protected final class IntImage implements InputImage {
 		protected int[][] fData;
 		private int w;
 
@@ -539,9 +539,9 @@ public class Volume {
 	}
 
 	protected class IntLoader implements Loader {
-		protected Img image;
+		protected InputImage image;
 
-		protected IntLoader(Img imp) {
+		protected IntLoader(InputImage imp) {
 			this.image = imp;
 		}
 
@@ -576,7 +576,7 @@ public class Volume {
 	
 	protected class SaturatedIntLoader extends IntLoader {
 		
-		protected SaturatedIntLoader(Img imp) {
+		protected SaturatedIntLoader(InputImage imp) {
 			super(imp);
 		}
 		
@@ -603,10 +603,10 @@ public class Volume {
 	}
 
 	protected class ByteLoader implements Loader {
-		protected Img image;
+		protected InputImage image;
 		protected int channel;
 
-		protected ByteLoader(Img imp, int channel) {
+		protected ByteLoader(InputImage imp, int channel) {
 			this.image = imp;
 			this.channel = channel;
 		}
@@ -636,7 +636,7 @@ public class Volume {
 
 	protected class AverageByteLoader extends ByteLoader {
 
-		protected AverageByteLoader(Img imp) {
+		protected AverageByteLoader(InputImage imp) {
 			super(imp, 0);
 		}
 
