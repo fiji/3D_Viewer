@@ -2,22 +2,15 @@ package marchingcubes;
 
 import ij.ImagePlus;
 import ij.ImageStack;
-import ij.process.ImageProcessor;
-import ij.process.ColorProcessor;
-import ij.process.ByteProcessor;
 import ij.measure.Calibration;
-import java.util.List;
-
-import javax.vecmath.Point3f;
-
+import ij.process.ByteProcessor;
+import ij.process.ColorProcessor;
+import ij.process.ImageProcessor;
 import ij3d.AreaListVolume;
 import ij3d.Volume;
-import ij3d.ImgLibVolume;
-
 import isosurface.Triangulator;
 
-import mpicbg.imglib.image.Image;
-import mpicbg.imglib.type.numeric.RealType;
+import java.util.List;
 
 import javax.vecmath.Point3f;
 
@@ -41,15 +34,6 @@ public class MCTriangulator implements Triangulator {
 		// get triangles
 		List l = MCCube.getTriangles(volume, threshold);
 		return l;
-	}
-
-	/**
-	 * @param img The Image<? extends RealType> instance to use.
-	 * @param threshold The cut-off (inclusive) of pixel values considered inside.
-	 * @param origin The translation of the origin, in 3D.
-	 */
-	public<T extends RealType<T>> List<Point3f> getTriangles(Image<T> img, int threshold, float[] origin) throws Exception {
-		return MCCube.getTriangles(new ImgLibVolume(img, origin), threshold);
 	}
 
 	/**
