@@ -1,9 +1,8 @@
 package octree;
 
-import javax.media.j3d.BranchGroup;
 import javax.media.j3d.Appearance;
+import javax.media.j3d.BranchGroup;
 import javax.media.j3d.GeometryArray;
-import javax.media.j3d.ImageComponent2D;
 import javax.media.j3d.Shape3D;
 
 public class ShapeGroup implements Comparable {

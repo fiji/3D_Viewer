@@ -1,21 +1,19 @@
 package ij3d.behaviors;
 
 import ij.IJ;
-
-import java.util.Enumeration;
-import java.util.List;
-
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseWheelEvent;
-import java.awt.event.InputEvent;
-import java.awt.event.KeyEvent;
-import java.awt.AWTEvent;
-
 import ij3d.Content;
 import ij3d.ContentInstant;
 import ij3d.DefaultUniverse;
-import ij3d.ImageCanvas3D;
 import ij3d.Image3DUniverse;
+import ij3d.ImageCanvas3D;
+
+import java.awt.AWTEvent;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseWheelEvent;
+import java.util.Enumeration;
+import java.util.List;
 
 import javax.media.j3d.Behavior;
 import javax.media.j3d.WakeupCondition;

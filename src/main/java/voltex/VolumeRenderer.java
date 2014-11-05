@@ -13,7 +13,6 @@ import javax.media.j3d.Node;
 import javax.media.j3d.OrderedGroup;
 import javax.media.j3d.Shape3D;
 import javax.media.j3d.Switch;
-import javax.media.j3d.Texture;
 import javax.media.j3d.TextureUnitState;
 import javax.media.j3d.Transform3D;
 import javax.media.j3d.View;

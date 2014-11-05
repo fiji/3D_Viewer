@@ -1,5 +1,8 @@
 package customnode;
 
+import com.sun.j3d.utils.geometry.GeometryInfo;
+import com.sun.j3d.utils.geometry.NormalGenerator;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -14,9 +17,6 @@ import javax.media.j3d.TriangleArray;
 import javax.vecmath.Color3f;
 import javax.vecmath.Color4f;
 import javax.vecmath.Point3f;
-
-import com.sun.j3d.utils.geometry.GeometryInfo;
-import com.sun.j3d.utils.geometry.NormalGenerator;
 
 
 public class CustomTransparentTriangleMesh extends CustomTriangleMesh {

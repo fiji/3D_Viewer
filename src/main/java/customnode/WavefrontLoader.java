@@ -1,16 +1,15 @@
 package customnode;
 
-import javax.vecmath.Point3f;
-import javax.vecmath.Color4f;
-import javax.vecmath.Color3f;
-
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import java.io.IOException;
-import java.io.File;
-import java.io.FileReader;
-import java.io.BufferedReader;
+import javax.vecmath.Color3f;
+import javax.vecmath.Color4f;
+import javax.vecmath.Point3f;
 
 public class WavefrontLoader {
 

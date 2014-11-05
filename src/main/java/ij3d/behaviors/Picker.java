@@ -2,25 +2,27 @@ package ij3d.behaviors;
 
 import com.sun.j3d.utils.pickfast.PickCanvas;
 import com.sun.j3d.utils.pickfast.PickTool;
+
 import ij.IJ;
-import ij.ImagePlus;
-import ij.measure.Calibration;
-import ij3d.Volume;
 import ij3d.Content;
 import ij3d.DefaultUniverse;
 import ij3d.ImageCanvas3D;
-import voltex.VoltexGroup;
+import ij3d.Volume;
+
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 import javax.media.j3d.BranchGroup;
 import javax.media.j3d.PickInfo;
 import javax.media.j3d.SceneGraphPath;
 import javax.vecmath.Point3d;
 import javax.vecmath.Vector3d;
+
 import vib.BenesNamedPoint;
 import vib.PointList;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Map;
+import voltex.VoltexGroup;
 
 /**
  * This class is a helper class which implements functions for picking.

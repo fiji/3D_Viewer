@@ -1,8 +1,8 @@
 package view4d;
 
-import ij3d.Image3DUniverse;
 import ij.ImagePlus;
 import ij.ImageStack;
+import ij3d.Image3DUniverse;
 
 
 /**

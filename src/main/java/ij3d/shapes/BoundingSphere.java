@@ -1,10 +1,17 @@
 package ij3d.shapes;
 
-import com.sun.j3d.utils.universe.*;
-import com.sun.j3d.utils.geometry.*;
-import com.sun.j3d.utils.behaviors.mouse.*;
-import javax.media.j3d.*;
-import javax.vecmath.*;
+import com.sun.j3d.utils.geometry.Sphere;
+
+import javax.media.j3d.Appearance;
+import javax.media.j3d.BranchGroup;
+import javax.media.j3d.ColoringAttributes;
+import javax.media.j3d.PolygonAttributes;
+import javax.media.j3d.Transform3D;
+import javax.media.j3d.TransformGroup;
+import javax.media.j3d.TransparencyAttributes;
+import javax.vecmath.Color3f;
+import javax.vecmath.Point3f;
+import javax.vecmath.Vector3f;
 
 public class BoundingSphere extends BranchGroup {
 

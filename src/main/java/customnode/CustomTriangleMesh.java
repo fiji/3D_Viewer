@@ -1,27 +1,23 @@
 package customnode;
 
-import isosurface.MeshProperties;
-
-import java.util.List;
-import java.util.Arrays;
-
-import java.awt.Polygon;
-
-import javax.media.j3d.Geometry;
-import javax.media.j3d.GeometryArray;
-import javax.media.j3d.TriangleArray;
-import javax.media.j3d.Transform3D;
-import javax.media.j3d.Canvas3D;
-import javax.vecmath.Color3f;
-import javax.vecmath.Point3d;
-import javax.vecmath.Point2d;
-import javax.vecmath.Point3f;
-
 import com.sun.j3d.utils.geometry.GeometryInfo;
 import com.sun.j3d.utils.geometry.NormalGenerator;
-import com.sun.j3d.utils.geometry.Stripifier;
 
+import isosurface.MeshProperties;
+
+import java.awt.Polygon;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import javax.media.j3d.Canvas3D;
+import javax.media.j3d.GeometryArray;
+import javax.media.j3d.Transform3D;
+import javax.media.j3d.TriangleArray;
+import javax.vecmath.Color3f;
+import javax.vecmath.Point2d;
+import javax.vecmath.Point3d;
+import javax.vecmath.Point3f;
 
 
 public class CustomTriangleMesh extends CustomMesh {

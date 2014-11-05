@@ -1,46 +1,39 @@
 package ij3d;
 
-import ij.io.SaveDialog;
-import ij.io.FileSaver;
-import ij.io.FileInfo;
-import ij.gui.GenericDialog;
+import customnode.CustomMesh;
+import customnode.CustomMeshNode;
+import customnode.CustomMultiMesh;
+import customnode.MeshLoader;
+import customnode.WavefrontExporter;
 import ij.IJ;
+import ij.gui.GenericDialog;
+import ij.io.FileInfo;
+import ij.io.SaveDialog;
+
+import java.awt.Button;
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.Panel;
+import java.awt.TextField;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
+
+import javax.media.j3d.Transform3D;
+import javax.vecmath.Color3f;
 
 import orthoslice.OrthoGroup;
 import surfaceplot.SurfacePlotGroup;
-
-import customnode.MeshLoader;
-import customnode.WavefrontExporter;
-import customnode.CustomMeshNode;
-import customnode.CustomMesh;
-import customnode.CustomMultiMesh;
-
-import java.io.IOException;
-import java.io.BufferedReader;
-import java.io.PrintWriter;
-import java.io.FileWriter;
-import java.io.FileReader;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileWriter;
-
-import java.util.Collection;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.TreeMap;
-import java.util.ArrayList;
-
-import javax.media.j3d.Transform3D;
-
-import javax.vecmath.Color3f;
-
-import java.awt.Panel;
-import java.awt.Button;
-import java.awt.TextField;
-import java.awt.FlowLayout;
-import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class SaveSession {
 

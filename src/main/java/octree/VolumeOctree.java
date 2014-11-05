@@ -1,31 +1,27 @@
 package octree;
 
-import ij3d.UniverseListener;
+import ij3d.AxisConstants;
 import ij3d.Content;
+import ij3d.UniverseListener;
 
 import java.io.File;
 import java.io.FileInputStream;
-
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Arrays;
 import java.util.BitSet;
+import java.util.List;
 import java.util.Properties;
 
-import javax.media.j3d.BoundingSphere;
 import javax.media.j3d.BranchGroup;
-import javax.media.j3d.View;
 import javax.media.j3d.Canvas3D;
 import javax.media.j3d.Group;
 import javax.media.j3d.Node;
 import javax.media.j3d.OrderedGroup;
 import javax.media.j3d.Switch;
-
 import javax.media.j3d.Transform3D;
+import javax.media.j3d.View;
 import javax.vecmath.Point3d;
 import javax.vecmath.Vector3d;
-
-import ij3d.AxisConstants;
 
 public class VolumeOctree implements UniverseListener, AxisConstants {
 

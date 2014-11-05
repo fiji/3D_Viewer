@@ -1,21 +1,17 @@
 package customnode;
 
-import customnode.CustomMesh;
-
-import java.io.File;
-import java.io.Writer;
-import java.io.FileOutputStream;
-import java.io.OutputStreamWriter;
-import java.io.IOException;
 import java.io.BufferedOutputStream;
-
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Map;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import javax.vecmath.Color4f;
 import javax.vecmath.Color3f;
+import javax.vecmath.Color4f;
 import javax.vecmath.Point3f;
 
 public class WavefrontExporter {

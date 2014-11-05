@@ -1,13 +1,11 @@
 package ij3d;
 
 import ij.IJ;
-
-import ij3d.pointlist.PointListDialog;
 import ij.ImagePlus;
-
 import ij.io.FileInfo;
 import ij.io.OpenDialog;
 import ij.io.SaveDialog;
+import ij3d.pointlist.PointListDialog;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -15,24 +13,21 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
-
-import vib.PointList;
+import java.util.HashMap;
+import java.util.TreeMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.media.j3d.BranchGroup;
 import javax.media.j3d.Switch;
 import javax.media.j3d.Transform3D;
 import javax.media.j3d.TransformGroup;
 import javax.media.j3d.View;
-
-import javax.vecmath.Vector3f;
 import javax.vecmath.Color3f;
 import javax.vecmath.Point3d;
+import javax.vecmath.Vector3f;
 
-import java.util.TreeMap;
-import java.util.HashMap;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import vib.PointList;
 
 public class Content extends BranchGroup implements UniverseListener, ContentConstants, AxisConstants {
 

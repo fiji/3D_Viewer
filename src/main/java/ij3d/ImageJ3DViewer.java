@@ -1,5 +1,6 @@
 package ij3d;
 
+import customnode.u3d.U3DExporter;
 import ij.IJ;
 import ij.ImagePlus;
 import ij.WindowManager;
@@ -16,7 +17,6 @@ import javax.vecmath.Color3f;
 import orthoslice.OrthoGroup;
 import voltex.VoltexGroup;
 import voltex.VolumeRenderer;
-import customnode.u3d.U3DExporter;
 
 public class ImageJ3DViewer implements PlugIn {
 

@@ -1,18 +1,20 @@
 package orthoslice;
 
+import ij.ImagePlus;
+
 import java.util.Arrays;
 import java.util.BitSet;
-import ij.ImagePlus;
-import voltex.VolumeRenderer;
 
-import javax.media.j3d.GeometryArray;
 import javax.media.j3d.Appearance;
-import javax.media.j3d.Shape3D;
 import javax.media.j3d.BranchGroup;
+import javax.media.j3d.GeometryArray;
 import javax.media.j3d.Group;
+import javax.media.j3d.Shape3D;
 import javax.media.j3d.Switch;
 import javax.media.j3d.View;
 import javax.vecmath.Color3f;
+
+import voltex.VolumeRenderer;
 
 public class MultiOrthoslice extends VolumeRenderer {
 

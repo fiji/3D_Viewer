@@ -4,9 +4,10 @@ import ij.ImagePlus;
 import ij3d.Content;
 import ij3d.ContentInstant;
 
+import javax.media.j3d.View;
+
 import vib.NaiveResampler;
 import voltex.VoltexGroup;
-import javax.media.j3d.View;
 
 /**
  * This class extends VoltexGroup. Instead of a whole volume, it shows

@@ -1,12 +1,11 @@
 package customnode;
 
+import ij3d.ContentNode;
+
 import javax.media.j3d.View;
+import javax.vecmath.Color3f;
 import javax.vecmath.Point3f;
 import javax.vecmath.Tuple3d;
-import javax.vecmath.Color3f;
-
-import ij3d.Content;
-import ij3d.ContentNode;
 
 public class CustomMeshNode extends ContentNode {
 

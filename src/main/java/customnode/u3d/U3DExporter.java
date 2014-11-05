@@ -1,5 +1,7 @@
 package customnode.u3d;
 
+import customnode.CustomMeshNode;
+import customnode.CustomTriangleMesh;
 import ij3d.Content;
 import ij3d.ContentNode;
 import ij3d.Image3DUniverse;
@@ -23,9 +25,6 @@ import javax.vecmath.Color3f;
 import javax.vecmath.Color4f;
 import javax.vecmath.Point3f;
 import javax.vecmath.Vector3f;
-
-import customnode.CustomMeshNode;
-import customnode.CustomTriangleMesh;
 
 /**
  * Some links:

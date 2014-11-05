@@ -1,11 +1,10 @@
 package ij3d.behaviors;
 
-import ij3d.*;
-
-import javax.media.j3d.*;
-import javax.vecmath.*;
-
 import java.util.Enumeration;
+
+import javax.media.j3d.Behavior;
+import javax.media.j3d.WakeupOnBehaviorPost;
+import javax.media.j3d.WakeupOnElapsedFrames;
 
 public class WaitForNextFrameBehavior extends Behavior {
 

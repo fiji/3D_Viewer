@@ -3,9 +3,8 @@ package orthoslice;
 import ij.ImagePlus;
 import ij3d.Content;
 import ij3d.ContentInstant;
-
 import vib.NaiveResampler;
-import voltex.*;
+import voltex.VoltexGroup;
 
 /**
  * This class extends VoltexGroup. Instead of a whole volume, it shows

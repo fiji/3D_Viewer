@@ -1,7 +1,7 @@
 package ij3d;
 
-import ij.gui.Toolbar;
 import ij.IJ;
+import ij.gui.Toolbar;
 
 public class IJAdapter implements UIAdapter {
 

@@ -60,21 +60,23 @@ Institute of Neuroinformatics, University of Zurich / ETH, Switzerland.
 
 package ij3d;
 
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Arrays;
-
-import javax.vecmath.Point3f;
-import javax.vecmath.Color3f;
-
 import ij.IJ;
 import ij.ImagePlus;
 import ij.ImageStack;
-import ij.process.*;
 import ij.measure.Calibration;
+import ij.process.ByteProcessor;
+import ij.process.ColorProcessor;
+import ij.process.FloatProcessor;
+import ij.process.ShortProcessor;
 
 import java.awt.Color;
 import java.awt.image.IndexColorModel;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import javax.vecmath.Color3f;
+import javax.vecmath.Point3f;
 
 public class Pipe {
 

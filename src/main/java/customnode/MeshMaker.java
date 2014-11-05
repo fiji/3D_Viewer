@@ -9,12 +9,14 @@
 package customnode;
 
 import ij.IJ;
-import javax.vecmath.Point3f;
-import javax.vecmath.Vector3f;
-import java.util.List;
+import ij3d.Pipe;
+
 import java.util.ArrayList;
 import java.util.HashMap;
-import ij3d.Pipe;
+import java.util.List;
+
+import javax.vecmath.Point3f;
+import javax.vecmath.Vector3f;
 
 public class MeshMaker {
 

@@ -3,11 +3,9 @@
 package process3d;
 
 import ij.ImagePlus;
-import ij.ImageStack;
-import ij.plugin.filter.PlugInFilter;
 import ij.gui.GenericDialog;
+import ij.plugin.filter.PlugInFilter;
 import ij.process.ImageProcessor;
-import ij.measure.Calibration;
 
 /**
  * Smooth_es an ImagePlus, either uniformly or by Gaussian blur.

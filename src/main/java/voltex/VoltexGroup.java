@@ -1,25 +1,24 @@
 package voltex;
 
-import java.awt.Polygon;
-
-import javax.vecmath.Color3f;
-import javax.vecmath.Point2d;
-import javax.vecmath.Point3d;
-import javax.media.j3d.View;
-import javax.media.j3d.Canvas3D;
-import javax.media.j3d.Transform3D;
-
-import ij.ImagePlus;
 import ij.IJ;
+import ij.ImagePlus;
 import ij.gui.Roi;
 import ij.measure.Calibration;
 import ij.process.ImageProcessor;
-
-import ij3d.ContentInstant;
 import ij3d.Content;
+import ij3d.ContentInstant;
 import ij3d.ContentNode;
 
+import java.awt.Polygon;
+
+import javax.media.j3d.Canvas3D;
+import javax.media.j3d.Transform3D;
+import javax.media.j3d.View;
+import javax.vecmath.Color3f;
+import javax.vecmath.Point2d;
+import javax.vecmath.Point3d;
 import javax.vecmath.Tuple3d;
+
 import vib.NaiveResampler;
 
 /**

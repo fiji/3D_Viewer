@@ -1,5 +1,12 @@
 package ij3d;
 
+import customnode.CustomLineMesh;
+import customnode.CustomMesh;
+import customnode.CustomMultiMesh;
+import customnode.CustomPointMesh;
+import customnode.CustomQuadMesh;
+import customnode.CustomTriangleMesh;
+import customnode.MeshLoader;
 import ij.IJ;
 import ij.ImagePlus;
 import ij3d.contextmenu.ContextMenu;
@@ -51,13 +58,6 @@ import javax.vecmath.Vector3d;
 import octree.VolumeOctree;
 import view4d.Timeline;
 import view4d.TimelineGUI;
-import customnode.CustomLineMesh;
-import customnode.CustomMesh;
-import customnode.CustomMultiMesh;
-import customnode.CustomPointMesh;
-import customnode.CustomQuadMesh;
-import customnode.CustomTriangleMesh;
-import customnode.MeshLoader;
 
 public class Image3DUniverse extends DefaultAnimatableUniverse {
 

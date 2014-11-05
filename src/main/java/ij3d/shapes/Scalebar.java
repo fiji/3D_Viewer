@@ -3,24 +3,22 @@ package ij3d.shapes;
 import java.awt.Font;
 import java.text.DecimalFormat;
 
-import javax.vecmath.Point3f;
-import javax.vecmath.Color3f;
-import javax.vecmath.Vector3f;
-import javax.media.j3d.LineArray;
-import javax.media.j3d.Geometry;
-import javax.media.j3d.OrientedShape3D;
-import javax.media.j3d.Shape3D;
+import javax.media.j3d.Appearance;
 import javax.media.j3d.BranchGroup;
-import javax.media.j3d.Switch;
-import javax.media.j3d.Transform3D;
-import javax.media.j3d.TransformGroup;
-import javax.media.j3d.Text3D;
+import javax.media.j3d.ColoringAttributes;
 import javax.media.j3d.Font3D;
 import javax.media.j3d.FontExtrusion;
-import javax.media.j3d.Appearance;
-import javax.media.j3d.Material;
+import javax.media.j3d.Geometry;
+import javax.media.j3d.LineArray;
+import javax.media.j3d.OrientedShape3D;
 import javax.media.j3d.PolygonAttributes;
-import javax.media.j3d.ColoringAttributes;
+import javax.media.j3d.Shape3D;
+import javax.media.j3d.Text3D;
+import javax.media.j3d.Transform3D;
+import javax.media.j3d.TransformGroup;
+import javax.vecmath.Color3f;
+import javax.vecmath.Point3f;
+import javax.vecmath.Vector3f;
 
 
 public class Scalebar extends BranchGroup {

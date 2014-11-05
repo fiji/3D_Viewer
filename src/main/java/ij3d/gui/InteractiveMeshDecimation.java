@@ -1,5 +1,8 @@
 package ij3d.gui;
 
+import customnode.CustomTriangleMesh;
+import customnode.EdgeContraction;
+import customnode.FullInfoMesh;
 import ij.IJ;
 import ij.gui.GenericDialog;
 
@@ -9,10 +12,6 @@ import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-
-import customnode.CustomTriangleMesh;
-import customnode.EdgeContraction;
-import customnode.FullInfoMesh;
 
 public class InteractiveMeshDecimation {
 	public void run(final CustomTriangleMesh ctm) {

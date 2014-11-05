@@ -1,25 +1,20 @@
 package ij3d.gui;
 
-import ij.util.Java2;
-import ij.gui.GenericDialog;
-import ij.io.OpenDialog;
 import ij.IJ;
-import ij.WindowManager;
 import ij.ImagePlus;
-
+import ij.WindowManager;
+import ij.gui.GenericDialog;
+import ij3d.ColorTable;
 import ij3d.Content;
 import ij3d.ContentCreator;
 import ij3d.Image3DUniverse;
-import ij3d.ColorTable;
 
-import javax.swing.JFileChooser;
-import javax.swing.filechooser.*;
-import java.awt.event.*;
-import java.awt.*;
-
-import java.util.Vector;
-
+import java.awt.Choice;
+import java.awt.TextField;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.io.File;
+import java.util.Vector;
 
 import javax.vecmath.Color3f;
 

@@ -1,5 +1,7 @@
 package ij3d;
 
+import customnode.CustomMesh;
+import customnode.CustomMeshNode;
 import ij.IJ;
 import ij.ImagePlus;
 import ij.ImageStack;
@@ -36,8 +38,6 @@ import vib.FastMatrix;
 import vib.InterpolatedImage;
 import vib.PointList;
 import voltex.VoltexGroup;
-import customnode.CustomMesh;
-import customnode.CustomMeshNode;
 
 public class ContentInstant extends BranchGroup implements UniverseListener, ContentConstants {
 

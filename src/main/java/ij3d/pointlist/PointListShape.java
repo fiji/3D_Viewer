@@ -1,5 +1,8 @@
 package ij3d.pointlist;
 
+import com.sun.j3d.utils.geometry.Sphere;
+import com.sun.j3d.utils.geometry.Text2D;
+
 import java.awt.Font;
 
 import javax.media.j3d.Alpha;
@@ -23,9 +26,6 @@ import javax.vecmath.Vector3f;
 
 import vib.BenesNamedPoint;
 import vib.PointList;
-
-import com.sun.j3d.utils.geometry.Sphere;
-import com.sun.j3d.utils.geometry.Text2D;
 
 /**
  * This class extends BranchGroup to represent a PointList as a number

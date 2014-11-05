@@ -1,34 +1,30 @@
 package customnode;
 
+import com.sun.j3d.utils.geometry.GeometryInfo;
+import com.sun.j3d.utils.geometry.NormalGenerator;
+
 import ij.ImagePlus;
 import ij.measure.Calibration;
 import ij.plugin.Duplicator;
 import ij.process.StackConverter;
 
-import vib.InterpolatedImage;
-
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Arrays;
-import java.util.Map;
-
-import com.sun.j3d.utils.geometry.GeometryInfo;
-import com.sun.j3d.utils.geometry.NormalGenerator;
 
 import javax.media.j3d.Appearance;
 import javax.media.j3d.ColoringAttributes;
-import javax.media.j3d.Geometry;
-import javax.media.j3d.GeometryStripArray;
 import javax.media.j3d.GeometryArray;
+import javax.media.j3d.GeometryStripArray;
 import javax.media.j3d.Material;
 import javax.media.j3d.PolygonAttributes;
-import javax.media.j3d.RenderingAttributes;
 import javax.media.j3d.Shape3D;
 import javax.media.j3d.TransparencyAttributes;
 import javax.vecmath.Color3f;
-import javax.vecmath.Vector3f;
 import javax.vecmath.Point3f;
+
+import vib.InterpolatedImage;
 
 public abstract class CustomMesh extends Shape3D {
 

@@ -1,16 +1,16 @@
 package ij3d.behaviors;
 
-import ij3d.UniverseSettings;
 import ij3d.DefaultUniverse;
 import ij3d.Image3DUniverse;
 import ij3d.ImageCanvas3D;
+
 import javax.media.j3d.Transform3D;
 import javax.media.j3d.TransformGroup;
 import javax.vecmath.AxisAngle4d;
 import javax.vecmath.Point2d;
 import javax.vecmath.Point3d;
-import javax.vecmath.Vector3d;
 import javax.vecmath.Tuple3d;
+import javax.vecmath.Vector3d;
 
 /**
  * This class is a helper class which implements some functions for

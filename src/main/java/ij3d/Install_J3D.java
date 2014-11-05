@@ -1,28 +1,25 @@
 package ij3d;
 
-import ij.plugin.PlugIn;
-import ij.gui.YesNoCancelDialog;
 import ij.IJ;
-
-import java.net.URL;
-import java.net.URLConnection;
-import java.net.MalformedURLException;
+import ij.gui.YesNoCancelDialog;
+import ij.plugin.PlugIn;
 
 import java.awt.Frame;
-
-import java.util.zip.*;
-import java.util.Enumeration;
-import java.util.List;
-import java.util.ArrayList;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.ByteArrayOutputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.List;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipException;
+import java.util.zip.ZipFile;
 
 import javax.media.j3d.VirtualUniverse;
 

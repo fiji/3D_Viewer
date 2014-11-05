@@ -1,48 +1,46 @@
 package ij3d;
 
+import com.sun.j3d.utils.universe.MultiTransformGroup;
+import com.sun.j3d.utils.universe.SimpleUniverse;
+
+import ij.ImagePlus;
+import ij3d.behaviors.BehaviorCallback;
+import ij3d.behaviors.ContentTransformer;
+import ij3d.behaviors.InteractiveBehavior;
+import ij3d.behaviors.InteractiveViewPlatformTransformer;
+import ij3d.behaviors.Picker;
+import ij3d.behaviors.WaitForNextFrameBehavior;
 import ij3d.shapes.CoordinateSystem;
 import ij3d.shapes.Scalebar;
-import ij3d.behaviors.InteractiveBehavior;
-import ij.ImagePlus;
 
-import java.awt.GraphicsEnvironment;
-import java.awt.GraphicsConfiguration;
 import java.awt.Dimension;
+import java.awt.GraphicsConfiguration;
+import java.awt.GraphicsEnvironment;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.image.BufferedImage;
-
-import java.util.List;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.BitSet;
+import java.util.Iterator;
+import java.util.List;
 
-import com.sun.j3d.utils.universe.MultiTransformGroup;
-import com.sun.j3d.utils.universe.SimpleUniverse;
-
-import ij3d.behaviors.BehaviorCallback;
-import ij3d.behaviors.Picker;
-import ij3d.behaviors.WaitForNextFrameBehavior;
-import ij3d.behaviors.ContentTransformer;
-import ij3d.behaviors.InteractiveViewPlatformTransformer;
-
-import javax.media.j3d.ImageComponent2D;
-import javax.media.j3d.Canvas3D;
-import javax.media.j3d.Screen3D;
-import javax.media.j3d.GraphicsConfigTemplate3D;
 import javax.media.j3d.AmbientLight;
+import javax.media.j3d.Background;
 import javax.media.j3d.BoundingSphere;
 import javax.media.j3d.BranchGroup;
+import javax.media.j3d.Canvas3D;
 import javax.media.j3d.DirectionalLight;
+import javax.media.j3d.GraphicsConfigTemplate3D;
 import javax.media.j3d.Group;
+import javax.media.j3d.ImageComponent2D;
 import javax.media.j3d.PointLight;
+import javax.media.j3d.Screen3D;
 import javax.media.j3d.Switch;
 import javax.media.j3d.Transform3D;
 import javax.media.j3d.TransformGroup;
-import javax.media.j3d.Background;
 import javax.vecmath.Color3f;
 import javax.vecmath.Point3d;
 

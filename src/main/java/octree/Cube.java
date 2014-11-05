@@ -1,14 +1,14 @@
 package octree;
 
-import java.io.File;
+import ij3d.AxisConstants;
 
-import java.util.Arrays;
+import java.io.File;
 import java.util.List;
+
 import javax.media.j3d.Canvas3D;
 import javax.media.j3d.Transform3D;
 import javax.vecmath.Point2d;
 import javax.vecmath.Point3d;
-import ij3d.AxisConstants;
 
 public class Cube implements AxisConstants, Comparable<Cube> {
 

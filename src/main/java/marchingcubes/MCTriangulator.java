@@ -2,22 +2,20 @@ package marchingcubes;
 
 import ij.ImagePlus;
 import ij.ImageStack;
-import ij.process.ImageProcessor;
-import ij.process.ColorProcessor;
-import ij.process.ByteProcessor;
 import ij.measure.Calibration;
+import ij.process.ByteProcessor;
+import ij.process.ColorProcessor;
+import ij.process.ImageProcessor;
+import ij3d.ImgLibVolume;
+import ij3d.Volume;
+import isosurface.Triangulator;
+
 import java.util.List;
 
 import javax.vecmath.Point3f;
 
-import ij3d.Volume;
-import ij3d.ImgLibVolume;
-
-import isosurface.Triangulator;
-
 import mpicbg.imglib.image.Image;
 import mpicbg.imglib.type.numeric.RealType;
-
 import vib.NaiveResampler;
 
 public class MCTriangulator implements Triangulator {

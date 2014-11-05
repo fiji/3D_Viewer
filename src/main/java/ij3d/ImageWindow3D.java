@@ -1,37 +1,21 @@
 package ij3d;
 
 import com.sun.j3d.utils.universe.SimpleUniverse;
-import javax.media.j3d.View;
 
-import ij.IJ;
-import ij.ImageJ;
 import ij.ImagePlus;
-import ij.WindowManager;
-import ij.gui.ImageWindow;
 import ij.gui.ImageCanvas;
 import ij.process.ColorProcessor;
-import ij.macro.Interpreter;
 
-import javax.swing.JFrame;
 import java.awt.AWTException;
-import java.awt.Label;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Font;
-import java.awt.BorderLayout;
-import java.awt.Graphics;
 import java.awt.GraphicsConfiguration;
 import java.awt.GraphicsEnvironment;
-import java.awt.Insets;
+import java.awt.Label;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.Robot;
-import java.awt.image.BufferedImage;
-
-import java.awt.event.WindowStateListener;
-import java.awt.event.WindowEvent;
 import java.awt.event.WindowAdapter;
-
+import java.awt.event.WindowEvent;
+import java.awt.image.BufferedImage;
 import java.lang.reflect.Method;
 
 import javax.media.j3d.Canvas3D;
@@ -40,7 +24,8 @@ import javax.media.j3d.ImageComponent2D;
 import javax.media.j3d.RenderingError;
 import javax.media.j3d.RenderingErrorListener;
 import javax.media.j3d.Screen3D;
-import javax.vecmath.Color3f;
+import javax.media.j3d.View;
+import javax.swing.JFrame;
 
 public class ImageWindow3D extends JFrame implements UniverseListener {
 

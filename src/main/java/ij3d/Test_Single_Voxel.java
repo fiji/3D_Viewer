@@ -2,26 +2,18 @@
 
 package ij3d;
 
-import ij.*;
-import ij.process.*;
-import ij.gui.*;
-import ij.plugin.*;
-import ij.plugin.filter.*;
-import ij.text.*;
-import ij.measure.Calibration;
-import ij.io.*;
-
-import ij3d.Image3DUniverse;
-import ij3d.Image3DMenubar;
-import ij3d.Content;
-import ij3d.Pipe;
-import javax.vecmath.Color3f;
-import javax.vecmath.Point3f;
+import ij.ImagePlus;
+import ij.ImageStack;
 import ij.gui.GUI;
+import ij.plugin.PlugIn;
+import ij.process.ByteProcessor;
 
 import java.awt.Color;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
+
+import javax.vecmath.Color3f;
+import javax.vecmath.Point3f;
 
 /* A test for the 3D viewer.  The results are odd at the moment - one
    end of the red line should always appear to be at the centre of the

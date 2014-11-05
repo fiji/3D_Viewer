@@ -1,5 +1,7 @@
 package ij3d.shapes;
 
+import com.sun.j3d.utils.geometry.Text2D;
+
 import java.awt.Font;
 
 import javax.media.j3d.Appearance;
@@ -15,8 +17,6 @@ import javax.media.j3d.TransformGroup;
 import javax.vecmath.Color3f;
 import javax.vecmath.Point3f;
 import javax.vecmath.Vector3f;
-
-import com.sun.j3d.utils.geometry.Text2D;
 
 
 public class CoordinateSystem extends BranchGroup {

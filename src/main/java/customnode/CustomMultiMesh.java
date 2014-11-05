@@ -1,16 +1,15 @@
 package customnode;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.ArrayList;
-
-import javax.vecmath.Tuple3d;
-import javax.vecmath.Point3f;
-import javax.vecmath.Color3f;
 
 import javax.media.j3d.BranchGroup;
 import javax.media.j3d.View;
+import javax.vecmath.Color3f;
+import javax.vecmath.Point3f;
+import javax.vecmath.Tuple3d;
 
 public class CustomMultiMesh extends CustomMeshNode {
 

@@ -30,25 +30,20 @@ package isosurface;
 import ij.IJ;
 import ij.ImagePlus;
 import ij.ImageStack;
-import ij.process.*;
-import ij.gui.*;
-import ij.plugin.*;
-import ij.plugin.filter.*;
-import ij.text.*;
+import ij.gui.GUI;
+import ij.gui.GenericDialog;
 import ij.measure.Calibration;
-import ij.io.*;
-
-import ij3d.Image3DUniverse;
+import ij.plugin.PlugIn;
+import ij.process.ByteProcessor;
 import ij3d.Content;
-import javax.vecmath.Color3f;
+import ij3d.Image3DUniverse;
 
-import java.awt.image.ColorModel;
 import java.awt.image.IndexColorModel;
-
 import java.util.HashMap;
 
-import process3d.Smooth_;
+import javax.vecmath.Color3f;
 
+import process3d.Smooth_;
 import vib.NaiveResampler;
 
 /*

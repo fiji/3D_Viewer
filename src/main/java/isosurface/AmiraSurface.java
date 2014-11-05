@@ -1,19 +1,14 @@
 package isosurface;
 
 import amira.AmiraParameters;
-
 import ij.IJ;
-
 import ij.io.OpenDialog;
-
 import ij.plugin.PlugIn;
-
 import ij3d.Image3DUniverse;
 
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;

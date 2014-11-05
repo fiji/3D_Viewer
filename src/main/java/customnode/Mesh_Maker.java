@@ -8,17 +8,14 @@
 
 package customnode;
 
-import ij.IJ;
-import ij.WindowManager;
 import ij.plugin.PlugIn;
-import javax.vecmath.Color3f;
-import javax.vecmath.Point3f;
-import javax.media.j3d.Transform3D;
-import java.util.List;
-import java.util.ArrayList;
-import java.awt.Color;
-import ij3d.Image3DUniverse;
 import ij3d.Content;
+import ij3d.Image3DUniverse;
+
+import java.awt.Color;
+
+import javax.media.j3d.Transform3D;
+import javax.vecmath.Color3f;
 
 public class Mesh_Maker extends MeshMaker implements PlugIn {
 

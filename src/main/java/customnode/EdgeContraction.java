@@ -1,5 +1,8 @@
 package customnode;
 
+import customnode.FullInfoMesh.Edge;
+import customnode.FullInfoMesh.Vertex;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -12,9 +15,6 @@ import java.util.TreeSet;
 
 import javax.vecmath.Point3f;
 import javax.vecmath.Vector3f;
-
-import customnode.FullInfoMesh.Edge;
-import customnode.FullInfoMesh.Vertex;
 
 public class EdgeContraction {
 

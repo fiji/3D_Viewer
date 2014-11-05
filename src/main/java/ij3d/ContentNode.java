@@ -2,9 +2,8 @@ package ij3d;
 
 import javax.media.j3d.BranchGroup;
 import javax.media.j3d.View;
-
-import javax.vecmath.Tuple3d;
 import javax.vecmath.Color3f;
+import javax.vecmath.Tuple3d;
 
 /**
  * Abstract class which has to be extended by classes that want to define

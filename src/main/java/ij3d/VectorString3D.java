@@ -30,14 +30,7 @@ Institute of Neuroinformatics, University of Zurich / ETH, Switzerland.
 
 package ij3d;
 
-import java.util.List;
-import java.util.ArrayList;
-
-import javax.vecmath.Point3f;
-
 import Jama.Matrix;
-
-import ij.IJ;
 
 // A mini version of VectorString3D taken from ini.trakem2.vector.VectorString3D:
 class VectorString3D {

@@ -1,14 +1,14 @@
 package ij3d.pointlist;
 
-import java.awt.Component;
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dialog;
 import java.awt.Frame;
-import java.awt.Panel;
-import java.awt.BorderLayout;
-import java.awt.ScrollPane;
-import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Panel;
+import java.awt.ScrollPane;
 
 /**
  * This class represents a window which can hold a set of PointListPanels. These

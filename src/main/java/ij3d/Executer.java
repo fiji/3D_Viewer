@@ -1,5 +1,10 @@
 package ij3d;
 
+import customnode.CustomMesh;
+import customnode.CustomMeshNode;
+import customnode.CustomMultiMesh;
+import customnode.CustomTriangleMesh;
+import customnode.u3d.U3DExporter;
 import ij.IJ;
 import ij.ImagePlus;
 import ij.WindowManager;
@@ -66,11 +71,6 @@ import orthoslice.OrthoGroup;
 import vib.FastMatrix;
 import voltex.VoltexGroup;
 import voltex.VolumeRenderer;
-import customnode.CustomMesh;
-import customnode.CustomMeshNode;
-import customnode.CustomMultiMesh;
-import customnode.CustomTriangleMesh;
-import customnode.u3d.U3DExporter;
 
 public class Executer {
 

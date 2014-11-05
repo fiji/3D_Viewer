@@ -1,33 +1,30 @@
 package voltex;
 
-import javax.vecmath.Color4f;
-import javax.vecmath.Point3i;
-import javax.vecmath.Point3d;
-import javax.vecmath.Point2d;
-
-import javax.media.j3d.Canvas3D;
-import javax.media.j3d.BranchGroup;
-import javax.media.j3d.Transform3D;
-import javax.media.j3d.TextureAttributes;
-
+import ij.IJ;
+import ij.ImagePlus;
 import ij.gui.GenericDialog;
 import ij.gui.Roi;
-import ij.ImagePlus;
-import ij.IJ;
 
-import java.util.Vector;
-
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
+import java.awt.Choice;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Label;
+import java.awt.Polygon;
+import java.awt.Scrollbar;
 import java.awt.event.AdjustmentEvent;
 import java.awt.event.AdjustmentListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.util.Vector;
 
-import java.awt.Scrollbar;
-import java.awt.Choice;
-import java.awt.Label;
-import java.awt.Font;
-import java.awt.Color;
-import java.awt.Polygon;
+import javax.media.j3d.BranchGroup;
+import javax.media.j3d.Canvas3D;
+import javax.media.j3d.TextureAttributes;
+import javax.media.j3d.Transform3D;
+import javax.vecmath.Color4f;
+import javax.vecmath.Point2d;
+import javax.vecmath.Point3d;
+import javax.vecmath.Point3i;
 
 public class Mask extends VoltexVolume {
 

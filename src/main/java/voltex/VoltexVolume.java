@@ -1,5 +1,9 @@
 package voltex;
 
+import ij.IJ;
+import ij.ImagePlus;
+import ij3d.Volume;
+
 import java.awt.color.ColorSpace;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
@@ -10,10 +14,6 @@ import java.awt.image.IndexColorModel;
 import java.awt.image.Raster;
 import java.awt.image.SampleModel;
 import java.awt.image.WritableRaster;
-
-import ij.ImagePlus;
-import ij3d.Volume;
-import ij.IJ;
 
 import javax.media.j3d.ImageComponent;
 import javax.media.j3d.ImageComponent2D;

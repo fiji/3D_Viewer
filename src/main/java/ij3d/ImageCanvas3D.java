@@ -1,33 +1,29 @@
 package ij3d;
 
 import com.sun.j3d.utils.universe.SimpleUniverse;
-import javax.media.j3d.J3DGraphics2D;
-import javax.media.j3d.Canvas3D;
-import javax.media.j3d.Background;
-import javax.vecmath.Color3f;
 
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionAdapter;
-import java.awt.event.MouseMotionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
+import ij.ImagePlus;
+import ij.gui.ImageCanvas;
+import ij.gui.Roi;
+import ij.process.ByteProcessor;
 
 import java.awt.Dimension;
-
-import java.util.Map;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 import java.util.HashMap;
-
-import ij.process.ByteProcessor;
-import ij.gui.ImageCanvas;
-import ij.ImagePlus;
-import ij.gui.Roi;
-
-import java.util.concurrent.Executors;
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+import javax.media.j3d.Background;
+import javax.media.j3d.Canvas3D;
+import javax.media.j3d.J3DGraphics2D;
+import javax.vecmath.Color3f;
 
 public class ImageCanvas3D extends Canvas3D implements KeyListener {
 

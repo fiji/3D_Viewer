@@ -1,9 +1,19 @@
 package octree;
 
-import java.awt.image.*;
-import javax.media.j3d.*;
-import javax.vecmath.*;
 import ij3d.AxisConstants;
+
+import javax.media.j3d.Appearance;
+import javax.media.j3d.ColoringAttributes;
+import javax.media.j3d.ImageComponent;
+import javax.media.j3d.ImageComponent2D;
+import javax.media.j3d.Material;
+import javax.media.j3d.PolygonAttributes;
+import javax.media.j3d.RenderingAttributes;
+import javax.media.j3d.Texture;
+import javax.media.j3d.Texture2D;
+import javax.media.j3d.TextureAttributes;
+import javax.media.j3d.TransparencyAttributes;
+import javax.vecmath.Color3f;
 
 public class AppearanceCreator implements AxisConstants {
 

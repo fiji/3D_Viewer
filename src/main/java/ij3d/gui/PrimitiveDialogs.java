@@ -1,5 +1,10 @@
 package ij3d.gui;
 
+import customnode.Box;
+import customnode.Cone;
+import customnode.Primitive;
+import customnode.Sphere;
+import customnode.Tube;
 import ij.gui.GenericDialog;
 import ij3d.Content;
 import ij3d.Image3DUniverse;
@@ -20,12 +25,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.vecmath.Point3f;
-
-import customnode.Box;
-import customnode.Cone;
-import customnode.Primitive;
-import customnode.Sphere;
-import customnode.Tube;
 
 public class PrimitiveDialogs {
 

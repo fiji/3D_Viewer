@@ -1,10 +1,12 @@
 package ij3d;
 
+import ij.IJ;
 import ij.ImagePlus;
 import ij.ImageStack;
 import ij.measure.Calibration;
-import ij.IJ;
+
 import java.awt.image.IndexColorModel;
+
 import javax.vecmath.Point3d;
 
 /**

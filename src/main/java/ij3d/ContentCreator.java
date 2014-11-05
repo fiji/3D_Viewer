@@ -1,22 +1,21 @@
 package ij3d;
 
-import ij.ImageStack;
-import ij.ImagePlus;
+import customnode.CustomMesh;
+import customnode.CustomMeshNode;
+import customnode.CustomMultiMesh;
 import ij.IJ;
+import ij.ImagePlus;
+import ij.ImageStack;
 import ij.io.FileInfo;
 import ij.process.ColorProcessor;
 import ij.process.ImageConverter;
 import ij.process.StackConverter;
 
 import java.io.File;
-import java.util.TreeMap;
-import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
-
-import customnode.CustomMesh;
-import customnode.CustomMultiMesh;
-import customnode.CustomMeshNode;
+import java.util.TreeMap;
 
 import javax.vecmath.Color3f;
 

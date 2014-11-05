@@ -1,39 +1,35 @@
 /** Albert Cardona and Bene Schmid 20070614 at Janelia Farms*/
 package isosurface;
 
-import ij3d.Content;
-import ij3d.ContentNode;
-import ij3d.Executer;
+import customnode.CustomMesh;
+import customnode.CustomMeshNode;
+import customnode.CustomMultiMesh;
 import customnode.CustomQuadMesh;
 import customnode.CustomTriangleMesh;
 import customnode.WavefrontExporter;
-import customnode.CustomMeshNode;
-import customnode.CustomMesh;
-import customnode.CustomMultiMesh;
-
 import ij.IJ;
-import ij.io.SaveDialog;
+import ij3d.Content;
+import ij3d.ContentNode;
+import ij3d.Executer;
 
+import java.io.BufferedOutputStream;
 import java.io.DataOutputStream;
 import java.io.File;
-import java.io.BufferedOutputStream;
-import java.io.OutputStreamWriter;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.io.StringWriter;
 import java.io.Writer;
-import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
-
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.Hashtable;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 
-import javax.vecmath.Point3f;
 import javax.vecmath.Color3f;
+import javax.vecmath.Point3f;
 
 
 public class MeshExporter {

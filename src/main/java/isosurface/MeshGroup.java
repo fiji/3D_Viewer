@@ -1,5 +1,6 @@
 package isosurface;
 
+import customnode.CustomTriangleMesh;
 import ij.IJ;
 import ij3d.Content;
 import ij3d.ContentInstant;
@@ -14,7 +15,6 @@ import javax.vecmath.Point3f;
 import javax.vecmath.Tuple3d;
 
 import marchingcubes.MCTriangulator;
-import customnode.CustomTriangleMesh;
 
 public class MeshGroup extends ContentNode {
 

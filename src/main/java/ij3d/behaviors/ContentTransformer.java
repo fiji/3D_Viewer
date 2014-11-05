@@ -3,7 +3,9 @@ package ij3d.behaviors;
 import ij3d.Content;
 import ij3d.DefaultUniverse;
 import ij3d.ImageCanvas3D;
+
 import java.awt.event.MouseEvent;
+
 import javax.media.j3d.Transform3D;
 import javax.media.j3d.TransformGroup;
 import javax.vecmath.AxisAngle4d;

@@ -1,18 +1,16 @@
 package octree;
 
-import java.awt.image.DataBufferByte;
-import java.awt.image.BufferedImage;
+import ij3d.AxisConstants;
 
-import java.io.IOException;
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferByte;
+import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.FileOutputStream;
-import javax.media.j3d.NioImageBuffer;
+import java.io.IOException;
+
 import javax.media.j3d.TexCoordGeneration;
 import javax.vecmath.Vector4f;
-import ij3d.AxisConstants;
 
 public class CubeData implements AxisConstants {
 

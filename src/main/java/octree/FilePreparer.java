@@ -1,13 +1,13 @@
 package octree;
 
-import java.io.RandomAccessFile;
-import java.io.IOException;
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.DataOutputStream;
-
+import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.util.Arrays;
 import java.util.Properties;
+
 import vib.NaiveResampler;
 
 public class FilePreparer {

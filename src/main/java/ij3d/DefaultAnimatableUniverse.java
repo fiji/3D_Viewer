@@ -2,16 +2,15 @@ package ij3d;
 
 import ij.IJ;
 import ij.ImagePlus;
-import ij.process.ImageProcessor;
 import ij.ImageStack;
+import ij.process.ImageProcessor;
 
-import javax.media.j3d.BranchGroup;
 import javax.media.j3d.Alpha;
+import javax.media.j3d.BranchGroup;
 import javax.media.j3d.RotationInterpolator;
 import javax.media.j3d.Transform3D;
 import javax.media.j3d.TransformGroup;
 import javax.media.j3d.View;
-
 import javax.vecmath.AxisAngle4d;
 import javax.vecmath.Vector3d;
 import javax.vecmath.Vector3f;
