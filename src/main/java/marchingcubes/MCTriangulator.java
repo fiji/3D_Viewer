@@ -6,7 +6,7 @@ import ij.measure.Calibration;
 import ij.process.ByteProcessor;
 import ij.process.ColorProcessor;
 import ij.process.ImageProcessor;
-import ij3d.ImgLibVolume;
+import ij3d.AreaListVolume;
 import ij3d.Volume;
 import isosurface.Triangulator;
 
@@ -14,8 +14,6 @@ import java.util.List;
 
 import javax.vecmath.Point3f;
 
-import mpicbg.imglib.image.Image;
-import mpicbg.imglib.type.numeric.RealType;
 import vib.NaiveResampler;
 
 public class MCTriangulator implements Triangulator {
@@ -39,12 +37,13 @@ public class MCTriangulator implements Triangulator {
 	}
 
 	/**
-	 * @param img The Image<? extends RealType> instance to use.
-	 * @param threshold The cut-off (inclusive) of pixel values considered inside.
-	 * @param origin The translation of the origin, in 3D.
+	 * Triangulates the specifified volume.
+	 *
+	 * @param volume the volume to triangulate
+	 * @return the triangles
 	 */
-	public<T extends RealType<T>> List<Point3f> getTriangles(Image<T> img, int threshold, float[] origin) throws Exception {
-		return MCCube.getTriangles(new ImgLibVolume(img, origin), threshold);
+	public List<Point3f> getTriangles(AreaListVolume volume) throws Exception {
+		return MCCube.getTriangles(volume, 128);
 	}
 
 	static public void zeroPad(final ImagePlus imp) {

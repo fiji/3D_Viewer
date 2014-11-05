@@ -1,21 +1,19 @@
 package marchingcubes;
 
 import ij.IJ;
-import ij3d.ImgLibVolume;
+import ij3d.AreaListVolume;
 import ij3d.Volume;
 
 import java.awt.Polygon;
 import java.awt.Rectangle;
-import java.awt.Shape;
 import java.awt.geom.Area;
 import java.awt.geom.PathIterator;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.vecmath.Point3f;
-
-import mpicbg.imglib.container.shapelist.ShapeList;
 
 public final class MCCube {
 	// vertexes
@@ -195,10 +193,10 @@ public final class MCCube {
 		car.threshold = thresh + 0.5f;
 		car.volume = volume;
 
-		if (volume instanceof ImgLibVolume && ((ImgLibVolume)volume).getImage().getContainer() instanceof ShapeList) {
-			getShapeListImageTriangles((ImgLibVolume)volume, car, tri);
+		MCCube cube = new MCCube();
+		if (volume instanceof AreaListVolume) {
+			return getTriangles(cube, (AreaListVolume)volume, car, tri);
 		} else {
-			MCCube cube = new MCCube();
 			for(int z = -1; z < car.d+1; z+=1){
 				for(int x = -1; x < car.w+1; x+=1){
 					for(int y = -1; y < car.h+1; y+=1){
@@ -221,49 +219,55 @@ public final class MCCube {
 		return tri;
 	}
 
-	/** Identical to getTriangles, but iterates only the minimal necessary bounding box, by asking the shapes objects. */
-	private static final void getShapeListImageTriangles(final ImgLibVolume volume, final Carrier car, final List<Point3f> tri) {
-		final ShapeList sli = (ShapeList) volume.getImage().getContainer();
-		final ArrayList<ArrayList<Shape>> shapeLists = sli.getShapeLists();
-		final Area[] sectionAreas = new Area[shapeLists.size()];
-		// Create one Area for each section, composed of the addition of all Shape instances
-		{
-			int next = -1;
-			for (final ArrayList<Shape> shapeList : shapeLists) {
-				next++;
-				if (shapeList.isEmpty()) {
-					continue;
-				}
-				final Area a = new Area(shapeList.get(0));
-				for (int i=1; i<shapeList.size(); i++) {
-					a.add(new Area(shapeList.get(i)));
-				}
-				sectionAreas[next] = a;
+	/**
+	 * An efficient helper for {@link AreaListVolume}s.
+	 * 
+	 * @param volume the volume
+	 * @param tri the {@link List} to which to add the triangles
+	 * @return the list of triangles
+	 */
+	private static final List<Point3f> getTriangles(MCCube cube, final AreaListVolume volume, final Carrier car, final List<Point3f> tri) {
+
+		final List<List<Area>> list = volume.getAreas();
+		final Area[] sectionAreas = new Area[list.size()];
+		// Create one Area for each section, composed of the addition of all Shape
+		// instances
+		int next = -1;
+		for (final List<Area> shapeList : list) {
+			next++;
+			if (shapeList.isEmpty()) continue;
+			final Area a = shapeList.get(0);
+			for (int i = 1; i < shapeList.size(); i++) {
+				a.add(new Area(shapeList.get(i)));
 			}
+			sectionAreas[next] = a;
 		}
 		// Fuse Area instances for previous and next sections
 		final Area[] scanAreas = new Area[sectionAreas.length];
-		for (int i=0; i<sectionAreas.length; i++) {
+		for (int i = 0; i < sectionAreas.length; i++) {
 			if (null == sectionAreas[i]) continue;
 			final Area a = new Area(sectionAreas[i]);
-			if (i-1 < 0 || null == sectionAreas[i-1]) {}
-			else a.add(sectionAreas[i-1]);
-			if (i+1 > sectionAreas.length -1 || null == sectionAreas[i+1]) {}
-			else a.add(sectionAreas[i+1]);
+			if (i - 1 < 0 || null == sectionAreas[i - 1]) {}
+			else a.add(sectionAreas[i - 1]);
+			if (i + 1 > sectionAreas.length - 1 || null == sectionAreas[i + 1]) {}
+			else a.add(sectionAreas[i + 1]);
 			scanAreas[i] = a;
 		}
 		// Collect the bounds of all subareas in each scanArea:
-		final HashMap<Integer,ArrayList<Rectangle>> sectionBounds = new HashMap<Integer,ArrayList<Rectangle>>();
-		for (int i=0; i<scanAreas.length; i++) {
+		final Map<Integer, ArrayList<Rectangle>> sectionBounds =
+			new HashMap<Integer, ArrayList<Rectangle>>();
+		for (int i = 0; i < scanAreas.length; i++) {
 			if (null == scanAreas[i]) continue;
 			final ArrayList<Rectangle> bs = new ArrayList<Rectangle>();
 			Polygon pol = new Polygon();
 			final float[] coords = new float[6];
-			for (final PathIterator pit = scanAreas[i].getPathIterator(null); !pit.isDone(); pit.next()) {
+			for (final PathIterator pit = scanAreas[i].getPathIterator(null); !pit
+				.isDone(); pit.next())
+			{
 				switch (pit.currentSegment(coords)) {
 					case PathIterator.SEG_MOVETO:
 					case PathIterator.SEG_LINETO:
-						pol.addPoint((int)coords[0], (int)coords[1]);
+						pol.addPoint((int) coords[0], (int) coords[1]);
 						break;
 					case PathIterator.SEG_CLOSE:
 						bs.add(pol.getBounds());
@@ -277,18 +281,17 @@ public final class MCCube {
 			sectionBounds.put(i, bs);
 		}
 
-		// Add Z paddings on top and bottom
+// Add Z paddings on top and bottom
 		sectionBounds.put(-1, sectionBounds.get(0));
-		sectionBounds.put(car.d, sectionBounds.get(car.d-1));
+		sectionBounds.put(car.d, sectionBounds.get(car.d - 1));
 
-		// Scan only relevant areas:
-		final MCCube cube = new MCCube();
+// Scan only relevant areas:
 		for (int z = -1; z < car.d + 1; z += 1) {
 			final ArrayList<Rectangle> bs = sectionBounds.get(z);
 			if (null == bs || bs.isEmpty()) continue;
 			for (final Rectangle bounds : bs) {
-				for (int x = bounds.x -1; x < bounds.x + bounds.width +2; x+=1) {
-					for (int y = bounds.y -1; y < bounds.y + bounds.height +2; y+=1) {
+				for (int x = bounds.x - 1; x < bounds.x + bounds.width + 2; x += 1) {
+					for (int y = bounds.y - 1; y < bounds.y + bounds.height + 2; y += 1) {
 						cube.init(x, y, z);
 						cube.computeEdges(car);
 						cube.getTriangles(tri, car);
@@ -296,8 +299,17 @@ public final class MCCube {
 				}
 			}
 
-			IJ.showProgress(z, car.d-2);
+			IJ.showProgress(z, car.d - 2);
 		}
+
+		// convert pixel coordinates
+		for (int i = 0; i < tri.size(); i++) {
+			Point3f p = (Point3f) tri.get(i);
+			p.x = (float) (p.x * volume.pw + volume.minCoord.x);
+			p.y = (float) (p.y * volume.ph + volume.minCoord.y);
+			p.z = (float) (p.z * volume.pd + volume.minCoord.z);
+		}
+		return tri;
 	}
 
 	protected static final int ambigous[] = {
