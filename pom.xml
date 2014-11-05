@@ -15,6 +15,25 @@
 	<name>plugins/3D_Viewer.jar</name>
 	<description />
 
+	<scm>
+		<connection>scm:git:git://github.com/fiji/3D_Viewer</connection>
+		<developerConnection>scm:git:git@github.com:fiji/3D_Viewer</developerConnection>
+		<tag>HEAD</tag>
+		<url>https://github.com/fiji/3D_Viewer</url>
+	</scm>
+	<ciManagement>
+		<system>Jenkins</system>
+		<url>http://jenkins.imagej.net/job/3D_Viewer/</url>
+	</ciManagement>
+
+	<repositories>
+		<!-- NB: for project parent -->
+		<repository>
+			<id>imagej.public</id>
+			<url>http://maven.imagej.net/content/groups/public</url>
+		</repository>
+	</repositories>
+
 	<dependencies>
 		<!-- Fiji dependencies -->
 		<dependency>
@@ -73,25 +92,5 @@
 			</plugin>
 		</plugins>
 	</build>
-
-	<ciManagement>
-		<system>Jenkins</system>
-		<url>http://jenkins.imagej.net/job/3D_Viewer/</url>
-	</ciManagement>
-
-	<scm>
-		<connection>scm:git:git://github.com/fiji/3D_Viewer</connection>
-		<developerConnection>scm:git:git@github.com:fiji/3D_Viewer</developerConnection>
-		<tag>HEAD</tag>
-		<url>https://github.com/fiji/3D_Viewer</url>
-	</scm>
-
-	<repositories>
-		<!-- NB: for project parent -->
-		<repository>
-			<id>imagej.public</id>
-			<url>http://maven.imagej.net/content/groups/public</url>
-		</repository>
-	</repositories>
 
 </project>
