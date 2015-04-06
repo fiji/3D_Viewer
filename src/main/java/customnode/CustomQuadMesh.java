@@ -1,3 +1,4 @@
+
 package customnode;
 
 import com.sun.j3d.utils.geometry.GeometryInfo;
@@ -6,6 +7,7 @@ import com.sun.j3d.utils.geometry.NormalGenerator;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.media.j3d.Geometry;
 import javax.media.j3d.GeometryArray;
 import javax.media.j3d.QuadArray;
 import javax.vecmath.Color3f;
@@ -13,23 +15,27 @@ import javax.vecmath.Point3f;
 
 public class CustomQuadMesh extends CustomTriangleMesh {
 
-	public CustomQuadMesh(List<Point3f> mesh) {
+	public CustomQuadMesh(final List<Point3f> mesh) {
 		super(mesh);
 	}
 
-	public CustomQuadMesh(List<Point3f> mesh, Color3f color, float trans) {
+	public CustomQuadMesh(final List<Point3f> mesh, final Color3f color,
+		final float trans)
+	{
 		super(mesh, color, trans);
 	}
 
-	public void addQuads(Point3f[] v) {
-		if(v.length % 4 != 0)
-			throw new IllegalArgumentException(
-				"Number must be a multiple of 4");
+	public void addQuads(final Point3f[] v) {
+		if (v.length % 4 != 0) throw new IllegalArgumentException(
+			"Number must be a multiple of 4");
 		addVertices(v);
 	}
 
-	private Point3f[] fourPoints = new Point3f[4];
-	public void addQuad(Point3f p1, Point3f p2, Point3f p3, Point3f p4) {
+	private final Point3f[] fourPoints = new Point3f[4];
+
+	public void addQuad(final Point3f p1, final Point3f p2, final Point3f p3,
+		final Point3f p4)
+	{
 		fourPoints[0] = p1;
 		fourPoints[1] = p2;
 		fourPoints[2] = p3;
@@ -39,32 +45,30 @@ public class CustomQuadMesh extends CustomTriangleMesh {
 
 	@Override
 	protected GeometryArray createGeometry() {
-		if(mesh == null || mesh.size() < 4)
-			return null;
-		List<Point3f> tri = mesh;
-		int nValid = tri.size();
-		int nAll = 2 * nValid;
+		if (mesh == null || mesh.size() < 4) return null;
+		final List<Point3f> tri = mesh;
+		final int nValid = tri.size();
+		final int nAll = 2 * nValid;
 
-		Point3f[] coords = new Point3f[nValid];
+		final Point3f[] coords = new Point3f[nValid];
 		tri.toArray(coords);
 
-		Color3f colors[] = new Color3f[nValid];
+		final Color3f colors[] = new Color3f[nValid];
 		Arrays.fill(colors, color);
 
-		GeometryArray ta = new QuadArray(nAll,
-						QuadArray.COORDINATES |
-						QuadArray.COLOR_3 |
-						QuadArray.NORMALS);
+		final GeometryArray ta =
+			new QuadArray(nAll, GeometryArray.COORDINATES | GeometryArray.COLOR_3 |
+				GeometryArray.NORMALS);
 
 		ta.setCoordinates(0, coords);
 		ta.setColors(0, colors);
 
-		GeometryInfo gi = new GeometryInfo(ta);
+		final GeometryInfo gi = new GeometryInfo(ta);
 		// generate normals
-		NormalGenerator ng = new NormalGenerator();
+		final NormalGenerator ng = new NormalGenerator();
 		ng.generateNormals(gi);
 
-		GeometryArray result = gi.getGeometryArray();
+		final GeometryArray result = gi.getGeometryArray();
 		result.setValidVertexCount(nValid);
 
 		result.setCapability(GeometryArray.ALLOW_NORMAL_WRITE);
@@ -73,7 +77,7 @@ public class CustomQuadMesh extends CustomTriangleMesh {
 		result.setCapability(GeometryArray.ALLOW_COUNT_WRITE);
 		result.setCapability(GeometryArray.ALLOW_COUNT_READ);
 		result.setCapability(GeometryArray.ALLOW_FORMAT_READ);
-		result.setCapability(GeometryArray.ALLOW_INTERSECT);
+		result.setCapability(Geometry.ALLOW_INTERSECT);
 
 		return result;
 	}

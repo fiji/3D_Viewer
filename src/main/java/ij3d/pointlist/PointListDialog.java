@@ -1,3 +1,4 @@
+
 package ij3d.pointlist;
 
 import java.awt.BorderLayout;
@@ -13,31 +14,32 @@ import java.awt.ScrollPane;
 /**
  * This class represents a window which can hold a set of PointListPanels. These
  * panels can dynamically be added and removed from the window.
+ * 
  * @author Benjamin Schmid
- *
  */
 public class PointListDialog extends Dialog {
 
 	/** The constraints for the layout. */
-	private GridBagConstraints c;
+	private final GridBagConstraints c;
 
 	/** The layout itself */
-	private GridBagLayout gridbag;
+	private final GridBagLayout gridbag;
 
 	/** The parent panel of the PointListPanels */
-	private Panel panel;
+	private final Panel panel;
 
 	/**
-	 * An additional panel which is layed out at the bottom of the window
-	 * and may be used for showing some buttons.
+	 * An additional panel which is layed out at the bottom of the window and may
+	 * be used for showing some buttons.
 	 */
 	private Panel extraPanel;
 
 	/**
 	 * Constructs an empty PointListDialog
+	 * 
 	 * @param owner
 	 */
-	public PointListDialog(Frame owner) {
+	public PointListDialog(final Frame owner) {
 		super(owner, "Point list");
 		panel = new Panel();
 		gridbag = new GridBagLayout();
@@ -50,24 +52,25 @@ public class PointListDialog extends Dialog {
 		c.anchor = GridBagConstraints.NORTHWEST;
 		c.weighty = 0.1f;
 		c.fill = GridBagConstraints.NONE;
-		ScrollPane scroll = new ScrollPane();
+		final ScrollPane scroll = new ScrollPane();
 		scroll.add(panel);
 		add(scroll);
 	}
 
 	/**
 	 * Adds the specified PointListPanel. The window is made visible.
+	 * 
 	 * @param name
 	 * @param plp
 	 */
-	public void addPointList(String name, PointListPanel plp) {
-		if(!containsPointList(plp)) {
+	public void addPointList(final String name, final PointListPanel plp) {
+		if (!containsPointList(plp)) {
 			plp.setName(name);
 			gridbag.setConstraints(plp, c);
 			panel.add(plp);
 			c.gridx++;
 			// if not displayed yet, do so now.
-			if(!isVisible()) {
+			if (!isVisible()) {
 				setSize(250, 200);
 				setVisible(true);
 			}
@@ -75,53 +78,52 @@ public class PointListDialog extends Dialog {
 	}
 
 	/**
-	 * Removes the specified PointListPanel and hides the window, if it
-	 * was the last one.
+	 * Removes the specified PointListPanel and hides the window, if it was the
+	 * last one.
+	 * 
 	 * @param plp
 	 */
-	public void removePointList(PointListPanel plp) {
-		if(containsPointList(plp)) {
+	public void removePointList(final PointListPanel plp) {
+		if (containsPointList(plp)) {
 			panel.remove(plp);
 			c.gridx--;
 			// hide if it is empty
-			if(panel.getComponentCount() == 0)
-				setVisible(false);
+			if (panel.getComponentCount() == 0) setVisible(false);
 		}
 	}
 
 	/**
 	 * Returns true if the specified PointListPanel is already displayed
+	 * 
 	 * @param plp
 	 * @return
 	 */
-	public boolean containsPointList(PointListPanel plp) {
-		Component[] c = panel.getComponents();
-		for(int i = 0; i < c.length; i++) {
-			if(c[i] == plp)
-				return true;
+	public boolean containsPointList(final PointListPanel plp) {
+		final Component[] c = panel.getComponents();
+		for (int i = 0; i < c.length; i++) {
+			if (c[i] == plp) return true;
 		}
 		return false;
 	}
 
 	/**
-	 * Displays an optional panel at the bottom of the window. This may
-	 * be used for showing a panel with some buttons, for example.
+	 * Displays an optional panel at the bottom of the window. This may be used
+	 * for showing a panel with some buttons, for example.
+	 * 
 	 * @param p
 	 */
-	public void addPanel(Panel p) {
-		if(extraPanel != null)
-			remove(extraPanel);
+	public void addPanel(final Panel p) {
+		if (extraPanel != null) remove(extraPanel);
 		extraPanel = p;
 		add(p, BorderLayout.SOUTH);
 		update();
 	}
 
 	/**
-	 * Remove the optional panel at the bottom of the window (if there is
-	 * one).
+	 * Remove the optional panel at the bottom of the window (if there is one).
 	 */
 	public void removeExtraPanel() {
-		if(extraPanel != null) {
+		if (extraPanel != null) {
 			remove(extraPanel);
 			extraPanel = null;
 			update();
@@ -132,7 +134,6 @@ public class PointListDialog extends Dialog {
 	 * Update the layout.
 	 */
 	public void update() {
- 		validateTree();
+		validateTree();
 	}
 }
-

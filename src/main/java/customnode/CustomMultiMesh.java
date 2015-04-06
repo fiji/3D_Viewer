@@ -1,3 +1,4 @@
+
 package customnode;
 
 import java.io.IOException;
@@ -6,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import javax.media.j3d.BranchGroup;
+import javax.media.j3d.Group;
 import javax.media.j3d.View;
 import javax.vecmath.Color3f;
 import javax.vecmath.Point3f;
@@ -21,55 +23,55 @@ public class CustomMultiMesh extends CustomMeshNode {
 		calculateMinMaxCenterPoint();
 	}
 
-	public CustomMultiMesh(CustomMesh customMesh) {
+	public CustomMultiMesh(final CustomMesh customMesh) {
 		setCapabilities(this);
 		customMeshes = new ArrayList<CustomMesh>();
 		customMeshes.add(customMesh);
 		calculateMinMaxCenterPoint();
-		BranchGroup bg = new BranchGroup();
+		final BranchGroup bg = new BranchGroup();
 		setCapabilities(bg);
 
 		bg.addChild(customMesh);
 		addChild(bg);
 	}
 
-	public CustomMultiMesh(List<CustomMesh> meshes) {
+	public CustomMultiMesh(final List<CustomMesh> meshes) {
 		customMeshes = meshes;
 		calculateMinMaxCenterPoint();
-		for(CustomMesh m : customMeshes) {
-			BranchGroup bg = new BranchGroup();
+		for (final CustomMesh m : customMeshes) {
+			final BranchGroup bg = new BranchGroup();
 			setCapabilities(bg);
 			bg.addChild(m);
 			addChild(bg);
 		}
 	}
 
-	private static void setCapabilities(BranchGroup bg) {
+	private static void setCapabilities(final BranchGroup bg) {
 		bg.setCapability(BranchGroup.ALLOW_DETACH);
-		bg.setCapability(BranchGroup.ALLOW_CHILDREN_WRITE);
-		bg.setCapability(BranchGroup.ALLOW_CHILDREN_EXTEND);
+		bg.setCapability(Group.ALLOW_CHILDREN_WRITE);
+		bg.setCapability(Group.ALLOW_CHILDREN_EXTEND);
 	}
 
-	public void remove(int i) {
+	public void remove(final int i) {
 		customMeshes.remove(i);
 		calculateMinMaxCenterPoint();
-		BranchGroup bg = (BranchGroup)getChild(i);
+		final BranchGroup bg = (BranchGroup) getChild(i);
 		removeChild(i);
 		bg.removeAllChildren();
 	}
 
-	public void remove(CustomMesh mesh) {
+	public void remove(final CustomMesh mesh) {
 		customMeshes.remove(mesh);
 		calculateMinMaxCenterPoint();
-		BranchGroup bg = (BranchGroup)mesh.getParent();
+		final BranchGroup bg = (BranchGroup) mesh.getParent();
 		removeChild(bg);
 		bg.removeAllChildren();
 	}
 
-	public void add(CustomMesh mesh) {
+	public void add(final CustomMesh mesh) {
 		customMeshes.add(mesh);
 		calculateMinMaxCenterPoint();
-		BranchGroup bg = new BranchGroup();
+		final BranchGroup bg = new BranchGroup();
 		setCapabilities(bg);
 		bg.addChild(mesh);
 		addChild(bg);
@@ -79,92 +81,91 @@ public class CustomMultiMesh extends CustomMeshNode {
 		return customMeshes.size();
 	}
 
-	public CustomMesh getMesh(int i) {
+	public CustomMesh getMesh(final int i) {
 		return customMeshes.get(i);
 	}
 
 	@Override
-	public void getMin(Tuple3d min) {
+	public void getMin(final Tuple3d min) {
 		min.set(this.min);
 	}
 
 	@Override
-	public void getMax(Tuple3d max) {
+	public void getMax(final Tuple3d max) {
 		max.set(this.max);
 	}
 
 	@Override
-	public void getCenter(Tuple3d center) {
+	public void getCenter(final Tuple3d center) {
 		center.set(this.center);
 	}
 
 	@Override
-	public void channelsUpdated(boolean[] channels) {
+	public void channelsUpdated(final boolean[] channels) {
 		// do nothing
 	}
 
 	@Override
-	public void colorUpdated(Color3f color) {
-		for(CustomMesh mesh : customMeshes)
+	public void colorUpdated(final Color3f color) {
+		for (final CustomMesh mesh : customMeshes)
 			mesh.setColor(color);
 	}
 
 	@Override
-	public void eyePtChanged(View view) {
+	public void eyePtChanged(final View view) {
 		// do nothing
 	}
 
 	@Override
 	public float getVolume() {
 		float vol = 0f;
-		for(CustomMesh mesh : customMeshes)
+		for (final CustomMesh mesh : customMeshes)
 			vol += mesh.getVolume();
 		return vol;
 	}
 
 	@Override
-	public void shadeUpdated(boolean shaded) {
-		for(CustomMesh mesh : customMeshes)
+	public void shadeUpdated(final boolean shaded) {
+		for (final CustomMesh mesh : customMeshes)
 			mesh.setShaded(shaded);
 	}
 
 	@Override
-	public void thresholdUpdated(int threshold) {
+	public void thresholdUpdated(final int threshold) {
 		// do nothing
 	}
 
 	@Override
-	public void transparencyUpdated(float transparency) {
-		for(CustomMesh mesh : customMeshes)
+	public void transparencyUpdated(final float transparency) {
+		for (final CustomMesh mesh : customMeshes)
 			mesh.setTransparency(transparency);
 	}
 
-	private static void adjustMinMax(Point3f p, Point3f min, Point3f max) {
-		if(p.x < min.x) min.x = p.x;
-		if(p.y < min.y) min.y = p.y;
-		if(p.z < min.z) min.z = p.z;
+	private static void adjustMinMax(final Point3f p, final Point3f min,
+		final Point3f max)
+	{
+		if (p.x < min.x) min.x = p.x;
+		if (p.y < min.y) min.y = p.y;
+		if (p.z < min.z) min.z = p.z;
 
-		if(p.x > max.x) max.x = p.x;
-		if(p.y > max.y) max.y = p.y;
-		if(p.z > max.z) max.z = p.z;
+		if (p.x > max.x) max.x = p.x;
+		if (p.y > max.y) max.y = p.y;
+		if (p.z > max.z) max.z = p.z;
 	}
 
 	private void calculateMinMaxCenterPoint() {
 		min = new Point3f();
 		max = new Point3f();
 		center = new Point3f();
-		if(customMeshes.isEmpty())
-			return;
+		if (customMeshes.isEmpty()) return;
 
-		customMeshes.get(0).calculateMinMaxCenterPoint(
-				min, max, center);
-		Point3f mint = new Point3f();
-		Point3f maxt = new Point3f();
-		int n = customMeshes.size();
-		if(n == 1)
-			return;
-		for(int i = 1; i < n; i++) {
-			CustomMesh mesh = customMeshes.get(i);
+		customMeshes.get(0).calculateMinMaxCenterPoint(min, max, center);
+		final Point3f mint = new Point3f();
+		final Point3f maxt = new Point3f();
+		final int n = customMeshes.size();
+		if (n == 1) return;
+		for (int i = 1; i < n; i++) {
+			final CustomMesh mesh = customMeshes.get(i);
 			mesh.calculateMinMaxCenterPoint(mint, maxt, center);
 			adjustMinMax(mint, min, max);
 			adjustMinMax(maxt, min, max);
@@ -173,35 +174,36 @@ public class CustomMultiMesh extends CustomMeshNode {
 		center.scale(0.5f);
 	}
 
-	public void restoreDisplayedData(String path, String name) {
+	@Override
+	public void restoreDisplayedData(final String path, final String name) {
 		HashMap<String, CustomMesh> contents = null;
 		customMeshes = null;
 		try {
 			contents = WavefrontLoader.load(path);
-			for(int i = 0; i < contents.size(); i++) {
-				CustomMesh cm = contents.get(name + "###" + i);
+			for (int i = 0; i < contents.size(); i++) {
+				final CustomMesh cm = contents.get(name + "###" + i);
 				customMeshes.add(cm);
 				cm.update();
 			}
 
-		} catch(IOException e) {
+		}
+		catch (final IOException e) {
 			e.printStackTrace();
 		}
 	}
 
-	public void swapDisplayedData(String path, String name) {
-		HashMap<String, CustomMesh> contents =
+	@Override
+	public void swapDisplayedData(final String path, final String name) {
+		final HashMap<String, CustomMesh> contents =
 			new HashMap<String, CustomMesh>();
-		for(int i = 0; i < customMeshes.size(); i++)
+		for (int i = 0; i < customMeshes.size(); i++)
 			contents.put(name + "###" + i, customMeshes.get(i));
 
 		try {
-			WavefrontExporter.save(
-				contents,
-				path + ".obj");
-		} catch(IOException e) {
+			WavefrontExporter.save(contents, path + ".obj");
+		}
+		catch (final IOException e) {
 			e.printStackTrace();
 		}
 	}
 }
-

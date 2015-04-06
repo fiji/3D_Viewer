@@ -1,3 +1,4 @@
+
 package ij3d.shortcuts;
 
 import java.awt.BorderLayout;
@@ -14,23 +15,25 @@ import javax.swing.JScrollPane;
 public class ShortCutDialog extends JDialog {
 
 	public ShortCutDialog(final ShortCuts shortcuts) {
-		ShortCutTable table = new ShortCutTable(shortcuts);
+		final ShortCutTable table = new ShortCutTable(shortcuts);
 		getContentPane().add(new JScrollPane(table));
 
-		JPanel buttons = new JPanel(new FlowLayout());
-		JButton cancel = new JButton("Cancel");
+		final JPanel buttons = new JPanel(new FlowLayout());
+		final JButton cancel = new JButton("Cancel");
 		cancel.addActionListener(new ActionListener() {
+
 			@Override
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(final ActionEvent e) {
 				shortcuts.reload();
 				dispose();
 			}
 		});
 		buttons.add(cancel);
-		JButton ok = new JButton("Ok");
+		final JButton ok = new JButton("Ok");
 		ok.addActionListener(new ActionListener() {
+
 			@Override
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(final ActionEvent e) {
 				shortcuts.save();
 				dispose();
 			}

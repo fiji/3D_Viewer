@@ -1,41 +1,45 @@
+
 package ij3d;
 
 public class NoopAdapter implements UIAdapter {
 
+	@Override
 	public boolean isHandTool() {
 		return true;
 	}
 
+	@Override
 	public boolean isPointTool() {
 		return false;
 	}
 
+	@Override
 	public boolean isMagnifierTool() {
 		return false;
 	}
 
+	@Override
 	public boolean isRoiTool() {
 		return false;
 	}
 
+	@Override
 	public int getToolId() {
 		return 0;
 	}
 
-	public void setTool(int id) {
-	}
+	@Override
+	public void setTool(final int id) {}
 
-	public void setHandTool() {
-	}
+	@Override
+	public void setHandTool() {}
 
-	public void setPointTool() {
-	}
+	@Override
+	public void setPointTool() {}
 
-	public void showStatus(String status) {
-	}
+	@Override
+	public void showStatus(final String status) {}
 
-	public void showProgress(int a, int b) {
-	}
+	@Override
+	public void showProgress(final int a, final int b) {}
 }
-
-

@@ -1,3 +1,4 @@
+
 package customnode;
 
 import java.util.Arrays;
@@ -5,6 +6,7 @@ import java.util.List;
 
 import javax.media.j3d.Appearance;
 import javax.media.j3d.ColoringAttributes;
+import javax.media.j3d.Geometry;
 import javax.media.j3d.GeometryArray;
 import javax.media.j3d.LineArray;
 import javax.media.j3d.LineAttributes;
@@ -20,9 +22,9 @@ public class CustomLineMesh extends CustomMesh {
 	public static final int PAIRWISE = 0;
 	public static final int CONTINUOUS = 1;
 
-	public static final int SOLID    = LineAttributes.PATTERN_SOLID;
-	public static final int DOT      = LineAttributes.PATTERN_DOT;
-	public static final int DASH     = LineAttributes.PATTERN_DASH;
+	public static final int SOLID = LineAttributes.PATTERN_SOLID;
+	public static final int DOT = LineAttributes.PATTERN_DOT;
+	public static final int DASH = LineAttributes.PATTERN_DASH;
 	public static final int DASH_DOT = LineAttributes.PATTERN_DASH_DOT;
 
 	public static final int DEFAULT_MODE = CONTINUOUS;
@@ -33,22 +35,22 @@ public class CustomLineMesh extends CustomMesh {
 	private int pattern = DEFAULT_PATTERN;
 	private float linewidth = DEFAULT_LINEWIDTH;
 
-	public CustomLineMesh(List<Point3f> mesh) {
+	public CustomLineMesh(final List<Point3f> mesh) {
 		this(mesh, DEFAULT_MODE);
 	}
 
-	public CustomLineMesh(List<Point3f> mesh, int mode) {
+	public CustomLineMesh(final List<Point3f> mesh, final int mode) {
 		this(mesh, mode, DEFAULT_COLOR, 0);
 	}
 
-	public CustomLineMesh(List<Point3f> mesh, int mode,
-			Color3f color, float transparency) {
+	public CustomLineMesh(final List<Point3f> mesh, final int mode,
+		final Color3f color, final float transparency)
+	{
 		this.setCapability(ALLOW_GEOMETRY_READ);
 		this.setCapability(ALLOW_GEOMETRY_WRITE);
 		this.setCapability(ALLOW_APPEARANCE_READ);
 		this.setCapability(ALLOW_APPEARANCE_WRITE);
-		if(color != null)
-			this.color = color;
+		if (color != null) this.color = color;
 		this.mesh = mesh;
 		this.mode = mode;
 		this.transparency = transparency;
@@ -59,16 +61,16 @@ public class CustomLineMesh extends CustomMesh {
 		return mode;
 	}
 
-	public void setPattern(int pattern) {
+	public void setPattern(final int pattern) {
 		this.pattern = pattern;
 		getAppearance().getLineAttributes().setLinePattern(pattern);
 	}
 
-	public void setAntiAliasing(boolean b) {
+	public void setAntiAliasing(final boolean b) {
 		getAppearance().getLineAttributes().setLineAntialiasingEnable(b);
 	}
 
-	public void setLineWidth(float w) {
+	public void setLineWidth(final float w) {
 		this.linewidth = w;
 		getAppearance().getLineAttributes().setLineWidth(w);
 	}
@@ -77,9 +79,9 @@ public class CustomLineMesh extends CustomMesh {
 		return linewidth;
 	}
 
-	public void addLines(Point3f[] v) {
-		if(mode == PAIRWISE && (v.length % 2) != 0)
-			throw new IllegalArgumentException("Even number expected");
+	public void addLines(final Point3f[] v) {
+		if (mode == PAIRWISE && (v.length % 2) != 0) throw new IllegalArgumentException(
+			"Even number expected");
 		addVertices(v);
 	}
 
@@ -90,11 +92,11 @@ public class CustomLineMesh extends CustomMesh {
 
 	@Override
 	protected Appearance createAppearance() {
-		Appearance appearance = new Appearance();
+		final Appearance appearance = new Appearance();
 		appearance.setCapability(Appearance.ALLOW_TRANSPARENCY_ATTRIBUTES_READ);
 		appearance.setCapability(Appearance.ALLOW_LINE_ATTRIBUTES_READ);
 
-		LineAttributes lineAttrib = new LineAttributes();
+		final LineAttributes lineAttrib = new LineAttributes();
 		lineAttrib.setCapability(LineAttributes.ALLOW_ANTIALIASING_WRITE);
 		lineAttrib.setCapability(LineAttributes.ALLOW_PATTERN_WRITE);
 		lineAttrib.setCapability(LineAttributes.ALLOW_WIDTH_WRITE);
@@ -102,20 +104,21 @@ public class CustomLineMesh extends CustomMesh {
 		lineAttrib.setLinePattern(pattern);
 		appearance.setLineAttributes(lineAttrib);
 
-		PolygonAttributes polyAttrib = new PolygonAttributes();
+		final PolygonAttributes polyAttrib = new PolygonAttributes();
 		polyAttrib.setCapability(PolygonAttributes.ALLOW_MODE_WRITE);
 		polyAttrib.setPolygonMode(PolygonAttributes.POLYGON_FILL);
 		polyAttrib.setCullFace(PolygonAttributes.CULL_NONE);
 		polyAttrib.setBackFaceNormalFlip(true);
 		appearance.setPolygonAttributes(polyAttrib);
 
-		ColoringAttributes colorAttrib = new ColoringAttributes();
+		final ColoringAttributes colorAttrib = new ColoringAttributes();
 		colorAttrib.setShadeModel(ColoringAttributes.SHADE_GOURAUD);
 		colorAttrib.setColor(color);
 		appearance.setColoringAttributes(colorAttrib);
 
-		TransparencyAttributes tr = new TransparencyAttributes();
-		int mode = transparency == 0f ? TransparencyAttributes.NONE
+		final TransparencyAttributes tr = new TransparencyAttributes();
+		final int mode =
+			transparency == 0f ? TransparencyAttributes.NONE
 				: TransparencyAttributes.FASTEST;
 		tr.setCapability(TransparencyAttributes.ALLOW_VALUE_WRITE);
 		tr.setCapability(TransparencyAttributes.ALLOW_MODE_WRITE);
@@ -123,7 +126,7 @@ public class CustomLineMesh extends CustomMesh {
 		tr.setTransparency(transparency);
 		appearance.setTransparencyAttributes(tr);
 
-		Material material = new Material();
+		final Material material = new Material();
 		material.setCapability(Material.ALLOW_COMPONENT_WRITE);
 		material.setAmbientColor(0.1f, 0.1f, 0.1f);
 		material.setSpecularColor(0.1f, 0.1f, 0.1f);
@@ -134,29 +137,27 @@ public class CustomLineMesh extends CustomMesh {
 
 	@Override
 	protected GeometryArray createGeometry() {
-		if(mesh == null || mesh.size() < 2)
-			return null;
-		List<Point3f> tri = mesh;
-		int nValid = tri.size();
-		int nAll = 2 * nValid;
+		if (mesh == null || mesh.size() < 2) return null;
+		final List<Point3f> tri = mesh;
+		final int nValid = tri.size();
+		final int nAll = 2 * nValid;
 
-		Point3f[] coords = new Point3f[nValid];
+		final Point3f[] coords = new Point3f[nValid];
 		tri.toArray(coords);
 
-		Color3f colors[] = new Color3f[nValid];
+		final Color3f colors[] = new Color3f[nValid];
 		Arrays.fill(colors, color);
 
 		GeometryArray ta = null;
-		if(mode == PAIRWISE) {
-			ta = new LineArray(nAll,
-					LineArray.COORDINATES |
-					LineArray.COLOR_3);
+		if (mode == PAIRWISE) {
+			ta =
+				new LineArray(nAll, GeometryArray.COORDINATES | GeometryArray.COLOR_3);
 			ta.setValidVertexCount(nValid);
-		} else if (mode == CONTINUOUS) {
-			ta = new LineStripArray(nAll,
-					LineArray.COORDINATES |
-					LineArray.COLOR_3,
-					new int[] {nValid});
+		}
+		else if (mode == CONTINUOUS) {
+			ta =
+				new LineStripArray(nAll, GeometryArray.COORDINATES |
+					GeometryArray.COLOR_3, new int[] { nValid });
 		}
 
 		ta.setCoordinates(0, coords);
@@ -166,7 +167,7 @@ public class CustomLineMesh extends CustomMesh {
 		ta.setCapability(GeometryArray.ALLOW_COORDINATE_WRITE);
 		ta.setCapability(GeometryArray.ALLOW_COUNT_WRITE);
 		ta.setCapability(GeometryArray.ALLOW_COUNT_READ);
-		ta.setCapability(GeometryArray.ALLOW_INTERSECT);
+		ta.setCapability(Geometry.ALLOW_INTERSECT);
 
 		return ta;
 	}

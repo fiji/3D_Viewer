@@ -11,6 +11,4 @@ package ij3d;
 /**
  * @Deprecated Use customnode.Mesh_Maker instead.
  */
-public class Mesh_Maker extends customnode.Mesh_Maker {
-}
-
+public class Mesh_Maker extends customnode.Mesh_Maker {}

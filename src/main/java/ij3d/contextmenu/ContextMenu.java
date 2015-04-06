@@ -1,3 +1,4 @@
+
 package ij3d.contextmenu;
 
 import ij3d.Content;
@@ -16,19 +17,22 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
-public class ContextMenu implements ActionListener, ItemListener, ContentConstants {
+public class ContextMenu implements ActionListener, ItemListener,
+	ContentConstants
+{
 
-	private JPopupMenu popup = new JPopupMenu();
+	private final JPopupMenu popup = new JPopupMenu();
 
-	private Image3DUniverse univ;
-	private Executer executer;
+	private final Image3DUniverse univ;
+	private final Executer executer;
 
 	private Content content;
 
-	private JMenuItem slices, updateVol, fill, smoothMesh, smoothAllMeshes, smoothDialog, colorSurface, decimateMesh;
-	private JCheckBoxMenuItem shaded, saturated;
+	private final JMenuItem slices, updateVol, fill, smoothMesh, smoothAllMeshes,
+			smoothDialog, colorSurface, decimateMesh;
+	private final JCheckBoxMenuItem shaded, saturated;
 
-	public ContextMenu (Image3DUniverse univ) {
+	public ContextMenu(final Image3DUniverse univ) {
 
 		this.univ = univ;
 		this.executer = univ.getExecuter();
@@ -45,7 +49,7 @@ public class ContextMenu implements ActionListener, ItemListener, ContentConstan
 		fill.addActionListener(this);
 		popup.add(fill);
 
-		JMenu smooth = new JMenu("Smooth");
+		final JMenu smooth = new JMenu("Smooth");
 		popup.add(smooth);
 
 		smoothMesh = new JMenuItem("Smooth mesh");
@@ -80,44 +84,34 @@ public class ContextMenu implements ActionListener, ItemListener, ContentConstan
 
 	}
 
-	public void showPopup(MouseEvent e) {
+	public void showPopup(final MouseEvent e) {
 		content = univ.getPicker().getPickedContent(e.getX(), e.getY());
-		if(content == null)
-			return;
+		if (content == null) return;
 		univ.select(content);
 		shaded.setState(content.isShaded());
 		saturated.setState(content.isSaturatedVolumeRendering());
-		if(popup.isPopupTrigger(e))
-			popup.show(e.getComponent(), e.getX(), e.getY());
+		if (popup.isPopupTrigger(e)) popup.show(e.getComponent(), e.getX(), e
+			.getY());
 	}
 
 	@Override
-	public void itemStateChanged(ItemEvent e) {
-		Object src = e.getSource();
-		if(src == shaded)
-			executer.setShaded(content, shaded.getState());
-		else if(src == saturated)
-			executer.setSaturatedVolumeRendering(content, saturated.getState());
+	public void itemStateChanged(final ItemEvent e) {
+		final Object src = e.getSource();
+		if (src == shaded) executer.setShaded(content, shaded.getState());
+		else if (src == saturated) executer.setSaturatedVolumeRendering(content,
+			saturated.getState());
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
-		Object src = e.getSource();
-		if (src == updateVol)
-			executer.updateVolume(content);
-		else if (src == slices)
-			executer.changeSlices(content);
-		else if (src == fill)
-			executer.fill(content);
-		else if (src == smoothMesh)
-			executer.smoothMesh(content);
-		else if (src == smoothAllMeshes)
-			executer.smoothAllMeshes();
-		else if (src == smoothDialog)
-			executer.smoothControl();
-		else if (src == decimateMesh)
-			executer.decimateMesh();
-		else if(src == colorSurface)
-			executer.applySurfaceColors(content);
+	public void actionPerformed(final ActionEvent e) {
+		final Object src = e.getSource();
+		if (src == updateVol) executer.updateVolume(content);
+		else if (src == slices) executer.changeSlices(content);
+		else if (src == fill) executer.fill(content);
+		else if (src == smoothMesh) executer.smoothMesh(content);
+		else if (src == smoothAllMeshes) executer.smoothAllMeshes();
+		else if (src == smoothDialog) executer.smoothControl();
+		else if (src == decimateMesh) executer.decimateMesh();
+		else if (src == colorSurface) executer.applySurfaceColors(content);
 	}
 }

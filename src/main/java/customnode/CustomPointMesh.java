@@ -1,3 +1,4 @@
+
 package customnode;
 
 import java.util.Arrays;
@@ -5,6 +6,7 @@ import java.util.List;
 
 import javax.media.j3d.Appearance;
 import javax.media.j3d.ColoringAttributes;
+import javax.media.j3d.Geometry;
 import javax.media.j3d.GeometryArray;
 import javax.media.j3d.Material;
 import javax.media.j3d.PointArray;
@@ -20,12 +22,13 @@ public class CustomPointMesh extends CustomMesh {
 
 	private float pointsize = DEFAULT_POINT_SIZE;
 
-	public CustomPointMesh(List<Point3f> mesh) {
+	public CustomPointMesh(final List<Point3f> mesh) {
 		super(mesh);
 	}
 
-	public CustomPointMesh(List<Point3f> mesh,
-						Color3f color, float transparency) {
+	public CustomPointMesh(final List<Point3f> mesh, final Color3f color,
+		final float transparency)
+	{
 		super(mesh, color, transparency);
 	}
 
@@ -33,21 +36,22 @@ public class CustomPointMesh extends CustomMesh {
 		return pointsize;
 	}
 
-	public void setPointSize(float pointsize) {
+	public void setPointSize(final float pointsize) {
 		this.pointsize = pointsize;
 		getAppearance().getPointAttributes().setPointSize(pointsize);
 	}
 
-	public void setAntiAliasing(boolean b) {
+	public void setAntiAliasing(final boolean b) {
 		getAppearance().getPointAttributes().setPointAntialiasingEnable(b);
 	}
 
-	public void addPoints(Point3f[] v) {
+	public void addPoints(final Point3f[] v) {
 		addVertices(v);
 	}
 
-	private Point3f[] onePoint = new Point3f[1];
-	public void addPoint(Point3f p) {
+	private final Point3f[] onePoint = new Point3f[1];
+
+	public void addPoint(final Point3f p) {
 		onePoint[0] = p;
 		addVertices(onePoint);
 	}
@@ -56,32 +60,34 @@ public class CustomPointMesh extends CustomMesh {
 	public float getVolume() {
 		return 0;
 	}
+
 	@Override
 	protected Appearance createAppearance() {
-		Appearance appearance = new Appearance();
+		final Appearance appearance = new Appearance();
 		appearance.setCapability(Appearance.ALLOW_TRANSPARENCY_ATTRIBUTES_READ);
 		appearance.setCapability(Appearance.ALLOW_LINE_ATTRIBUTES_READ);
 
-		PointAttributes pointAttrib = new PointAttributes();
+		final PointAttributes pointAttrib = new PointAttributes();
 		pointAttrib.setCapability(PointAttributes.ALLOW_ANTIALIASING_WRITE);
 		pointAttrib.setCapability(PointAttributes.ALLOW_SIZE_WRITE);
 		pointAttrib.setPointSize(pointsize);
 		appearance.setPointAttributes(pointAttrib);
 
-		PolygonAttributes polyAttrib = new PolygonAttributes();
+		final PolygonAttributes polyAttrib = new PolygonAttributes();
 		polyAttrib.setCapability(PolygonAttributes.ALLOW_MODE_WRITE);
 		polyAttrib.setPolygonMode(PolygonAttributes.POLYGON_FILL);
 		polyAttrib.setCullFace(PolygonAttributes.CULL_BACK);
 		polyAttrib.setBackFaceNormalFlip(false);
 		appearance.setPolygonAttributes(polyAttrib);
 
-		ColoringAttributes colorAttrib = new ColoringAttributes();
+		final ColoringAttributes colorAttrib = new ColoringAttributes();
 		colorAttrib.setShadeModel(ColoringAttributes.SHADE_GOURAUD);
 		colorAttrib.setColor(color);
 		appearance.setColoringAttributes(colorAttrib);
 
-		TransparencyAttributes tr = new TransparencyAttributes();
-		int mode = transparency == 0f ? TransparencyAttributes.NONE
+		final TransparencyAttributes tr = new TransparencyAttributes();
+		final int mode =
+			transparency == 0f ? TransparencyAttributes.NONE
 				: TransparencyAttributes.FASTEST;
 		tr.setCapability(TransparencyAttributes.ALLOW_VALUE_WRITE);
 		tr.setCapability(TransparencyAttributes.ALLOW_MODE_WRITE);
@@ -89,7 +95,7 @@ public class CustomPointMesh extends CustomMesh {
 		tr.setTransparency(transparency);
 		appearance.setTransparencyAttributes(tr);
 
-		Material material = new Material();
+		final Material material = new Material();
 		material.setCapability(Material.ALLOW_COMPONENT_WRITE);
 		material.setAmbientColor(0.1f, 0.1f, 0.1f);
 		material.setSpecularColor(0.1f, 0.1f, 0.1f);
@@ -100,22 +106,20 @@ public class CustomPointMesh extends CustomMesh {
 
 	@Override
 	protected GeometryArray createGeometry() {
-		if(mesh == null || mesh.size() == 0)
-			return null;
-		List<Point3f> tri = mesh;
-		int nValid = tri.size();
-		int nAll = 2 * nValid;
+		if (mesh == null || mesh.size() == 0) return null;
+		final List<Point3f> tri = mesh;
+		final int nValid = tri.size();
+		final int nAll = 2 * nValid;
 
-		Point3f[] coords = new Point3f[nValid];
+		final Point3f[] coords = new Point3f[nValid];
 		tri.toArray(coords);
 
-		Color3f colors[] = new Color3f[nValid];
+		final Color3f colors[] = new Color3f[nValid];
 		Arrays.fill(colors, color);
 
 		GeometryArray ta = null;
-		ta = new PointArray(nAll,
-					PointArray.COORDINATES |
-					PointArray.COLOR_3);
+		ta =
+			new PointArray(nAll, GeometryArray.COORDINATES | GeometryArray.COLOR_3);
 
 		ta.setValidVertexCount(nValid);
 
@@ -126,7 +130,7 @@ public class CustomPointMesh extends CustomMesh {
 		ta.setCapability(GeometryArray.ALLOW_COORDINATE_WRITE);
 		ta.setCapability(GeometryArray.ALLOW_COUNT_WRITE);
 		ta.setCapability(GeometryArray.ALLOW_COUNT_READ);
-		ta.setCapability(GeometryArray.ALLOW_INTERSECT);
+		ta.setCapability(Geometry.ALLOW_INTERSECT);
 
 		return ta;
 	}

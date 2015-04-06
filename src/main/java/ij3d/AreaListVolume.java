@@ -1,3 +1,4 @@
+
 package ij3d;
 
 import java.awt.Rectangle;
@@ -30,7 +31,7 @@ public class AreaListVolume extends Volume {
 		final Rectangle bounds = new Rectangle();
 		for (final List<Area> list : areas) {
 			if (list == null) continue;
-			for (final Area area: list) {
+			for (final Area area : list) {
 				if (area != null) bounds.add(area.getBounds());
 			}
 		}
@@ -53,18 +54,18 @@ public class AreaListVolume extends Volume {
 	}
 
 	@Override
-	public boolean setAverage(boolean a) {
+	public boolean setAverage(final boolean a) {
 		// override super.initLoader();
 		return false;
 	}
 
 	@Override
-	public void setNoCheck(int x, int y, int z, int v) {
+	public void setNoCheck(final int x, final int y, final int z, final int v) {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public void set(int x, int y, int z, int v) {
+	public void set(final int x, final int y, final int z, final int v) {
 		throw new UnsupportedOperationException();
 	}
 

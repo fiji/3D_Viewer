@@ -1,3 +1,4 @@
+
 package voltex;
 
 import ij.IJ;
@@ -28,23 +29,21 @@ import javax.vecmath.Point3i;
 
 public class Mask extends VoltexVolume {
 
-	private VoltexVolume image;
-	private BranchGroup node;
+	private final VoltexVolume image;
+	private final BranchGroup node;
 
 	public enum BlendMethod {
-		REPLACE(TextureAttributes.COMBINE_REPLACE, "C = C0"),
-		MODULATE(TextureAttributes.COMBINE_MODULATE, "C = C0 C1"),
-		ADD(TextureAttributes.COMBINE_ADD, "C = C0 + C1"),
-		ADD_SIGNED(TextureAttributes.COMBINE_ADD_SIGNED,
-				"C = C0 + C1 - 0.5"),
-		SUBTRACT(TextureAttributes.COMBINE_SUBTRACT, "C = C0 - C1"),
-		INTERPOLATE(TextureAttributes.COMBINE_INTERPOLATE,
-				"C0 C2 + C1 (1 - C2)");
+		REPLACE(TextureAttributes.COMBINE_REPLACE, "C = C0"), MODULATE(
+			TextureAttributes.COMBINE_MODULATE, "C = C0 C1"), ADD(
+			TextureAttributes.COMBINE_ADD, "C = C0 + C1"), ADD_SIGNED(
+			TextureAttributes.COMBINE_ADD_SIGNED, "C = C0 + C1 - 0.5"), SUBTRACT(
+			TextureAttributes.COMBINE_SUBTRACT, "C = C0 - C1"), INTERPOLATE(
+			TextureAttributes.COMBINE_INTERPOLATE, "C0 C2 + C1 (1 - C2)");
 
 		private int value;
 		private String desc;
 
-		BlendMethod(int v, String d) {
+		BlendMethod(final int v, final String d) {
 			this.value = v;
 			this.desc = d;
 		}
@@ -55,13 +54,13 @@ public class Mask extends VoltexVolume {
 	}
 
 	public enum BlendSource {
-		TEXTURE(TextureAttributes.COMBINE_PREVIOUS_TEXTURE_UNIT_STATE),
-		MASK(TextureAttributes.COMBINE_TEXTURE_COLOR),
-		COLOR(TextureAttributes.COMBINE_CONSTANT_COLOR);
+		TEXTURE(TextureAttributes.COMBINE_PREVIOUS_TEXTURE_UNIT_STATE), MASK(
+			TextureAttributes.COMBINE_TEXTURE_COLOR), COLOR(
+			TextureAttributes.COMBINE_CONSTANT_COLOR);
 
 		private int value;
 
-		BlendSource(int v) {
+		BlendSource(final int v) {
 			this.value = v;
 		}
 	}
@@ -76,32 +75,28 @@ public class Mask extends VoltexVolume {
 	private BlendMethod alphaMethod = BlendMethod.REPLACE;
 
 	/** default color sources; array of length 3 */
-	private BlendSource[] colorSource = new BlendSource[] {
+	private final BlendSource[] colorSource = new BlendSource[] {
 		BlendSource.TEXTURE, BlendSource.MASK, BlendSource.COLOR };
 
 	/** default alpha sources; array of length 3 */
-	private BlendSource[] alphaSource = new BlendSource[] {
+	private final BlendSource[] alphaSource = new BlendSource[] {
 		BlendSource.TEXTURE, BlendSource.MASK, BlendSource.COLOR };
-	
-	/** default blend color */
-	private Color4f blendColor = new Color4f(0, 0, 0, 0);
 
+	/** default blend color */
+	private final Color4f blendColor = new Color4f(0, 0, 0, 0);
 
 	public static final int BG = 50;
 
-	public Mask(VoltexVolume image, BranchGroup node) {
+	public Mask(final VoltexVolume image, final BranchGroup node) {
 		super(createMaskImage(image));
 		this.image = image;
 		this.node = node;
 		initTextureAttributes();
 	}
 
-	private static ImagePlus createMaskImage(VoltexVolume image) {
-		ImagePlus maskI = IJ.createImage(
-				"Mask", "8-bit white",
-				image.xDim,
-				image.yDim,
-				image.zDim);
+	private static ImagePlus createMaskImage(final VoltexVolume image) {
+		final ImagePlus maskI =
+			IJ.createImage("Mask", "8-bit white", image.xDim, image.yDim, image.zDim);
 		maskI.setCalibration(image.getImagePlus().getCalibration().copy());
 		return maskI;
 	}
@@ -110,20 +105,19 @@ public class Mask extends VoltexVolume {
 		return maskAttr;
 	}
 
-	public void subtractInverse(Canvas3D canvas, Roi roi) {
-		Polygon p = roi.getPolygon();
+	public void subtractInverse(final Canvas3D canvas, final Roi roi) {
+		final Polygon p = roi.getPolygon();
 
-		Transform3D volToIP = new Transform3D();
+		final Transform3D volToIP = new Transform3D();
 		volumeToImagePlate(canvas, volToIP);
 
-		Point2d onCanvas = new Point2d();
-		Point3i pos = new Point3i(0, 0, 0);
-		for(int z = 0; z < zDim; z++) {
-			for(int y = 0; y < yDim; y++) {
-				for(int x = 0; x < xDim; x++) {
-					volumePointInCanvas(canvas, volToIP,
-							x, y, z, onCanvas);
-					if(!p.contains(onCanvas.x, onCanvas.y)){
+		final Point2d onCanvas = new Point2d();
+		final Point3i pos = new Point3i(0, 0, 0);
+		for (int z = 0; z < zDim; z++) {
+			for (int y = 0; y < yDim; y++) {
+				for (int x = 0; x < xDim; x++) {
+					volumePointInCanvas(canvas, volToIP, x, y, z, onCanvas);
+					if (!p.contains(onCanvas.x, onCanvas.y)) {
 						setNoCheckNoUpdate(x, y, z, BG);
 					}
 				}
@@ -134,36 +128,34 @@ public class Mask extends VoltexVolume {
 		updateData();
 	}
 
-	public void subtract(Canvas3D canvas, Roi roi) {}
+	public void subtract(final Canvas3D canvas, final Roi roi) {}
 
 	public ImagePlus getMask() {
 		return imp;
 	}
 
-	public void cropToMask() {
-	}
+	public void cropToMask() {}
 
-	public void upateMask() {
-	}
+	public void upateMask() {}
 
 	/* ***************************************************************
 	 * Blending stuff
 	 * **************************************************************/
-	public void setBlendColor(Color4f col) {
+	public void setBlendColor(final Color4f col) {
 		blendColor.set(col);
 		maskAttr.setTextureBlendColor(blendColor);
 	}
 
-	public void setColorSource(int index, BlendSource c) {
+	public void setColorSource(final int index, final BlendSource c) {
 		colorSource[index] = c;
 		maskAttr.setCombineRgbSource(index, colorSource[index].value);
 	}
 
-	public BlendSource getColorSource(int index) {
+	public BlendSource getColorSource(final int index) {
 		return colorSource[index];
 	}
 
-	public void setColorMethod(BlendMethod m) {
+	public void setColorMethod(final BlendMethod m) {
 		colorMethod = m;
 		maskAttr.setCombineRgbMode(colorMethod.value);
 	}
@@ -172,16 +164,16 @@ public class Mask extends VoltexVolume {
 		return colorMethod;
 	}
 
-	public void setAlphaSource(int index, BlendSource c) {
+	public void setAlphaSource(final int index, final BlendSource c) {
 		alphaSource[index] = c;
 		maskAttr.setCombineAlphaSource(index, alphaSource[index].value);
 	}
 
-	public BlendSource getAlphaSource(int index) {
+	public BlendSource getAlphaSource(final int index) {
 		return alphaSource[index];
 	}
 
-	public void setAlphaMethod(BlendMethod m) {
+	public void setAlphaMethod(final BlendMethod m) {
 		alphaMethod = m;
 		maskAttr.setCombineAlphaMode(alphaMethod.value);
 	}
@@ -191,46 +183,41 @@ public class Mask extends VoltexVolume {
 	}
 
 	public void interactivelyChangeBlending() {
-		String[] methods = new String[BlendMethod.values().length];
+		final String[] methods = new String[BlendMethod.values().length];
 		int i = 0;
-		for(BlendMethod bm : BlendMethod.values())
+		for (final BlendMethod bm : BlendMethod.values())
 			methods[i++] = bm.fullString();
 
-		String[] sources = new String[BlendSource.values().length];
+		final String[] sources = new String[BlendSource.values().length];
 		i = 0;
-		for(BlendSource bs : BlendSource.values())
+		for (final BlendSource bs : BlendSource.values())
 			sources[i++] = bs.name();
 
-		GenericDialog gd = new GenericDialog("Blending");
-
+		final GenericDialog gd = new GenericDialog("Blending");
 
 		gd.setInsets(5, 0, 0);
 		gd.addMessage("RGB blending parameters:");
-		Label l = (Label)gd.getMessage();
+		Label l = (Label) gd.getMessage();
 		l.setFont(new Font("Helvetica", Font.BOLD, 12));
 		l.setForeground(Color.BLUE);
-		gd.addChoice("Color blend method", methods,
-				methods[colorMethod.ordinal()]);
+		gd.addChoice("Color blend method", methods, methods[colorMethod.ordinal()]);
 		gd.addChoice("C1", sources, sources[colorSource[0].ordinal()]);
 		gd.addChoice("C2", sources, sources[colorSource[1].ordinal()]);
 		gd.addChoice("C3", sources, sources[colorSource[2].ordinal()]);
 
-
 		gd.setInsets(5, 0, 0);
 		gd.addMessage("Alpha blending parameters:");
-		l = (Label)gd.getMessage();
+		l = (Label) gd.getMessage();
 		l.setFont(new Font("Helvetica", Font.BOLD, 12));
 		l.setForeground(Color.BLUE);
-		gd.addChoice("Alpha blend method", methods,
-				methods[alphaMethod.ordinal()]);
+		gd.addChoice("Alpha blend method", methods, methods[alphaMethod.ordinal()]);
 		gd.addChoice("A1", sources, sources[alphaSource[0].ordinal()]);
 		gd.addChoice("A2", sources, sources[alphaSource[1].ordinal()]);
 		gd.addChoice("A3", sources, sources[alphaSource[2].ordinal()]);
 
-
 		gd.setInsets(5, 0, 0);
 		gd.addMessage("COLOR values:");
-		l = (Label)gd.getMessage();
+		l = (Label) gd.getMessage();
 		l.setFont(new Font("Helvetica", Font.BOLD, 12));
 		l.setForeground(Color.BLUE);
 		gd.addSlider("Red", 0.0, 255.0, 255 * blendColor.x);
@@ -247,94 +234,118 @@ public class Mask extends VoltexVolume {
 // 			});
 // 		}
 
-		Vector choices = gd.getChoices();
+		final Vector choices = gd.getChoices();
 		// color
-		final Choice c1 = (Choice)choices.get(0);
+		final Choice c1 = (Choice) choices.get(0);
 		c1.addItemListener(new ItemListener() {
-			public void itemStateChanged(ItemEvent e) {
+
+			@Override
+			public void itemStateChanged(final ItemEvent e) {
 				setColorMethod(BlendMethod.values()[c1.getSelectedIndex()]);
 			}
 		});
 
-		final Choice c2 = (Choice)choices.get(1);
+		final Choice c2 = (Choice) choices.get(1);
 		c2.addItemListener(new ItemListener() {
-			public void itemStateChanged(ItemEvent e) {
+
+			@Override
+			public void itemStateChanged(final ItemEvent e) {
 				setColorSource(0, BlendSource.values()[c2.getSelectedIndex()]);
 			}
 		});
 
-		final Choice c3 = (Choice)choices.get(2);
+		final Choice c3 = (Choice) choices.get(2);
 		c3.addItemListener(new ItemListener() {
-			public void itemStateChanged(ItemEvent e) {
+
+			@Override
+			public void itemStateChanged(final ItemEvent e) {
 				setColorSource(1, BlendSource.values()[c3.getSelectedIndex()]);
 			}
 		});
 
-		final Choice c4 = (Choice)choices.get(3);
+		final Choice c4 = (Choice) choices.get(3);
 		c4.addItemListener(new ItemListener() {
-			public void itemStateChanged(ItemEvent e) {
+
+			@Override
+			public void itemStateChanged(final ItemEvent e) {
 				setColorSource(2, BlendSource.values()[c4.getSelectedIndex()]);
 			}
 		});
 
 		// alpha
-		final Choice c5 = (Choice)choices.get(4);
+		final Choice c5 = (Choice) choices.get(4);
 		c5.addItemListener(new ItemListener() {
-			public void itemStateChanged(ItemEvent e) {
+
+			@Override
+			public void itemStateChanged(final ItemEvent e) {
 				setAlphaMethod(BlendMethod.values()[c5.getSelectedIndex()]);
 			}
 		});
 
-		final Choice c6 = (Choice)choices.get(5);
+		final Choice c6 = (Choice) choices.get(5);
 		c6.addItemListener(new ItemListener() {
-			public void itemStateChanged(ItemEvent e) {
+
+			@Override
+			public void itemStateChanged(final ItemEvent e) {
 				setAlphaSource(0, BlendSource.values()[c6.getSelectedIndex()]);
 			}
 		});
 
-		final Choice c7 = (Choice)choices.get(6);
+		final Choice c7 = (Choice) choices.get(6);
 		c7.addItemListener(new ItemListener() {
-			public void itemStateChanged(ItemEvent e) {
+
+			@Override
+			public void itemStateChanged(final ItemEvent e) {
 				setAlphaSource(1, BlendSource.values()[c7.getSelectedIndex()]);
 			}
 		});
 
-		final Choice c8 = (Choice)choices.get(7);
+		final Choice c8 = (Choice) choices.get(7);
 		c8.addItemListener(new ItemListener() {
-			public void itemStateChanged(ItemEvent e) {
+
+			@Override
+			public void itemStateChanged(final ItemEvent e) {
 				setAlphaSource(2, BlendSource.values()[c8.getSelectedIndex()]);
 			}
 		});
 
 		// blend color
-		Vector sliders = gd.getSliders();
-		final Scrollbar s1 = (Scrollbar)sliders.get(0);
+		final Vector sliders = gd.getSliders();
+		final Scrollbar s1 = (Scrollbar) sliders.get(0);
 		s1.addAdjustmentListener(new AdjustmentListener() {
-			public void adjustmentValueChanged(AdjustmentEvent e) {
+
+			@Override
+			public void adjustmentValueChanged(final AdjustmentEvent e) {
 				blendColor.x = s1.getValue() / 255f;
 				maskAttr.setTextureBlendColor(blendColor);
 			}
 		});
 
-		final Scrollbar s2 = (Scrollbar)sliders.get(1);
+		final Scrollbar s2 = (Scrollbar) sliders.get(1);
 		s2.addAdjustmentListener(new AdjustmentListener() {
-			public void adjustmentValueChanged(AdjustmentEvent e) {
+
+			@Override
+			public void adjustmentValueChanged(final AdjustmentEvent e) {
 				blendColor.y = s2.getValue() / 255f;
 				maskAttr.setTextureBlendColor(blendColor);
 			}
 		});
 
-		final Scrollbar s3 = (Scrollbar)sliders.get(2);
+		final Scrollbar s3 = (Scrollbar) sliders.get(2);
 		s3.addAdjustmentListener(new AdjustmentListener() {
-			public void adjustmentValueChanged(AdjustmentEvent e) {
+
+			@Override
+			public void adjustmentValueChanged(final AdjustmentEvent e) {
 				blendColor.z = s3.getValue() / 255f;
 				maskAttr.setTextureBlendColor(blendColor);
 			}
 		});
 
-		final Scrollbar s4 = (Scrollbar)sliders.get(3);
+		final Scrollbar s4 = (Scrollbar) sliders.get(3);
 		s4.addAdjustmentListener(new AdjustmentListener() {
-			public void adjustmentValueChanged(AdjustmentEvent e) {
+
+			@Override
+			public void adjustmentValueChanged(final AdjustmentEvent e) {
 				blendColor.w = s4.getValue() / 255f;
 				maskAttr.setTextureBlendColor(blendColor);
 			}
@@ -345,23 +356,23 @@ public class Mask extends VoltexVolume {
 
 // 		if(gd.wasCanceled())
 // 			return;
-// 
+//
 // 		colorMethod = BlendMethod.values()[gd.getNextChoiceIndex()];
 // 		colorSource[0] = BlendSource.values()[gd.getNextChoiceIndex()];
 // 		colorSource[1] = BlendSource.values()[gd.getNextChoiceIndex()];
 // 		colorSource[2] = BlendSource.values()[gd.getNextChoiceIndex()];
-// 
+//
 // 		alphaMethod = BlendMethod.values()[gd.getNextChoiceIndex()];
 // 		alphaSource[0] = BlendSource.values()[gd.getNextChoiceIndex()];
 // 		alphaSource[1] = BlendSource.values()[gd.getNextChoiceIndex()];
 // 		alphaSource[2] = BlendSource.values()[gd.getNextChoiceIndex()];
-// 
+//
 // 		blendColor.set((float)gd.getNextNumber() / 255f, // red
 // 			(float)gd.getNextNumber() / 255f, // green
 // 			(float)gd.getNextNumber() / 255f, // blue
 // 			(float)gd.getNextNumber() / 255f); // alpha
-// 
-// 
+//
+//
 // 		updateMaskAttributes();
 	}
 
@@ -390,20 +401,25 @@ public class Mask extends VoltexVolume {
 	/* ***************************************************************
 	 * Private helpher functions.
 	 * **************************************************************/
-	private Point3d locInImagePlate = new Point3d();
-	private void volumePointInCanvas(Canvas3D canvas,
-		Transform3D volToIP, int x, int y, int z, Point2d out) {
-		
+	private final Point3d locInImagePlate = new Point3d();
+
+	private void volumePointInCanvas(final Canvas3D canvas,
+		final Transform3D volToIP, final int x, final int y, final int z,
+		final Point2d out)
+	{
+
 		locInImagePlate.set(x * pw, y * ph, z * pd);
 		volToIP.transform(locInImagePlate);
 		canvas.getPixelLocationFromImagePlate(locInImagePlate, out);
 	}
 
-	private void volumeToImagePlate(Canvas3D canvas, Transform3D volToIP) {
+	private void volumeToImagePlate(final Canvas3D canvas,
+		final Transform3D volToIP)
+	{
 		canvas.getImagePlateToVworld(volToIP);
 		volToIP.invert();
 
-		Transform3D toVWorld = new Transform3D();
+		final Transform3D toVWorld = new Transform3D();
 		node.getLocalToVworld(toVWorld);
 		volToIP.mul(toVWorld);
 	}
@@ -418,4 +434,3 @@ public class Mask extends VoltexVolume {
 		updateMaskAttributes();
 	}
 }
-

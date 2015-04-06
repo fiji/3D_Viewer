@@ -1,3 +1,4 @@
+
 package voltex;
 
 import ij.IJ;
@@ -22,8 +23,7 @@ import javax.vecmath.Tuple3d;
 import vib.NaiveResampler;
 
 /**
- * This class extends ContentNode to display a Content as a
- * Volume Rendering.
+ * This class extends ContentNode to display a Content as a Volume Rendering.
  *
  * @author Benjamin Schmid
  */
@@ -57,34 +57,37 @@ public class VoltexGroup extends ContentNode {
 
 	/**
 	 * Initialize this VoltexGroup with the specified Content.
+	 * 
 	 * @param c
-	 * @throws IllegalArgumentException if the specified Content has no
-	 *         image.
+	 * @throws IllegalArgumentException if the specified Content has no image.
 	 */
-	public VoltexGroup(Content c) {
+	public VoltexGroup(final Content c) {
 		this(c.getCurrent());
 	}
 
 	/**
 	 * Initialize this VoltexGroup with the specified ContentInstant.
+	 * 
 	 * @param c
-	 * @throws IllegalArgumentException if the specified ContentInstant has no image.
+	 * @throws IllegalArgumentException if the specified ContentInstant has no
+	 *           image.
 	 */
-	public VoltexGroup(ContentInstant c) {
+	public VoltexGroup(final ContentInstant c) {
 		super();
-		if(c.getImage() == null)
-			throw new IllegalArgumentException("VoltexGroup can only" +
-				"be initialized from a ContentInstant that holds an image.");
+		if (c.getImage() == null) throw new IllegalArgumentException(
+			"VoltexGroup can only"
+				+ "be initialized from a ContentInstant that holds an image.");
 		this.c = c;
-		ImagePlus imp = c.getResamplingFactor() == 1
-			? c.getImage()
-			: NaiveResampler.resample(c.getImage(), c.getResamplingFactor());
-		renderer = new VolumeRenderer(imp, c.getColor(),
-				c.getTransparency(), c.getChannels());
-		int[] rLUT = new int[256];
-		int[] gLUT = new int[256];
-		int[] bLUT = new int[256];
-		int[] aLUT = new int[256];
+		final ImagePlus imp =
+			c.getResamplingFactor() == 1 ? c.getImage() : NaiveResampler.resample(c
+				.getImage(), c.getResamplingFactor());
+		renderer =
+			new VolumeRenderer(imp, c.getColor(), c.getTransparency(), c
+				.getChannels());
+		final int[] rLUT = new int[256];
+		final int[] gLUT = new int[256];
+		final int[] bLUT = new int[256];
+		final int[] aLUT = new int[256];
 		renderer.volume.getRedLUT(rLUT);
 		renderer.volume.getGreenLUT(gLUT);
 		renderer.volume.getBlueLUT(bLUT);
@@ -96,12 +99,11 @@ public class VoltexGroup extends ContentNode {
 	}
 
 	/**
-	 * Update the volume rendering from the image
-	 * (only if the resampling factor is 1.
+	 * Update the volume rendering from the image (only if the resampling factor
+	 * is 1.
 	 */
 	public void update() {
-		if(c.getResamplingFactor() != 1)
-			return;
+		if (c.getResamplingFactor() != 1) return;
 		renderer.getVolume().updateData();
 	}
 
@@ -117,36 +119,41 @@ public class VoltexGroup extends ContentNode {
 	}
 
 	/**
-	 * @see ContentNode#getMin(Tupe3d) getMin
+	 * @see ContentNode#getMin(Tuple3d) getMin
 	 */
-	public void getMin(Tuple3d min) {
+	@Override
+	public void getMin(final Tuple3d min) {
 		min.set(this.min);
 	}
 
 	/**
-	 * @see ContentNode#getMax (Tupe3d) getMax
+	 * @see ContentNode#getMax (Tuple3d) getMax
 	 */
-	public void getMax(Tuple3d max) {
+	@Override
+	public void getMax(final Tuple3d max) {
 		max.set(this.max);
 	}
 
 	/**
-	 * @see ContentNode#getCenter(Tupe3d) getCenter
+	 * @see ContentNode#getCenter(Tuple3d) getCenter
 	 */
-	public void getCenter(Tuple3d center) {
+	@Override
+	public void getCenter(final Tuple3d center) {
 		center.set(this.center);
 	}
 
 	/**
-	 * @see ContentNode#thresholdUpdated() thresholdUpdated
+	 * @see ContentNode#thresholdUpdated(int) thresholdUpdated
 	 */
-	public void thresholdUpdated(int threshold) {
+	@Override
+	public void thresholdUpdated(final int threshold) {
 		renderer.setThreshold(threshold);
 	}
 
 	/**
 	 * @see ContentNode#getVolume() getVolume
 	 */
+	@Override
 	public float getVolume() {
 		return volume;
 	}
@@ -154,84 +161,92 @@ public class VoltexGroup extends ContentNode {
 	/**
 	 * @see ContentNode#eyePtChanged(View view) eyePtChanged
 	 */
-	public void eyePtChanged(View view) {
+	@Override
+	public void eyePtChanged(final View view) {
 		renderer.eyePtChanged(view);
 	}
 
 	/**
 	 * @see ContentNode#channelsUpdated() channelsUpdated
 	 */
-	public void channelsUpdated(boolean[] channels) {
+	@Override
+	public void channelsUpdated(final boolean[] channels) {
 		renderer.setChannels(channels);
 	}
 
 	/**
 	 * @see ContentNode#lutUpdated() lutUpdated
 	 */
-	public void lutUpdated(int[] r, int[] g, int[] b, int[] a) {
+	@Override
+	public void lutUpdated(final int[] r, final int[] g, final int[] b,
+		final int[] a)
+	{
 		renderer.setLUTs(r, g, b, a);
 	}
 
 	/**
 	 * @see ContentNode#shadeUpdated() shadeUpdated
 	 */
-	public void shadeUpdated(boolean shaded) {
+	@Override
+	public void shadeUpdated(final boolean shaded) {
 		// do nothing
 	}
 
 	/**
 	 * @see ContentNode#colorUpdated() colorUpdated
 	 */
-	public void colorUpdated(Color3f color) {
+	@Override
+	public void colorUpdated(final Color3f color) {
 		renderer.setColor(color);
 	}
 
 	/**
 	 * @see ContentNode#transparencyUpdated() transparencyUpdated
 	 */
-	public void transparencyUpdated(float transparency) {
+	@Override
+	public void transparencyUpdated(final float transparency) {
 		renderer.setTransparency(transparency);
 	}
 
 	/**
-	 * Stores the matrix which transforms this VoltexGroup to the
-	 * image plate in the specified Transform3D.
+	 * Stores the matrix which transforms this VoltexGroup to the image plate in
+	 * the specified Transform3D.
+	 * 
 	 * @param toImagePlate
 	 */
-	public void volumeToImagePlate(Transform3D toImagePlate) {
-		Transform3D toVWorld = new Transform3D();
+	public void volumeToImagePlate(final Transform3D toImagePlate) {
+		final Transform3D toVWorld = new Transform3D();
 		renderer.getVolumeNode().getLocalToVworld(toVWorld);
 		toImagePlate.mul(toVWorld);
 	}
 
 	/**
-	 * Fills the projection of the specified ROI with the given fillValue.
-	 * Does nothing if the given ROI is null.
-	 * Works not only on the internally created image (the resampled one),
-	 * but also on the original image.
+	 * Fills the projection of the specified ROI with the given fillValue. Does
+	 * nothing if the given ROI is null. Works not only on the internally created
+	 * image (the resampled one), but also on the original image.
+	 * 
 	 * @param universe
 	 * @param fillValue
 	 */
-	public void fillRoi(Canvas3D canvas, Roi roi, byte fillValue) {
-		if(roi == null)
-			return;
+	public void
+		fillRoi(final Canvas3D canvas, final Roi roi, final byte fillValue)
+	{
+		if (roi == null) return;
 
-		Polygon p = roi.getPolygon();
-		Transform3D volToIP = new Transform3D();
+		final Polygon p = roi.getPolygon();
+		final Transform3D volToIP = new Transform3D();
 		canvas.getImagePlateToVworld(volToIP);
 		volToIP.invert();
 		volumeToImagePlate(volToIP);
 
-		VoltexVolume vol = renderer.getVolume();
-		Point2d onCanvas = new Point2d();
-		for(int z = 0; z < vol.zDim; z++) {
-			for(int y = 0; y < vol.yDim; y++) {
-				for(int x = 0; x < vol.xDim; x++) {
-					volumePointInCanvas(canvas, volToIP,
-							x, y, z, onCanvas);
-					if(p.contains(onCanvas.x, onCanvas.y)) {
-						vol.setNoCheckNoUpdate(
-							x, y, z, fillValue);
+		final VoltexVolume vol = renderer.getVolume();
+		final Point2d onCanvas = new Point2d();
+		for (int z = 0; z < vol.zDim; z++) {
+			for (int y = 0; y < vol.yDim; y++) {
+				for (int x = 0; x < vol.xDim; x++) {
+					volumePointInCanvas(canvas, volToIP, x, y, z, onCanvas);
+					if (p.contains(onCanvas.x, onCanvas.y)) {
+						vol.setNoCheckNoUpdate(x, y, z, fillValue);
 					}
 				}
 			}
@@ -241,22 +256,17 @@ public class VoltexGroup extends ContentNode {
 		vol.updateData();
 
 		// also fill the original image
-		ImagePlus image = c.getImage();
-		int factor = c.getResamplingFactor();
-		if(image == null || factor == 1)
-			return;
+		final ImagePlus image = c.getImage();
+		final int factor = c.getResamplingFactor();
+		if (image == null || factor == 1) return;
 
-		ij3d.Volume volu = new ij3d.Volume(image);
-		for(int z = 0; z < volu.zDim; z++) {
-			for(int y = 0; y < volu.yDim; y++) {
-				for(int x = 0; x < volu.xDim; x++) {
-					volumePointInCanvas(canvas,
-							volToIP,
-							x/factor,
-							y/factor,
-							z/factor,
-							onCanvas);
-					if(p.contains(onCanvas.x, onCanvas.y)) {
+		final ij3d.Volume volu = new ij3d.Volume(image);
+		for (int z = 0; z < volu.zDim; z++) {
+			for (int y = 0; y < volu.yDim; y++) {
+				for (int x = 0; x < volu.xDim; x++) {
+					volumePointInCanvas(canvas, volToIP, x / factor, y / factor, z /
+						factor, onCanvas);
+					if (p.contains(onCanvas.x, onCanvas.y)) {
 						volu.set(x, y, z, fillValue);
 					}
 				}
@@ -267,8 +277,8 @@ public class VoltexGroup extends ContentNode {
 	}
 
 	/**
-	 * Returns the 3D coordinates of the given x, y, z position on the
-	 * 3D canvas.
+	 * Returns the 3D coordinates of the given x, y, z position on the 3D canvas.
+	 * 
 	 * @param canvas
 	 * @param volToIP
 	 * @param x
@@ -276,14 +286,16 @@ public class VoltexGroup extends ContentNode {
 	 * @param z
 	 * @return
 	 */
-	private void volumePointInCanvas(Canvas3D canvas,
-		Transform3D volToIP, int x, int y, int z, Point2d ret) {
+	private void volumePointInCanvas(final Canvas3D canvas,
+		final Transform3D volToIP, final int x, final int y, final int z,
+		final Point2d ret)
+	{
 
-		VoltexVolume vol = renderer.volume;
-		double px = x * vol.pw;
-		double py = y * vol.ph;
-		double pz = z * vol.pd;
-		Point3d locInImagePlate = new Point3d(px, py, pz);
+		final VoltexVolume vol = renderer.volume;
+		final double px = x * vol.pw;
+		final double py = y * vol.ph;
+		final double pz = z * vol.pd;
+		final Point3d locInImagePlate = new Point3d(px, py, pz);
 
 		volToIP.transform(locInImagePlate);
 
@@ -291,42 +303,42 @@ public class VoltexGroup extends ContentNode {
 	}
 
 	/**
-	 * Calculate the minimum, maximum and center coordinate, together with
-	 * the volume.
+	 * Calculate the minimum, maximum and center coordinate, together with the
+	 * volume.
 	 */
 	protected void calculateMinMaxCenterPoint() {
-		ImagePlus imp = c.getImage();
-		int w = imp.getWidth(), h = imp.getHeight();
-		int d = imp.getStackSize();
-		Calibration cal = imp.getCalibration();
+		final ImagePlus imp = c.getImage();
+		final int w = imp.getWidth(), h = imp.getHeight();
+		final int d = imp.getStackSize();
+		final Calibration cal = imp.getCalibration();
 		min = new Point3d();
 		max = new Point3d();
 		center = new Point3d();
-		min.x = w * (float)cal.pixelHeight;
-		min.y = h * (float)cal.pixelHeight;
-		min.z = d * (float)cal.pixelDepth;
+		min.x = w * (float) cal.pixelHeight;
+		min.y = h * (float) cal.pixelHeight;
+		min.z = d * (float) cal.pixelDepth;
 		max.x = 0;
 		max.y = 0;
 		max.z = 0;
 
 		float vol = 0;
-		for(int zi = 0; zi < d; zi++) {
-			float z = zi * (float)cal.pixelDepth;
-			ImageProcessor ip = imp.getStack().getProcessor(zi+1);
+		for (int zi = 0; zi < d; zi++) {
+			final float z = zi * (float) cal.pixelDepth;
+			final ImageProcessor ip = imp.getStack().getProcessor(zi + 1);
 
-			int wh = w * h;
-			for(int i = 0; i < wh; i++) {
-				float v = ip.getf(i);
-				if(v == 0) continue;
+			final int wh = w * h;
+			for (int i = 0; i < wh; i++) {
+				final float v = ip.getf(i);
+				if (v == 0) continue;
 				vol += v;
-				float x = (i % w) * (float)cal.pixelWidth;
-				float y = (i / w) * (float)cal.pixelHeight;
-				if(x < min.x) min.x = x;
-				if(y < min.y) min.y = y;
-				if(z < min.z) min.z = z;
-				if(x > max.x) max.x = x;
-				if(y > max.y) max.y = y;
-				if(z > max.z) max.z = z;
+				final float x = (i % w) * (float) cal.pixelWidth;
+				final float y = (i / w) * (float) cal.pixelHeight;
+				if (x < min.x) min.x = x;
+				if (y < min.y) min.y = y;
+				if (z < min.z) min.z = z;
+				if (x > max.x) max.x = x;
+				if (y > max.y) max.y = y;
+				if (z > max.z) max.z = z;
 				center.x += v * x;
 				center.y += v * y;
 				center.z += v * z;
@@ -336,14 +348,12 @@ public class VoltexGroup extends ContentNode {
 		center.y /= vol;
 		center.z /= vol;
 
-		volume = (float)(vol * cal.pixelWidth
-				* cal.pixelHeight
-				* cal.pixelDepth);
+		volume = (float) (vol * cal.pixelWidth * cal.pixelHeight * cal.pixelDepth);
 
 	}
 
 	@Override
-	public void swapDisplayedData(String path, String name) {
+	public void swapDisplayedData(final String path, final String name) {
 		renderer.volume.swap(path + ".tif");
 		renderer.disableTextures();
 	}
@@ -355,7 +365,7 @@ public class VoltexGroup extends ContentNode {
 	}
 
 	@Override
-	public void restoreDisplayedData(String path, String name) {
+	public void restoreDisplayedData(final String path, final String name) {
 		renderer.volume.restore(path + ".tif");
 		renderer.enableTextures();
 	}

@@ -1,8 +1,10 @@
+
 package customnode.u3d;
 
 /// <summary>Constants is a class that holds constants that are needed by more than
 /// one of the objects in the U3D namespace.</summary>
 public class Constants {
+
 	// context ranges
 	// / <summary>
 	// / the context for uncompressed U8
@@ -46,5 +48,6 @@ public class Constants {
 	// / <summary>
 	// / used to swap 8 bits in place
 	// / </summary>
-	public static final long[] Swap8 = { 0, 8, 4, 12, 2, 10, 6, 14, 1, 9, 5, 13, 3, 11, 7, 15 };
+	public static final long[] Swap8 = { 0, 8, 4, 12, 2, 10, 6, 14, 1, 9, 5, 13,
+		3, 11, 7, 15 };
 }

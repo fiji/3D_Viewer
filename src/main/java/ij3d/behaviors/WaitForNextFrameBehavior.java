@@ -1,3 +1,4 @@
+
 package ij3d.behaviors;
 
 import java.util.Enumeration;
@@ -10,26 +11,29 @@ public class WaitForNextFrameBehavior extends Behavior {
 
 	public static final int TRIGGER_ID = 1;
 
-	private WakeupOnBehaviorPost postCrit;
-	private WakeupOnElapsedFrames frameCrit;
+	private final WakeupOnBehaviorPost postCrit;
+	private final WakeupOnElapsedFrames frameCrit;
 
 	public WaitForNextFrameBehavior() {
-		boolean passive = false;
+		final boolean passive = false;
 		postCrit = new WakeupOnBehaviorPost(null, TRIGGER_ID);
 		frameCrit = new WakeupOnElapsedFrames(1, passive);
 	}
 
+	@Override
 	public void initialize() {
 		wakeupOn(postCrit);
 	}
 
-	public void processStimulus(Enumeration criteria) {
-		while(criteria.hasMoreElements()) {
-			Object c = criteria.nextElement();
-			if(c instanceof WakeupOnBehaviorPost) {
+	@Override
+	public void processStimulus(final Enumeration criteria) {
+		while (criteria.hasMoreElements()) {
+			final Object c = criteria.nextElement();
+			if (c instanceof WakeupOnBehaviorPost) {
 				wakeupOn(frameCrit);
-			} else if(c instanceof WakeupOnElapsedFrames) {
-				synchronized(this) {
+			}
+			else if (c instanceof WakeupOnElapsedFrames) {
+				synchronized (this) {
 					this.notifyAll();
 				}
 				wakeupOn(postCrit);
@@ -37,4 +41,3 @@ public class WaitForNextFrameBehavior extends Behavior {
 		}
 	}
 }
-

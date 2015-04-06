@@ -1,3 +1,4 @@
+
 package ij3d;
 
 /**
@@ -8,10 +9,10 @@ package ij3d;
 
 abstract public interface AxisConstants {
 
-    static final int 	X_AXIS = 0;
-    static final int 	Y_AXIS = 1;
-    static final int 	Z_AXIS = 2;
+	static final int X_AXIS = 0;
+	static final int Y_AXIS = 1;
+	static final int Z_AXIS = 2;
 
-    static final int 	FRONT = 0;
-    static final int 	BACK = 1;
+	static final int FRONT = 0;
+	static final int BACK = 1;
 }

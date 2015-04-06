@@ -1,3 +1,4 @@
+
 package customnode;
 
 import ij3d.ContentNode;
@@ -12,9 +13,10 @@ public class CustomMeshNode extends ContentNode {
 	private CustomMesh mesh;
 
 	protected Point3f min, max, center;
+
 	protected CustomMeshNode() {}
 
-	public CustomMeshNode(CustomMesh mesh) {
+	public CustomMeshNode(final CustomMesh mesh) {
 		this.mesh = mesh;
 		calculateMinMaxCenterPoint();
 		addChild(mesh);
@@ -25,37 +27,39 @@ public class CustomMeshNode extends ContentNode {
 	}
 
 	@Override
-	public void getMin(Tuple3d min) {
+	public void getMin(final Tuple3d min) {
 		min.set(this.min);
 	}
 
 	@Override
-	public void getMax(Tuple3d max) {
+	public void getMax(final Tuple3d max) {
 		max.set(this.max);
 	}
 
 	@Override
-	public void getCenter(Tuple3d center) {
+	public void getCenter(final Tuple3d center) {
 		center.set(this.center);
 	}
 
 	@Override
-	public void channelsUpdated(boolean[] channels) {
+	public void channelsUpdated(final boolean[] channels) {
 		// do nothing
 	}
 
 	@Override
-	public void lutUpdated(int[] r, int[] g, int[] b, int[] a) {
+	public void lutUpdated(final int[] r, final int[] g, final int[] b,
+		final int[] a)
+	{
 		// do nothing
 	}
 
 	@Override
-	public void colorUpdated(Color3f color) {
+	public void colorUpdated(final Color3f color) {
 		mesh.setColor(color);
 	}
 
 	@Override
-	public void eyePtChanged(View view) {
+	public void eyePtChanged(final View view) {
 		// do nothing
 	}
 
@@ -65,17 +69,17 @@ public class CustomMeshNode extends ContentNode {
 	}
 
 	@Override
-	public void shadeUpdated(boolean shaded) {
+	public void shadeUpdated(final boolean shaded) {
 		mesh.setShaded(shaded);
 	}
 
 	@Override
-	public void thresholdUpdated(int threshold) {
+	public void thresholdUpdated(final int threshold) {
 		// do nothing
 	}
 
 	@Override
-	public void transparencyUpdated(float transparency) {
+	public void transparencyUpdated(final float transparency) {
 		mesh.setTransparency(transparency);
 	}
 
@@ -87,12 +91,12 @@ public class CustomMeshNode extends ContentNode {
 	}
 
 	@Override
-	public void restoreDisplayedData(String path, String name) {
+	public void restoreDisplayedData(final String path, final String name) {
 		mesh.restoreDisplayedData(path, name);
 	}
 
 	@Override
-	public void swapDisplayedData(String path, String name) {
+	public void swapDisplayedData(final String path, final String name) {
 		mesh.swapDisplayedData(path, name);
 	}
 

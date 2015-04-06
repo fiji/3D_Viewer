@@ -20,33 +20,33 @@ import javax.vecmath.Point3f;
    voxel, since A Pixel Is Not A Little Square. */
 
 public class Test_Single_Voxel implements PlugIn {
-	public void run( String ignore ) {
-		ImageStack stack = new ImageStack(3,3);
-		for( int i = 0; i < 3; ++i ) {
-			byte [] pixels = new byte[9];
-			if( i == 1 )
-				pixels[4] = (byte)255;
-			ByteProcessor bp = new ByteProcessor(3,3);
+
+	@Override
+	public void run(final String ignore) {
+		final ImageStack stack = new ImageStack(3, 3);
+		for (int i = 0; i < 3; ++i) {
+			final byte[] pixels = new byte[9];
+			if (i == 1) pixels[4] = (byte) 255;
+			final ByteProcessor bp = new ByteProcessor(3, 3);
 			bp.setPixels(pixels);
-			stack.addSlice("",bp);
+			stack.addSlice("", bp);
 		}
-		ImagePlus i = new ImagePlus("test",stack);
+		final ImagePlus i = new ImagePlus("test", stack);
 		i.show();
-		Image3DUniverse univ = new Image3DUniverse(512, 512);
+		final Image3DUniverse univ = new Image3DUniverse(512, 512);
 		univ.show();
 		GUI.center(univ.getWindow());
-		boolean [] channels = { true, true, true };
-		Content c = univ.addContent(i,
-					    new Color3f(Color.white),
-					    "Volume Rendering of a Single Voxel at (1,1,1)",
-					    10, // threshold
-					    channels,
-					    1, // resampling factor
-					    Content.VOLUME);
-		List<Point3f> linePoints = new ArrayList<Point3f>();
-		linePoints.add(new Point3f(1,1,1));
-		linePoints.add(new Point3f(2,2,2));
-		univ.addLineMesh( linePoints, new Color3f(Color.red), "Line from (1,1,1) to (2,2,2)", false );
+		final boolean[] channels = { true, true, true };
+		final Content c =
+			univ.addContent(i, new Color3f(Color.white),
+				"Volume Rendering of a Single Voxel at (1,1,1)", 10, // threshold
+				channels, 1, // resampling factor
+				ContentConstants.VOLUME);
+		final List<Point3f> linePoints = new ArrayList<Point3f>();
+		linePoints.add(new Point3f(1, 1, 1));
+		linePoints.add(new Point3f(2, 2, 2));
+		univ.addLineMesh(linePoints, new Color3f(Color.red),
+			"Line from (1,1,1) to (2,2,2)", false);
 		univ.resetView();
 	}
 }

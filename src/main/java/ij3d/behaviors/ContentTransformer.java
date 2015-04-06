@@ -1,3 +1,4 @@
+
 package ij3d.behaviors;
 
 import ij3d.Content;
@@ -13,90 +14,94 @@ import javax.vecmath.Point3d;
 import javax.vecmath.Vector3d;
 
 /**
- * This class is a helper class which transforms MouseEvents
- * to an appropriate transformation of the selected Content.
- * 
+ * This class is a helper class which transforms MouseEvents to an appropriate
+ * transformation of the selected Content.
+ *
  * @author Benjamin Schmid
  */
 public class ContentTransformer {
 
-	private Initializer initializer;
+	private final Initializer initializer;
 
-	private DefaultUniverse univ;
-	private ImageCanvas3D canvas;
-	private BehaviorCallback callback;
+	private final DefaultUniverse univ;
+	private final ImageCanvas3D canvas;
+	private final BehaviorCallback callback;
 	private Content content;
 
-	private Vector3d axisPerDx = new Vector3d();
-	private Vector3d axisPerDy = new Vector3d();
+	private final Vector3d axisPerDx = new Vector3d();
+	private final Vector3d axisPerDy = new Vector3d();
 	private double anglePerPix;
-	
 
-	private AxisAngle4d aaX = new AxisAngle4d();
-	private AxisAngle4d aaY = new AxisAngle4d();
-	private Transform3D transX = new Transform3D();
-	private Transform3D transY = new Transform3D();
+	private final AxisAngle4d aaX = new AxisAngle4d();
+	private final AxisAngle4d aaY = new AxisAngle4d();
+	private final Transform3D transX = new Transform3D();
+	private final Transform3D transY = new Transform3D();
 
-	private Transform3D transl = new Transform3D();
-	private Transform3D transl_inv = new Transform3D();
+	private final Transform3D transl = new Transform3D();
+	private final Transform3D transl_inv = new Transform3D();
 
-	private Vector3d translationPerDx = new Vector3d();
-	private Vector3d translationPerDy = new Vector3d();
+	private final Vector3d translationPerDx = new Vector3d();
+	private final Vector3d translationPerDy = new Vector3d();
 
 	private TransformGroup translateTG, rotateTG;
-		
+
 	private int xLast, yLast;
 
 	/**
 	 * Constructs a new ContentTransformer.
+	 * 
 	 * @param univ
 	 * @param callback
 	 */
-	public ContentTransformer(DefaultUniverse univ, BehaviorCallback callback) {
+	public ContentTransformer(final DefaultUniverse univ,
+		final BehaviorCallback callback)
+	{
 		this.univ = univ;
-		this.canvas = (ImageCanvas3D)univ.getCanvas();
+		this.canvas = (ImageCanvas3D) univ.getCanvas();
 		this.callback = callback;
 		this.initializer = new Initializer();
 	}
 
 	/**
-	 * This method should be called to initiate a new transformation, e.g.
-	 * when the mouse is pressed before rotation or translation.
+	 * This method should be called to initiate a new transformation, e.g. when
+	 * the mouse is pressed before rotation or translation.
+	 * 
 	 * @param c
 	 * @param x
 	 * @param y
 	 */
-	public void init(Content c, int x, int y) {
+	public void init(final Content c, final int x, final int y) {
 		initializer.init(c, x, y);
 	}
 
 	/**
 	 * Translate the selected Content suitably to the specified MouseEvent.
+	 * 
 	 * @param e
 	 */
-	public void translate(MouseEvent e) {
+	public void translate(final MouseEvent e) {
 		translate(e.getX(), e.getY());
 	}
 
 	/**
 	 * Rotate the selected Content suitably to the specified MouseEvent.
+	 * 
 	 * @param e
 	 */
-	public void rotate(MouseEvent e) {
+	public void rotate(final MouseEvent e) {
 		rotate(e.getX(), e.getY());
 	}
 
-	private Transform3D translateNew = new Transform3D();
-	private Transform3D translateOld = new Transform3D();
-	private Vector3d translation = new Vector3d();
-	private Point3d v1 = new Point3d();
-	private Point3d v2 = new Point3d();
+	private final Transform3D translateNew = new Transform3D();
+	private final Transform3D translateOld = new Transform3D();
+	private final Vector3d translation = new Vector3d();
+	private final Point3d v1 = new Point3d();
+	private final Point3d v2 = new Point3d();
 
-	void translate(int xNew, int yNew) {
-		if(content == null || content.isLocked())
-			return;
-		int dx = xNew - xLast;
-		int dy = yNew - yLast;
+	void translate(final int xNew, final int yNew) {
+		if (content == null || content.isLocked()) return;
+		final int dx = xNew - xLast;
+		final int dy = yNew - yLast;
 		translateTG.getTransform(translateOld);
 		v1.scale(dx, translationPerDx);
 		v2.scale(-dy, translationPerDy);
@@ -105,20 +110,20 @@ public class ContentTransformer {
 		translateNew.mul(translateOld);
 
 		translateTG.setTransform(translateNew);
-		transformChanged(BehaviorCallback.TRANSLATE, translateNew);	
+		transformChanged(BehaviorCallback.TRANSLATE, translateNew);
 
 		xLast = xNew;
 		yLast = yNew;
 	}
 
-	private Transform3D rotateNew = new Transform3D();
-	private Transform3D rotateOld = new Transform3D();
-	void rotate(int xNew, int yNew) {
-		if(content == null || content.isLocked())
-			return;
+	private final Transform3D rotateNew = new Transform3D();
+	private final Transform3D rotateOld = new Transform3D();
 
-		int dx = xNew - xLast;
-		int dy = yNew - yLast;
+	void rotate(final int xNew, final int yNew) {
+		if (content == null || content.isLocked()) return;
+
+		final int dx = xNew - xLast;
+		final int dy = yNew - yLast;
 
 		aaX.set(axisPerDx, dx * anglePerPix);
 		aaY.set(axisPerDy, dy * anglePerPix);
@@ -138,33 +143,33 @@ public class ContentTransformer {
 		xLast = xNew;
 		yLast = yNew;
 
-		transformChanged(BehaviorCallback.ROTATE, rotateNew);	
+		transformChanged(BehaviorCallback.ROTATE, rotateNew);
 	}
 
-	private void transformChanged(int type, Transform3D t) {
-		if(callback != null)
-			callback.transformChanged(type, t);
+	private void transformChanged(final int type, final Transform3D t) {
+		if (callback != null) callback.transformChanged(type, t);
 	}
 
 	private class Initializer {
-		private Point3d centerInVWorld = new Point3d();
-		private Point3d centerInIp = new Point3d();
 
-		private Transform3D ipToVWorld           = new Transform3D();
-		private Transform3D ipToVWorldInverse    = new Transform3D();
-		private Transform3D localToVWorld        = new Transform3D();
-		private Transform3D localToVWorldInverse = new Transform3D();
+		private final Point3d centerInVWorld = new Point3d();
+		private final Point3d centerInIp = new Point3d();
 
-		private Point3d eyePtInVWorld  = new Point3d();
-		private Point3d pickPtInVWorld = new Point3d();
+		private final Transform3D ipToVWorld = new Transform3D();
+		private final Transform3D ipToVWorldInverse = new Transform3D();
+		private final Transform3D localToVWorld = new Transform3D();
+		private final Transform3D localToVWorldInverse = new Transform3D();
 
-		private Point3d p1 = new Point3d();
-		private Point3d p2 = new Point3d();
-		private Point3d p3 = new Point3d();
+		private final Point3d eyePtInVWorld = new Point3d();
+		private final Point3d pickPtInVWorld = new Point3d();
 
-		private Vector3d vec = new Vector3d();
+		private final Point3d p1 = new Point3d();
+		private final Point3d p2 = new Point3d();
+		private final Point3d p3 = new Point3d();
 
-		private void init(Content c, int x, int y) {
+		private final Vector3d vec = new Vector3d();
+
+		private void init(final Content c, final int x, final int y) {
 			xLast = x;
 			yLast = y;
 
@@ -186,43 +191,44 @@ public class ContentTransformer {
 			ipToVWorld.transform(eyePtInVWorld);
 
 			// use picking to infer the radius of the virtual sphere which is rotated
-			Point3d p = univ.getPicker().getPickPointGeometry(c, x, y);
+			final Point3d p = univ.getPicker().getPickPointGeometry(c, x, y);
 			float r = 0, dD = 0;
-			if(p != null) {
+			if (p != null) {
 				pickPtInVWorld.set(p);
 				localToVWorld.transform(pickPtInVWorld);
-				r = (float)pickPtInVWorld.distance(centerInVWorld);
-			} else {
+				r = (float) pickPtInVWorld.distance(centerInVWorld);
+			}
+			else {
 				c.getContent().getMin(p1);
 				localToVWorld.transform(p1);
-				r = (float)p1.distance(centerInVWorld);
+				r = (float) p1.distance(centerInVWorld);
 				vec.sub(centerInVWorld, eyePtInVWorld);
 				vec.normalize();
 				vec.scale(-r);
 				pickPtInVWorld.add(centerInVWorld, vec);
 			}
-			dD = (float)pickPtInVWorld.distance(eyePtInVWorld);
+			dD = (float) pickPtInVWorld.distance(eyePtInVWorld);
 
 			// calculate distance between eye and canvas point
 			canvas.getPixelLocationInImagePlate(x, y, p1);
 			ipToVWorld.transform(p1);
-			float dd = (float)p1.distance(eyePtInVWorld);
+			final float dd = (float) p1.distance(eyePtInVWorld);
 
 			// calculate the virtual distance between two neighboring pixels
-			canvas.getPixelLocationInImagePlate(x+1, y, p2);
+			canvas.getPixelLocationInImagePlate(x + 1, y, p2);
 			ipToVWorld.transform(p2);
-			float dx = (float)p1.distance(p2);
+			final float dx = (float) p1.distance(p2);
 
 			// calculate the virtual distance between two neighboring pixels
-			canvas.getPixelLocationInImagePlate(x, y+1, p3);
+			canvas.getPixelLocationInImagePlate(x, y + 1, p3);
 			ipToVWorld.transform(p3);
-			float dy = (float)p1.distance(p3);
+			final float dy = (float) p1.distance(p3);
 
-			float dX = dD / dd * dx;
-			float dY = dD / dd * dy;
+			final float dX = dD / dd * dx;
+			final float dY = dD / dd * dy;
 
 			anglePerPix = Math.atan2(dX, r);
-			
+
 			univ.getViewPlatformTransformer().getYDir(axisPerDx, ipToVWorld);
 			univ.getViewPlatformTransformer().getXDir(axisPerDy, ipToVWorld);
 

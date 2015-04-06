@@ -1,3 +1,4 @@
+
 package ij3d;
 
 import ij.IJ;
@@ -25,20 +26,20 @@ import vib.FastMatrix;
 import vib.PointList;
 
 public class RegistrationMenubar extends JMenuBar implements ActionListener,
-							UniverseListener {
+	UniverseListener
+{
 
-	private Image3DUniverse univ;
+	private final Image3DUniverse univ;
 
-	private JMenu register;
-	private JMenuItem exit;
-	private JMenuItem adjustSlices;
+	private final JMenu register;
+	private final JMenuItem exit;
+	private final JMenuItem adjustSlices;
 
-	private List openDialogs = new ArrayList();
+	private final List openDialogs = new ArrayList();
 
 	private Content templ, model;
 
-
-	public RegistrationMenubar(Image3DUniverse univ) {
+	public RegistrationMenubar(final Image3DUniverse univ) {
 		super();
 		this.univ = univ;
 
@@ -58,29 +59,34 @@ public class RegistrationMenubar extends JMenuBar implements ActionListener,
 
 	}
 
-	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == exit) {
+	@Override
+	public void actionPerformed(final ActionEvent e) {
+		if (e.getSource() == exit) {
 			exitRegistration();
-		} else if(e.getSource() == adjustSlices) {
-			Content c = univ.getSelected();
-			if(c != null)
-				univ.getExecuter().changeSlices(c);
-		} else if(e.getActionCommand().equals("LS_TEMPLATE")) {
+		}
+		else if (e.getSource() == adjustSlices) {
+			final Content c = univ.getSelected();
+			if (c != null) univ.getExecuter().changeSlices(c);
+		}
+		else if (e.getActionCommand().equals("LS_TEMPLATE")) {
 			// select landmarks of the template
 			selectLandmarkSet(templ, "LS_MODEL");
-		} else if(e.getActionCommand().equals("LS_MODEL")) {
+		}
+		else if (e.getActionCommand().equals("LS_MODEL")) {
 			// select the landmarks of the model
 			selectLandmarkSet(model, "REGISTER");
-		} else if(e.getActionCommand().equals("REGISTER")) {
+		}
+		else if (e.getActionCommand().equals("REGISTER")) {
 			// do registration
 			doRegistration(templ, model);
 		}
 	}
 
-
 	// usually called from the main menu bar.
 	public void register() {
 		new Thread(new Runnable() {
+
+			@Override
 			public void run() {
 				initRegistration();
 			}
@@ -90,7 +96,7 @@ public class RegistrationMenubar extends JMenuBar implements ActionListener,
 	public void exitRegistration() {
 		templ.showPointList(false);
 		model.showPointList(false);
-		JMenuBar mb = univ.getMenuBar();
+		final JMenuBar mb = univ.getMenuBar();
 		univ.setMenubar(mb);
 		univ.clearSelection();
 		univ.setStatus("");
@@ -99,30 +105,30 @@ public class RegistrationMenubar extends JMenuBar implements ActionListener,
 	}
 
 	private void hideAll() {
-		for(Iterator it = univ.contents(); it.hasNext();)
-			((Content)it.next()).setVisible(false);
+		for (final Iterator it = univ.contents(); it.hasNext();)
+			((Content) it.next()).setVisible(false);
 	}
 
-
 	private void selectLandmarkSet(final Content content,
-						String actionCommand) {
+		final String actionCommand)
+	{
 		hideAll();
 		content.setVisible(true);
-		content.displayAs(Content.ORTHO);
+		content.displayAs(ContentConstants.ORTHO);
 		content.showPointList(true);
 		univ.ui.setPointTool();
 		univ.select(content);
 
-		univ.setStatus("Select landmarks in " + content.getName() +
-				" and click OK");
+		univ
+			.setStatus("Select landmarks in " + content.getName() + " and click OK");
 
-		Panel p = new Panel(new FlowLayout());
+		final Panel p = new Panel(new FlowLayout());
 		Button b = new Button("OK");
 		b.setActionCommand(actionCommand);
 		b.addActionListener(this);
 		p.add(b);
 
-		if(actionCommand.equals("REGISTER")) {
+		if (actionCommand.equals("REGISTER")) {
 			b = new Button("Back to template");
 			b.setActionCommand("LS_TEMPLATE");
 			b.addActionListener(this);
@@ -134,57 +140,52 @@ public class RegistrationMenubar extends JMenuBar implements ActionListener,
 
 	public void initRegistration() {
 		// Select the contents used for registration
-		Collection contents = univ.getContents();
-		if(contents.size() < 2) {
-			IJ.error("At least two bodies are required for " +
-				" registration");
+		final Collection contents = univ.getContents();
+		if (contents.size() < 2) {
+			IJ.error("At least two bodies are required for " + " registration");
 			return;
 		}
-		String[] conts = new String[contents.size()];
+		final String[] conts = new String[contents.size()];
 		int i = 0;
-		for(Iterator it = contents.iterator(); it.hasNext();)
-			conts[i++] = ((Content)it.next()).getName();
-		GenericDialog gd = new GenericDialog("Registration");
+		for (final Iterator it = contents.iterator(); it.hasNext();)
+			conts[i++] = ((Content) it.next()).getName();
+		final GenericDialog gd = new GenericDialog("Registration");
 		gd.addChoice("template", conts, conts[0]);
 		gd.addChoice("model", conts, conts[1]);
 		gd.addCheckbox("allow scaling", true);
 		openDialogs.add(gd);
 		gd.showDialog();
 		openDialogs.remove(gd);
-		if(gd.wasCanceled())
-			return;
+		if (gd.wasCanceled()) return;
 		templ = univ.getContent(gd.getNextChoice());
 		model = univ.getContent(gd.getNextChoice());
-		boolean scaling = gd.getNextBoolean();
+		final boolean scaling = gd.getNextBoolean();
 
 		// Select the landmarks of the template
 		selectLandmarkSet(templ, "LS_MODEL");
 	}
 
-
-
-
-	public void doRegistration(Content templ, Content model) {
+	public void doRegistration(final Content templ, final Content model) {
 
 		univ.setStatus("");
 		// select the landmarks common to template and model
-		PointList tpoints = templ.getPointList();
-		PointList mpoints = model.getPointList();
-		if(tpoints.size() < 2 || mpoints.size() < 2) {
+		final PointList tpoints = templ.getPointList();
+		final PointList mpoints = model.getPointList();
+		if (tpoints.size() < 2 || mpoints.size() < 2) {
 			IJ.error("At least two points are required in each "
 				+ "of the point lists");
 		}
-		List sett = new ArrayList();
-		List setm = new ArrayList();
-		for(int i = 0; i < tpoints.size(); i++) {
-			BenesNamedPoint pt = tpoints.get(i);
-			BenesNamedPoint pm = mpoints.get(pt.getName());
-			if(pm != null) {
+		final List sett = new ArrayList();
+		final List setm = new ArrayList();
+		for (int i = 0; i < tpoints.size(); i++) {
+			final BenesNamedPoint pt = tpoints.get(i);
+			final BenesNamedPoint pm = mpoints.get(pt.getName());
+			if (pm != null) {
 				sett.add(pt);
 				setm.add(pm);
 			}
 		}
-		if(sett.size() < 2) {
+		if (sett.size() < 2) {
 			IJ.error("At least two points with the same name "
 				+ "must exist in both bodies");
 			univ.setStatus("");
@@ -192,29 +193,28 @@ public class RegistrationMenubar extends JMenuBar implements ActionListener,
 		}
 
 		// Display common landmarks
-		DecimalFormat df = new DecimalFormat("00.000");
+		final DecimalFormat df = new DecimalFormat("00.000");
 		String message = "Points used for registration\n \n";
-		for(int i = 0; i < sett.size(); i++) {
-			BenesNamedPoint bnp = (BenesNamedPoint)sett.get(i);
-			message += (bnp.getName() + "    "
-				+ df.format(bnp.x) + "    "
-				+ df.format(bnp.y) + "    "
-				+ df.format(bnp.z) + "\n");
+		for (int i = 0; i < sett.size(); i++) {
+			final BenesNamedPoint bnp = (BenesNamedPoint) sett.get(i);
+			message +=
+				(bnp.getName() + "    " + df.format(bnp.x) + "    " + df.format(bnp.y) +
+					"    " + df.format(bnp.z) + "\n");
 		}
-		boolean cont = IJ.showMessageWithCancel(
-			"Points used for registration", message);
-		if(!cont) return;
+		final boolean cont =
+			IJ.showMessageWithCancel("Points used for registration", message);
+		if (!cont) return;
 
 		// calculate best rigid
-		BenesNamedPoint[] sm = new BenesNamedPoint[setm.size()];
-		BenesNamedPoint[] st = new BenesNamedPoint[sett.size()];
-		FastMatrix fm = FastMatrix.bestRigid(
-			(BenesNamedPoint[])setm.toArray(sm),
-			(BenesNamedPoint[])sett.toArray(st));
+		final BenesNamedPoint[] sm = new BenesNamedPoint[setm.size()];
+		final BenesNamedPoint[] st = new BenesNamedPoint[sett.size()];
+		final FastMatrix fm =
+			FastMatrix.bestRigid((BenesNamedPoint[]) setm.toArray(sm),
+				(BenesNamedPoint[]) sett.toArray(st));
 
 		// reset the transformation of the template
 		// and set the transformation of the model.
-		Transform3D t3d = new Transform3D(fm.rowwise16());
+		final Transform3D t3d = new Transform3D(fm.rowwise16());
 		templ.setTransform(new Transform3D());
 		model.setTransform(t3d);
 
@@ -226,32 +226,44 @@ public class RegistrationMenubar extends JMenuBar implements ActionListener,
 		univ.clearSelection();
 		univ.ui.setHandTool();
 
-		IJ.showMessage("Contents are locked to prevent\n" +
-			"accidental transformations");
+		IJ.showMessage("Contents are locked to prevent\n"
+			+ "accidental transformations");
 		exitRegistration();
 	}
 
 	public void closeAllDialogs() {
-		while(openDialogs.size() > 0) {
-			GenericDialog gd = (GenericDialog)openDialogs.get(0);
+		while (openDialogs.size() > 0) {
+			final GenericDialog gd = (GenericDialog) openDialogs.get(0);
 			gd.dispose();
 			openDialogs.remove(gd);
 		}
 	}
 
-
-
-
 	// Universe Listener interface
-	public void transformationStarted(View view) {}
-	public void transformationFinished(View view) {}
+	@Override
+	public void transformationStarted(final View view) {}
+
+	@Override
+	public void transformationFinished(final View view) {}
+
+	@Override
 	public void canvasResized() {}
-	public void transformationUpdated(View view) {}
-	public void contentChanged(Content c) {}
+
+	@Override
+	public void transformationUpdated(final View view) {}
+
+	@Override
+	public void contentChanged(final Content c) {}
+
+	@Override
 	public void universeClosed() {}
-	public void contentAdded(Content c) {}
 
-	public void contentRemoved(Content c) {}
-	public void contentSelected(Content c) {}
+	@Override
+	public void contentAdded(final Content c) {}
+
+	@Override
+	public void contentRemoved(final Content c) {}
+
+	@Override
+	public void contentSelected(final Content c) {}
 }
-

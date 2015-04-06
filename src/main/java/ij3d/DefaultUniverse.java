@@ -1,3 +1,4 @@
+
 package ij3d;
 
 import com.sun.j3d.utils.universe.MultiTransformGroup;
@@ -14,6 +15,7 @@ import ij3d.shapes.CoordinateSystem;
 import ij3d.shapes.Scalebar;
 
 import java.awt.Dimension;
+import java.awt.GraphicsConfigTemplate;
 import java.awt.GraphicsConfiguration;
 import java.awt.GraphicsEnvironment;
 import java.awt.event.ComponentAdapter;
@@ -35,7 +37,9 @@ import javax.media.j3d.Canvas3D;
 import javax.media.j3d.DirectionalLight;
 import javax.media.j3d.GraphicsConfigTemplate3D;
 import javax.media.j3d.Group;
+import javax.media.j3d.ImageComponent;
 import javax.media.j3d.ImageComponent2D;
+import javax.media.j3d.Light;
 import javax.media.j3d.PointLight;
 import javax.media.j3d.Screen3D;
 import javax.media.j3d.Switch;
@@ -44,19 +48,20 @@ import javax.media.j3d.TransformGroup;
 import javax.vecmath.Color3f;
 import javax.vecmath.Point3d;
 
-public abstract class DefaultUniverse extends SimpleUniverse
-						implements BehaviorCallback {
+public abstract class DefaultUniverse extends SimpleUniverse implements
+	BehaviorCallback
+{
 
 	/**
 	 * The index of the transform group in the viewing platform's
 	 * MultiTransformGroup which is responsible for centering
 	 */
-	public static final int CENTER_TG    = 0;
+	public static final int CENTER_TG = 0;
 	/**
 	 * The index of the transform group in the viewing platform's
 	 * MultiTransformGroup which is responsible for zooming
 	 */
-	public static final int ZOOM_TG      = 4;
+	public static final int ZOOM_TG = 4;
 	/**
 	 * The index of the transform group in the viewing platform's
 	 * MultiTransformGroup which is responsible for translation
@@ -66,32 +71,24 @@ public abstract class DefaultUniverse extends SimpleUniverse
 	 * The index of the transform group in the viewing platform's
 	 * MultiTransformGroup which is responsible for animation
 	 */
-	public static final int ANIMATE_TG   = 3;
+	public static final int ANIMATE_TG = 3;
 	/**
 	 * The index of the transform group in the viewing platform's
 	 * MultiTransformGroup which is responsible for rotation
 	 */
-	public static final int ROTATION_TG  = 2;
-
-
-
-
+	public static final int ROTATION_TG = 2;
 
 	/**
-	 * Constant used in showAttribute() specifying whether a scalebar
-	 * should be displayed or not.
+	 * Constant used in showAttribute() specifying whether a scalebar should be
+	 * displayed or not.
 	 */
-	public static final int ATTRIBUTE_SCALEBAR     = 0;
+	public static final int ATTRIBUTE_SCALEBAR = 0;
 
 	/**
 	 * Constant used in showAttribute() specifying whether a global coordinate
 	 * system should be displayed or not.
 	 */
 	public static final int ATTRIBUTE_COORD_SYSTEM = 1;
-
-
-
-
 
 	/**
 	 * Reference to root BranchGroup. This is the place to add global entries.
@@ -104,14 +101,12 @@ public abstract class DefaultUniverse extends SimpleUniverse
 	protected Scalebar scalebar;
 
 	/**
-	 * Reference to the global coordinate system, which is optionally
-	 * displayable.
+	 * Reference to the global coordinate system, which is optionally displayable.
 	 */
 	protected CoordinateSystem globalCoord;
 
 	/**
-	 * The shared Bounds object which is needed for Java3D's scheduling
-	 * mechanism.
+	 * The shared Bounds object which is needed for Java3D's scheduling mechanism.
 	 */
 	protected BoundingSphere bounds;
 
@@ -120,49 +115,45 @@ public abstract class DefaultUniverse extends SimpleUniverse
 	 */
 	protected ImageWindow3D win;
 
-
-
-
-
 	/** The global minimum point */
-	protected final Point3d globalMin    = new Point3d();
+	protected final Point3d globalMin = new Point3d();
 
 	/** The global maximum point */
-	protected final Point3d globalMax    = new Point3d();
+	protected final Point3d globalMax = new Point3d();
 
 	/** The global center point */
 	protected final Point3d globalCenter = new Point3d();
 
 	/**
-	 * Reference to the InteractiveBehavior. This handles mouse and
-	 * keyboard input.
+	 * Reference to the InteractiveBehavior. This handles mouse and keyboard
+	 * input.
 	 */
 	protected InteractiveBehavior mouseBehavior;
 
 	/**
-	 * Reference to the ContentTransformer. This handles the mouse and
-	 * keyboard input which addresses individual Contents and is used by
-	 * the InteractiveBehavior.
+	 * Reference to the ContentTransformer. This handles the mouse and keyboard
+	 * input which addresses individual Contents and is used by the
+	 * InteractiveBehavior.
 	 */
 	protected final ContentTransformer contentTransformer;
 
 	/**
-	 * Reference to the Picker. This handles the picking of Contents and
-	 * of landmark points of individual objects. The picker is also used by
-	 * the InteractiveBehavior.
+	 * Reference to the Picker. This handles the picking of Contents and of
+	 * landmark points of individual objects. The picker is also used by the
+	 * InteractiveBehavior.
 	 */
 	protected final Picker picker;
 
 	/**
-	 * Reference to the InteractiveViewPlatformTransformer. This handles
-	 * mouse and keyboard input which transforms the whole view. It is
-	 * used by the InteractiveBehavior.
+	 * Reference to the InteractiveViewPlatformTransformer. This handles mouse and
+	 * keyboard input which transforms the whole view. It is used by the
+	 * InteractiveBehavior.
 	 */
 	protected final InteractiveViewPlatformTransformer viewTransformer;
 
 	/**
-	 * Reference to the WaitForNextFrameBehavior. This provides a way to
-	 * wait until the next frame is rendered.
+	 * Reference to the WaitForNextFrameBehavior. This provides a way to wait
+	 * until the next frame is rendered.
 	 */
 	protected final WaitForNextFrameBehavior frameBehavior;
 
@@ -173,38 +164,38 @@ public abstract class DefaultUniverse extends SimpleUniverse
 	 */
 	public final UIAdapter ui;
 
-
 	/**
 	 * Switch which holds the optionally displayable scalebar and coordinate
 	 * system.
 	 */
 	protected final Switch attributesSwitch;
-	private BitSet attributesMask = new BitSet(2);
+	private final BitSet attributesMask = new BitSet(2);
 
-	private List listeners = new ArrayList();
+	private final List listeners = new ArrayList();
 	private boolean transformed = false;
 
 	public abstract Content getSelected();
+
 	public abstract Iterator contents();
 
 	/**
-	 * Constructor.
-	 * Sets up the universe, adds the switch for the attributes (scalebar,
-	 * coordinate syste), and initializes some light sources.
+	 * Constructor. Sets up the universe, adds the switch for the attributes
+	 * (scalebar, coordinate syste), and initializes some light sources.
+	 * 
 	 * @param width
 	 * @param height
 	 */
-	public DefaultUniverse(int width, int height) {
+	public DefaultUniverse(final int width, final int height) {
 		this(width, height, getDefaultUIAdapter());
 	}
 
 	private static UIAdapter getDefaultUIAdapter() {
-		if(ij.IJ.getInstance() == null)
-			return new NoopAdapter();
+		if (ij.IJ.getInstance() == null) return new NoopAdapter();
 		return new IJAdapter();
 	}
 
-	public DefaultUniverse(int width, int height, UIAdapter uia) {
+	public DefaultUniverse(final int width, final int height, final UIAdapter uia)
+	{
 		super(new ImageCanvas3D(width, height, uia), 5);
 		this.ui = uia;
 		getViewer().getView().setProjectionPolicy(UniverseSettings.projection);
@@ -217,7 +208,7 @@ public abstract class DefaultUniverse extends SimpleUniverse
 		scene.setCapability(Group.ALLOW_CHILDREN_READ);
 		scene.setCapability(Group.ALLOW_CHILDREN_WRITE);
 
-		Background bg = ((ImageCanvas3D)getCanvas()).getBG();
+		final Background bg = ((ImageCanvas3D) getCanvas()).getBG();
 		bg.setApplicationBounds(bounds);
 		scene.addChild(bg);
 
@@ -234,19 +225,20 @@ public abstract class DefaultUniverse extends SimpleUniverse
 		// ah, and maybe a global coordinate system
 		globalCoord = new CoordinateSystem(100, new Color3f(1, 0, 0));
 		attributesSwitch.addChild(globalCoord);
-		attributesMask.set(ATTRIBUTE_COORD_SYSTEM, UniverseSettings.showGlobalCoordinateSystem);
+		attributesMask.set(ATTRIBUTE_COORD_SYSTEM,
+			UniverseSettings.showGlobalCoordinateSystem);
 
 		attributesSwitch.setChildMask(attributesMask);
 
 		// Lightening
-		BranchGroup lightBG = new BranchGroup();
+		final BranchGroup lightBG = new BranchGroup();
 
-		AmbientLight lightA = new AmbientLight();
+		final AmbientLight lightA = new AmbientLight();
 		lightA.setInfluencingBounds(bounds);
 		lightA.setEnable(false);
 		lightBG.addChild(lightA);
 
-		DirectionalLight lightD1 = new DirectionalLight();
+		final DirectionalLight lightD1 = new DirectionalLight();
 		lightD1.setInfluencingBounds(bounds);
 		lightD1.setEnable(false);
 		lightBG.addChild(lightD1);
@@ -254,8 +246,8 @@ public abstract class DefaultUniverse extends SimpleUniverse
 		light = new PointLight();
 		light.setCapability(PointLight.ALLOW_POSITION_READ);
 		light.setCapability(PointLight.ALLOW_POSITION_WRITE);
-		light.setCapability(PointLight.ALLOW_COLOR_READ);
-		light.setCapability(PointLight.ALLOW_COLOR_WRITE);
+		light.setCapability(Light.ALLOW_COLOR_READ);
+		light.setCapability(Light.ALLOW_COLOR_WRITE);
 		light.setPosition(-2, 0, -3);
 		light.setInfluencingBounds(bounds);
 		lightBG.addChild(light);
@@ -279,29 +271,30 @@ public abstract class DefaultUniverse extends SimpleUniverse
 		addBranchGraph(scene);
 
 		getCanvas().addMouseListener(new MouseAdapter() {
+
 			@Override
-			public void mouseReleased(MouseEvent e) {
-				if(ui.isHandTool() || ui.isMagnifierTool()) {
-					if(transformed)
-						fireTransformationFinished();
+			public void mouseReleased(final MouseEvent e) {
+				if (ui.isHandTool() || ui.isMagnifierTool()) {
+					if (transformed) fireTransformationFinished();
 					transformed = false;
 				}
 			}
 		});
 		getCanvas().addMouseMotionListener(new MouseMotionAdapter() {
+
 			@Override
-			public void mouseDragged(MouseEvent e) {
-				if(ui.isHandTool() || ui.isMagnifierTool()) {
-					if(!transformed)
-						fireTransformationStarted();
+			public void mouseDragged(final MouseEvent e) {
+				if (ui.isHandTool() || ui.isMagnifierTool()) {
+					if (!transformed) fireTransformationStarted();
 					transformed = true;
 				}
 			}
 		});
 
 		getCanvas().addComponentListener(new ComponentAdapter() {
+
 			@Override
-			public void componentResized(ComponentEvent e) {
+			public void componentResized(final ComponentEvent e) {
 				fireCanvasResized();
 			}
 		});
@@ -310,21 +303,21 @@ public abstract class DefaultUniverse extends SimpleUniverse
 	}
 
 	/**
-	 * @deprecated This method should not be used any more from outside
-	 * this class. Use addInteractiveBehavior() instead.
+	 * @deprecated This method should not be used any more from outside this
+	 *             class. Use addInteractiveBehavior() instead.
 	 */
-	public void setInteractiveBehavior(InteractiveBehavior b) {
-		if(mouseBehavior != null)
-			scene.removeChild(mouseBehavior.getParent());
+	@Deprecated
+	public void setInteractiveBehavior(final InteractiveBehavior b) {
+		if (mouseBehavior != null) scene.removeChild(mouseBehavior.getParent());
 		mouseBehavior = b;
 		mouseBehavior.setSchedulingBounds(bounds);
-		BranchGroup bg = new BranchGroup();
+		final BranchGroup bg = new BranchGroup();
 		bg.setCapability(BranchGroup.ALLOW_DETACH);
 		bg.addChild(mouseBehavior);
 		scene.addChild(bg);
 	}
 
-	public void addInteractiveBehavior(InteractiveBehavior b) {
+	public void addInteractiveBehavior(final InteractiveBehavior b) {
 		if (null == mouseBehavior) {
 			setInteractiveBehavior(b);
 			return;
@@ -338,12 +331,11 @@ public abstract class DefaultUniverse extends SimpleUniverse
 	}
 
 	/**
-	 * Copy the whole transformation, which transforms any
-	 * point from the vworld coordinate system to the observer
-	 * coordinate system.
+	 * Copy the whole transformation, which transforms any point from the vworld
+	 * coordinate system to the observer coordinate system.
 	 */
-	public void getVworldToCamera(Transform3D transform) {
-		Transform3D tmp = new Transform3D();
+	public void getVworldToCamera(final Transform3D transform) {
+		final Transform3D tmp = new Transform3D();
 		getCenterTG().getTransform(transform);
 		getTranslateTG().getTransform(tmp);
 		transform.mul(tmp);
@@ -355,12 +347,12 @@ public abstract class DefaultUniverse extends SimpleUniverse
 	}
 
 	/**
-	 * Copy the inverse vworld to camera transformation, which transforms
-	 * any point from the observer coordinate system to vworld coordinate
-	 * system to the
+	 * Copy the inverse vworld to camera transformation, which transforms any
+	 * point from the observer coordinate system to vworld coordinate system to
+	 * the
 	 */
-	public void getVworldToCameraInverse(Transform3D transform) {
-		Transform3D tmp = new Transform3D();
+	public void getVworldToCameraInverse(final Transform3D transform) {
+		final Transform3D tmp = new Transform3D();
 		getCenterTG().getTransform(transform);
 		getTranslateTG().getTransform(tmp);
 		transform.mul(tmp);
@@ -371,78 +363,82 @@ public abstract class DefaultUniverse extends SimpleUniverse
 	}
 
 	/**
-	 * Returns the TransformGroup of the viewing platform's
-	 * MultiTransformGroup which is responsible for zooming.
+	 * Returns the TransformGroup of the viewing platform's MultiTransformGroup
+	 * which is responsible for zooming.
 	 */
 	public TransformGroup getZoomTG() {
-		return getViewingPlatform().getMultiTransformGroup().getTransformGroup(ZOOM_TG);
+		return getViewingPlatform().getMultiTransformGroup().getTransformGroup(
+			ZOOM_TG);
 	}
 
 	/**
-	 * Returns the TransformGroup of the viewing platform's
-	 * MultiTransformGroup which is responsible for centering the universe.
+	 * Returns the TransformGroup of the viewing platform's MultiTransformGroup
+	 * which is responsible for centering the universe.
 	 */
 	public TransformGroup getCenterTG() {
-		return getViewingPlatform().getMultiTransformGroup().getTransformGroup(CENTER_TG);
+		return getViewingPlatform().getMultiTransformGroup().getTransformGroup(
+			CENTER_TG);
 	}
 
 	/**
-	 * Returns the TransformGroup of the viewing platform's
-	 * MultiTransformGroup which is responsible for rotation.
+	 * Returns the TransformGroup of the viewing platform's MultiTransformGroup
+	 * which is responsible for rotation.
 	 */
 	public TransformGroup getRotationTG() {
-		return getViewingPlatform().getMultiTransformGroup().getTransformGroup(ROTATION_TG);
+		return getViewingPlatform().getMultiTransformGroup().getTransformGroup(
+			ROTATION_TG);
 	}
 
 	/**
-	 * Returns the TransformGroup of the viewing platform's
-	 * MultiTransformGroup which is responsible for translation.
+	 * Returns the TransformGroup of the viewing platform's MultiTransformGroup
+	 * which is responsible for translation.
 	 */
 	public TransformGroup getTranslateTG() {
-		return getViewingPlatform().getMultiTransformGroup().getTransformGroup(TRANSLATE_TG);
+		return getViewingPlatform().getMultiTransformGroup().getTransformGroup(
+			TRANSLATE_TG);
 	}
 
 	/**
-	 * Returns the TransformGroup of the viewing platform's
-	 * MultiTransformGroup which is responsible for animation.
+	 * Returns the TransformGroup of the viewing platform's MultiTransformGroup
+	 * which is responsible for animation.
 	 */
 	public TransformGroup getAnimationTG() {
-		return getViewingPlatform().getMultiTransformGroup().getTransformGroup(ANIMATE_TG);
+		return getViewingPlatform().getMultiTransformGroup().getTransformGroup(
+			ANIMATE_TG);
 	}
 
 	/** Stores the list of Transform3D that describe the view. */
 	public static class GlobalTransform {
+
 		Transform3D[] transforms;
 	}
 
-	/** Obtain a copy of all the Transform3D that describe the view
-	 *  such as zoom, pan, and rotation. */
-	public void getGlobalTransform(GlobalTransform transform) {
-		MultiTransformGroup group =
+	/**
+	 * Obtain a copy of all the Transform3D that describe the view such as zoom,
+	 * pan, and rotation.
+	 */
+	public void getGlobalTransform(final GlobalTransform transform) {
+		final MultiTransformGroup group =
 			getViewingPlatform().getMultiTransformGroup();
-		int num = group.getNumTransforms();
-		if (transform.transforms == null ||
-				transform.transforms.length != num) {
+		final int num = group.getNumTransforms();
+		if (transform.transforms == null || transform.transforms.length != num) {
 			transform.transforms = new Transform3D[num];
 			for (int i = 0; i < num; i++)
 				transform.transforms[i] = new Transform3D();
 		}
 		for (int i = 0; i < num; i++)
-			group.getTransformGroup(i)
-				.getTransform(transform.transforms[i]);
+			group.getTransformGroup(i).getTransform(transform.transforms[i]);
 	}
 
 	/** Set the transforms for zoom, pan, and rotation. */
-	public void setGlobalTransform(GlobalTransform transform) {
-		MultiTransformGroup group =
+	public void setGlobalTransform(final GlobalTransform transform) {
+		final MultiTransformGroup group =
 			getViewingPlatform().getMultiTransformGroup();
-		int num = group.getNumTransforms();
-		if (transform.transforms == null ||
-				transform.transforms.length != num)
-			throw new RuntimeException("Internal 3D Viewer error");
+		final int num = group.getNumTransforms();
+		if (transform.transforms == null || transform.transforms.length != num) throw new RuntimeException(
+			"Internal 3D Viewer error");
 		for (int i = 0; i < num; i++)
-			group.getTransformGroup(i)
-				.setTransform(transform.transforms[i]);
+			group.getTransformGroup(i).setTransform(transform.transforms[i]);
 
 		waitForNextFrame();
 		fireTransformationUpdated();
@@ -463,27 +459,26 @@ public abstract class DefaultUniverse extends SimpleUniverse
 	}
 
 	/**
-	 * Returns a reference to the ContentTransformer which is used by
-	 * this universe to handle mouse and keyboard input which aims to
-	 * transform individual Contents.
+	 * Returns a reference to the ContentTransformer which is used by this
+	 * universe to handle mouse and keyboard input which aims to transform
+	 * individual Contents.
 	 */
 	public ContentTransformer getContentTransformer() {
 		return contentTransformer;
 	}
 
 	/**
-	 * Returns a reference to the Picker which is used by
-	 * this universe to handle mouse input which aims to pick
-	 * Contents and change landmark sets.
+	 * Returns a reference to the Picker which is used by this universe to handle
+	 * mouse input which aims to pick Contents and change landmark sets.
 	 */
 	public Picker getPicker() {
 		return picker;
 	}
 
 	/**
-	 * Returns a reference to the InteractiveViewPlatformTransformer which
-	 * is used by this universe to handle mouse and keyboard input which
-	 * aims to transform the viewing platform.
+	 * Returns a reference to the InteractiveViewPlatformTransformer which is used
+	 * by this universe to handle mouse and keyboard input which aims to transform
+	 * the viewing platform.
 	 */
 	public InteractiveViewPlatformTransformer getViewPlatformTransformer() {
 		return viewTransformer;
@@ -491,19 +486,21 @@ public abstract class DefaultUniverse extends SimpleUniverse
 
 	/**
 	 * Show or hide the specified attribute.
+	 * 
 	 * @param attribute, one of ATTRIBUTE_SCALEBAR or ATTRIBUTE_COORD_SYSTEM
 	 * @param flag, indicating whether it should be displayed or hided.
 	 */
-	public void showAttribute(int attribute, boolean flag) {
+	public void showAttribute(final int attribute, final boolean flag) {
 		attributesMask.set(attribute, flag);
 		attributesSwitch.setChildMask(attributesMask);
 	}
 
 	/**
 	 * Returns whether the specified attribute is visible or not.
+	 * 
 	 * @param attribute, one of ATTRIBUTE_SCALEBAR or ATTRIBUTE_COORD_SYSTEM.
 	 */
-	public boolean isAttributeVisible(int attribute) {
+	public boolean isAttributeVisible(final int attribute) {
 		return attributesMask.get(attribute);
 	}
 
@@ -515,12 +512,12 @@ public abstract class DefaultUniverse extends SimpleUniverse
 	}
 
 	/**
-	 * Implements the BehaviorCallback interface of the behavior objects
-	 * used by this universe. This method is invoked to inform about
-	 * transformation changes. This method simply calls
-	 * fireTransformationUpdated().
+	 * Implements the BehaviorCallback interface of the behavior objects used by
+	 * this universe. This method is invoked to inform about transformation
+	 * changes. This method simply calls fireTransformationUpdated().
 	 */
-	public void transformChanged(int type, Transform3D xf) {
+	@Override
+	public void transformChanged(final int type, final Transform3D xf) {
 		fireTransformationUpdated();
 	}
 
@@ -528,33 +525,31 @@ public abstract class DefaultUniverse extends SimpleUniverse
 	 * Waits until the next frame is rendered.
 	 */
 	public void waitForNextFrame() {
-		if (win == null)
-			return;
+		if (win == null) return;
 		frameBehavior.postId(WaitForNextFrameBehavior.TRIGGER_ID);
-		synchronized(frameBehavior) {
+		synchronized (frameBehavior) {
 			try {
 				frameBehavior.wait();
-			} catch(Exception e) {}
+			}
+			catch (final Exception e) {}
 		}
 	}
 
 	/**
-	 * Flag indicating if the window of this universe should be brought
-	 * to front when
+	 * Flag indicating if the window of this universe should be brought to front
+	 * when
 	 */
 	protected boolean useToFront = true;
 
 	/**
-	 * For some interactive applications, the use of toFront() in
-	 * ImageWindow3D creates usability problems, so these methods
-	 * allow one to supress this behaviour by calling
-	 * setUseToFront(false).  This will only have an effect when
-	 * off-screen 3D rendering is not available.  You should be
-	 * careful about using this - it will, for example, cause
-	 * problems for scripted use of the viewer from macros if
-	 * off-screen 3D rendering is not available.
+	 * For some interactive applications, the use of toFront() in ImageWindow3D
+	 * creates usability problems, so these methods allow one to supress this
+	 * behaviour by calling setUseToFront(false). This will only have an effect
+	 * when off-screen 3D rendering is not available. You should be careful about
+	 * using this - it will, for example, cause problems for scripted use of the
+	 * viewer from macros if off-screen 3D rendering is not available.
 	 */
-	public void setUseToFront(boolean useToFront) {
+	public void setUseToFront(final boolean useToFront) {
 		this.useToFront = useToFront;
 	}
 
@@ -569,19 +564,18 @@ public abstract class DefaultUniverse extends SimpleUniverse
 	 * Returns the dimensions of this universe.
 	 */
 	public Dimension getSize() {
-		if(win != null)
-			return win.getSize();
+		if (win != null) return win.getSize();
 		return null;
 	}
 
 	/**
 	 * Set the dimensions of this universe.
+	 * 
 	 * @param w the new width
 	 * @param h the new height
 	 */
-	public void setSize(int w, int h) {
-		if(win != null)
-			win.setSize(w, h);
+	public void setSize(final int w, final int h) {
+		if (win != null) win.setSize(w, h);
 	}
 
 	/**
@@ -598,13 +592,14 @@ public abstract class DefaultUniverse extends SimpleUniverse
 		win.close();
 	}
 
+	@Override
 	public void cleanup() {
 		UniverseSettings.save();
-		if(win != null) {
+		if (win != null) {
 			fireUniverseClosed();
-			while(!listeners.isEmpty())
+			while (!listeners.isEmpty())
 				listeners.remove(0);
-			ImageWindow3D win2 = win;
+			final ImageWindow3D win2 = win;
 			win = null;
 			if (null != mouseBehavior) mouseBehavior.setExternalBehaviours(null);
 		}
@@ -635,14 +630,12 @@ public abstract class DefaultUniverse extends SimpleUniverse
 	 */
 	public ImagePlus takeSnapshot(final int w, final int h) {
 		final GraphicsConfigTemplate3D templ = new GraphicsConfigTemplate3D();
-		templ.setDoubleBuffer(GraphicsConfigTemplate3D.UNNECESSARY);
+		templ.setDoubleBuffer(GraphicsConfigTemplate.UNNECESSARY);
 		final Canvas3D onCanvas = getCanvas();
-		if ( offCanvas == null )
-		{
-			final GraphicsConfiguration gc = GraphicsEnvironment.
-			getLocalGraphicsEnvironment().
-			getDefaultScreenDevice().
-			getBestConfiguration(templ);
+		if (offCanvas == null) {
+			final GraphicsConfiguration gc =
+				GraphicsEnvironment.getLocalGraphicsEnvironment()
+					.getDefaultScreenDevice().getBestConfiguration(templ);
 			offCanvas = new Canvas3D(gc, true);
 			System.out.println("construct canvas");
 		}
@@ -653,13 +646,12 @@ public abstract class DefaultUniverse extends SimpleUniverse
 		sOff.setPhysicalScreenHeight(sOn.getPhysicalScreenHeight());
 		getViewer().getView().addCanvas3D(offCanvas);
 
-		Color3f bg = new Color3f();
-		((ImageCanvas3D)onCanvas).getBG().getColor(bg);
+		final Color3f bg = new Color3f();
+		((ImageCanvas3D) onCanvas).getBG().getColor(bg);
 
-		BufferedImage bImage = new BufferedImage(
-				w, h, BufferedImage.TYPE_INT_ARGB);
-		ImageComponent2D ic2d = new ImageComponent2D(
-				ImageComponent2D.FORMAT_RGBA, bImage);
+		BufferedImage bImage = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+		final ImageComponent2D ic2d =
+			new ImageComponent2D(ImageComponent.FORMAT_RGBA, bImage);
 
 		offCanvas.setOffScreenBuffer(ic2d);
 		offCanvas.renderOffScreenBuffer();
@@ -673,24 +665,23 @@ public abstract class DefaultUniverse extends SimpleUniverse
 	/**
 	 * Register the specified UniverseListener
 	 */
-	public void addUniverseListener(UniverseListener l) {
+	public void addUniverseListener(final UniverseListener l) {
 		listeners.add(l);
 	}
 
 	/**
 	 * Remove the specified UniverseListener
 	 */
-	public void removeUniverseListener(UniverseListener l) {
+	public void removeUniverseListener(final UniverseListener l) {
 		listeners.remove(l);
 	}
 
 	/**
-	 * Invokes the univeresClosed() method of all registered
-	 * UniverseListeners.
+	 * Invokes the univeresClosed() method of all registered UniverseListeners.
 	 */
 	public void fireUniverseClosed() {
-		for(int i = 0; i < listeners.size(); i++) {
-			UniverseListener l = (UniverseListener)listeners.get(i);
+		for (int i = 0; i < listeners.size(); i++) {
+			final UniverseListener l = (UniverseListener) listeners.get(i);
 			l.universeClosed();
 		}
 	}
@@ -700,8 +691,8 @@ public abstract class DefaultUniverse extends SimpleUniverse
 	 * UniverseListeners.
 	 */
 	public void fireTransformationStarted() {
-		for(int i = 0; i < listeners.size(); i++) {
-			UniverseListener l = (UniverseListener)listeners.get(i);
+		for (int i = 0; i < listeners.size(); i++) {
+			final UniverseListener l = (UniverseListener) listeners.get(i);
 			l.transformationStarted(getCanvas().getView());
 		}
 	}
@@ -711,8 +702,8 @@ public abstract class DefaultUniverse extends SimpleUniverse
 	 * UniverseListeners.
 	 */
 	public void fireTransformationUpdated() {
-		for(int i = 0; i < listeners.size(); i++) {
-			UniverseListener l = (UniverseListener)listeners.get(i);
+		for (int i = 0; i < listeners.size(); i++) {
+			final UniverseListener l = (UniverseListener) listeners.get(i);
 			l.transformationUpdated(getCanvas().getView());
 		}
 	}
@@ -722,63 +713,58 @@ public abstract class DefaultUniverse extends SimpleUniverse
 	 * UniverseListeners.
 	 */
 	public void fireTransformationFinished() {
-		for(int i = 0; i < listeners.size(); i++) {
-			UniverseListener l = (UniverseListener)listeners.get(i);
+		for (int i = 0; i < listeners.size(); i++) {
+			final UniverseListener l = (UniverseListener) listeners.get(i);
 			l.transformationFinished(getCanvas().getView());
 		}
 	}
 
 	/**
-	 * Invokes the contentAdded() method of all registered
-	 * UniverseListeners.
+	 * Invokes the contentAdded() method of all registered UniverseListeners.
 	 */
-	public void fireContentAdded(Content c) {
-		for(int i = 0; i < listeners.size(); i++) {
-			UniverseListener l = (UniverseListener)listeners.get(i);
+	public void fireContentAdded(final Content c) {
+		for (int i = 0; i < listeners.size(); i++) {
+			final UniverseListener l = (UniverseListener) listeners.get(i);
 			l.contentAdded(c);
 		}
 	}
 
 	/**
-	 * Invokes the contentChanged() method of all registered
-	 * UniverseListeners.
+	 * Invokes the contentChanged() method of all registered UniverseListeners.
 	 */
-	public void fireContentChanged(Content c) {
-		for(int i = 0; i < listeners.size(); i++) {
-			UniverseListener l = (UniverseListener)listeners.get(i);
+	public void fireContentChanged(final Content c) {
+		for (int i = 0; i < listeners.size(); i++) {
+			final UniverseListener l = (UniverseListener) listeners.get(i);
 			l.contentChanged(c);
 		}
 	}
 
 	/**
-	 * Invokes the contentRemoved() method of all registered
-	 * UniverseListeners.
+	 * Invokes the contentRemoved() method of all registered UniverseListeners.
 	 */
-	public void fireContentRemoved(Content c) {
-		for(int i = 0; i < listeners.size(); i++) {
-			UniverseListener l = (UniverseListener)listeners.get(i);
+	public void fireContentRemoved(final Content c) {
+		for (int i = 0; i < listeners.size(); i++) {
+			final UniverseListener l = (UniverseListener) listeners.get(i);
 			l.contentRemoved(c);
 		}
 	}
 
 	/**
-	 * Invokes the contentSelected() method of all registered
-	 * UniverseListeners.
+	 * Invokes the contentSelected() method of all registered UniverseListeners.
 	 */
-	public void fireContentSelected(Content c) {
-		for(int i = 0; i < listeners.size(); i++) {
-			UniverseListener l = (UniverseListener)listeners.get(i);
+	public void fireContentSelected(final Content c) {
+		for (int i = 0; i < listeners.size(); i++) {
+			final UniverseListener l = (UniverseListener) listeners.get(i);
 			l.contentSelected(c);
 		}
 	}
 
 	/**
-	 * Invokes the canvasResized() method of all registered
-	 * UniverseListeners.
+	 * Invokes the canvasResized() method of all registered UniverseListeners.
 	 */
 	public void fireCanvasResized() {
-		for(int i = 0; i < listeners.size(); i++) {
-			UniverseListener l = (UniverseListener)listeners.get(i);
+		for (int i = 0; i < listeners.size(); i++) {
+			final UniverseListener l = (UniverseListener) listeners.get(i);
 			l.canvasResized();
 		}
 	}

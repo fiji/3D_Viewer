@@ -1,3 +1,4 @@
+
 package octree;
 
 import ij.IJ;
@@ -24,25 +25,27 @@ public class OctreeDialog {
 	private boolean canceled = false;
 
 	public void showDialog() {
-		GenericDialog gd = new GenericDialog("Add large volume");
+		final GenericDialog gd = new GenericDialog("Add large volume");
 
 		gd.addStringField("Name:", "", 10);
 
-		gd.addMessage("Please specify the path to the image which you\n" +
-				"want to display.\n" +
-				"If you specify a directory with precomputed data\n" +
-				"below, you can leave this field empty");
+		gd.addMessage("Please specify the path to the image which you\n"
+			+ "want to display.\n"
+			+ "If you specify a directory with precomputed data\n"
+			+ "below, you can leave this field empty");
 		Panel p = new Panel(new FlowLayout());
 		final TextField imagePathTF = new TextField(30);
 		p.add(imagePathTF);
 		Button b = new Button("...");
 		b.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				OpenDialog od = new OpenDialog("Image path", null);
-				String dir = od.getDirectory();
-				String file = od.getFileName();
-				if(dir != null && file != null) {
-					File f = new File(od.getDirectory(), od.getFileName());
+
+			@Override
+			public void actionPerformed(final ActionEvent e) {
+				final OpenDialog od = new OpenDialog("Image path", null);
+				final String dir = od.getDirectory();
+				final String file = od.getFileName();
+				if (dir != null && file != null) {
+					final File f = new File(od.getDirectory(), od.getFileName());
 					imagePathTF.setText(f.getAbsolutePath());
 				}
 			}
@@ -50,29 +53,29 @@ public class OctreeDialog {
 		p.add(b);
 		gd.addPanel(p);
 
-
-		gd.addMessage("For displaying large volumes, much data has to be\n" +
-				"precomputed. Please specify an empty directory where\n" +
-				"this data can be stored. If data for this image was\n" +
-				"precomputed before, please specify the directory\n" +
-				"containing it here.");
+		gd.addMessage("For displaying large volumes, much data has to be\n"
+			+ "precomputed. Please specify an empty directory where\n"
+			+ "this data can be stored. If data for this image was\n"
+			+ "precomputed before, please specify the directory\n"
+			+ "containing it here.");
 		p = new Panel(new FlowLayout());
 		final TextField imageDirTF = new TextField(30);
 		p.add(imageDirTF);
 		b = new Button("...");
 		b.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				DirectoryChooser dc = new DirectoryChooser("Data directory");
-				String dir = dc.getDirectory();
-				if(dir != null)
-					imageDirTF.setText(dir);
+
+			@Override
+			public void actionPerformed(final ActionEvent e) {
+				final DirectoryChooser dc = new DirectoryChooser("Data directory");
+				final String dir = dc.getDirectory();
+				if (dir != null) imageDirTF.setText(dir);
 			}
 		});
 		p.add(b);
 		gd.addPanel(p);
 		gd.showDialog();
 
-		if(gd.wasCanceled()) {
+		if (gd.wasCanceled()) {
 			canceled = true;
 			return;
 		}
@@ -84,27 +87,27 @@ public class OctreeDialog {
 
 	public boolean checkUserInput() {
 		// TODO check name
-		if(canceled)
-			return false;
+		if (canceled) return false;
 
 		File f = new File(imageDir);
-		if(!f.exists() && !f.mkdir()) {
+		if (!f.exists() && !f.mkdir()) {
 			IJ.error(imageDir + " does not exist and can't be created.");
 			return false;
 		}
-		if(!f.isDirectory()) {
+		if (!f.isDirectory()) {
 			IJ.error(imageDir + " is not a directory.");
 			return false;
 		}
 		dirEmpty = f.list().length == 0;
 
 		f = new File(imagePath);
-		if(!f.exists() && dirEmpty) {
+		if (!f.exists() && dirEmpty) {
 			IJ.error("Found an empty directory and " + imagePath + " does not exist");
 			return false;
 		}
-		if(!f.isFile() && dirEmpty) {
-			IJ.error("Found an empty directory and " + imagePath + " is not a valid file.");
+		if (!f.isFile() && dirEmpty) {
+			IJ.error("Found an empty directory and " + imagePath +
+				" is not a valid file.");
 			return false;
 		}
 		return true;

@@ -1,17 +1,11 @@
+
 package customnode.u3d;
 
 public class DataBlock {
-	
-	private long[] 
-	    data = null,
-	    metaData = null;
-	private long 
-		dataSize = 0, 
-		metaDataSize = 0,
-		priority = 0,
-		blockType = 0;
-	
-	
+
+	private long[] data = null, metaData = null;
+	private long dataSize = 0, metaDataSize = 0, priority = 0, blockType = 0;
+
 	public DataBlock() {
 
 	}
@@ -20,22 +14,20 @@ public class DataBlock {
 		return this.dataSize;
 	}
 
-	public void setDataSize(long value) {
+	public void setDataSize(final long value) {
 		this.dataSize = value;
-		//allocate data buffer for block.
-		//the data is generally aligned to byte values
-		//but array is 4 bytes values . . .
-		if ((this.dataSize & 0x3) == 0)
-			this.data = new long[(int)value >> 2];
-		else
-			this.data = new long[((int)value >> 2) + 1];
+		// allocate data buffer for block.
+		// the data is generally aligned to byte values
+		// but array is 4 bytes values . . .
+		if ((this.dataSize & 0x3) == 0) this.data = new long[(int) value >> 2];
+		else this.data = new long[((int) value >> 2) + 1];
 	}
 
 	public long[] getData() {
 		return this.data;
 	}
 
-	public void setData(long[] value) {
+	public void setData(final long[] value) {
 		this.data = value;
 	}
 
@@ -43,22 +35,21 @@ public class DataBlock {
 		return this.metaDataSize;
 	}
 
-	public void setMetaDataSize(long value) {
+	public void setMetaDataSize(final long value) {
 		this.metaDataSize = value;
-		//allocate data buffer for block.
-		//the data is generally aligned to byte values
-		//but array is 4 bytes values . . .
-		if ((this.metaDataSize & 0x3) == 0)
-			this.metaData = new long[(int)value >> 2];
-		else
-			this.metaData = new long[((int)value >> 2) + 1];
+		// allocate data buffer for block.
+		// the data is generally aligned to byte values
+		// but array is 4 bytes values . . .
+		if ((this.metaDataSize & 0x3) == 0) this.metaData =
+			new long[(int) value >> 2];
+		else this.metaData = new long[((int) value >> 2) + 1];
 	}
 
 	public long[] getMetaData() {
 		return this.metaData;
 	}
 
-	public void setMetaData(long[] value) {
+	public void setMetaData(final long[] value) {
 		if (value.length == this.metaData.length) {
 			System.arraycopy(value, 0, this.metaData, 0, value.length);
 		}
@@ -68,7 +59,7 @@ public class DataBlock {
 		return this.blockType;
 	}
 
-	public void setBlockType(long value) {
+	public void setBlockType(final long value) {
 		this.blockType = value;
 	}
 
@@ -76,7 +67,7 @@ public class DataBlock {
 		return this.priority;
 	}
 
-	public void setPriority(long value) {
+	public void setPriority(final long value) {
 		this.priority = value;
 	}
 }

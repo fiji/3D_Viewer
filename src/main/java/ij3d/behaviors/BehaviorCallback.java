@@ -1,3 +1,4 @@
+
 package ij3d.behaviors;
 
 import javax.media.j3d.Transform3D;
@@ -11,8 +12,8 @@ public interface BehaviorCallback {
 	public static final int TRANSLATE = 0;
 
 	/**
-	 * Called when the transformation of a Content or the view
-	 * has changed.
+	 * Called when the transformation of a Content or the view has changed.
+	 * 
 	 * @param type
 	 * @param t
 	 */

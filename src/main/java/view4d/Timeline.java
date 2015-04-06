@@ -1,27 +1,27 @@
+
 package view4d;
 
 import ij.ImagePlus;
 import ij.ImageStack;
 import ij3d.Image3DUniverse;
 
-
 /**
- * Implements the functionality for the 4D viewer, like loading
- * and animation.
+ * Implements the functionality for the 4D viewer, like loading and animation.
  *
  * @author Benjamin Schmid
  */
 public class Timeline {
 
-	private Image3DUniverse univ;
+	private final Image3DUniverse univ;
 	private Thread playing = null;
 	private boolean bounceback = true;
 
 	/**
 	 * Initialize the timeline
+	 * 
 	 * @param univ
 	 */
-	public Timeline(Image3DUniverse univ) {
+	public Timeline(final Image3DUniverse univ) {
 		this.univ = univ;
 	}
 
@@ -29,7 +29,7 @@ public class Timeline {
 		return univ;
 	}
 
-	public void setBounceBack(boolean bounce) {
+	public void setBounceBack(final boolean bounce) {
 		this.bounceback = bounce;
 	}
 
@@ -39,11 +39,11 @@ public class Timeline {
 
 	/**
 	 * Returns the number of time points.
+	 * 
 	 * @return
 	 */
 	public int size() {
-		if(univ.getContents().size() == 0)
-			return 0;
+		if (univ.getContents().size() == 0) return 0;
 		return univ.getEndTime() - univ.getStartTime();
 	}
 
@@ -51,8 +51,7 @@ public class Timeline {
 	 * Speed up the animation.
 	 */
 	public void faster() {
-		if(delay >= 50)
-			delay -= 50;
+		if (delay >= 50) delay -= 50;
 	}
 
 	/**
@@ -64,23 +63,24 @@ public class Timeline {
 
 	public ImagePlus record() {
 		pause();
-		int s = univ.getStartTime();
-		int e = univ.getEndTime();
+		final int s = univ.getStartTime();
+		final int e = univ.getEndTime();
 
 		univ.showTimepoint(s);
 		try {
 			Thread.sleep(100);
-		} catch(InterruptedException ex) {}
-		ImagePlus imp = univ.takeSnapshot();
-		ImageStack stack = new ImageStack(
-			imp.getWidth(), imp.getHeight());
+		}
+		catch (final InterruptedException ex) {}
+		final ImagePlus imp = univ.takeSnapshot();
+		final ImageStack stack = new ImageStack(imp.getWidth(), imp.getHeight());
 		stack.addSlice("", imp.getProcessor());
 
-		for(int i = s + 1; i <= e; i++) {
+		for (int i = s + 1; i <= e; i++) {
 			univ.showTimepoint(i);
 			try {
 				Thread.sleep(100);
-			} catch(InterruptedException ex) {}
+			}
+			catch (final InterruptedException ex) {}
 			stack.addSlice("", univ.takeSnapshot().getProcessor());
 		}
 		return new ImagePlus("Movie", stack);
@@ -93,31 +93,32 @@ public class Timeline {
 	 * Start animation.
 	 */
 	public synchronized void play() {
-		if(size() == 0)
-			return;
-		if(playing != null)
-			return;
+		if (size() == 0) return;
+		if (playing != null) return;
 		playing = new Thread(new Runnable() {
+
+			@Override
 			public void run() {
 				int inc = +1;
 				shouldPause = false;
-				while(!shouldPause) {
+				while (!shouldPause) {
 					int next = univ.getCurrentTimepoint() + inc;
-					if(next > univ.getEndTime()) {
-						if(bounceback) {
+					if (next > univ.getEndTime()) {
+						if (bounceback) {
 							inc = -inc;
 							continue;
-						} else {
-							next = univ.getStartTime();
 						}
-					} else if(next < univ.getStartTime()) {
+						next = univ.getStartTime();
+					}
+					else if (next < univ.getStartTime()) {
 						inc = -inc;
 						continue;
 					}
 					univ.showTimepoint(next);
 					try {
 						Thread.sleep(delay);
-					} catch(Exception e) {
+					}
+					catch (final Exception e) {
 						shouldPause = true;
 					}
 				}
@@ -139,11 +140,9 @@ public class Timeline {
 	 * Display next timepoint.
 	 */
 	public void next() {
-		if(univ.getContents().size() == 0)
-			return;
-		int curr = univ.getCurrentTimepoint();
-		if(curr == univ.getEndTime())
-			return;
+		if (univ.getContents().size() == 0) return;
+		final int curr = univ.getCurrentTimepoint();
+		if (curr == univ.getEndTime()) return;
 		univ.showTimepoint(curr + 1);
 	}
 
@@ -151,11 +150,9 @@ public class Timeline {
 	 * Display previous timepoint.
 	 */
 	public void previous() {
-		if(univ.getContents().size() == 0)
-			return;
-		int curr = univ.getCurrentTimepoint();
-		if(curr == univ.getStartTime())
-			return;
+		if (univ.getContents().size() == 0) return;
+		final int curr = univ.getCurrentTimepoint();
+		if (curr == univ.getStartTime()) return;
 		univ.showTimepoint(curr - 1);
 	}
 
@@ -163,11 +160,9 @@ public class Timeline {
 	 * Display first timepoint.
 	 */
 	public void first() {
-		if(univ.getContents().size() == 0)
-			return;
-		int first = univ.getStartTime();
-		if(univ.getCurrentTimepoint() == first)
-			return;
+		if (univ.getContents().size() == 0) return;
+		final int first = univ.getStartTime();
+		if (univ.getCurrentTimepoint() == first) return;
 		univ.showTimepoint(first);
 	}
 
@@ -175,12 +170,9 @@ public class Timeline {
 	 * Display last timepoint.
 	 */
 	public void last() {
-		if(univ.getContents().size() == 0)
-			return;
-		int last = univ.getEndTime();
-		if(univ.getCurrentTimepoint() == last)
-			return;
+		if (univ.getContents().size() == 0) return;
+		final int last = univ.getEndTime();
+		if (univ.getCurrentTimepoint() == last) return;
 		univ.showTimepoint(last);
 	}
 }
-

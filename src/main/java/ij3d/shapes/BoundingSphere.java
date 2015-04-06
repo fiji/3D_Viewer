@@ -1,3 +1,4 @@
+
 package ij3d.shapes;
 
 import com.sun.j3d.utils.geometry.Sphere;
@@ -15,31 +16,35 @@ import javax.vecmath.Vector3f;
 
 public class BoundingSphere extends BranchGroup {
 
-	private Point3f center;
+	private final Point3f center;
 	private float radius;
-	private Color3f color;
-	private float transparency;
+	private final Color3f color;
+	private final float transparency;
 
-	private TransformGroup scaleTG;
-	private Transform3D scale = new Transform3D();
+	private final TransformGroup scaleTG;
+	private final Transform3D scale = new Transform3D();
 
-	private TransformGroup translateTG;
-	private Transform3D translate = new Transform3D();
+	private final TransformGroup translateTG;
+	private final Transform3D translate = new Transform3D();
 
-	private TransparencyAttributes ta;
-	private PolygonAttributes pa;
-	private ColoringAttributes ca;
-	private Appearance appearance;
+	private final TransparencyAttributes ta;
+	private final PolygonAttributes pa;
+	private final ColoringAttributes ca;
+	private final Appearance appearance;
 
-	public BoundingSphere(Point3f center, float radius) {
+	public BoundingSphere(final Point3f center, final float radius) {
 		this(center, radius, new Color3f(1, 0, 0));
 	}
 
-	public BoundingSphere(Point3f center, float radius, Color3f color) {
+	public BoundingSphere(final Point3f center, final float radius,
+		final Color3f color)
+	{
 		this(center, radius, color, 0f);
 	}
 
-	public BoundingSphere(Point3f center, float radius, Color3f color, float transparency) {
+	public BoundingSphere(final Point3f center, final float radius,
+		final Color3f color, final float transparency)
+	{
 		setCapability(BranchGroup.ALLOW_DETACH);
 //		setCapability(BranchGroup.ENABLE_PICK_REPORTING);
 		this.center = new Point3f(center);
@@ -60,10 +65,11 @@ public class BoundingSphere extends BranchGroup {
 		ca.setColor(color);
 		appearance.setColoringAttributes(ca);
 
-		Sphere sphere = new Sphere(1, /*Primitive.ENABLE_GEOMETRY_PICKING,*/ appearance);
+		final Sphere sphere =
+			new Sphere(1, /*Primitive.ENABLE_GEOMETRY_PICKING,*/appearance);
 		sphere.setName("BS");
 
-		Vector3f translateV = new Vector3f(center);
+		final Vector3f translateV = new Vector3f(center);
 		translate.set(translateV);
 		translateTG = new TransformGroup(translate);
 		translateTG.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
@@ -71,37 +77,38 @@ public class BoundingSphere extends BranchGroup {
 		scale.set(radius);
 		scaleTG = new TransformGroup(scale);
 		scaleTG.setCapability(TransformGroup.ALLOW_TRANSFORM_WRITE);
-		
+
 		scaleTG.addChild(sphere);
 		translateTG.addChild(scaleTG);
 		addChild(translateTG);
 	}
 
-	public void setRadius(float radius) {
+	public void setRadius(final float radius) {
 		this.radius = radius;
 		scale.set(radius);
 		scaleTG.setTransform(scale);
 	}
 
-	public void setCenter(Point3f center) {
+	public void setCenter(final Point3f center) {
 		this.center.set(center);
-		Vector3f translateV = new Vector3f(center);
+		final Vector3f translateV = new Vector3f(center);
 		translate.set(translateV);
 		translateTG.setTransform(translate);
 	}
 
-	public void getTransform(Transform3D transform) {
+	public void getTransform(final Transform3D transform) {
 		transform.set(new Vector3f(center));
 		transform.mul(scale);
 	}
 
-	public void getTransformInverse(Transform3D transform) {
+	public void getTransformInverse(final Transform3D transform) {
 		getTransform(transform);
 		transform.invert();
 	}
 
+	@Override
 	public String toString() {
-		return "[BoundingSphere center: " + center + " radius: " + radius + "] " + hashCode(); 
+		return "[BoundingSphere center: " + center + " radius: " + radius + "] " +
+			hashCode();
 	}
-} 
-
+}

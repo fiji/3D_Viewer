@@ -1,3 +1,4 @@
+
 package customnode;
 
 import java.util.ArrayList;
@@ -26,23 +27,22 @@ public class FullInfoMesh {
 		edges = new HashMap<Edge, Edge>();
 	}
 
-	public FullInfoMesh(List<Point3f> mesh) {
+	public FullInfoMesh(final List<Point3f> mesh) {
 		this();
-		for(int i = 0; i < mesh.size(); i += 3) {
-			int f1 = addVertex(mesh.get(i));
-			int f2 = addVertex(mesh.get(i + 1));
-			int f3 = addVertex(mesh.get(i + 2));
+		for (int i = 0; i < mesh.size(); i += 3) {
+			final int f1 = addVertex(mesh.get(i));
+			final int f2 = addVertex(mesh.get(i + 1));
+			final int f3 = addVertex(mesh.get(i + 2));
 
 			addFace(f1, f2, f3);
 		}
 	}
 
 	public List<Point3f> getMesh() {
-		List<Point3f> ret = new ArrayList<Point3f>();
-		for(int i = 0; i < faces.size(); i++) {
-			int f = getFace(i);
-			if(f != -1)
-				ret.add(new Point3f(getVertex(f)));
+		final List<Point3f> ret = new ArrayList<Point3f>();
+		for (int i = 0; i < faces.size(); i++) {
+			final int f = getFace(i);
+			if (f != -1) ret.add(new Point3f(getVertex(f)));
 		}
 		return ret;
 	}
@@ -51,17 +51,16 @@ public class FullInfoMesh {
 		return vertexToIndex.keySet();
 	}
 
-	public void moveVertex(int vIdx, Vector3f displacement) {
-		Point3f p = vertices.get(vIdx);
+	public void moveVertex(final int vIdx, final Vector3f displacement) {
+		final Point3f p = vertices.get(vIdx);
 		vertexToIndex.remove(p);
 		p.add(displacement);
 		vertexToIndex.put(p, vIdx);
 
 	}
 
-	public int getIndex(Point3f v) {
-		if(vertexToIndex.containsKey(v))
-			return vertexToIndex.get(v);
+	public int getIndex(final Point3f v) {
+		if (vertexToIndex.containsKey(v)) return vertexToIndex.get(v);
 		return -1;
 	}
 
@@ -69,7 +68,7 @@ public class FullInfoMesh {
 		return vertexToIndex.size();
 	}
 
-	public Vertex getVertex(int i) {
+	public Vertex getVertex(final int i) {
 		return vertices.get(i);
 	}
 
@@ -77,58 +76,55 @@ public class FullInfoMesh {
 		return faces.size();
 	}
 
-	public int getFace(int i) {
+	public int getFace(final int i) {
 		return faces.get(i);
 	}
 
-	public int addVertex(Point3f p) {
-		if(vertexToIndex.containsKey(p))
-			return vertexToIndex.get(p);
+	public int addVertex(final Point3f p) {
+		if (vertexToIndex.containsKey(p)) return vertexToIndex.get(p);
 
-		Vertex v = new Vertex(p);
+		final Vertex v = new Vertex(p);
 		vertices.add(v);
-		int idx = vertices.size() - 1;
+		final int idx = vertices.size() - 1;
 		vertexToIndex.put(v, idx);
 		return idx;
 	}
 
-	public void removeVertex(Point3f p) {
+	public void removeVertex(final Point3f p) {
 		removeVertex(vertexToIndex.get(p));
 	}
 
-	public void removeVertex(int vIdx) {
+	public void removeVertex(final int vIdx) {
 		Vertex v = getVertex(vIdx);
-		ArrayList<Integer> toRemove =
-			new ArrayList<Integer>(v.triangles);
-		for(int f : toRemove)
+		final ArrayList<Integer> toRemove = new ArrayList<Integer>(v.triangles);
+		for (final int f : toRemove)
 			removeFace(f);
 
 		v = vertices.get(vIdx);
 	}
 
-	public void removeFace(int fIdx) {
-		int f1 = getFace(3 * fIdx);
-		int f2 = getFace(3 * fIdx + 1);
-		int f3 = getFace(3 * fIdx + 2);
+	public void removeFace(final int fIdx) {
+		final int f1 = getFace(3 * fIdx);
+		final int f2 = getFace(3 * fIdx + 1);
+		final int f3 = getFace(3 * fIdx + 2);
 
-		if(f1 == -1 && f2 == -1 && f3 == -1)
-			return;
+		if (f1 == -1 && f2 == -1 && f3 == -1) return;
 
-		boolean b = triangles.remove(new Triangle(f1, f2, f3));
+		final boolean b = triangles.remove(new Triangle(f1, f2, f3));
 		assert b;
 
-		faces.set(3 * fIdx,     -1);
+		faces.set(3 * fIdx, -1);
 		faces.set(3 * fIdx + 1, -1);
 		faces.set(3 * fIdx + 2, -1);
 
-		Vertex v1 = getVertex(f1);
-		Vertex v2 = getVertex(f2);
-		Vertex v3 = getVertex(f3);
+		final Vertex v1 = getVertex(f1);
+		final Vertex v2 = getVertex(f2);
+		final Vertex v3 = getVertex(f3);
 
 		Edge etmp = new Edge(f1, f2);
 		etmp = edges.get(etmp);
 		etmp.removeTriangle(fIdx);
-		if(etmp.nTriangles() == 0) {
+		if (etmp.nTriangles() == 0) {
 			v1.removeEdge(etmp);
 			v2.removeEdge(etmp);
 			edges.remove(etmp);
@@ -137,7 +133,7 @@ public class FullInfoMesh {
 		etmp = new Edge(f2, f3);
 		etmp = edges.get(etmp);
 		etmp.removeTriangle(fIdx);
-		if(etmp.nTriangles() == 0) {
+		if (etmp.nTriangles() == 0) {
 			v2.removeEdge(etmp);
 			v3.removeEdge(etmp);
 			edges.remove(etmp);
@@ -146,7 +142,7 @@ public class FullInfoMesh {
 		etmp = new Edge(f3, f1);
 		etmp = edges.get(etmp);
 		etmp.removeTriangle(fIdx);
-		if(etmp.nTriangles() == 0) {
+		if (etmp.nTriangles() == 0) {
 			v3.removeEdge(etmp);
 			v1.removeEdge(etmp);
 			edges.remove(etmp);
@@ -156,59 +152,51 @@ public class FullInfoMesh {
 		v2.removeTriangle(fIdx);
 		v3.removeTriangle(fIdx);
 
-		if(v1.triangles.size() == 0) {
+		if (v1.triangles.size() == 0) {
 			vertexToIndex.remove(v1);
 			vertices.set(f1, null);
 		}
-		if(v2.triangles.size() == 0) {
+		if (v2.triangles.size() == 0) {
 			vertexToIndex.remove(v2);
 			vertices.set(f2, null);
 		}
-		if(v3.triangles.size() == 0) {
+		if (v3.triangles.size() == 0) {
 			vertexToIndex.remove(v3);
 			vertices.set(f3, null);
 		}
 	}
 
-	public void addFace(int f1, int f2, int f3) {
-		Triangle tri = new Triangle(f1, f2, f3);
-		if(triangles.contains(tri))
-			return;
+	public void addFace(final int f1, final int f2, final int f3) {
+		final Triangle tri = new Triangle(f1, f2, f3);
+		if (triangles.contains(tri)) return;
 
 		triangles.add(tri);
 
-		Vertex v1 = getVertex(f1);
-		Vertex v2 = getVertex(f2);
-		Vertex v3 = getVertex(f3);
+		final Vertex v1 = getVertex(f1);
+		final Vertex v2 = getVertex(f2);
+		final Vertex v3 = getVertex(f3);
 
 		Edge e1 = new Edge(f2, f3);
 		Edge e2 = new Edge(f3, f1);
 		Edge e3 = new Edge(f1, f2);
 
 		Edge etmp = edges.get(e1);
-		if(etmp != null)
-			e1 = etmp;
-		else
-			edges.put(e1, e1);
+		if (etmp != null) e1 = etmp;
+		else edges.put(e1, e1);
 
 		etmp = edges.get(e2);
-		if(etmp != null)
-			e2 = etmp;
-		else
-			edges.put(e2, e2);
+		if (etmp != null) e2 = etmp;
+		else edges.put(e2, e2);
 
 		etmp = edges.get(e3);
-		if(etmp != null)
-			e3 = etmp;
-		else
-			edges.put(e3, e3);
-
+		if (etmp != null) e3 = etmp;
+		else edges.put(e3, e3);
 
 		v1.addEdges(e2, e3);
 		v2.addEdges(e1, e3);
 		v3.addEdges(e1, e2);
 
-		int fIdx = faces.size() / 3;
+		final int fIdx = faces.size() / 3;
 
 		faces.add(f1);
 		faces.add(f2);
@@ -223,16 +211,17 @@ public class FullInfoMesh {
 		v3.addTriangle(fIdx);
 	}
 
-	private Vector3f tmpv1 = new Vector3f();
-	private Vector3f tmpv2 = new Vector3f();
-	public void getFaceNormal(int fIdx, Vector3f ret) {
-		int f1 = getFace(3 * fIdx);
-		int f2 = getFace(3 * fIdx + 1);
-		int f3 = getFace(3 * fIdx + 2);
+	private final Vector3f tmpv1 = new Vector3f();
+	private final Vector3f tmpv2 = new Vector3f();
 
-		Vertex v1 = getVertex(f1);
-		Vertex v2 = getVertex(f2);
-		Vertex v3 = getVertex(f3);
+	public void getFaceNormal(final int fIdx, final Vector3f ret) {
+		final int f1 = getFace(3 * fIdx);
+		final int f2 = getFace(3 * fIdx + 1);
+		final int f3 = getFace(3 * fIdx + 2);
+
+		final Vertex v1 = getVertex(f1);
+		final Vertex v2 = getVertex(f2);
+		final Vertex v3 = getVertex(f3);
 
 		tmpv1.sub(v2, v1);
 		tmpv2.sub(v3, v1);
@@ -240,26 +229,26 @@ public class FullInfoMesh {
 		ret.cross(tmpv1, tmpv2);
 	}
 
-	public void getVertexNormal(Vertex v, Vector3f ret) {
+	public void getVertexNormal(final Vertex v, final Vector3f ret) {
 		ret.set(0, 0, 0);
-		Vector3f tn = new Vector3f();
-		for(int fIdx : v.triangles) {
+		final Vector3f tn = new Vector3f();
+		for (final int fIdx : v.triangles) {
 			getFaceNormal(fIdx, tn);
 			ret.add(tn);
 		}
 		ret.normalize();
 	}
 
-	public void getVertexNormal(int vIdx, Vector3f ret) {
-		Vertex v = getVertex(vIdx);
+	public void getVertexNormal(final int vIdx, final Vector3f ret) {
+		final Vertex v = getVertex(vIdx);
 		getVertexNormal(v, ret);
 	}
 
-	public int contractEdge(Edge e, Point3f p) {
-		if(!edges.containsKey(e))
-			throw new IllegalArgumentException("no edge " + e);
+	public int contractEdge(final Edge e, final Point3f p) {
+		if (!edges.containsKey(e)) throw new IllegalArgumentException("no edge " +
+			e);
 
-		Vertex v1 = getVertex(e.p1);
+		final Vertex v1 = getVertex(e.p1);
 
 		HashSet<Integer> remainingTri = new HashSet<Integer>();
 		remainingTri.addAll(v1.triangles);
@@ -267,9 +256,8 @@ public class FullInfoMesh {
 
 		// need to store this because it's destroyed
 		// in removeVertex()
-		ArrayList<Integer> remainingFaces =
-			new ArrayList<Integer>();
-		for(int fIdx : remainingTri) {
+		ArrayList<Integer> remainingFaces = new ArrayList<Integer>();
+		for (final int fIdx : remainingTri) {
 			remainingFaces.add(getFace(3 * fIdx));
 			remainingFaces.add(getFace(3 * fIdx + 1));
 			remainingFaces.add(getFace(3 * fIdx + 2));
@@ -279,10 +267,11 @@ public class FullInfoMesh {
 
 		// create the new vertex
 		int vIdx = -1;
-		if(vertexToIndex.containsKey(p)) {
+		if (vertexToIndex.containsKey(p)) {
 			vIdx = vertexToIndex.get(p);
-		} else {
-			Vertex v = new Vertex(p);
+		}
+		else {
+			final Vertex v = new Vertex(p);
 			vIdx = e.p1;
 			vertices.set(vIdx, v);
 			vertexToIndex.put(v, vIdx);
@@ -290,17 +279,16 @@ public class FullInfoMesh {
 
 		// add the remaining triangles, where the edge points
 		// are replaced by the midpoint
-		for(int i = 0; i < remainingFaces.size(); i += 3) {
-			int f1 = remainingFaces.get(i);
-			int f2 = remainingFaces.get(i + 1);
-			int f3 = remainingFaces.get(i + 2);
-			if(f1 == e.p1) addFace(vIdx, f2, f3);
-			if(f2 == e.p1) addFace(f1, vIdx, f3);
-			if(f3 == e.p1) addFace(f1, f2, vIdx);
+		for (int i = 0; i < remainingFaces.size(); i += 3) {
+			final int f1 = remainingFaces.get(i);
+			final int f2 = remainingFaces.get(i + 1);
+			final int f3 = remainingFaces.get(i + 2);
+			if (f1 == e.p1) addFace(vIdx, f2, f3);
+			if (f2 == e.p1) addFace(f1, vIdx, f3);
+			if (f3 == e.p1) addFace(f1, f2, vIdx);
 		}
 
-
-		Vertex v2 = getVertex(e.p2);
+		final Vertex v2 = getVertex(e.p2);
 		remainingTri = new HashSet<Integer>();
 		remainingTri.addAll(v2.triangles);
 		remainingTri.removeAll(e.triangles);
@@ -308,7 +296,7 @@ public class FullInfoMesh {
 		// need to store this because it's destroyed
 		// in removeVertex()
 		remainingFaces = new ArrayList<Integer>();
-		for(int fIdx : remainingTri) {
+		for (final int fIdx : remainingTri) {
 			remainingFaces.add(getFace(3 * fIdx));
 			remainingFaces.add(getFace(3 * fIdx + 1));
 			remainingFaces.add(getFace(3 * fIdx + 2));
@@ -318,50 +306,49 @@ public class FullInfoMesh {
 
 		// add the remaining triangles, where the edge points
 		// are replaced by the midpoint
-		for(int i = 0; i < remainingFaces.size(); i += 3) {
-			int f1 = remainingFaces.get(i);
-			int f2 = remainingFaces.get(i + 1);
-			int f3 = remainingFaces.get(i + 2);
-			if(f1 == e.p2) addFace(vIdx, f2, f3);
-			if(f2 == e.p2) addFace(f1, vIdx, f3);
-			if(f3 == e.p2) addFace(f1, f2, vIdx);
+		for (int i = 0; i < remainingFaces.size(); i += 3) {
+			final int f1 = remainingFaces.get(i);
+			final int f2 = remainingFaces.get(i + 1);
+			final int f3 = remainingFaces.get(i + 2);
+			if (f1 == e.p2) addFace(vIdx, f2, f3);
+			if (f2 == e.p2) addFace(f1, vIdx, f3);
+			if (f3 == e.p2) addFace(f1, f2, vIdx);
 		}
 		return vIdx;
 	}
 
 	public ArrayList<ArrayList<Point3f>> getSubmeshes() {
-		HashSet<Vertex> open = new HashSet<Vertex>();
+		final HashSet<Vertex> open = new HashSet<Vertex>();
 		open.addAll(vertices);
 		open.remove(null);
-		ArrayList<ArrayList<Point3f>> ret =
+		final ArrayList<ArrayList<Point3f>> ret =
 			new ArrayList<ArrayList<Point3f>>();
-		while(!open.isEmpty()) {
-			HashSet<Integer> meshSet = new HashSet<Integer>();
-			LinkedList<Integer> queue = new LinkedList<Integer>();
+		while (!open.isEmpty()) {
+			final HashSet<Integer> meshSet = new HashSet<Integer>();
+			final LinkedList<Integer> queue = new LinkedList<Integer>();
 
-			Vertex start = open.iterator().next();
+			final Vertex start = open.iterator().next();
 			open.remove(start);
 			queue.add(vertexToIndex.get(start));
 
-			while(!queue.isEmpty()) {
-				Integer vIdx = queue.poll();
+			while (!queue.isEmpty()) {
+				final Integer vIdx = queue.poll();
 				meshSet.add(vIdx);
 
-				Vertex v = getVertex(vIdx);
-				for(Edge e : v.edges) {
-					int nIdx = e.p1 == vIdx ? e.p2 : e.p1;
-					Vertex n = getVertex(nIdx);
-					if(open.contains(n)) {
+				final Vertex v = getVertex(vIdx);
+				for (final Edge e : v.edges) {
+					final int nIdx = e.p1 == vIdx ? e.p2 : e.p1;
+					final Vertex n = getVertex(nIdx);
+					if (open.contains(n)) {
 						open.remove(n);
 						queue.offer(nIdx);
 					}
 				}
 			}
 
-			ArrayList<Point3f> tris = new ArrayList<Point3f>();
-			for(int f : faces) {
-				if(f != -1 && meshSet.contains(f))
-					tris.add(getVertex(f));
+			final ArrayList<Point3f> tris = new ArrayList<Point3f>();
+			for (final int f : faces) {
+				if (f != -1 && meshSet.contains(f)) tris.add(getVertex(f));
 			}
 			ret.add(tris);
 		}
@@ -382,30 +369,30 @@ public class FullInfoMesh {
 			return triangles;
 		}
 
-		private Vertex(Point3f p) {
+		private Vertex(final Point3f p) {
 			super(p);
 			edges = new HashSet<Edge>();
 			triangles = new HashSet<Integer>();
 		}
 
-		private void addEdge(Edge e) {
+		private void addEdge(final Edge e) {
 			edges.add(e);
 		}
 
-		private void addEdges(Edge e1, Edge e2) {
+		private void addEdges(final Edge e1, final Edge e2) {
 			addEdge(e1);
 			addEdge(e2);
 		}
 
-		private void removeEdge(Edge e) {
+		private void removeEdge(final Edge e) {
 			edges.remove(e);
 		}
 
-		private void addTriangle(int i) {
+		private void addTriangle(final int i) {
 			triangles.add(i);
 		}
 
-		private void removeTriangle(int i) {
+		private void removeTriangle(final int i) {
 			triangles.remove(i);
 		}
 	}
@@ -414,7 +401,7 @@ public class FullInfoMesh {
 
 		public final int f1, f2, f3;
 
-		private Triangle(int f1, int f2, int f3) {
+		private Triangle(final int f1, final int f2, final int f3) {
 			this.f1 = f1;
 			this.f2 = f2;
 			this.f3 = f3;
@@ -426,38 +413,62 @@ public class FullInfoMesh {
 		}
 
 		@Override
-		public boolean equals(Object o) {
-			Triangle r = (Triangle)o;
+		public boolean equals(final Object o) {
+			final Triangle r = (Triangle) o;
 			int tmp;
 			int tf1 = f1, tf2 = f2, tf3 = f3;
-			if(tf2 < tf1) {tmp = tf1; tf1 = tf2; tf2 = tmp;}
-			if(tf3 < tf2) {tmp = tf2; tf2 = tf3; tf3 = tmp;}
-			if(tf2 < tf1) {tmp = tf1; tf1 = tf2; tf2 = tmp;}
+			if (tf2 < tf1) {
+				tmp = tf1;
+				tf1 = tf2;
+				tf2 = tmp;
+			}
+			if (tf3 < tf2) {
+				tmp = tf2;
+				tf2 = tf3;
+				tf3 = tmp;
+			}
+			if (tf2 < tf1) {
+				tmp = tf1;
+				tf1 = tf2;
+				tf2 = tmp;
+			}
 
 			int rf1 = r.f1, rf2 = r.f2, rf3 = r.f3;
-			if(rf2 < rf1) {tmp = rf1; rf1 = rf2; rf2 = tmp;}
-			if(rf3 < rf2) {tmp = rf2; rf2 = rf3; rf3 = tmp;}
-			if(rf2 < rf1) {tmp = rf1; rf1 = rf2; rf2 = tmp;}
+			if (rf2 < rf1) {
+				tmp = rf1;
+				rf1 = rf2;
+				rf2 = tmp;
+			}
+			if (rf3 < rf2) {
+				tmp = rf2;
+				rf2 = rf3;
+				rf3 = tmp;
+			}
+			if (rf2 < rf1) {
+				tmp = rf1;
+				rf1 = rf2;
+				rf2 = tmp;
+			}
 
 			return tf1 == rf1 && tf2 == rf2 && tf3 == rf3;
 		}
 	}
 
 	protected static final class Edge {
+
 		public final int p1, p2;
 		final HashSet<Integer> triangles;
 
-		Edge(int p1, int p2) {
+		Edge(final int p1, final int p2) {
 			this.p1 = p1;
 			this.p2 = p2;
 			triangles = new HashSet<Integer>();
 		}
 
 		@Override
-		public boolean equals(Object o) {
-			Edge e = (Edge)o;
-			return (p1 == e.p1 && p2 == e.p2) ||
-				(p1 == e.p2 && p2 == e.p1);
+		public boolean equals(final Object o) {
+			final Edge e = (Edge) o;
+			return (p1 == e.p1 && p2 == e.p2) || (p1 == e.p2 && p2 == e.p1);
 		}
 
 		@Override
@@ -465,11 +476,11 @@ public class FullInfoMesh {
 			return p1 * p2;
 		}
 
-		private void addTriangle(int i) {
+		private void addTriangle(final int i) {
 			triangles.add(i);
 		}
 
-		private void removeTriangle(int i) {
+		private void removeTriangle(final int i) {
 			triangles.remove(i);
 		}
 
@@ -478,4 +489,3 @@ public class FullInfoMesh {
 		}
 	}
 }
-

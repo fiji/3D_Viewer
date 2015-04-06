@@ -1,3 +1,4 @@
+
 package ij3d.gui;
 
 import ij.gui.GenericDialog;
@@ -50,20 +51,24 @@ public class LUTDialog extends GenericDialog {
 		setModal(false);
 		tool = new ChannelsTool(r, g, b, a);
 		addPanel(tool);
-		String[] choice = new String[] {
-			"Red", "Green", "Blue", "Alpha", "RGB", "RGBA" };
+		final String[] choice =
+			new String[] { "Red", "Green", "Blue", "Alpha", "RGB", "RGBA" };
 		addChoice("Channel", choice, choice[0]);
-		final Choice cho = (Choice)getChoices().get(0);
+		final Choice cho = (Choice) getChoices().get(0);
 		cho.addItemListener(new ItemListener() {
-			public void itemStateChanged(ItemEvent e) {
+
+			@Override
+			public void itemStateChanged(final ItemEvent e) {
 				tool.channel = cho.getSelectedIndex();
 				tool.repaint();
 			}
 		});
-		Panel p = new Panel(new FlowLayout());
-		Button button = new Button("Reset");
+		final Panel p = new Panel(new FlowLayout());
+		final Button button = new Button("Reset");
 		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+
+			@Override
+			public void actionPerformed(final ActionEvent e) {
 				reset();
 				repainter.requestRepaint();
 				tool.repaint();
@@ -74,8 +79,9 @@ public class LUTDialog extends GenericDialog {
 		repainter.start();
 
 		addWindowListener(new WindowAdapter() {
+
 			@Override
-			public void windowClosed(WindowEvent e) {
+			public void windowClosed(final WindowEvent e) {
 				repainter.quit();
 			}
 		});
@@ -85,8 +91,9 @@ public class LUTDialog extends GenericDialog {
 		addMessage("Press <Ctrl> to create straight lines");
 	}
 
-	public void actionPerformed(ActionEvent e) {
-		if(e.getActionCommand().equals("Cancel")) {
+	@Override
+	public void actionPerformed(final ActionEvent e) {
+		if (e.getActionCommand().equals("Cancel")) {
 			reset();
 			repainter.requestRepaint();
 			tool.repaint();
@@ -102,19 +109,20 @@ public class LUTDialog extends GenericDialog {
 	}
 
 	public static interface Listener {
+
 		public void applied();
 	}
 
-	public void addListener(Listener l) {
+	public void addListener(final Listener l) {
 		listeners.add(l);
 	}
 
-	public void removeListener(Listener l) {
+	public void removeListener(final Listener l) {
 		listeners.remove(l);
 	}
 
 	private void fireApplied() {
-		for(Listener l : listeners)
+		for (final Listener l : listeners)
 			l.applied();
 	}
 
@@ -124,21 +132,23 @@ public class LUTDialog extends GenericDialog {
 		boolean stop = false;
 
 		public synchronized void requestRepaint() {
-			if(!repaintNeeded) {
+			if (!repaintNeeded) {
 				repaintNeeded = true;
 				this.notify();
 			}
 		}
 
 		public void repaintIfNeeded() {
-			synchronized(this) {
-				if(!repaintNeeded) {
+			synchronized (this) {
+				if (!repaintNeeded) {
 					try {
 						this.wait();
-					} catch(InterruptedException e) {
+					}
+					catch (final InterruptedException e) {
 						e.printStackTrace();
 					}
-				} else {
+				}
+				else {
 					repaintNeeded = false;
 				}
 			}
@@ -152,31 +162,36 @@ public class LUTDialog extends GenericDialog {
 			requestRepaint();
 		}
 
+		@Override
 		public void run() {
-			while(!stop) {
+			while (!stop) {
 				repaintIfNeeded();
 			}
 		}
 	}
 
-	private class ChannelsTool extends Panel implements MouseListener, MouseMotionListener {
+	private class ChannelsTool extends Panel implements MouseListener,
+		MouseMotionListener
+	{
 
-		final static int RED   = 0;
+		final static int RED = 0;
 		final static int GREEN = 1;
-		final static int BLUE  = 2;
+		final static int BLUE = 2;
 		final static int ALPHA = 3;
-		final static int RGB   = 4;
-		final static int RGBA  = 5;
+		final static int RGB = 4;
+		final static int RGBA = 5;
 
-		private boolean allLuts = false;
+		private final boolean allLuts = false;
 
 		private final int[][] luts;
-		private final Color[] colors = new Color[] {
-			Color.RED, Color.GREEN, Color.BLUE, Color.WHITE };
+		private final Color[] colors = new Color[] { Color.RED, Color.GREEN,
+			Color.BLUE, Color.WHITE };
 
 		private int channel = 0;
 
-		public ChannelsTool(int[] r, int[] g, int[] b, int[] a) {
+		public ChannelsTool(final int[] r, final int[] g, final int[] b,
+			final int[] a)
+		{
 			super();
 			setPreferredSize(new Dimension(256, 256));
 			addMouseListener(this);
@@ -189,58 +204,79 @@ public class LUTDialog extends GenericDialog {
 			luts[3] = a;
 		}
 
-		public void mouseEntered(MouseEvent e) {}
-		public void mouseExited(MouseEvent e) {}
-		public void mousePressed(MouseEvent e) {
+		@Override
+		public void mouseEntered(final MouseEvent e) {}
+
+		@Override
+		public void mouseExited(final MouseEvent e) {}
+
+		@Override
+		public void mousePressed(final MouseEvent e) {
 			xLast = e.getX();
 			yLast = e.getY();
 			handleMouseDragged(e);
 		}
-		public void mouseReleased(MouseEvent e) {}
-		public void mouseClicked(MouseEvent e) {}
-		public void mouseMoved(MouseEvent e) {}
+
+		@Override
+		public void mouseReleased(final MouseEvent e) {}
+
+		@Override
+		public void mouseClicked(final MouseEvent e) {}
+
+		@Override
+		public void mouseMoved(final MouseEvent e) {}
 
 		int xLast = -1, yLast = -1;
-		public void mouseDragged(MouseEvent e) {
+
+		@Override
+		public void mouseDragged(final MouseEvent e) {
 			handleMouseDragged(e);
 		}
 
-		public void handleMouseDragged(MouseEvent e) {
-			int mod = e.getModifiers();
-			boolean ctrl = ((mod & InputEvent.CTRL_MASK) != 0);
+		public void handleMouseDragged(final MouseEvent e) {
+			final int mod = e.getModifiers();
+			final boolean ctrl = ((mod & InputEvent.CTRL_MASK) != 0);
 			handleMouseDraggedWithoutCtrl(e, ctrl);
 		}
 
-		public void handleMouseDraggedWithoutCtrl(MouseEvent e, boolean ctrl) {
+		public void handleMouseDraggedWithoutCtrl(final MouseEvent e,
+			final boolean ctrl)
+		{
 			int x = e.getX(), y = e.getY();
-			if(x < 0) x = 0;
-			if(y < 0) y = 0;
-			if(x > 255) x = 255;
-			if(y > 255) y = 255;
+			if (x < 0) x = 0;
+			if (y < 0) y = 0;
+			if (x > 255) x = 255;
+			if (y > 255) y = 255;
 			int sx = xLast, ex = x, sy = yLast, ey = y;
-			if(ex < sx) {
+			if (ex < sx) {
 				sx = x;
 				ex = xLast;
 				sy = y;
 				ey = yLast;
 			}
 			int lx = ex - sx;
-			int ly = ey - sy;
-			for(int i = sx; i <= ex; i++) {
-				if(lx == 0) lx = 1;
-				double r = (double)(i - sx) / lx;
-				int yi = (int)Math.round(sy + r * ly);
-				int v = 255 - yi;
-				switch(channel) {
+			final int ly = ey - sy;
+			for (int i = sx; i <= ex; i++) {
+				if (lx == 0) lx = 1;
+				final double r = (double) (i - sx) / lx;
+				final int yi = (int) Math.round(sy + r * ly);
+				final int v = 255 - yi;
+				switch (channel) {
 					case 0:
 					case 1:
 					case 2:
-					case 3: luts[channel][i] = v; break;
-					case 4: luts[0][i] = luts[1][i] = luts[2][i] = v; break;
-					case 5: luts[0][i] = luts[1][i] = luts[2][i] = luts[3][i] = v; break;
+					case 3:
+						luts[channel][i] = v;
+						break;
+					case 4:
+						luts[0][i] = luts[1][i] = luts[2][i] = v;
+						break;
+					case 5:
+						luts[0][i] = luts[1][i] = luts[2][i] = luts[3][i] = v;
+						break;
 				}
 			}
-			if(!ctrl) {
+			if (!ctrl) {
 				yLast = y;
 				xLast = x;
 			}
@@ -248,9 +284,10 @@ public class LUTDialog extends GenericDialog {
 			repainter.requestRepaint();
 		}
 
-		public void paint(Graphics g) {
+		@Override
+		public void paint(final Graphics g) {
 			// single channel
-			if(channel < 4) {
+			if (channel < 4) {
 				paintLut(g, luts[channel], colors[channel]);
 				return;
 			}
@@ -260,15 +297,14 @@ public class LUTDialog extends GenericDialog {
 			paintLut(g, luts[2], colors[2]);
 
 			// rgba
-			if(channel == 5)
-				paintLut(g, luts[3], colors[3]);
+			if (channel == 5) paintLut(g, luts[3], colors[3]);
 		}
 
-		public void paintLut(Graphics g, int[] lut, Color c) {
+		public void paintLut(final Graphics g, final int[] lut, final Color c) {
 			g.setColor(c);
 			int x = 0;
 			int y = 255 - lut[x];
-			for(int i = 1; i < 256; i++) {
+			for (int i = 1; i < 256; i++) {
 				g.drawLine(x, y, i, 255 - lut[i]);
 				x = i;
 				y = 255 - lut[i];

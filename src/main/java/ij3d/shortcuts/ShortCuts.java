@@ -1,3 +1,4 @@
+
 package ij3d.shortcuts;
 
 import ij3d.UniverseSettings;
@@ -17,18 +18,17 @@ public class ShortCuts {
 	private final HashMap<String, JMenuItem> items;
 	private final HashMap<String, String> shortcuts;
 
-	public ShortCuts(JMenuBar menubar) {
+	public ShortCuts(final JMenuBar menubar) {
 		commands = new ArrayList<String>();
 		items = new HashMap<String, JMenuItem>();
 		shortcuts = UniverseSettings.shortcuts;
 
-		for(int i = 0; i < menubar.getMenuCount(); i++)
+		for (int i = 0; i < menubar.getMenuCount(); i++)
 			scan(menubar.getMenu(i), "");
 
-		for(String command : commands) {
-			String shortcut = shortcuts.get(command);
-			if(shortcut != null)
-				setShortCut(command, shortcut);
+		for (final String command : commands) {
+			final String shortcut = shortcuts.get(command);
+			if (shortcut != null) setShortCut(command, shortcut);
 		}
 	}
 
@@ -44,21 +44,21 @@ public class ShortCuts {
 		return commands;
 	}
 
-	public String getShortCut(String command) {
+	public String getShortCut(final String command) {
 		return shortcuts.get(command);
 	}
 
-	public void setShortCut(String command, String shortcut) {
-		if(shortcut.trim().length() == 0) {
+	public void setShortCut(final String command, final String shortcut) {
+		if (shortcut.trim().length() == 0) {
 			clearShortCut(command);
 			return;
 		}
-		shortcuts.put(command,  shortcut);
-		KeyStroke stroke = KeyStroke.getKeyStroke(shortcut);
+		shortcuts.put(command, shortcut);
+		final KeyStroke stroke = KeyStroke.getKeyStroke(shortcut);
 		items.get(command).setAccelerator(stroke);
 	}
 
-	public void clearShortCut(String command) {
+	public void clearShortCut(final String command) {
 		items.get(command).setAccelerator(null);
 		shortcuts.remove(command);
 	}
@@ -67,21 +67,20 @@ public class ShortCuts {
 		return commands.size();
 	}
 
-	public String getCommand(int i) {
+	public String getCommand(final int i) {
 		return commands.get(i);
 	}
 
-	private void scan(JMenu menu, String prefix) {
+	private void scan(final JMenu menu, String prefix) {
 		prefix += menu.getText() + " > ";
-		for(int i = 0; i < menu.getItemCount(); i++) {
-			JMenuItem mi = menu.getItem(i);
-			if(mi == null)
-				continue;
-			if(mi instanceof JMenu) {
-				scan((JMenu)mi, prefix);
+		for (int i = 0; i < menu.getItemCount(); i++) {
+			final JMenuItem mi = menu.getItem(i);
+			if (mi == null) continue;
+			if (mi instanceof JMenu) {
+				scan((JMenu) mi, prefix);
 			}
 			else {
-				String c = prefix + mi.getText();
+				final String c = prefix + mi.getText();
 				commands.add(c);
 				items.put(c, mi);
 			}

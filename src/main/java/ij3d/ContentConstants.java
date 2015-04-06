@@ -1,6 +1,8 @@
+
 package ij3d;
 
 public interface ContentConstants {
+
 	// global constants
 	public static final int CO = 0;
 	public static final int BS = 1;

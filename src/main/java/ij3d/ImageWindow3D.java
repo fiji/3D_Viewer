@@ -1,3 +1,4 @@
+
 package ij3d;
 
 import com.sun.j3d.utils.universe.SimpleUniverse;
@@ -7,6 +8,7 @@ import ij.gui.ImageCanvas;
 import ij.process.ColorProcessor;
 
 import java.awt.AWTException;
+import java.awt.GraphicsConfigTemplate;
 import java.awt.GraphicsConfiguration;
 import java.awt.GraphicsEnvironment;
 import java.awt.Label;
@@ -20,6 +22,7 @@ import java.lang.reflect.Method;
 
 import javax.media.j3d.Canvas3D;
 import javax.media.j3d.GraphicsConfigTemplate3D;
+import javax.media.j3d.ImageComponent;
 import javax.media.j3d.ImageComponent2D;
 import javax.media.j3d.RenderingError;
 import javax.media.j3d.RenderingErrorListener;
@@ -30,21 +33,21 @@ import javax.swing.JFrame;
 public class ImageWindow3D extends JFrame implements UniverseListener {
 
 	private DefaultUniverse universe;
-	private ImageCanvas3D canvas3D;
-	private Label status = new Label("");
+	private final ImageCanvas3D canvas3D;
+	private final Label status = new Label("");
 	private boolean noOffScreen = true;
-	private ErrorListener error_listener;
+	private final ErrorListener error_listener;
 	private ImagePlus imp;
 
-	public ImageWindow3D(String title, DefaultUniverse universe) {
+	public ImageWindow3D(final String title, final DefaultUniverse universe) {
 		super(title);
-		String j3dNoOffScreen = System.getProperty("j3d.noOffScreen");
-		if (j3dNoOffScreen != null && j3dNoOffScreen.equals("true"))
-			noOffScreen = true;
+		final String j3dNoOffScreen = System.getProperty("j3d.noOffScreen");
+		if (j3dNoOffScreen != null && j3dNoOffScreen.equals("true")) noOffScreen =
+			true;
 		imp = new ImagePlus();
 		imp.setTitle("ImageJ 3D Viewer");
 		this.universe = universe;
-		this.canvas3D = (ImageCanvas3D)universe.getCanvas();
+		this.canvas3D = (ImageCanvas3D) universe.getCanvas();
 
 		error_listener = new ErrorListener();
 		error_listener.addTo(universe);
@@ -52,7 +55,9 @@ public class ImageWindow3D extends JFrame implements UniverseListener {
 		add(canvas3D, -1);
 
 		addWindowListener(new WindowAdapter() {
-			public void windowClosing(WindowEvent e) {
+
+			@Override
+			public void windowClosing(final WindowEvent e) {
 				close();
 			}
 		});
@@ -72,19 +77,19 @@ public class ImageWindow3D extends JFrame implements UniverseListener {
 
 	/* off-screen rendering stuff */
 	private Canvas3D offScreenCanvas3D;
-	private Canvas3D getOffScreenCanvas() {
-		if (offScreenCanvas3D != null)
-			return offScreenCanvas3D;
 
-		GraphicsConfigTemplate3D templ = new GraphicsConfigTemplate3D();
-		templ.setDoubleBuffer(GraphicsConfigTemplate3D.UNNECESSARY);
-		GraphicsConfiguration gc =
-			GraphicsEnvironment.getLocalGraphicsEnvironment().
-			getDefaultScreenDevice().getBestConfiguration(templ);
+	private Canvas3D getOffScreenCanvas() {
+		if (offScreenCanvas3D != null) return offScreenCanvas3D;
+
+		final GraphicsConfigTemplate3D templ = new GraphicsConfigTemplate3D();
+		templ.setDoubleBuffer(GraphicsConfigTemplate.UNNECESSARY);
+		final GraphicsConfiguration gc =
+			GraphicsEnvironment.getLocalGraphicsEnvironment()
+				.getDefaultScreenDevice().getBestConfiguration(templ);
 
 		offScreenCanvas3D = new Canvas3D(gc, true);
-		Screen3D sOn = canvas3D.getScreen3D();
-		Screen3D sOff = offScreenCanvas3D.getScreen3D();
+		final Screen3D sOn = canvas3D.getScreen3D();
+		final Screen3D sOff = offScreenCanvas3D.getScreen3D();
 		sOff.setSize(sOn.getSize());
 		sOff.setPhysicalScreenWidth(sOn.getPhysicalScreenWidth());
 		sOff.setPhysicalScreenHeight(sOn.getPhysicalScreenHeight());
@@ -95,12 +100,12 @@ public class ImageWindow3D extends JFrame implements UniverseListener {
 	}
 
 	private static ImagePlus makeDummyImagePlus() {
-		ColorProcessor cp = new ColorProcessor(1, 1);
+		final ColorProcessor cp = new ColorProcessor(1, 1);
 		return new ImagePlus("3D", cp);
 	}
 
 	public void updateImagePlus() {
-		//this.imp = getNewImagePlus();
+		// this.imp = getNewImagePlus();
 		imp_updater.update();
 	}
 
@@ -115,34 +120,55 @@ public class ImageWindow3D extends JFrame implements UniverseListener {
 	final ImagePlusUpdater imp_updater = new ImagePlusUpdater();
 
 	private class ImagePlusUpdater extends Thread {
+
 		boolean go = true;
 		int update = 0;
+
 		ImagePlusUpdater() {
 			super("3D-V-IMP-updater");
-			try { setDaemon(true); } catch (Exception e) { e.printStackTrace(); }
+			try {
+				setDaemon(true);
+			}
+			catch (final Exception e) {
+				e.printStackTrace();
+			}
 			setPriority(Thread.NORM_PRIORITY);
 			start();
 		}
+
 		void update() {
 			synchronized (this) {
 				update++;
 				notify();
 			}
 		}
+
 		void updateAndWait() {
 			update();
 			synchronized (this) {
 				while (update > 0) {
-					try { wait(); } catch (InterruptedException ie) { ie.printStackTrace(); }
+					try {
+						wait();
+					}
+					catch (final InterruptedException ie) {
+						ie.printStackTrace();
+					}
 				}
 			}
 		}
+
+		@Override
 		public void run() {
 			while (go) {
 				final int u;
 				synchronized (this) {
 					if (0 == update) {
-						try { wait(); } catch (InterruptedException ie) { ie.printStackTrace(); }
+						try {
+							wait();
+						}
+						catch (final InterruptedException ie) {
+							ie.printStackTrace();
+						}
 					}
 					u = update;
 				}
@@ -155,6 +181,7 @@ public class ImageWindow3D extends JFrame implements UniverseListener {
 				}
 			}
 		}
+
 		void quit() {
 			go = false;
 			synchronized (this) {
@@ -165,66 +192,61 @@ public class ImageWindow3D extends JFrame implements UniverseListener {
 	}
 
 	public ImagePlus getImagePlus() {
-		if(imp == null)
-			imp_updater.updateAndWait(); //updateImagePlus();
+		if (imp == null) imp_updater.updateAndWait(); // updateImagePlus();
 		return imp;
 	}
 
-	private int top = 0, bottom = 0, left = 0, right = 0;
+	private final int top = 0, bottom = 0, left = 0, right = 0;
+
 	private ImagePlus getNewImagePlus() {
-		if (getWidth() <= 0 || getHeight() <= 0)
-			return makeDummyImagePlus();
+		if (getWidth() <= 0 || getHeight() <= 0) return makeDummyImagePlus();
 		if (noOffScreen) {
-			if (universe != null && universe.getUseToFront())
-				toFront();
-			Point p = canvas3D.getLocationOnScreen();
-			int w = canvas3D.getWidth();
-			int h = canvas3D.getHeight();
+			if (universe != null && universe.getUseToFront()) toFront();
+			final Point p = canvas3D.getLocationOnScreen();
+			final int w = canvas3D.getWidth();
+			final int h = canvas3D.getHeight();
 			Robot robot;
 			try {
-				robot = new Robot(getGraphicsConfiguration()
-					.getDevice());
-			} catch (AWTException e) {
+				robot = new Robot(getGraphicsConfiguration().getDevice());
+			}
+			catch (final AWTException e) {
 				return makeDummyImagePlus();
 			}
-			Rectangle r = new Rectangle(p.x + left, p.y + top,
-					w - left - right, h - top - bottom);
-			BufferedImage bImage = robot.createScreenCapture(r);
-			ColorProcessor cp = new ColorProcessor(bImage);
-			ImagePlus result = new ImagePlus("3d", cp);
+			final Rectangle r =
+				new Rectangle(p.x + left, p.y + top, w - left - right, h - top - bottom);
+			final BufferedImage bImage = robot.createScreenCapture(r);
+			final ColorProcessor cp = new ColorProcessor(bImage);
+			final ImagePlus result = new ImagePlus("3d", cp);
 			result.setRoi(canvas3D.getRoi());
 			return result;
 		}
-		BufferedImage bImage = new BufferedImage(canvas3D.getWidth(),
-				canvas3D.getHeight(),
+		BufferedImage bImage =
+			new BufferedImage(canvas3D.getWidth(), canvas3D.getHeight(),
 				BufferedImage.TYPE_INT_ARGB);
-		ImageComponent2D buffer =
-			new ImageComponent2D(ImageComponent2D.FORMAT_RGBA,
-					bImage);
+		final ImageComponent2D buffer =
+			new ImageComponent2D(ImageComponent.FORMAT_RGBA, bImage);
 
 		try {
 			getOffScreenCanvas();
 			offScreenCanvas3D.setOffScreenBuffer(buffer);
 			offScreenCanvas3D.renderOffScreenBuffer();
 			offScreenCanvas3D.waitForOffScreenRendering();
-			bImage = offScreenCanvas3D.getOffScreenBuffer()
-				.getImage();
+			bImage = offScreenCanvas3D.getOffScreenBuffer().getImage();
 			// To release the reference of buffer inside Java 3D.
 			offScreenCanvas3D.setOffScreenBuffer(null);
-		} catch (Exception e) {
+		}
+		catch (final Exception e) {
 			noOffScreen = true;
-			universe.getViewer().getView()
-				.removeCanvas3D(offScreenCanvas3D);
+			universe.getViewer().getView().removeCanvas3D(offScreenCanvas3D);
 			offScreenCanvas3D = null;
-			System.err.println("Java3D error: " +
- 				"Off-screen rendering not supported by this\n" +
-				"setup. Falling back to screen capturing");
+			System.err.println("Java3D error: "
+				+ "Off-screen rendering not supported by this\n"
+				+ "setup. Falling back to screen capturing");
 			return getNewImagePlus();
 		}
 
-
-		ColorProcessor cp = new ColorProcessor(bImage);
-		ImagePlus result = new ImagePlus("3d", cp);
+		final ColorProcessor cp = new ColorProcessor(bImage);
+		final ImagePlus result = new ImagePlus("3d", cp);
 		result.setRoi(canvas3D.getRoi());
 		return result;
 	}
@@ -241,19 +263,17 @@ public class ImageWindow3D extends JFrame implements UniverseListener {
 		// collected and removed from the Canvas3D, overcomming the limit
 		// of 32 total Canvas3D instances.
 		try {
-			Method m = SimpleUniverse.class.getMethod(
-					"removeRenderingErrorListener",
-					new Class[]{RenderingErrorListener.class});
-			if (null != m)
-				m.invoke(universe, new Object[]{error_listener});
-		} catch (Exception ex) {
-			System.out.println(
-					"Could NOT remove the RenderingErrorListener!");
+			final Method m =
+				SimpleUniverse.class.getMethod("removeRenderingErrorListener",
+					new Class[] { RenderingErrorListener.class });
+			if (null != m) m.invoke(universe, new Object[] { error_listener });
+		}
+		catch (final Exception ex) {
+			System.out.println("Could NOT remove the RenderingErrorListener!");
 			ex.printStackTrace();
 		}
 
-		if (null != universe.getWindow())
-			universe.cleanup();
+		if (null != universe.getWindow()) universe.cleanup();
 
 		imp_updater.quit();
 		canvas3D.flush();
@@ -264,26 +284,39 @@ public class ImageWindow3D extends JFrame implements UniverseListener {
 	/*
 	 * The UniverseListener interface
 	 */
+	@Override
 	public void universeClosed() {}
-	public void transformationStarted(View view) {}
-	public void transformationUpdated(View view) {}
-	public void contentSelected(Content c) {}
-	public void transformationFinished(View view) {
+
+	@Override
+	public void transformationStarted(final View view) {}
+
+	@Override
+	public void transformationUpdated(final View view) {}
+
+	@Override
+	public void contentSelected(final Content c) {}
+
+	@Override
+	public void transformationFinished(final View view) {
 		updateImagePlus();
 	}
 
-	public void contentAdded(Content c){
+	@Override
+	public void contentAdded(final Content c) {
 		updateImagePlus();
 	}
 
-	public void contentRemoved(Content c){
+	@Override
+	public void contentRemoved(final Content c) {
 		updateImagePlus();
 	}
 
-	public void contentChanged(Content c){
+	@Override
+	public void contentChanged(final Content c) {
 		updateImagePlus();
 	}
 
+	@Override
 	public void canvasResized() {
 		updateImagePlus();
 	}
@@ -291,7 +324,9 @@ public class ImageWindow3D extends JFrame implements UniverseListener {
 	private int lastToolID;
 
 	private class ErrorListener implements RenderingErrorListener {
-		public void errorOccurred(RenderingError error) {
+
+		@Override
+		public void errorOccurred(final RenderingError error) {
 			throw new RuntimeException(error.getDetailMessage());
 		}
 
@@ -301,22 +336,20 @@ public class ImageWindow3D extends JFrame implements UniverseListener {
 		 * The problem, of course, is that Java3D 1.5 just exit(1)s
 		 * on error by default, _unless_ you add a listener!
 		 */
-		public void addTo(DefaultUniverse universe) {
+		public void addTo(final DefaultUniverse universe) {
 			try {
-				Class[] params = {
-					RenderingErrorListener.class
-				};
-				Class c = universe.getClass();
-				String name = "addRenderingErrorListener";
-				Method m = c.getMethod(name, params);
-				Object[] list = { this };
+				final Class[] params = { RenderingErrorListener.class };
+				final Class c = universe.getClass();
+				final String name = "addRenderingErrorListener";
+				final Method m = c.getMethod(name, params);
+				final Object[] list = { this };
 				m.invoke(universe, list);
-			} catch (Exception e) {
+			}
+			catch (final Exception e) {
 				/* method not found -> Java3D 1.4 */
 				System.err.println("Java3D < 1.5 detected");
-				//e.printStackTrace();
+				// e.printStackTrace();
 			}
 		}
 	}
 }
-

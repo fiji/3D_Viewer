@@ -1,3 +1,4 @@
+
 package customnode.u3d;
 
 import static java.lang.Float.floatToRawIntBits;
@@ -19,28 +20,27 @@ import java.io.UnsupportedEncodingException;
 /// </remarks>
 public class BitStreamWrite {
 
-	private ContextManager contextManager; //the context manager handles
+	private final ContextManager contextManager; // the context manager handles
 	// the updates to the histograms for the compression contexts.
-	private long high; //high and low are the upper and lower
-	private long low; //limits on the probability
-	private long underflow; //stores the number of bits of underflow
-	//caused by the limited range of high and
-	//low
-	private boolean compressed; //this is true if a compressed value was
-	//written. when the datablock is retrieved,
-	//a 32 bit 0 is written to reset the values of
-	//high, low, and underflow.
-	private long[] data; //the data section of the datablock to write.
-	private int dataPosition; //the position currently to write in the
-	//datablock specified in 32 bit increments.
-	private long dataLocal; //the local value of the data corresponding
-	//to dataposition
-	private long dataLocalNext; //the 32 bits in data after dataLocal
-	private int dataBitOffset; //the offset into dataLocal that the next
-	//write will occur
+	private long high; // high and low are the upper and lower
+	private long low; // limits on the probability
+	private long underflow; // stores the number of bits of underflow
+	// caused by the limited range of high and
+	// low
+	private boolean compressed; // this is true if a compressed value was
+	// written. when the datablock is retrieved,
+	// a 32 bit 0 is written to reset the values of
+	// high, low, and underflow.
+	private long[] data; // the data section of the datablock to write.
+	private int dataPosition; // the position currently to write in the
+	// datablock specified in 32 bit increments.
+	private long dataLocal; // the local value of the data corresponding
+	// to dataposition
+	private long dataLocalNext; // the 32 bits in data after dataLocal
+	private int dataBitOffset; // the offset into dataLocal that the next
+	// write will occur
 	private final int DataSizeIncrement = 0x000023F8;
 
-	
 	public BitStreamWrite() {
 		this.contextManager = new ContextManager();
 		this.high = 0x0000FFFF;
@@ -48,60 +48,59 @@ public class BitStreamWrite {
 		this.compressed = false;
 	}
 
-	public void WriteString(String s) {
-		WriteU16((short)s.length());
+	public void WriteString(final String s) {
+		WriteU16((short) s.length());
 		byte[] bytes = null;
 		try {
 			bytes = s.getBytes("UTF-8");
-		} catch (UnsupportedEncodingException e) {
+		}
+		catch (final UnsupportedEncodingException e) {
 			e.printStackTrace();
 			return;
 		}
 		for (int i = 0; i < bytes.length; i++)
 			WriteU8(bytes[i]);
 	}
-	
-	
-	public void WriteColor(Color c) {
+
+	public void WriteColor(final Color c) {
 		WriteF32(c.getRed() / 255.0f);
 		WriteF32(c.getGreen() / 255.0f);
 		WriteF32(c.getBlue() / 255.0f);
 	}
-	
-	
-	public void WriteU8(short uValue) {
-		long symbol = SwapBits8(uValue);
+
+	public void WriteU8(final short uValue) {
+		final long symbol = SwapBits8(uValue);
 		WriteSymbol(Constants.Context8, symbol);
 	}
 
-	public void WriteU16(int uValue) {
+	public void WriteU16(final int uValue) {
 		WriteU8((short) (0x00FF & uValue));
 		WriteU8((short) (0x00FF & (uValue >> 8)));
 	}
 
-	public void WriteU32(long uValue) {
+	public void WriteU32(final long uValue) {
 		WriteU16((int) (0x0000FFFF & uValue));
 		WriteU16((int) (0x0000FFFF & (uValue >> 16)));
 	}
 
-	public void WriteU64(long uValue) {
+	public void WriteU64(final long uValue) {
 		WriteU32((0x00000000FFFFFFFF & uValue));
 		WriteU32((0x00000000FFFFFFFF & (uValue >> 32)));
 	}
-			
-	public void WriteI32(int iValue) {
+
+	public void WriteI32(final int iValue) {
 		WriteU32(iValue);
 	}
-	
-	public void WriteI16(short iValue) {
+
+	public void WriteI16(final short iValue) {
 		WriteU16(iValue);
 	}
 
-	public void WriteF32(float fValue) {
-		WriteU32((long)floatToRawIntBits(fValue));
+	public void WriteF32(final float fValue) {
+		WriteU32(floatToRawIntBits(fValue));
 	}
 
-	public void WriteCompressedU32(long context, long uValue) {
+	public void WriteCompressedU32(final long context, final long uValue) {
 		compressed = true;
 		boolean escape = false;
 		if ((context != 0) && (context < Constants.MaxRange)) {
@@ -110,12 +109,13 @@ public class BitStreamWrite {
 				WriteU32(uValue);
 				this.contextManager.AddSymbol(context, uValue + 1);
 			}
-		} else {
+		}
+		else {
 			WriteU32(uValue);
 		}
 	}
 
-	public void WriteCompressedU16(long context, int uValue) {
+	public void WriteCompressedU16(final long context, final int uValue) {
 		compressed = true;
 		boolean escape = false;
 		if ((context != 0) && (context < Constants.MaxRange)) {
@@ -124,12 +124,13 @@ public class BitStreamWrite {
 				WriteU16(uValue);
 				this.contextManager.AddSymbol(context, uValue + 1);
 			}
-		} else {
+		}
+		else {
 			WriteU16(uValue);
 		}
 	}
 
-	public void WriteCompressedU8(long context, short uValue) {
+	public void WriteCompressedU8(final long context, final short uValue) {
 		compressed = true;
 		boolean escape = false;
 		if ((context != 0) && (context < Constants.MaxRange)) {
@@ -138,15 +139,17 @@ public class BitStreamWrite {
 				WriteU8(uValue);
 				this.contextManager.AddSymbol(context, uValue + 1);
 			}
-		} else {
+		}
+		else {
 			WriteU8(uValue);
 		}
 	}
 
-	
-	public void WriteDataBlock(DataBlock b) {
-		int dataSize = (int)Math.ceil(b.getDataSize() / 4.0); // include padding
-		int metaDataSize = (int)Math.ceil(b.getMetaDataSize() / 4.0); // include padding
+	public void WriteDataBlock(final DataBlock b) {
+		final int dataSize = (int) Math.ceil(b.getDataSize() / 4.0); // include
+																																	// padding
+		final int metaDataSize = (int) Math.ceil(b.getMetaDataSize() / 4.0); // include
+																																					// padding
 		WriteU32(b.getBlockType());
 		WriteU32(b.getDataSize());
 		WriteU32(b.getMetaDataSize());
@@ -155,20 +158,19 @@ public class BitStreamWrite {
 		for (int i = 0; i < metaDataSize; i++)
 			WriteU32(b.getMetaData()[i]);
 	}
-	
-	
+
 	public DataBlock GetDataBlock() {
-		if (compressed) //Flush the arithmetic coder
+		if (compressed) // Flush the arithmetic coder
 		{
 			this.WriteU32(0);
 		}
 		AlignToByte();
-		long numBytes = ((long) this.dataPosition << 2)
-				+ ((long) this.dataBitOffset >> 3);
-		DataBlock rDataBlock = new DataBlock();
+		final long numBytes =
+			((long) this.dataPosition << 2) + ((long) this.dataBitOffset >> 3);
+		final DataBlock rDataBlock = new DataBlock();
 		PutLocal();
 		rDataBlock.setDataSize(numBytes);
-		long[] tempData = rDataBlock.getData();
+		final long[] tempData = rDataBlock.getData();
 		System.arraycopy(this.data, 0, tempData, 0, tempData.length);
 		rDataBlock.setData(tempData);
 		return rDataBlock;
@@ -201,36 +203,37 @@ public class BitStreamWrite {
 	 * context's histogram. In this case, the escape symbol, 0, is
 	 * written.
 	 */
-	private boolean WriteSymbol(long context, long symbol) {
+	private boolean WriteSymbol(final long context, long symbol) {
 		symbol++;
 		boolean rEscape = false;
 		long totalCumFreq = 0;
 		long symbolCumFreq = 0;
 		long symbolFreq = 0;
 		totalCumFreq = this.contextManager.GetTotalSymbolFrequency(context);
-		symbolCumFreq = this.contextManager.GetCumulativeSymbolFrequency(
-				context, symbol);
+		symbolCumFreq =
+			this.contextManager.GetCumulativeSymbolFrequency(context, symbol);
 		symbolFreq = this.contextManager.GetSymbolFrequency(context, symbol);
-		if (0 == symbolFreq) { //the symbol has not occurred yet.
-			//Write out the escape symbol, 0.
+		if (0 == symbolFreq) { // the symbol has not occurred yet.
+			// Write out the escape symbol, 0.
 			symbol = 0;
-			symbolCumFreq = this.contextManager.GetCumulativeSymbolFrequency(
-					context, symbol);
-			symbolFreq = this.contextManager
-					.GetSymbolFrequency(context, symbol);
+			symbolCumFreq =
+				this.contextManager.GetCumulativeSymbolFrequency(context, symbol);
+			symbolFreq = this.contextManager.GetSymbolFrequency(context, symbol);
 		}
-		if (0 == symbol) { //the symbol is the escape symbol.
+		if (0 == symbol) { // the symbol is the escape symbol.
 			rEscape = true;
 		}
-		long range = this.high + 1 - this.low;
-		this.high = this.low - 1 + range * (symbolCumFreq + symbolFreq) / totalCumFreq;
+		final long range = this.high + 1 - this.low;
+		this.high =
+			this.low - 1 + range * (symbolCumFreq + symbolFreq) / totalCumFreq;
 		this.low = this.low + range * symbolCumFreq / totalCumFreq;
 		this.contextManager.AddSymbol(context, symbol);
-		//write bits
+		// write bits
 		long bit = this.low >> 15;
-		//long highmask = this.high & Constants.HalfMask;
-		//long lowmask = this.low & Constants.HalfMask;
-		while ((this.high & Constants.HalfMask) == (this.low & Constants.HalfMask)) {
+		// long highmask = this.high & Constants.HalfMask;
+		// long lowmask = this.low & Constants.HalfMask;
+		while ((this.high & Constants.HalfMask) == (this.low & Constants.HalfMask))
+		{
 			this.high &= ~Constants.HalfMask;
 			this.high += this.high + 1;
 			WriteBit(bit);
@@ -242,15 +245,16 @@ public class BitStreamWrite {
 			this.low += this.low;
 			bit = this.low >> 15;
 		}
-		//check for underflow
+		// check for underflow
 		// Underflow occurs when the values in this.low and this.high
 		// approach each other, without leaving the lower resp. upper
 		// half of the scaling interval. The range is not large enough
 		// to code the next symbol. To avoid this, the interval is
 		// artificially enlarged once the this.low is larger than the
 		// first quarter and this.high is lower than the third quarter.
-		while ((0 == (this.high & Constants.QuarterMask))
-				&& (Constants.QuarterMask == (this.low & Constants.QuarterMask))) {
+		while ((0 == (this.high & Constants.QuarterMask)) &&
+			(Constants.QuarterMask == (this.low & Constants.QuarterMask)))
+		{
 			this.high &= ~Constants.HalfMask;
 			this.high <<= 1;
 			this.low <<= 1;
@@ -267,9 +271,9 @@ public class BitStreamWrite {
 	 * reverses the order of the bits of an 8 bit value.
 	 * E.g. abcdefgh -> hgfedcba
 	 */
-	private long SwapBits8(long rValue) {
-		return (Constants.Swap8[(int) ((rValue) & 0xf)] << 4)
-				| (Constants.Swap8[(int) ((rValue) >> 4)]);
+	private long SwapBits8(final long rValue) {
+		return (Constants.Swap8[(int) ((rValue) & 0xf)] << 4) |
+			(Constants.Swap8[(int) ((rValue) >> 4)]);
 	}
 
 	/*
@@ -277,7 +281,7 @@ public class BitStreamWrite {
 	 * Write the given bit to the datablock.
 	 */
 	private void WriteBit(long bit) {
-		long mask = 1;
+		final long mask = 1;
 		bit &= mask;
 		this.dataLocal &= ~(mask << this.dataBitOffset);
 		this.dataLocal |= (bit << this.dataBitOffset);
@@ -307,12 +311,12 @@ public class BitStreamWrite {
 	 * store the initial 64 bits of the datablock in dataLocal and
 	 * dataLocalNext
 	 */
-	//		private void GetLocal()
-	//		{
-	//		CheckPosition();
-	//		this.dataLocal = this.data[this.dataPosition];
-	//		this.dataLocalNext = this.data[this.dataPosition+1];
-	//		}
+	// private void GetLocal()
+	// {
+	// CheckPosition();
+	// this.dataLocal = this.data[this.dataPosition];
+	// this.dataLocalNext = this.data[this.dataPosition+1];
+	// }
 	/*
 	 * PutLocal
 	 * stores the local values of the data to the data array
@@ -339,15 +343,16 @@ public class BitStreamWrite {
 	 * Creates and new array for storing the data written. Copies
 	 * values of the old array to the new arry.
 	 */
-	private void AllocateDataBuffer(int size) {
+	private void AllocateDataBuffer(final int size) {
 		// Store an old buffer if it exists
 		if (null != this.data) {
-			long[] oldData = this.data;
+			final long[] oldData = this.data;
 			this.data = new long[size];
 			for (int i = 0; i < oldData.length; i++) {
 				this.data[i] = oldData[i];
 			}
-		} else {
+		}
+		else {
 			this.data = new long[size];
 		}
 	}
@@ -359,6 +364,5 @@ public class BitStreamWrite {
 	int GetBitCount() {
 		return (this.dataPosition << 5) + this.dataBitOffset;
 	}
-	
 
 }

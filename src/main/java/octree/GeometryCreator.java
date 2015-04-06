@@ -1,3 +1,4 @@
+
 package octree;
 
 import ij3d.AxisConstants;
@@ -7,34 +8,32 @@ import javax.media.j3d.QuadArray;
 
 public class GeometryCreator implements AxisConstants {
 
-	private float[] quadCoords = new float[12];
+	private final float[] quadCoords = new float[12];
 	private static GeometryCreator instance;
 
 	private GeometryCreator() {}
 
 	public static GeometryCreator instance() {
-		if(instance == null)
-			instance = new GeometryCreator();
+		if (instance == null) instance = new GeometryCreator();
 		return instance;
 	}
 
-	public GeometryArray getQuad(CubeData cdata, int index) {
+	public GeometryArray getQuad(final CubeData cdata, final int index) {
 		calculateQuad(cdata, index);
-		QuadArray quadArray = new QuadArray(4,
-					GeometryArray.COORDINATES);
+		final QuadArray quadArray = new QuadArray(4, GeometryArray.COORDINATES);
 
 		quadArray.setCoordinates(0, quadCoords);
 //		quadArray.setCapability(QuadArray.ALLOW_INTERSECT);
 		return quadArray;
 	}
 
-	public float[] getQuadCoordinates(CubeData cdata, int index) {
+	public float[] getQuadCoordinates(final CubeData cdata, final int index) {
 		calculateQuad(cdata, index);
 		return quadCoords;
 	}
 
-	private void calculateQuad(CubeData cdata, int index) {
-		switch(cdata.axis) {
+	private void calculateQuad(final CubeData cdata, final int index) {
+		switch (cdata.axis) {
 			case X_AXIS:
 				setCoordsY(cdata);
 				setCoordsZ(cdata);
@@ -53,31 +52,31 @@ public class GeometryCreator implements AxisConstants {
 		}
 	}
 
-	private void setCurCoordX(int i, CubeData cdata) {
-		float curX = i * cdata.cal[0] + cdata.min[0];
+	private void setCurCoordX(final int i, final CubeData cdata) {
+		final float curX = i * cdata.cal[0] + cdata.min[0];
 		quadCoords[0] = curX;
 		quadCoords[3] = curX;
 		quadCoords[6] = curX;
 		quadCoords[9] = curX;
 	}
 
-	private void setCurCoordY(int i, CubeData cdata) {
-		float curY = i * cdata.cal[1] + cdata.min[1];
+	private void setCurCoordY(final int i, final CubeData cdata) {
+		final float curY = i * cdata.cal[1] + cdata.min[1];
 		quadCoords[1] = curY;
 		quadCoords[4] = curY;
 		quadCoords[7] = curY;
 		quadCoords[10] = curY;
 	}
 
-	private void setCurCoordZ(int i, CubeData cdata) {
-		float curZ = i * cdata.cal[2] + cdata.min[2];
+	private void setCurCoordZ(final int i, final CubeData cdata) {
+		final float curZ = i * cdata.cal[2] + cdata.min[2];
 		quadCoords[2] = curZ;
 		quadCoords[5] = curZ;
 		quadCoords[8] = curZ;
 		quadCoords[11] = curZ;
 	}
 
-	private void setCoordsX(CubeData cdata) {
+	private void setCoordsX(final CubeData cdata) {
 		// lower left
 		quadCoords[1] = cdata.min[1];
 		quadCoords[2] = cdata.min[2];
@@ -92,7 +91,7 @@ public class GeometryCreator implements AxisConstants {
 		quadCoords[11] = cdata.max[2];
 	}
 
-	private void setCoordsY(CubeData cdata) {
+	private void setCoordsY(final CubeData cdata) {
 		// lower left
 		quadCoords[0] = cdata.min[0];
 		quadCoords[2] = cdata.min[2];
@@ -107,7 +106,7 @@ public class GeometryCreator implements AxisConstants {
 		quadCoords[11] = cdata.min[2];
 	}
 
-	private void setCoordsZ(CubeData cdata) {
+	private void setCoordsZ(final CubeData cdata) {
 		// lower left
 		quadCoords[0] = cdata.min[0];
 		quadCoords[1] = cdata.min[1];

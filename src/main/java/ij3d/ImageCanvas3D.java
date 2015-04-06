@@ -1,3 +1,4 @@
+
 package ij3d;
 
 import com.sun.j3d.utils.universe.SimpleUniverse;
@@ -27,11 +28,11 @@ import javax.vecmath.Color3f;
 
 public class ImageCanvas3D extends Canvas3D implements KeyListener {
 
-	private RoiImagePlus roiImagePlus;
-	private ImageCanvas roiImageCanvas;
+	private final RoiImagePlus roiImagePlus;
+	private final ImageCanvas roiImageCanvas;
 	private Map<Integer, Long> pressed, released;
-	private Background background;
-	private UIAdapter ui;
+	private final Background background;
+	private final UIAdapter ui;
 	final private ExecutorService exec = Executors.newSingleThreadExecutor();
 
 	protected void flush() {
@@ -39,29 +40,32 @@ public class ImageCanvas3D extends Canvas3D implements KeyListener {
 	}
 
 	private class RoiImagePlus extends ImagePlus {
-		public RoiImagePlus(String title, ByteProcessor ip) {
+
+		public RoiImagePlus(final String title, final ByteProcessor ip) {
 			super();
 			setProcessor(title, ip);
 			pressed = new HashMap<Integer, Long>();
 			released = new HashMap<Integer, Long>();
 		}
 
+		@Override
 		public ImageCanvas getCanvas() {
 			return roiImageCanvas;
 		}
 	}
 
-	public ImageCanvas3D(int width, int height, UIAdapter uia) {
+	public ImageCanvas3D(final int width, final int height, final UIAdapter uia) {
 		super(SimpleUniverse.getPreferredConfiguration());
 		this.ui = uia;
 		setPreferredSize(new Dimension(width, height));
-		ByteProcessor ip = new ByteProcessor(width, height);
+		final ByteProcessor ip = new ByteProcessor(width, height);
 		roiImagePlus = new RoiImagePlus("RoiImage", ip);
 		roiImageCanvas = new ImageCanvas(roiImagePlus) {
+
 			/* prevent ROI to enlarge/move on mouse click */
-			public void mousePressed(MouseEvent e) {
-				if(!ui.isMagnifierTool() && !ui.isPointTool())
-					super.mousePressed(e);
+			@Override
+			public void mousePressed(final MouseEvent e) {
+				if (!ui.isMagnifierTool() && !ui.isPointTool()) super.mousePressed(e);
 			}
 		};
 		roiImageCanvas.removeKeyListener(ij.IJ.getInstance());
@@ -69,14 +73,14 @@ public class ImageCanvas3D extends Canvas3D implements KeyListener {
 		roiImageCanvas.removeMouseMotionListener(roiImageCanvas);
 		roiImageCanvas.disablePopupMenu(true);
 
-		background = new Background(
-			new Color3f(UniverseSettings.defaultBackground));
+		background =
+			new Background(new Color3f(UniverseSettings.defaultBackground));
 		background.setCapability(Background.ALLOW_COLOR_WRITE);
 
 		addListeners();
 	}
 
-	public Background getBG() { //can't use getBackground()
+	public Background getBG() { // can't use getBackground()
 		return background;
 	}
 
@@ -87,40 +91,60 @@ public class ImageCanvas3D extends Canvas3D implements KeyListener {
 
 	void addListeners() {
 		addMouseMotionListener(new MouseMotionAdapter() {
-			public void mouseDragged(MouseEvent e) {
-				if(ui.isRoiTool())
-					exec.submit(new Runnable() { public void run() {
+
+			@Override
+			public void mouseDragged(final MouseEvent e) {
+				if (ui.isRoiTool()) exec.submit(new Runnable() {
+
+					@Override
+					public void run() {
 						postRender();
-					}});
+					}
+				});
 			}
 		});
 		addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				if(ui.isRoiTool())
-					exec.submit(new Runnable() { public void run() {
+
+			@Override
+			public void mouseClicked(final MouseEvent e) {
+				if (ui.isRoiTool()) exec.submit(new Runnable() {
+
+					@Override
+					public void run() {
 						render();
-					}});
+					}
+				});
 			}
-			public void mouseReleased(MouseEvent e) {
-				if(ui.isRoiTool())
-					exec.submit(new Runnable() { public void run() {
+
+			@Override
+			public void mouseReleased(final MouseEvent e) {
+				if (ui.isRoiTool()) exec.submit(new Runnable() {
+
+					@Override
+					public void run() {
 						render();
-					}});
+					}
+				});
 			}
-			public void mousePressed(MouseEvent e) {
-				if(!ui.isRoiTool())
-					roiImagePlus.killRoi();
+
+			@Override
+			public void mousePressed(final MouseEvent e) {
+				if (!ui.isRoiTool()) roiImagePlus.killRoi();
 			}
 		});
 		addComponentListener(new ComponentAdapter() {
-			public void componentResized(ComponentEvent e) {
-				exec.submit(new Runnable() { public void run() {
-					ByteProcessor ip = new ByteProcessor(
-									getWidth(),
-									getHeight());
-					roiImagePlus.setProcessor("RoiImagePlus", ip);
-					render();
-				}});
+
+			@Override
+			public void componentResized(final ComponentEvent e) {
+				exec.submit(new Runnable() {
+
+					@Override
+					public void run() {
+						final ByteProcessor ip = new ByteProcessor(getWidth(), getHeight());
+						roiImagePlus.setProcessor("RoiImagePlus", ip);
+						render();
+					}
+				});
 			}
 		});
 	}
@@ -145,40 +169,41 @@ public class ImageCanvas3D extends Canvas3D implements KeyListener {
 	 * dependent on the operating system preferences,
 	 * even if the key is hold down.
 	 */
-	public void keyTyped(KeyEvent e) {}
+	@Override
+	public void keyTyped(final KeyEvent e) {}
 
-	public synchronized void keyPressed(KeyEvent e) {
-		long when = e.getWhen();
+	@Override
+	public synchronized void keyPressed(final KeyEvent e) {
+		final long when = e.getWhen();
 		pressed.put(e.getKeyCode(), when);
 	}
 
-	public synchronized void keyReleased(KeyEvent e) {
-		long when = e.getWhen();
+	@Override
+	public synchronized void keyReleased(final KeyEvent e) {
+		final long when = e.getWhen();
 		released.put(e.getKeyCode(), when);
 	}
 
-	public synchronized void releaseKey(int keycode) {
+	public synchronized void releaseKey(final int keycode) {
 		pressed.remove(keycode);
 		released.remove(keycode);
 	}
 
-	public synchronized boolean isKeyDown(int keycode) {
-		if(!pressed.containsKey(keycode))
-			return false;
-		if(!released.containsKey(keycode))
-			return true;
-		long p = pressed.get(keycode);
-		long r = released.get(keycode);
+	public synchronized boolean isKeyDown(final int keycode) {
+		if (!pressed.containsKey(keycode)) return false;
+		if (!released.containsKey(keycode)) return true;
+		final long p = pressed.get(keycode);
+		final long r = released.get(keycode);
 		return p >= r || System.currentTimeMillis() - r < 100;
 	}
 
+	@Override
 	public void postRender() {
-		J3DGraphics2D g3d = getGraphics2D();
-		Roi roi = roiImagePlus.getRoi();
-		if(roi != null) {
+		final J3DGraphics2D g3d = getGraphics2D();
+		final Roi roi = roiImagePlus.getRoi();
+		if (roi != null) {
 			roi.draw(g3d);
 		}
 		g3d.flush(true);
 	}
 }
-

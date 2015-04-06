@@ -1,3 +1,4 @@
+
 package octree;
 
 import ij3d.AxisConstants;
@@ -37,13 +38,12 @@ public class AppearanceCreator implements AxisConstants {
 	}
 
 	public static AppearanceCreator instance() {
-		if(instance == null)
-			instance = new AppearanceCreator();
+		if (instance == null) instance = new AppearanceCreator();
 		return instance;
 	}
 
-	public Appearance getAppearance(CubeData cdata, int index) {
-		Appearance a = new Appearance();
+	public Appearance getAppearance(final CubeData cdata, final int index) {
+		final Appearance a = new Appearance();
 		a.setMaterial(material);
 		a.setTransparencyAttributes(transAttr);
 		a.setPolygonAttributes(polyAttr);
@@ -56,21 +56,23 @@ public class AppearanceCreator implements AxisConstants {
 		return a;
 	}
 
-	public void setTransparency(float f) {
+	public void setTransparency(final float f) {
 		transAttr.setTransparency(f);
 	}
 
-	public void setThreshold(float f) {
+	public void setThreshold(final float f) {
 		rendAttr.setAlphaTestValue(f);
 	}
 
-	public void setColor(Color3f c) {
+	public void setColor(final Color3f c) {
 		colAttr.setColor(c);
 	}
 
-	private Texture2D getTexture(CubeData cdata, int index) {
-		Texture2D tex = new Texture2D(Texture.BASE_LEVEL, TEX_MODE, SIZE, SIZE);
-		ImageComponent2D pArray = new ImageComponent2D(COMP_TYPE, SIZE, SIZE, BY_REF, Y_UP);
+	private Texture2D getTexture(final CubeData cdata, final int index) {
+		final Texture2D tex =
+			new Texture2D(Texture.BASE_LEVEL, TEX_MODE, SIZE, SIZE);
+		final ImageComponent2D pArray =
+			new ImageComponent2D(COMP_TYPE, SIZE, SIZE, BY_REF, Y_UP);
 		pArray.set(cdata.images[index]);
 
 		tex.setImage(0, pArray);
@@ -83,7 +85,7 @@ public class AppearanceCreator implements AxisConstants {
 		return tex;
 	}
 
-	private void initAttributes(Color3f color, float transparency) {
+	private void initAttributes(final Color3f color, final float transparency) {
 		texAttr = new TextureAttributes();
 		texAttr.setTextureMode(TextureAttributes.COMBINE);
 		texAttr.setCombineRgbMode(TextureAttributes.COMBINE_MODULATE);
@@ -104,18 +106,18 @@ public class AppearanceCreator implements AxisConstants {
 		colAttr = new ColoringAttributes();
 		colAttr.setCapability(ColoringAttributes.ALLOW_COLOR_WRITE);
 		colAttr.setShadeModel(ColoringAttributes.NICEST);
-		if(color == null) {
+		if (color == null) {
 			colAttr.setColor(1f, 1f, 1f);
-		} else {
+		}
+		else {
 			colAttr.setColor(color);
 		}
 
 		// Avoid rendering of voxels having an alpha value of zero
 		rendAttr = new RenderingAttributes();
 		rendAttr.setDepthTestFunction(RenderingAttributes.ALWAYS);
-		rendAttr.setCapability(
-			RenderingAttributes.ALLOW_ALPHA_TEST_VALUE_WRITE);
- 		rendAttr.setAlphaTestValue(0f);
+		rendAttr.setCapability(RenderingAttributes.ALLOW_ALPHA_TEST_VALUE_WRITE);
+		rendAttr.setAlphaTestValue(0f);
 		rendAttr.setAlphaTestFunction(RenderingAttributes.GREATER);
 	}
 }

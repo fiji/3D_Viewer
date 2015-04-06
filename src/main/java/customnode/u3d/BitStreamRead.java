@@ -1,3 +1,4 @@
+
 package customnode.u3d;
 
 /// <summary> BitStreamRead.cs
@@ -18,32 +19,32 @@ package customnode.u3d;
 /// </remarks>
 public class BitStreamRead {
 
-	private ContextManager contextManager; //the context manager handles
-	//the updates to the histograms
-	//for the compression contexts.
-	private long high; //high and low are the upper and
-	private long low; //lower limits on the
-	//probability
-	private long underflow; //stores the number of bits of
-	//underflow caused by the
-	//limited range of high and low
-	private long code; //the value as represented in
-	//the datablock
-	private long[] data; //the data section of the
-	//datablock to read from.
-	private long dataPosition; //the position currently read in
-	//the datablock specified in 32
-	//bit increments.
-	private long dataLocal; //the local value of the data
-	//corresponding to dataposition.
-	private long dataLocalNext; //the 32 bits in data after
-	//dataLocal
-	private int dataBitOffset; //the offset into dataLocal that
+	private final ContextManager contextManager; // the context manager handles
+	// the updates to the histograms
+	// for the compression contexts.
+	private long high; // high and low are the upper and
+	private long low; // lower limits on the
+	// probability
+	private long underflow; // stores the number of bits of
+	// underflow caused by the
+	// limited range of high and low
+	private long code; // the value as represented in
+	// the datablock
+	private long[] data; // the data section of the
+	// datablock to read from.
+	private long dataPosition; // the position currently read in
+	// the datablock specified in 32
+	// bit increments.
+	private long dataLocal; // the local value of the data
+	// corresponding to dataposition.
+	private long dataLocalNext; // the 32 bits in data after
+	// dataLocal
+	private int dataBitOffset; // the offset into dataLocal that
 	// the next read will occur
 	private static final long[] FastNotMask = { 0x0000FFFF, 0x00007FFF,
-			0x00003FFF, 0x00001FFF, 0x00000FFF };
-	private static final long[] ReadCount = { 4, 3, 2, 2, 1, 1, 1, 1, 0, 0, 0,
-			0, 0, 0, 0, 0 };
+		0x00003FFF, 0x00001FFF, 0x00000FFF };
+	private static final long[] ReadCount = { 4, 3, 2, 2, 1, 1, 1, 1, 0, 0, 0, 0,
+		0, 0, 0, 0 };
 
 	public BitStreamRead() {
 		this.contextManager = new ContextManager();
@@ -60,92 +61,108 @@ public class BitStreamRead {
 	}
 
 	public int ReadU16() {
-		short low = ReadU8();
-		short high = ReadU8();
-		return (int) (((int) low) | (((int) high) << 8));
+		final short low = ReadU8();
+		final short high = ReadU8();
+		return (low) | ((high) << 8);
 	}
 
 	public long ReadU32() {
 		long rValue;
-		int low = ReadU16();
-		int high = ReadU16();
+		final int low = ReadU16();
+		final int high = ReadU16();
 		rValue = ((long) low) | ((long) (high << 16));
 		return rValue;
 	}
 
-	//		public void ReadU64(out UInt64 rValue)
-	//		{
-	//		long low = 0;
-	//		long high = 0;
-	//		ReadU32(out low);
-	//		ReadU32(out high);
-	//		rValue = ((UInt64) low) | (((UInt64) high) << 32);
-	//		}
+	// public void ReadU64(out UInt64 rValue)
+	// {
+	// long low = 0;
+	// long high = 0;
+	// ReadU32(out low);
+	// ReadU32(out high);
+	// rValue = ((UInt64) low) | (((UInt64) high) << 32);
+	// }
 	public int ReadI32() {
-		long uValue = ReadU32();
+		final long uValue = ReadU32();
 		return (int) (uValue);
 	}
 
 	public float ReadF32() {
-		long uValue = ReadU32();
-		//		rValue = BitConverter.ToSingle(BitConverter.Getshorts(uValue), 0);
+		final long uValue = ReadU32();
+		// rValue = BitConverter.ToSingle(BitConverter.Getshorts(uValue), 0);
 		return Float.intBitsToFloat((int) uValue);
 	}
 
-	public long ReadCompressedU32(long context) {
+	public long ReadCompressedU32(final long context) {
 		long rValue;
 		long symbol = 0;
-		if (context != Constants.Context8 && context < Constants.MaxRange) { //the context is a compressed context
+		if (context != Constants.Context8 && context < Constants.MaxRange) { // the
+																																					// context
+																																					// is
+																																					// a
+																																					// compressed
+																																					// context
 			symbol = ReadSymbol(context);
-			if (symbol != 0) { //the symbol is compressed
+			if (symbol != 0) { // the symbol is compressed
 				rValue = symbol - 1;
-			} else { //escape character, the symbol was not compressed
+			}
+			else { // escape character, the symbol was not compressed
 				rValue = ReadU32();
 				this.contextManager.AddSymbol(context, rValue + 1);
 			}
-		} else { //The context specified is uncompressed.
+		}
+		else { // The context specified is uncompressed.
 			rValue = ReadU32();
 		}
 		return rValue;
 	}
 
-	public int ReadCompressedU16(long context) {
+	public int ReadCompressedU16(final long context) {
 		int rValue;
 		long symbol = 0;
-		if (context != 0 && context < Constants.MaxRange) { //the context is a compressed context
+		if (context != 0 && context < Constants.MaxRange) { // the context is a
+																												// compressed context
 			symbol = ReadSymbol(context);
-			if (symbol != 0) { //the symbol is compressed
+			if (symbol != 0) { // the symbol is compressed
 				rValue = (int) (symbol - 1);
-			} else { //the symbol is uncompressed
+			}
+			else { // the symbol is uncompressed
 				rValue = ReadU16();
 				this.contextManager.AddSymbol(context, rValue + 1);
 			}
-		} else { //the context specified is not compressed
+		}
+		else { // the context specified is not compressed
 			rValue = ReadU16();
 		}
 		return rValue;
 	}
 
-	public short ReadCompressedU8(long context) {
+	public short ReadCompressedU8(final long context) {
 		short rValue;
 		long symbol = 0;
-		if (context != 0 && context < Constants.MaxRange) { //the context is a compressed context
+		if (context != 0 && context < Constants.MaxRange) { // the context is a
+																												// compressed context
 			symbol = ReadSymbol(context);
-			if (symbol != 0) { //the symbol is compressed
+			if (symbol != 0) { // the symbol is compressed
 				rValue = (short) (symbol - 1);
-			} else { //the symbol is not compressed
+			}
+			else { // the symbol is not compressed
 				rValue = ReadU8();
 				this.contextManager.AddSymbol(context, rValue + (long) 1);
 			}
-		} else { //the context specified is not compressed
+		}
+		else { // the context specified is not compressed
 			rValue = ReadU8();
 		}
 		return rValue;
 	}
 
-	public void SetDataBlock(DataBlock dataBlock) { //set the data to be read to data and get the first part of the data
-		//into local variables
-		long[] tempData = dataBlock.getData();
+	public void SetDataBlock(final DataBlock dataBlock) { // set the data to be
+																												// read to data and get
+																												// the first part of the
+																												// data
+		// into local variables
+		final long[] tempData = dataBlock.getData();
 		this.data = new long[tempData.length];
 		System.arraycopy(tempData, 0, this.data, 0, tempData.length);
 		this.dataPosition = 0;
@@ -161,9 +178,9 @@ public class BitStreamRead {
 	 * reverses the order of the bits of an 8 bit value.
 	 * E.g. abcdefgh -> hgfedcba
 	 */
-	private long SwapBits8(long rValue) {
-		return (Constants.Swap8[(int) ((rValue) & 0xf)] << 4)
-				| (Constants.Swap8[(int) ((rValue) >> 4)]);
+	private long SwapBits8(final long rValue) {
+		return (Constants.Swap8[(int) ((rValue) & 0xf)] << 4) |
+			(Constants.Swap8[(int) ((rValue) >> 4)]);
 	}
 
 	/* ReadSymbol
@@ -171,41 +188,40 @@ public class BitStreamRead {
 	 * The symbol 0 represents the escape value and signifies that the
 	 * next symbol read will be uncompressed.
 	 */
-	private long ReadSymbol(long context) {
+	private long ReadSymbol(final long context) {
 		long rSymbol;
 		long uValue = 0;
 		// Fill in the code word
-		long position = GetBitCount();
+		final long position = GetBitCount();
 		this.code = ReadBit();
 		this.dataBitOffset += (int) this.underflow;
 		while (this.dataBitOffset >= 32) {
 			this.dataBitOffset -= 32;
 			IncrementPosition();
 		}
-		long temp = Read15Bits();
+		final long temp = Read15Bits();
 		this.code <<= 15;
 		this.code |= temp;
 		SeekToBit(position);
 		// Get total count to calculate probabilites
-		long totalCumFreq = this.contextManager
-				.GetTotalSymbolFrequency(context);
+		final long totalCumFreq =
+			this.contextManager.GetTotalSymbolFrequency(context);
 		// Get the cumulative frequency of the current symbol
-		long range = this.high + 1 - this.low;
+		final long range = this.high + 1 - this.low;
 		// The relationship:
 		// codeCumFreq <= (totalCumFreq * (this.code - this.low)) / range
 		// is used to calculate the cumulative frequency of the current
 		// symbol. The +1 and -1 in the line below are used to counteract
 		// finite word length problems resulting from the division by range.
-		long codeCumFreq = ((totalCumFreq) * (1 + this.code - this.low) - 1)
-				/ (range);
+		final long codeCumFreq =
+			((totalCumFreq) * (1 + this.code - this.low) - 1) / (range);
 		// Get the current symbol
-		uValue = this.contextManager.GetSymbolFromFrequency(context,
-				codeCumFreq);
+		uValue = this.contextManager.GetSymbolFromFrequency(context, codeCumFreq);
 		// Update state and context
-		long valueCumFreq = this.contextManager.GetCumulativeSymbolFrequency(
-				context, uValue);
-		long valueFreq = this.contextManager
-				.GetSymbolFrequency(context, uValue);
+		final long valueCumFreq =
+			this.contextManager.GetCumulativeSymbolFrequency(context, uValue);
+		final long valueFreq =
+			this.contextManager.GetSymbolFrequency(context, uValue);
 		long low = this.low;
 		long high = this.high;
 		high = low - 1 + range * (valueCumFreq + valueFreq) / totalCumFreq;
@@ -216,26 +232,28 @@ public class BitStreamRead {
 		long maskedHigh;
 		// Count bits to read
 		// Fast count the first 4 bits
-		//compare most significant 4 bits of low and high
-		bitCount = (int) ReadCount[(int) (((low >> 12) ^ (high >> 12)) & 0x0000000F)];
+		// compare most significant 4 bits of low and high
+		bitCount =
+			(int) ReadCount[(int) (((low >> 12) ^ (high >> 12)) & 0x0000000F)];
 		low &= FastNotMask[bitCount];
 		high &= FastNotMask[bitCount];
 		high <<= bitCount;
 		low <<= bitCount;
-		high |= (long) ((1 << bitCount) - 1);
+		high |= (1 << bitCount) - 1;
 		// Regular count the rest
 		maskedLow = Constants.HalfMask & low;
 		maskedHigh = Constants.HalfMask & high;
-		while (((maskedLow | maskedHigh) == 0)
-				|| ((maskedLow == Constants.HalfMask) && maskedHigh == Constants.HalfMask)) {
+		while (((maskedLow | maskedHigh) == 0) ||
+			((maskedLow == Constants.HalfMask) && maskedHigh == Constants.HalfMask))
+		{
 			low = (Constants.NotHalfMask & low) << 1;
 			high = ((Constants.NotHalfMask & high) << 1) | 1;
 			maskedLow = Constants.HalfMask & low;
 			maskedHigh = Constants.HalfMask & high;
 			bitCount++;
 		}
-		long savedBitsLow = maskedLow;
-		long savedBitsHigh = maskedHigh;
+		final long savedBitsLow = maskedLow;
+		final long savedBitsHigh = maskedHigh;
 		if (bitCount > 0) {
 			bitCount += (int) this.underflow;
 			this.underflow = 0;
@@ -276,7 +294,7 @@ public class BitStreamRead {
 	 * returns the number of bits read in rCount
 	 */
 	private long GetBitCount() {
-		return (long) ((this.dataPosition << 5) + this.dataBitOffset);
+		return (this.dataPosition << 5) + this.dataBitOffset;
 	}
 
 	/* ReadBit
@@ -308,10 +326,11 @@ public class BitStreamRead {
 			uValue |= (this.dataLocalNext << (32 - this.dataBitOffset));
 		}
 		uValue += uValue;
-		uValue = (Constants.Swap8[(int) ((uValue >> 12) & 0xf)])
-				| ((Constants.Swap8[(int) ((uValue >> 8) & 0xf)]) << 4)
-				| ((Constants.Swap8[(int) ((uValue >> 4) & 0xf)]) << 8)
-				| ((Constants.Swap8[(int) (uValue & 0xf)]) << 12);
+		uValue =
+			(Constants.Swap8[(int) ((uValue >> 12) & 0xf)]) |
+				((Constants.Swap8[(int) ((uValue >> 8) & 0xf)]) << 4) |
+				((Constants.Swap8[(int) ((uValue >> 4) & 0xf)]) << 8) |
+				((Constants.Swap8[(int) (uValue & 0xf)]) << 12);
 		rValue = uValue;
 		this.dataBitOffset += 15;
 		if (this.dataBitOffset >= 32) {
@@ -332,7 +351,8 @@ public class BitStreamRead {
 		this.dataLocal = this.data[(int) dataPosition];
 		if (this.data.length > this.dataPosition + 1) {
 			this.dataLocalNext = this.data[(int) this.dataPosition + 1];
-		} else {
+		}
+		else {
 			this.dataLocalNext = 0;
 		}
 	}
@@ -341,7 +361,7 @@ public class BitStreamRead {
 	 * Sets the dataLocal, dataLocalNext and bitOffSet values so that
 	 * the next read will occur at position in the datablock.
 	 */
-	private void SeekToBit(long position) {
+	private void SeekToBit(final long position) {
 		this.dataPosition = position >> 5;
 		this.dataBitOffset = (int) (position & 0x0000001F);
 		GetLocal();
