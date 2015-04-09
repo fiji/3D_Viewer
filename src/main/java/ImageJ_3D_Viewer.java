@@ -27,23 +27,15 @@ public class ImageJ_3D_Viewer implements PlugIn {
 		if(version != null && Float.parseFloat(version) >= 1.5)
 			return true;
 
-		boolean inst;
-		if(version != null) {
-			inst = IJ.showMessageWithCancel("Outdated Java 3D version",
-				"Java 3D version " + version + " detected,\n" +
-				"but version >= 1.5 is required.\n" +
-				"Auto-install new version?");
-		} else {
-			inst = IJ.showMessageWithCancel(
-				"Java 3D seems not to be installed\n",
-				"Java 3D seems not to be installed\n" +
-				"Auto-install?");
+		if (version != null) {
+			IJ.showMessage("3D Viewer", "Java 3D version " + version +
+				" detected,\n" + "but version >= 1.5 is required.\n" +
+				"Please uninstall the old Java 3D from your Java runtime.");
+		}
+		else {
+			IJ.showMessage("3D Viewer", "Java 3D is required, but not available");
 		}
 
-		if(inst) {
-			if(ij3d.Install_J3D.autoInstall())
-				IJ.showMessage("Please restart ImageJ now");
-		}
 		return false;
 	}
 
