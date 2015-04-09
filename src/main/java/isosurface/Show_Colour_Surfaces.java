@@ -41,7 +41,7 @@ import ij3d.Image3DUniverse;
 import java.awt.image.IndexColorModel;
 import java.util.HashMap;
 
-import javax.vecmath.Color3f;
+import org.scijava.vecmath.Color3f;
 
 import process3d.Smooth_;
 import vib.NaiveResampler;

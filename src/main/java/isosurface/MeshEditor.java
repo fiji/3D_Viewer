@@ -12,7 +12,7 @@ import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
 
-import javax.vecmath.Point3f;
+import org.scijava.vecmath.Point3f;
 
 public class MeshEditor {
 

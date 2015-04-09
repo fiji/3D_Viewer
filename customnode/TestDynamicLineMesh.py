@@ -2,7 +2,7 @@ from ij3d import *;
 from customnode import *;
 
 from java.util import ArrayList;
-from javax.vecmath import *;
+from org.scijava.vecmath import *;
 
 univ = Image3DUniverse();
 univ.show();

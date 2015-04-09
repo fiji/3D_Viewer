@@ -19,12 +19,12 @@ import java.awt.event.WindowEvent;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.vecmath.AxisAngle4f;
-import javax.vecmath.Matrix3f;
-import javax.vecmath.Matrix4f;
-import javax.vecmath.Point3f;
-import javax.vecmath.Tuple3f;
-import javax.vecmath.Vector3f;
+import org.scijava.vecmath.AxisAngle4f;
+import org.scijava.vecmath.Matrix3f;
+import org.scijava.vecmath.Matrix4f;
+import org.scijava.vecmath.Point3f;
+import org.scijava.vecmath.Tuple3f;
+import org.scijava.vecmath.Vector3f;
 
 import math3d.TransformIO;
 

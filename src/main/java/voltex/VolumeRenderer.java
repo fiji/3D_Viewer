@@ -4,21 +4,21 @@ import ij.IJ;
 import ij.ImagePlus;
 import ij3d.AxisConstants;
 
-import javax.media.j3d.Appearance;
-import javax.media.j3d.BranchGroup;
-import javax.media.j3d.Canvas3D;
-import javax.media.j3d.GeometryArray;
-import javax.media.j3d.Group;
-import javax.media.j3d.Node;
-import javax.media.j3d.OrderedGroup;
-import javax.media.j3d.Shape3D;
-import javax.media.j3d.Switch;
-import javax.media.j3d.TextureUnitState;
-import javax.media.j3d.Transform3D;
-import javax.media.j3d.View;
-import javax.vecmath.Color3f;
-import javax.vecmath.Point3d;
-import javax.vecmath.Vector3d;
+import org.scijava.java3d.Appearance;
+import org.scijava.java3d.BranchGroup;
+import org.scijava.java3d.Canvas3D;
+import org.scijava.java3d.GeometryArray;
+import org.scijava.java3d.Group;
+import org.scijava.java3d.Node;
+import org.scijava.java3d.OrderedGroup;
+import org.scijava.java3d.Shape3D;
+import org.scijava.java3d.Switch;
+import org.scijava.java3d.TextureUnitState;
+import org.scijava.java3d.Transform3D;
+import org.scijava.java3d.View;
+import org.scijava.vecmath.Color3f;
+import org.scijava.vecmath.Point3d;
+import org.scijava.vecmath.Vector3d;
 
 /**
  * This class is the main class for creating a volume rendering. It consists

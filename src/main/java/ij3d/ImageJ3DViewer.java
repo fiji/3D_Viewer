@@ -11,8 +11,8 @@ import isosurface.MeshExporter;
 import java.io.File;
 import java.io.IOException;
 
-import javax.media.j3d.Transform3D;
-import javax.vecmath.Color3f;
+import org.scijava.java3d.Transform3D;
+import org.scijava.vecmath.Color3f;
 
 import orthoslice.OrthoGroup;
 import voltex.VoltexGroup;

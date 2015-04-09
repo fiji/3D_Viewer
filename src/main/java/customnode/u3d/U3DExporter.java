@@ -20,11 +20,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.media.j3d.TriangleArray;
-import javax.vecmath.Color3f;
-import javax.vecmath.Color4f;
-import javax.vecmath.Point3f;
-import javax.vecmath.Vector3f;
+import org.scijava.java3d.TriangleArray;
+import org.scijava.vecmath.Color3f;
+import org.scijava.vecmath.Color4f;
+import org.scijava.vecmath.Point3f;
+import org.scijava.vecmath.Vector3f;
 
 /**
  * Some links:

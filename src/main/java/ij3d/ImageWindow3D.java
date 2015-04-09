@@ -1,6 +1,6 @@
 package ij3d;
 
-import com.sun.j3d.utils.universe.SimpleUniverse;
+import org.scijava.java3d.utils.universe.SimpleUniverse;
 
 import ij.ImagePlus;
 import ij.gui.ImageCanvas;
@@ -18,13 +18,13 @@ import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.lang.reflect.Method;
 
-import javax.media.j3d.Canvas3D;
-import javax.media.j3d.GraphicsConfigTemplate3D;
-import javax.media.j3d.ImageComponent2D;
-import javax.media.j3d.RenderingError;
-import javax.media.j3d.RenderingErrorListener;
-import javax.media.j3d.Screen3D;
-import javax.media.j3d.View;
+import org.scijava.java3d.Canvas3D;
+import org.scijava.java3d.GraphicsConfigTemplate3D;
+import org.scijava.java3d.ImageComponent2D;
+import org.scijava.java3d.RenderingError;
+import org.scijava.java3d.RenderingErrorListener;
+import org.scijava.java3d.Screen3D;
+import org.scijava.java3d.View;
 import javax.swing.JFrame;
 
 public class ImageWindow3D extends JFrame implements UniverseListener {

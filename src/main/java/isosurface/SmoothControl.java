@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import javax.vecmath.Point3f;
+import org.scijava.vecmath.Point3f;
 
 public class SmoothControl {
 

@@ -4,7 +4,7 @@ import ij.ImagePlus;
 import ij3d.Content;
 import ij3d.ContentInstant;
 
-import javax.media.j3d.View;
+import org.scijava.java3d.View;
 
 import vib.NaiveResampler;
 import voltex.VoltexGroup;

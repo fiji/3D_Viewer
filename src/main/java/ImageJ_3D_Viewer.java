@@ -42,7 +42,7 @@ public class ImageJ_3D_Viewer implements PlugIn {
 	public static String getJava3DVersion() {
 		try {
 			final ClassLoader cl = Thread.currentThread().getContextClassLoader();
-			final Class<?> c = cl.loadClass("javax.media.j3d.VirtualUniverse");
+			final Class<?> c = cl.loadClass("org.scijava.java3d.VirtualUniverse");
 			final Method getProperties = c.getMethod("getProperties");
 			final Object props = getProperties.invoke(null);
 			if (!(props instanceof Map)) return null;

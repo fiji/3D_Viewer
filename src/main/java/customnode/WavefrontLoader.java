@@ -7,9 +7,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import javax.vecmath.Color3f;
-import javax.vecmath.Color4f;
-import javax.vecmath.Point3f;
+import org.scijava.vecmath.Color3f;
+import org.scijava.vecmath.Color4f;
+import org.scijava.vecmath.Point3f;
 
 public class WavefrontLoader {
 

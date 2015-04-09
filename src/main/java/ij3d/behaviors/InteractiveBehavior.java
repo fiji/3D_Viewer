@@ -15,10 +15,10 @@ import java.awt.event.MouseWheelEvent;
 import java.util.Enumeration;
 import java.util.List;
 
-import javax.media.j3d.Behavior;
-import javax.media.j3d.WakeupCondition;
-import javax.media.j3d.WakeupOnAWTEvent;
-import javax.media.j3d.WakeupOr;
+import org.scijava.java3d.Behavior;
+import org.scijava.java3d.WakeupCondition;
+import org.scijava.java3d.WakeupOnAWTEvent;
+import org.scijava.java3d.WakeupOr;
 
 import orthoslice.OrthoGroup;
 import voltex.VolumeRenderer;

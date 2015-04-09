@@ -1,7 +1,7 @@
 package ij3d;
 
-import com.sun.j3d.utils.universe.MultiTransformGroup;
-import com.sun.j3d.utils.universe.SimpleUniverse;
+import org.scijava.java3d.utils.universe.MultiTransformGroup;
+import org.scijava.java3d.utils.universe.SimpleUniverse;
 
 import ij.ImagePlus;
 import ij3d.behaviors.BehaviorCallback;
@@ -27,22 +27,22 @@ import java.util.BitSet;
 import java.util.Iterator;
 import java.util.List;
 
-import javax.media.j3d.AmbientLight;
-import javax.media.j3d.Background;
-import javax.media.j3d.BoundingSphere;
-import javax.media.j3d.BranchGroup;
-import javax.media.j3d.Canvas3D;
-import javax.media.j3d.DirectionalLight;
-import javax.media.j3d.GraphicsConfigTemplate3D;
-import javax.media.j3d.Group;
-import javax.media.j3d.ImageComponent2D;
-import javax.media.j3d.PointLight;
-import javax.media.j3d.Screen3D;
-import javax.media.j3d.Switch;
-import javax.media.j3d.Transform3D;
-import javax.media.j3d.TransformGroup;
-import javax.vecmath.Color3f;
-import javax.vecmath.Point3d;
+import org.scijava.java3d.AmbientLight;
+import org.scijava.java3d.Background;
+import org.scijava.java3d.BoundingSphere;
+import org.scijava.java3d.BranchGroup;
+import org.scijava.java3d.Canvas3D;
+import org.scijava.java3d.DirectionalLight;
+import org.scijava.java3d.GraphicsConfigTemplate3D;
+import org.scijava.java3d.Group;
+import org.scijava.java3d.ImageComponent2D;
+import org.scijava.java3d.PointLight;
+import org.scijava.java3d.Screen3D;
+import org.scijava.java3d.Switch;
+import org.scijava.java3d.Transform3D;
+import org.scijava.java3d.TransformGroup;
+import org.scijava.vecmath.Color3f;
+import org.scijava.vecmath.Point3d;
 
 public abstract class DefaultUniverse extends SimpleUniverse
 						implements BehaviorCallback {

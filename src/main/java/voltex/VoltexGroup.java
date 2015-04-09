@@ -11,13 +11,13 @@ import ij3d.ContentNode;
 
 import java.awt.Polygon;
 
-import javax.media.j3d.Canvas3D;
-import javax.media.j3d.Transform3D;
-import javax.media.j3d.View;
-import javax.vecmath.Color3f;
-import javax.vecmath.Point2d;
-import javax.vecmath.Point3d;
-import javax.vecmath.Tuple3d;
+import org.scijava.java3d.Canvas3D;
+import org.scijava.java3d.Transform3D;
+import org.scijava.java3d.View;
+import org.scijava.vecmath.Color3f;
+import org.scijava.vecmath.Point2d;
+import org.scijava.vecmath.Point3d;
+import org.scijava.vecmath.Tuple3d;
 
 import vib.NaiveResampler;
 

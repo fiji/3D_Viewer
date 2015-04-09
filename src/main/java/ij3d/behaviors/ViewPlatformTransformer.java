@@ -4,13 +4,13 @@ import ij3d.DefaultUniverse;
 import ij3d.Image3DUniverse;
 import ij3d.ImageCanvas3D;
 
-import javax.media.j3d.Transform3D;
-import javax.media.j3d.TransformGroup;
-import javax.vecmath.AxisAngle4d;
-import javax.vecmath.Point2d;
-import javax.vecmath.Point3d;
-import javax.vecmath.Tuple3d;
-import javax.vecmath.Vector3d;
+import org.scijava.java3d.Transform3D;
+import org.scijava.java3d.TransformGroup;
+import org.scijava.vecmath.AxisAngle4d;
+import org.scijava.vecmath.Point2d;
+import org.scijava.vecmath.Point3d;
+import org.scijava.vecmath.Tuple3d;
+import org.scijava.vecmath.Vector3d;
 
 /**
  * This class is a helper class which implements some functions for

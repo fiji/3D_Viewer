@@ -17,7 +17,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.TreeMap;
 
-import javax.vecmath.Color3f;
+import org.scijava.vecmath.Color3f;
 
 public class ContentCreator {
 

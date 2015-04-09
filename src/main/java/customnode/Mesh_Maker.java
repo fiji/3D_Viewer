@@ -14,8 +14,8 @@ import ij3d.Image3DUniverse;
 
 import java.awt.Color;
 
-import javax.media.j3d.Transform3D;
-import javax.vecmath.Color3f;
+import org.scijava.java3d.Transform3D;
+import org.scijava.vecmath.Color3f;
 
 public class Mesh_Maker extends MeshMaker implements PlugIn {
 

@@ -10,9 +10,9 @@ import java.io.FileOutputStream;
 import java.util.HashMap;
 import java.util.Properties;
 
-import javax.media.j3d.View;
+import org.scijava.java3d.View;
 import javax.swing.KeyStroke;
-import javax.vecmath.Color3f;
+import org.scijava.vecmath.Color3f;
 
 public class UniverseSettings {
 

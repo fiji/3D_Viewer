@@ -4,14 +4,14 @@ import ij.ImagePlus;
 
 import java.util.BitSet;
 
-import javax.media.j3d.Group;
-import javax.media.j3d.QuadArray;
-import javax.media.j3d.Shape3D;
-import javax.media.j3d.Switch;
-import javax.media.j3d.TexCoordGeneration;
-import javax.media.j3d.Texture2D;
-import javax.media.j3d.View;
-import javax.vecmath.Color3f;
+import org.scijava.java3d.Group;
+import org.scijava.java3d.QuadArray;
+import org.scijava.java3d.Shape3D;
+import org.scijava.java3d.Switch;
+import org.scijava.java3d.TexCoordGeneration;
+import org.scijava.java3d.Texture2D;
+import org.scijava.java3d.View;
+import org.scijava.vecmath.Color3f;
 
 import voltex.VolumeRenderer;
 

@@ -5,15 +5,15 @@ import ij.ImagePlus;
 import ij.ImageStack;
 import ij.process.ImageProcessor;
 
-import javax.media.j3d.Alpha;
-import javax.media.j3d.BranchGroup;
-import javax.media.j3d.RotationInterpolator;
-import javax.media.j3d.Transform3D;
-import javax.media.j3d.TransformGroup;
-import javax.media.j3d.View;
-import javax.vecmath.AxisAngle4d;
-import javax.vecmath.Vector3d;
-import javax.vecmath.Vector3f;
+import org.scijava.java3d.Alpha;
+import org.scijava.java3d.BranchGroup;
+import org.scijava.java3d.RotationInterpolator;
+import org.scijava.java3d.Transform3D;
+import org.scijava.java3d.TransformGroup;
+import org.scijava.java3d.View;
+import org.scijava.vecmath.AxisAngle4d;
+import org.scijava.vecmath.Vector3d;
+import org.scijava.vecmath.Vector3f;
 
 public abstract class DefaultAnimatableUniverse extends DefaultUniverse {
 

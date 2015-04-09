@@ -2,20 +2,20 @@ package voltex;
 
 import ij3d.AxisConstants;
 
-import javax.media.j3d.Appearance;
-import javax.media.j3d.ColoringAttributes;
-import javax.media.j3d.ImageComponent2D;
-import javax.media.j3d.Material;
-import javax.media.j3d.PolygonAttributes;
-import javax.media.j3d.RenderingAttributes;
-import javax.media.j3d.TexCoordGeneration;
-import javax.media.j3d.Texture;
-import javax.media.j3d.Texture2D;
-import javax.media.j3d.TextureAttributes;
-import javax.media.j3d.TextureUnitState;
-import javax.media.j3d.TransparencyAttributes;
-import javax.vecmath.Color3f;
-import javax.vecmath.Vector4f;
+import org.scijava.java3d.Appearance;
+import org.scijava.java3d.ColoringAttributes;
+import org.scijava.java3d.ImageComponent2D;
+import org.scijava.java3d.Material;
+import org.scijava.java3d.PolygonAttributes;
+import org.scijava.java3d.RenderingAttributes;
+import org.scijava.java3d.TexCoordGeneration;
+import org.scijava.java3d.Texture;
+import org.scijava.java3d.Texture2D;
+import org.scijava.java3d.TextureAttributes;
+import org.scijava.java3d.TextureUnitState;
+import org.scijava.java3d.TransparencyAttributes;
+import org.scijava.vecmath.Color3f;
+import org.scijava.vecmath.Vector4f;
 
 
 /**

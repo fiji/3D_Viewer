@@ -29,8 +29,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
-import javax.media.j3d.Transform3D;
-import javax.vecmath.Color3f;
+import org.scijava.java3d.Transform3D;
+import org.scijava.vecmath.Color3f;
 
 import orthoslice.OrthoGroup;
 import surfaceplot.SurfacePlotGroup;
