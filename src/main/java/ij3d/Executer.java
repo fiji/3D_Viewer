@@ -105,6 +105,8 @@ public class Executer {
 	public static final String IMPORT = "importContent";
 	public static final String EXPORT = "exportContent";
 	public static final String SNAPSHOT = "snapshot";
+	
+	public static final String SHOW_CONTENT = "showContent";
 
 	// TODO
 	public static final String ADD = "add";
@@ -1097,6 +1099,7 @@ public class Executer {
 	public void showContent(final Content c, final boolean b) {
 		if (!checkSel(c)) return;
 		c.setVisible(b);
+		record( SHOW_CONTENT, c.getName(), ""+b );
 		if (!b) univ.clearSelection();
 	}
 
