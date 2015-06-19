@@ -4,6 +4,7 @@ package ij3d;
 import customnode.Box;
 import customnode.Cone;
 import customnode.Sphere;
+import customnode.Tube;
 import customnode.u3d.U3DExporter;
 import ij.IJ;
 import ij.ImagePlus;
@@ -15,6 +16,8 @@ import isosurface.MeshExporter;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.media.j3d.Transform3D;
 import javax.vecmath.Color3f;
@@ -229,6 +232,44 @@ public class ImageJ3DViewer implements PlugIn {
 			final Point3f p2 = PrimitiveDialogs.parsePoint( to );		
 			final float r = Float.parseFloat( radius );
 			univ.addCustomMesh( new Cone( p1, p2, r ), name );
+		}
+	}
+
+	/** auxiliary list of points to add to the current tube */
+	private static final List<Point3f> pts = new ArrayList<Point3f>();
+	
+	/**
+	 * Add a point to the list that will conform a tube into the current 
+	 * 3D universe
+	 * @param point string containing tube point coordinates
+	 */
+	public static void addTubePoint( final String point ) {
+		
+		final Image3DUniverse univ = getUniv();		
+		if ( univ != null ){													
+			pts.add( PrimitiveDialogs.parsePoint( point ) );						
+		}
+	}
+	
+	/**
+	 * Add a tube into the current 3D universe
+	 * @param name content name for the tube
+	 * @param radius string containing the radius of the tube
+	 * @param points strings containing the coordinates of the last point to add to the tube
+	 */
+	public static void finishTube( 
+			final String name,
+			final String radius,
+			final String point ) {
+		
+		final Image3DUniverse univ = getUniv();		
+		if ( univ != null ){				
+			final float r = Float.parseFloat( radius );
+			pts.add( PrimitiveDialogs.parsePoint( point ) );			
+			univ.addCustomMesh( new Tube( pts, r ), name );
+			
+			// reset list of points
+			pts.clear();
 		}
 	}
 	

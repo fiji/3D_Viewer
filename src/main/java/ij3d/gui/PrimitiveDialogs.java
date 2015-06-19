@@ -271,7 +271,14 @@ public class PrimitiveDialogs {
 			co.setForeground(java.awt.Color.BLUE);
 			showDialog();
 			if (wasCanceled()) univ.removeContent(tf0.getText());
-			else updatePreview();
+			else{
+				updatePreview();				
+				for( int i = 0; i < tfs.size()-1; i++ )
+					Executer.record( Executer.ADD_TUBE_POINT, 
+							tfs.get( i ).getText() );
+				Executer.record( Executer.FINISH_TUBE, tf0.getText(),
+						tf1.getText(), tfs.get( tfs.size() -1 ).getText() );
+			}
 		}
 
 		@Override
