@@ -8,6 +8,7 @@ import customnode.Sphere;
 import customnode.Tube;
 import ij.gui.GenericDialog;
 import ij3d.Content;
+import ij3d.Executer;
 import ij3d.Image3DUniverse;
 
 import java.awt.Component;
@@ -144,7 +145,11 @@ public class PrimitiveDialogs {
 			tf2.addFocusListener(this);
 			showDialog();
 			if (wasCanceled()) univ.removeContent(tf0.getText());
-			else updatePreview();
+			else{ 
+				updatePreview();
+				Executer.record( Executer.ADD_SPHERE, tf0.getText(), 
+						tf1.getText(), tf2.getText());
+			}
 		}
 
 		@Override

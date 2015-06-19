@@ -107,6 +107,7 @@ public class Executer {
 	public static final String SNAPSHOT = "snapshot";
 	
 	public static final String SHOW_CONTENT = "showContent";
+	public static final String ADD_SPHERE = "addSphere";
 
 	// TODO
 	public static final String ADD = "add";

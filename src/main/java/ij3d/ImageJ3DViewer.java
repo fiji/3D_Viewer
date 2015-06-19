@@ -1,12 +1,14 @@
 
 package ij3d;
 
+import customnode.Sphere;
 import customnode.u3d.U3DExporter;
 import ij.IJ;
 import ij.ImagePlus;
 import ij.WindowManager;
 import ij.gui.GUI;
 import ij.plugin.PlugIn;
+import ij3d.gui.PrimitiveDialogs;
 import isosurface.MeshExporter;
 
 import java.io.File;
@@ -14,6 +16,7 @@ import java.io.IOException;
 
 import javax.media.j3d.Transform3D;
 import javax.vecmath.Color3f;
+import javax.vecmath.Point3f;
 
 import orthoslice.OrthoGroup;
 import voltex.VoltexGroup;
@@ -117,7 +120,7 @@ public class ImageJ3DViewer implements PlugIn {
 				univ.clearSelection();
 		}
 	}
-
+		
 	// Contents menu
 	public static void add(final String image, final String c, final String name,
 		final String th, final String r, final String g, final String b,
@@ -164,6 +167,26 @@ public class ImageJ3DViewer implements PlugIn {
 		final boolean[] channels =
 			new boolean[] { getBoolean(r), getBoolean(g), getBoolean(b) };
 		univ.addOrthoslice(grey, color, name, 0, channels, factor);
+	}
+	
+	/**
+	 * Add a sphere into the current 3D universe
+	 * @param name content name for the sphere
+	 * @param center string containing the center coordinates (Ex: "0,2.3,8.4")
+	 * @param radius string containing the radius of the sphere
+	 */
+	public static void addSphere( 
+			final String name, 
+			final String center,
+			final String radius ) {
+		
+		final Image3DUniverse univ = getUniv();		
+		if ( univ != null ){
+			final Point3f c = PrimitiveDialogs.parsePoint( center );
+			final float r = Float.parseFloat( radius );
+			final Sphere s = new Sphere( c, r );			
+			univ.addCustomMesh( s, name );
+		}
 	}
 
 	public static void delete() {
