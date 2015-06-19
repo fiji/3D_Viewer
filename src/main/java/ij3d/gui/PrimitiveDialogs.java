@@ -108,7 +108,11 @@ public class PrimitiveDialogs {
 			tf2.addFocusListener(this);
 			showDialog();
 			if (wasCanceled()) univ.removeContent(tf0.getText());
-			else updatePreview();
+			else{
+				updatePreview();
+				Executer.record( Executer.ADD_BOX, tf0.getText(), 
+						tf1.getText(), tf2.getText());
+			}
 		}
 
 		@Override

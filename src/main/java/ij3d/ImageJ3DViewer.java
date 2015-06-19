@@ -1,6 +1,7 @@
 
 package ij3d;
 
+import customnode.Box;
 import customnode.Sphere;
 import customnode.u3d.U3DExporter;
 import ij.IJ;
@@ -186,6 +187,25 @@ public class ImageJ3DViewer implements PlugIn {
 			final float r = Float.parseFloat( radius );
 			final Sphere s = new Sphere( c, r );			
 			univ.addCustomMesh( s, name );
+		}
+	}
+	
+	/**
+	 * Add a box into the current 3D universe
+	 * @param name content name for the box
+	 * @param lowerCorner string containing the lower corner coordinates (Ex: "0,2.3,8.4")
+	 * @param upperCorner string containing the upper corner coordinates (Ex: "10,12.3,18.4")
+	 */
+	public static void addBox( 
+			final String name, 
+			final String lowerCorner,
+			final String upperCorner ) {
+		
+		final Image3DUniverse univ = getUniv();		
+		if ( univ != null ){
+			final Point3f lc = PrimitiveDialogs.parsePoint( lowerCorner );
+			final Point3f uc = PrimitiveDialogs.parsePoint( upperCorner );					
+			univ.addCustomMesh( new Box( lc, uc ) , name );
 		}
 	}
 
