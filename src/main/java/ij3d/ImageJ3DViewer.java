@@ -2,6 +2,7 @@
 package ij3d;
 
 import customnode.Box;
+import customnode.Cone;
 import customnode.Sphere;
 import customnode.u3d.U3DExporter;
 import ij.IJ;
@@ -209,6 +210,28 @@ public class ImageJ3DViewer implements PlugIn {
 		}
 	}
 
+	/**
+	 * Add a cone into the current 3D universe
+	 * @param name content name for the cone
+	 * @param from string containing the initial coordinates (Ex: "0,2.3,8.4")
+	 * @param to string containing the end coordinates (Ex: "10,12.3,18.4")
+	 * @param radius string containing the radius of the cone
+	 */
+	public static void addCone( 
+			final String name, 
+			final String from,
+			final String to,
+			final String radius ) {
+		
+		final Image3DUniverse univ = getUniv();		
+		if ( univ != null ){
+			final Point3f p1 = PrimitiveDialogs.parsePoint( from );
+			final Point3f p2 = PrimitiveDialogs.parsePoint( to );		
+			final float r = Float.parseFloat( radius );
+			univ.addCustomMesh( new Cone( p1, p2, r ), name );
+		}
+	}
+	
 	public static void delete() {
 		final Image3DUniverse univ = getUniv();
 		if (univ != null && univ.getSelected() != null) {
