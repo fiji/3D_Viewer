@@ -107,6 +107,11 @@ public class Executer {
 	public static final String SNAPSHOT = "snapshot";
 	
 	public static final String SHOW_CONTENT = "showContent";
+	public static final String ADD_SPHERE = "addSphere";
+	public static final String ADD_BOX = "addBox";
+	public static final String ADD_CONE = "addCone";
+	public static final String ADD_TUBE_POINT = "addTubePoint";
+	public static final String FINISH_TUBE = "finishTube";
 
 	// TODO
 	public static final String ADD = "add";

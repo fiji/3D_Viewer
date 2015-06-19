@@ -8,6 +8,7 @@ import customnode.Sphere;
 import customnode.Tube;
 import ij.gui.GenericDialog;
 import ij3d.Content;
+import ij3d.Executer;
 import ij3d.Image3DUniverse;
 
 import java.awt.Component;
@@ -107,7 +108,11 @@ public class PrimitiveDialogs {
 			tf2.addFocusListener(this);
 			showDialog();
 			if (wasCanceled()) univ.removeContent(tf0.getText());
-			else updatePreview();
+			else{
+				updatePreview();
+				Executer.record( Executer.ADD_BOX, tf0.getText(), 
+						tf1.getText(), tf2.getText());
+			}
 		}
 
 		@Override
@@ -144,7 +149,11 @@ public class PrimitiveDialogs {
 			tf2.addFocusListener(this);
 			showDialog();
 			if (wasCanceled()) univ.removeContent(tf0.getText());
-			else updatePreview();
+			else{ 
+				updatePreview();
+				Executer.record( Executer.ADD_SPHERE, tf0.getText(), 
+						tf1.getText(), tf2.getText());
+			}
 		}
 
 		@Override
@@ -184,7 +193,11 @@ public class PrimitiveDialogs {
 			tf3.addFocusListener(this);
 			showDialog();
 			if (wasCanceled()) univ.removeContent(tf0.getText());
-			else updatePreview();
+			else{
+				updatePreview();
+				Executer.record( Executer.ADD_CONE, tf0.getText(), 
+						tf1.getText(), tf2.getText(), tf3.getText() );
+			}
 		}
 
 		@Override
@@ -258,7 +271,14 @@ public class PrimitiveDialogs {
 			co.setForeground(java.awt.Color.BLUE);
 			showDialog();
 			if (wasCanceled()) univ.removeContent(tf0.getText());
-			else updatePreview();
+			else{
+				updatePreview();				
+				for( int i = 0; i < tfs.size()-1; i++ )
+					Executer.record( Executer.ADD_TUBE_POINT, 
+							tfs.get( i ).getText() );
+				Executer.record( Executer.FINISH_TUBE, tf0.getText(),
+						tf1.getText(), tfs.get( tfs.size() -1 ).getText() );
+			}
 		}
 
 		@Override

@@ -1,19 +1,27 @@
 
 package ij3d;
 
+import customnode.Box;
+import customnode.Cone;
+import customnode.Sphere;
+import customnode.Tube;
 import customnode.u3d.U3DExporter;
 import ij.IJ;
 import ij.ImagePlus;
 import ij.WindowManager;
 import ij.gui.GUI;
 import ij.plugin.PlugIn;
+import ij3d.gui.PrimitiveDialogs;
 import isosurface.MeshExporter;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.media.j3d.Transform3D;
 import javax.vecmath.Color3f;
+import javax.vecmath.Point3f;
 
 import orthoslice.OrthoGroup;
 import voltex.VoltexGroup;
@@ -117,7 +125,7 @@ public class ImageJ3DViewer implements PlugIn {
 				univ.clearSelection();
 		}
 	}
-
+		
 	// Contents menu
 	public static void add(final String image, final String c, final String name,
 		final String th, final String r, final String g, final String b,
@@ -165,7 +173,106 @@ public class ImageJ3DViewer implements PlugIn {
 			new boolean[] { getBoolean(r), getBoolean(g), getBoolean(b) };
 		univ.addOrthoslice(grey, color, name, 0, channels, factor);
 	}
+	
+	/**
+	 * Add a sphere into the current 3D universe
+	 * @param name content name for the sphere
+	 * @param center string containing the center coordinates (Ex: "0,2.3,8.4")
+	 * @param radius string containing the radius of the sphere
+	 */
+	public static void addSphere( 
+			final String name, 
+			final String center,
+			final String radius ) {
+		
+		final Image3DUniverse univ = getUniv();		
+		if ( univ != null ){
+			final Point3f c = PrimitiveDialogs.parsePoint( center );
+			final float r = Float.parseFloat( radius );
+			final Sphere s = new Sphere( c, r );			
+			univ.addCustomMesh( s, name );
+		}
+	}
+	
+	/**
+	 * Add a box into the current 3D universe
+	 * @param name content name for the box
+	 * @param lowerCorner string containing the lower corner coordinates (Ex: "0,2.3,8.4")
+	 * @param upperCorner string containing the upper corner coordinates (Ex: "10,12.3,18.4")
+	 */
+	public static void addBox( 
+			final String name, 
+			final String lowerCorner,
+			final String upperCorner ) {
+		
+		final Image3DUniverse univ = getUniv();		
+		if ( univ != null ){
+			final Point3f lc = PrimitiveDialogs.parsePoint( lowerCorner );
+			final Point3f uc = PrimitiveDialogs.parsePoint( upperCorner );					
+			univ.addCustomMesh( new Box( lc, uc ) , name );
+		}
+	}
 
+	/**
+	 * Add a cone into the current 3D universe
+	 * @param name content name for the cone
+	 * @param from string containing the initial coordinates (Ex: "0,2.3,8.4")
+	 * @param to string containing the end coordinates (Ex: "10,12.3,18.4")
+	 * @param radius string containing the radius of the cone
+	 */
+	public static void addCone( 
+			final String name, 
+			final String from,
+			final String to,
+			final String radius ) {
+		
+		final Image3DUniverse univ = getUniv();		
+		if ( univ != null ){
+			final Point3f p1 = PrimitiveDialogs.parsePoint( from );
+			final Point3f p2 = PrimitiveDialogs.parsePoint( to );		
+			final float r = Float.parseFloat( radius );
+			univ.addCustomMesh( new Cone( p1, p2, r ), name );
+		}
+	}
+
+	/** auxiliary list of points to add to the current tube */
+	private static final List<Point3f> pts = new ArrayList<Point3f>();
+	
+	/**
+	 * Add a point to the list that will conform a tube into the current 
+	 * 3D universe
+	 * @param point string containing tube point coordinates
+	 */
+	public static void addTubePoint( final String point ) {
+		
+		final Image3DUniverse univ = getUniv();		
+		if ( univ != null ){													
+			pts.add( PrimitiveDialogs.parsePoint( point ) );						
+		}
+	}
+	
+	/**
+	 * Add a tube into the current 3D universe
+	 * @param name content name for the tube
+	 * @param radius string containing the radius of the tube
+	 * @param points strings containing the coordinates of the last point to add to the tube
+	 */
+	public static void finishTube( 
+			final String name,
+			final String radius,
+			final String point ) {
+		
+		final Image3DUniverse univ = getUniv();		
+		if ( univ != null ){				
+			final float r = Float.parseFloat( radius );
+			pts.add( PrimitiveDialogs.parsePoint( point ) );			
+			univ.addCustomMesh( new Tube( pts, r ), name );
+			
+			// reset list of points
+			pts.clear();
+		}
+	}
+	
 	public static void delete() {
 		final Image3DUniverse univ = getUniv();
 		if (univ != null && univ.getSelected() != null) {
