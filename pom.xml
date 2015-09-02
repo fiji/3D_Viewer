@@ -10,7 +10,7 @@
 	</parent>
 
 	<artifactId>3D_Viewer</artifactId>
-	<version>3.0.2-SNAPSHOT</version>
+	<version>3.1.1-SNAPSHOT</version>
 
 	<name>plugins/3D_Viewer.jar</name>
 	<description />
