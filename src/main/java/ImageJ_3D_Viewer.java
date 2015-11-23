@@ -9,34 +9,11 @@ import ij3d.ImageJ3DViewer;
 public class ImageJ_3D_Viewer implements PlugIn {
 
 	public static void main(String[] args) {
-		if(checkJava3D())
-			new ImageJ3DViewer().run("");
+		new ImageJ3DViewer().run("");
 	}
 
 	public void run(String args) {
-		if(checkJava3D())
-			new ImageJ3DViewer().run(args);
-	}
-
-	/**
-	 * Returns true if the viewer can run.
-	 */
-	public static boolean checkJava3D() {
-		final String version = getJava3DVersion();
-		System.out.println("version = " + version);
-		if(version != null && Float.parseFloat(version) >= 1.5)
-			return true;
-
-		if (version != null) {
-			IJ.showMessage("3D Viewer", "Java 3D version " + version +
-				" detected,\n" + "but version >= 1.5 is required.\n" +
-				"Please uninstall the old Java 3D from your Java runtime.");
-		}
-		else {
-			IJ.showMessage("3D Viewer", "Java 3D is required, but not available");
-		}
-
-		return false;
+		new ImageJ3DViewer().run(args);
 	}
 
 	public static String getJava3DVersion() {
