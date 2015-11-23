@@ -1,3 +1,5 @@
+package ij3d;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Map;
