@@ -348,9 +348,7 @@ public abstract class CustomMesh extends Shape3D {
 		appearance.setColoringAttributes(colorAttrib);
 
 		final TransparencyAttributes tr = new TransparencyAttributes();
-		final int mode =
-			transparency == 0f ? TransparencyAttributes.NONE
-				: TransparencyAttributes.FASTEST;
+		final int mode = TransparencyAttributes.FASTEST;
 		tr.setCapability(TransparencyAttributes.ALLOW_VALUE_WRITE);
 		tr.setCapability(TransparencyAttributes.ALLOW_MODE_WRITE);
 		tr.setTransparencyMode(mode);
