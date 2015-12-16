@@ -10,7 +10,7 @@
 	</parent>
 
 	<artifactId>3D_Viewer</artifactId>
-	<version>4.0.0-SNAPSHOT</version>
+	<version>4.0.0</version>
 
 	<name>plugins/3D_Viewer.jar</name>
 	<description />
@@ -104,7 +104,7 @@
 	<scm>
 		<connection>scm:git:git://github.com/fiji/3D_Viewer</connection>
 		<developerConnection>scm:git:git@github.com:fiji/3D_Viewer</developerConnection>
-		<tag>HEAD</tag>
+		<tag>3D_Viewer-4.0.0</tag>
 		<url>https://github.com/fiji/3D_Viewer</url>
 	</scm>
 	<ciManagement>
