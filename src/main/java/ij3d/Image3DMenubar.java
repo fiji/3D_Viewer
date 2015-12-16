@@ -1,19 +1,20 @@
 
 package ij3d;
 
-import ij.ImagePlus;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
-import org.scijava.java3d.View;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.SwingUtilities;
+
+import org.scijava.java3d.View;
+
+import ij.ImagePlus;
 
 @SuppressWarnings("serial")
 public class Image3DMenubar extends JMenuBar implements ActionListener,

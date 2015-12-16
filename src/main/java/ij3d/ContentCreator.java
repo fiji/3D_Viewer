@@ -1,6 +1,14 @@
 
 package ij3d;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.TreeMap;
+
+import org.scijava.vecmath.Color3f;
+
 import customnode.CustomMesh;
 import customnode.CustomMeshNode;
 import customnode.CustomMultiMesh;
@@ -11,14 +19,6 @@ import ij.io.FileInfo;
 import ij.process.ColorProcessor;
 import ij.process.ImageConverter;
 import ij.process.StackConverter;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.TreeMap;
-
-import org.scijava.vecmath.Color3f;
 
 public class ContentCreator {
 

@@ -1,12 +1,11 @@
 
 package orthoslice;
 
+import org.scijava.java3d.View;
+
 import ij.ImagePlus;
 import ij3d.Content;
 import ij3d.ContentInstant;
-
-import org.scijava.java3d.View;
-
 import vib.NaiveResampler;
 import voltex.VoltexGroup;
 

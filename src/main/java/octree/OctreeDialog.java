@@ -1,11 +1,6 @@
 
 package octree;
 
-import ij.IJ;
-import ij.gui.GenericDialog;
-import ij.io.DirectoryChooser;
-import ij.io.OpenDialog;
-
 import java.awt.Button;
 import java.awt.FlowLayout;
 import java.awt.Panel;
@@ -13,6 +8,11 @@ import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+
+import ij.IJ;
+import ij.gui.GenericDialog;
+import ij.io.DirectoryChooser;
+import ij.io.OpenDialog;
 
 public class OctreeDialog {
 

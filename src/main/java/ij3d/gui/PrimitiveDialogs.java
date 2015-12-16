@@ -1,16 +1,6 @@
 
 package ij3d.gui;
 
-import customnode.Box;
-import customnode.Cone;
-import customnode.Primitive;
-import customnode.Sphere;
-import customnode.Tube;
-import ij.gui.GenericDialog;
-import ij3d.Content;
-import ij3d.Executer;
-import ij3d.Image3DUniverse;
-
 import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -27,6 +17,16 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.scijava.vecmath.Point3f;
+
+import customnode.Box;
+import customnode.Cone;
+import customnode.Primitive;
+import customnode.Sphere;
+import customnode.Tube;
+import ij.gui.GenericDialog;
+import ij3d.Content;
+import ij3d.Executer;
+import ij3d.Image3DUniverse;
 
 public class PrimitiveDialogs {
 

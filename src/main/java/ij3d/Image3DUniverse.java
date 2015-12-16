@@ -1,19 +1,6 @@
 
 package ij3d;
 
-import customnode.CustomLineMesh;
-import customnode.CustomMesh;
-import customnode.CustomMultiMesh;
-import customnode.CustomPointMesh;
-import customnode.CustomQuadMesh;
-import customnode.CustomTriangleMesh;
-import customnode.MeshLoader;
-import ij.IJ;
-import ij.ImagePlus;
-import ij3d.contextmenu.ContextMenu;
-import ij3d.pointlist.PointListDialog;
-import ij3d.shortcuts.ShortCuts;
-
 import java.awt.BorderLayout;
 import java.awt.CheckboxMenuItem;
 import java.awt.GraphicsDevice;
@@ -41,21 +28,34 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-import org.scijava.java3d.BranchGroup;
-import org.scijava.java3d.Canvas3D;
-import org.scijava.java3d.Transform3D;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.SwingUtilities;
+
+import org.scijava.java3d.BranchGroup;
+import org.scijava.java3d.Canvas3D;
+import org.scijava.java3d.Transform3D;
 import org.scijava.vecmath.AxisAngle4d;
 import org.scijava.vecmath.Color3f;
 import org.scijava.vecmath.Point3d;
 import org.scijava.vecmath.Point3f;
 import org.scijava.vecmath.Vector3d;
 
+import customnode.CustomLineMesh;
+import customnode.CustomMesh;
+import customnode.CustomMultiMesh;
+import customnode.CustomPointMesh;
+import customnode.CustomQuadMesh;
+import customnode.CustomTriangleMesh;
+import customnode.MeshLoader;
+import ij.IJ;
+import ij.ImagePlus;
+import ij3d.contextmenu.ContextMenu;
+import ij3d.pointlist.PointListDialog;
+import ij3d.shortcuts.ShortCuts;
 import octree.VolumeOctree;
 import view4d.Timeline;
 import view4d.TimelineGUI;

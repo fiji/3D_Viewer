@@ -1,8 +1,6 @@
 
 package orthoslice;
 
-import ij.ImagePlus;
-
 import java.util.Arrays;
 import java.util.BitSet;
 
@@ -15,6 +13,7 @@ import org.scijava.java3d.Switch;
 import org.scijava.java3d.View;
 import org.scijava.vecmath.Color3f;
 
+import ij.ImagePlus;
 import voltex.VolumeRenderer;
 
 public class MultiOrthoslice extends VolumeRenderer {

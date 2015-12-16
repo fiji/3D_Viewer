@@ -2,18 +2,18 @@
 
 package ij3d;
 
-import ij.ImagePlus;
-import ij.ImageStack;
-import ij.gui.GUI;
-import ij.plugin.PlugIn;
-import ij.process.ByteProcessor;
-
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.scijava.vecmath.Color3f;
 import org.scijava.vecmath.Point3f;
+
+import ij.ImagePlus;
+import ij.ImageStack;
+import ij.gui.GUI;
+import ij.plugin.PlugIn;
+import ij.process.ByteProcessor;
 
 /* A test for the 3D viewer.  The results are odd at the moment - one
    end of the red line should always appear to be at the centre of the

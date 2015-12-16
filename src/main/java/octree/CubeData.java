@@ -1,8 +1,6 @@
 
 package octree;
 
-import ij3d.AxisConstants;
-
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.io.DataInputStream;
@@ -12,6 +10,8 @@ import java.io.IOException;
 
 import org.scijava.java3d.TexCoordGeneration;
 import org.scijava.vecmath.Vector4f;
+
+import ij3d.AxisConstants;
 
 public class CubeData implements AxisConstants {
 

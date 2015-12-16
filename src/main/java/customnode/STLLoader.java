@@ -1,8 +1,6 @@
 
 package customnode;
 
-import ij.IJ;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -16,6 +14,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.scijava.vecmath.Point3f;
+
+import ij.IJ;
 
 public class STLLoader {
 

@@ -1,10 +1,6 @@
 
 package marchingcubes;
 
-import ij.IJ;
-import ij3d.AreaListVolume;
-import ij3d.Volume;
-
 import java.awt.Polygon;
 import java.awt.Rectangle;
 import java.awt.geom.Area;
@@ -15,6 +11,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.scijava.vecmath.Point3f;
+
+import ij.IJ;
+import ij3d.AreaListVolume;
+import ij3d.Volume;
 
 public final class MCCube {
 

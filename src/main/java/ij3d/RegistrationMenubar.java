@@ -1,9 +1,6 @@
 
 package ij3d;
 
-import ij.IJ;
-import ij.gui.GenericDialog;
-
 import java.awt.Button;
 import java.awt.FlowLayout;
 import java.awt.Panel;
@@ -15,12 +12,15 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-import org.scijava.java3d.Transform3D;
-import org.scijava.java3d.View;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
+import org.scijava.java3d.Transform3D;
+import org.scijava.java3d.View;
+
+import ij.IJ;
+import ij.gui.GenericDialog;
 import vib.BenesNamedPoint;
 import vib.FastMatrix;
 import vib.PointList;

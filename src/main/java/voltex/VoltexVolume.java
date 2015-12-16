@@ -1,10 +1,6 @@
 
 package voltex;
 
-import ij.IJ;
-import ij.ImagePlus;
-import ij3d.Volume;
-
 import java.awt.Transparency;
 import java.awt.color.ColorSpace;
 import java.awt.image.BufferedImage;
@@ -20,6 +16,10 @@ import java.awt.image.WritableRaster;
 import org.scijava.java3d.ImageComponent;
 import org.scijava.java3d.ImageComponent2D;
 import org.scijava.vecmath.Point3d;
+
+import ij.IJ;
+import ij.ImagePlus;
+import ij3d.Volume;
 
 /**
  * This class encapsulates an image stack and provides various methods for

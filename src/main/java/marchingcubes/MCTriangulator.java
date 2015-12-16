@@ -1,6 +1,10 @@
 
 package marchingcubes;
 
+import java.util.List;
+
+import org.scijava.vecmath.Point3f;
+
 import ij.ImagePlus;
 import ij.ImageStack;
 import ij.measure.Calibration;
@@ -10,11 +14,6 @@ import ij.process.ImageProcessor;
 import ij3d.AreaListVolume;
 import ij3d.Volume;
 import isosurface.Triangulator;
-
-import java.util.List;
-
-import org.scijava.vecmath.Point3f;
-
 import vib.NaiveResampler;
 
 public class MCTriangulator implements Triangulator {

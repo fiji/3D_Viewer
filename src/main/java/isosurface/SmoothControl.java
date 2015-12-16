@@ -1,17 +1,6 @@
 
 package isosurface;
 
-import customnode.CustomMesh;
-import customnode.CustomMeshNode;
-import customnode.CustomMultiMesh;
-import customnode.CustomTriangleMesh;
-import ij.IJ;
-import ij.gui.GenericDialog;
-import ij3d.Content;
-import ij3d.ContentInstant;
-import ij3d.ContentNode;
-import ij3d.Image3DUniverse;
-
 import java.awt.Choice;
 import java.awt.Scrollbar;
 import java.awt.event.AdjustmentEvent;
@@ -28,6 +17,17 @@ import java.util.Map;
 import java.util.Set;
 
 import org.scijava.vecmath.Point3f;
+
+import customnode.CustomMesh;
+import customnode.CustomMeshNode;
+import customnode.CustomMultiMesh;
+import customnode.CustomTriangleMesh;
+import ij.IJ;
+import ij.gui.GenericDialog;
+import ij3d.Content;
+import ij3d.ContentInstant;
+import ij3d.ContentNode;
+import ij3d.Image3DUniverse;
 
 public class SmoothControl {
 

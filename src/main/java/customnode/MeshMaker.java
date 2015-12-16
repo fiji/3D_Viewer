@@ -8,15 +8,15 @@
 
 package customnode;
 
-import ij.IJ;
-import ij3d.Pipe;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import org.scijava.vecmath.Point3f;
 import org.scijava.vecmath.Vector3f;
+
+import ij.IJ;
+import ij3d.Pipe;
 
 public class MeshMaker {
 

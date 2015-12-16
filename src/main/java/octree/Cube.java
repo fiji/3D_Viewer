@@ -1,8 +1,6 @@
 
 package octree;
 
-import ij3d.AxisConstants;
-
 import java.io.File;
 import java.util.List;
 
@@ -10,6 +8,8 @@ import org.scijava.java3d.Canvas3D;
 import org.scijava.java3d.Transform3D;
 import org.scijava.vecmath.Point2d;
 import org.scijava.vecmath.Point3d;
+
+import ij3d.AxisConstants;
 
 public class Cube implements AxisConstants, Comparable<Cube> {
 

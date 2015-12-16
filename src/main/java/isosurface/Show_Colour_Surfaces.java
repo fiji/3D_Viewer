@@ -27,6 +27,11 @@
 
 package isosurface;
 
+import java.awt.image.IndexColorModel;
+import java.util.HashMap;
+
+import org.scijava.vecmath.Color3f;
+
 import ij.IJ;
 import ij.ImagePlus;
 import ij.ImageStack;
@@ -38,12 +43,6 @@ import ij.process.ByteProcessor;
 import ij3d.Content;
 import ij3d.ContentConstants;
 import ij3d.Image3DUniverse;
-
-import java.awt.image.IndexColorModel;
-import java.util.HashMap;
-
-import org.scijava.vecmath.Color3f;
-
 import process3d.Smooth;
 import vib.NaiveResampler;
 

@@ -1,11 +1,11 @@
 
 package voltex;
 
-import ij3d.AxisConstants;
-
 import org.scijava.java3d.Geometry;
 import org.scijava.java3d.GeometryArray;
 import org.scijava.java3d.QuadArray;
+
+import ij3d.AxisConstants;
 
 /**
  * This class is a helper class whose main task is to create Geometry objects

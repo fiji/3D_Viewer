@@ -1,6 +1,15 @@
 
 package ij3d;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.scijava.java3d.Transform3D;
+import org.scijava.vecmath.Color3f;
+import org.scijava.vecmath.Point3f;
+
 import customnode.Box;
 import customnode.Cone;
 import customnode.Sphere;
@@ -13,16 +22,6 @@ import ij.gui.GUI;
 import ij.plugin.PlugIn;
 import ij3d.gui.PrimitiveDialogs;
 import isosurface.MeshExporter;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.scijava.java3d.Transform3D;
-import org.scijava.vecmath.Color3f;
-import org.scijava.vecmath.Point3f;
-
 import orthoslice.OrthoGroup;
 import voltex.VoltexGroup;
 

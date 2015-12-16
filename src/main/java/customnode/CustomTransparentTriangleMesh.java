@@ -1,9 +1,6 @@
 
 package customnode;
 
-import org.scijava.java3d.utils.geometry.GeometryInfo;
-import org.scijava.java3d.utils.geometry.NormalGenerator;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -16,6 +13,8 @@ import org.scijava.java3d.Material;
 import org.scijava.java3d.PolygonAttributes;
 import org.scijava.java3d.TransparencyAttributes;
 import org.scijava.java3d.TriangleArray;
+import org.scijava.java3d.utils.geometry.GeometryInfo;
+import org.scijava.java3d.utils.geometry.NormalGenerator;
 import org.scijava.vecmath.Color3f;
 import org.scijava.vecmath.Color4f;
 import org.scijava.vecmath.Point3f;

@@ -4,9 +4,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Map;
 
-import ij.IJ;
 import ij.plugin.PlugIn;
-import ij3d.ImageJ3DViewer;
 
 public class ImageJ_3D_Viewer implements PlugIn {
 

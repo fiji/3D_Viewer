@@ -1,8 +1,6 @@
 
 package orthoslice;
 
-import ij.ImagePlus;
-
 import java.util.BitSet;
 
 import org.scijava.java3d.Group;
@@ -14,6 +12,7 @@ import org.scijava.java3d.Texture2D;
 import org.scijava.java3d.View;
 import org.scijava.vecmath.Color3f;
 
+import ij.ImagePlus;
 import voltex.VolumeRenderer;
 
 /**

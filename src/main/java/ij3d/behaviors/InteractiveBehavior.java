@@ -1,15 +1,6 @@
 
 package ij3d.behaviors;
 
-import ij.IJ;
-import ij3d.AxisConstants;
-import ij3d.Content;
-import ij3d.ContentConstants;
-import ij3d.ContentInstant;
-import ij3d.DefaultUniverse;
-import ij3d.Image3DUniverse;
-import ij3d.ImageCanvas3D;
-
 import java.awt.AWTEvent;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
@@ -23,6 +14,14 @@ import org.scijava.java3d.WakeupCondition;
 import org.scijava.java3d.WakeupOnAWTEvent;
 import org.scijava.java3d.WakeupOr;
 
+import ij.IJ;
+import ij3d.AxisConstants;
+import ij3d.Content;
+import ij3d.ContentConstants;
+import ij3d.ContentInstant;
+import ij3d.DefaultUniverse;
+import ij3d.Image3DUniverse;
+import ij3d.ImageCanvas3D;
 import orthoslice.OrthoGroup;
 
 /**

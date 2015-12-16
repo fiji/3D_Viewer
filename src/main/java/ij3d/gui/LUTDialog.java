@@ -1,8 +1,6 @@
 
 package ij3d.gui;
 
-import ij.gui.GenericDialog;
-
 import java.awt.Button;
 import java.awt.Choice;
 import java.awt.Color;
@@ -21,6 +19,8 @@ import java.awt.event.MouseMotionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
+
+import ij.gui.GenericDialog;
 
 public class LUTDialog extends GenericDialog {
 

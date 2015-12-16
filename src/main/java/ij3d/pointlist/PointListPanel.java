@@ -1,8 +1,6 @@
 
 package ij3d.pointlist;
 
-import ij.gui.GenericDialog;
-
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
@@ -19,6 +17,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.DecimalFormat;
 
+import ij.gui.GenericDialog;
 import vib.BenesNamedPoint;
 import vib.PointList;
 

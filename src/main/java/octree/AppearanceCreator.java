@@ -1,8 +1,6 @@
 
 package octree;
 
-import ij3d.AxisConstants;
-
 import org.scijava.java3d.Appearance;
 import org.scijava.java3d.ColoringAttributes;
 import org.scijava.java3d.ImageComponent;
@@ -15,6 +13,8 @@ import org.scijava.java3d.Texture2D;
 import org.scijava.java3d.TextureAttributes;
 import org.scijava.java3d.TransparencyAttributes;
 import org.scijava.vecmath.Color3f;
+
+import ij3d.AxisConstants;
 
 public class AppearanceCreator implements AxisConstants {
 

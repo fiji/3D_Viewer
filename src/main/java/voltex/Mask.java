@@ -1,11 +1,6 @@
 
 package voltex;
 
-import ij.IJ;
-import ij.ImagePlus;
-import ij.gui.GenericDialog;
-import ij.gui.Roi;
-
 import java.awt.Choice;
 import java.awt.Color;
 import java.awt.Font;
@@ -26,6 +21,11 @@ import org.scijava.vecmath.Color4f;
 import org.scijava.vecmath.Point2d;
 import org.scijava.vecmath.Point3d;
 import org.scijava.vecmath.Point3i;
+
+import ij.IJ;
+import ij.ImagePlus;
+import ij.gui.GenericDialog;
+import ij.gui.Roi;
 
 public class Mask extends VoltexVolume {
 

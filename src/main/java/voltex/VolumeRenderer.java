@@ -1,10 +1,6 @@
 
 package voltex;
 
-import ij.IJ;
-import ij.ImagePlus;
-import ij3d.AxisConstants;
-
 import org.scijava.java3d.Appearance;
 import org.scijava.java3d.BranchGroup;
 import org.scijava.java3d.Canvas3D;
@@ -20,6 +16,10 @@ import org.scijava.java3d.View;
 import org.scijava.vecmath.Color3f;
 import org.scijava.vecmath.Point3d;
 import org.scijava.vecmath.Vector3d;
+
+import ij.IJ;
+import ij.ImagePlus;
+import ij3d.AxisConstants;
 
 /**
  * This class is the main class for creating a volume rendering. It consists of

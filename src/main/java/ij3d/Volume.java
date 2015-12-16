@@ -1,14 +1,14 @@
 
 package ij3d;
 
+import java.awt.image.IndexColorModel;
+
+import org.scijava.vecmath.Point3d;
+
 import ij.IJ;
 import ij.ImagePlus;
 import ij.ImageStack;
 import ij.measure.Calibration;
-
-import java.awt.image.IndexColorModel;
-
-import org.scijava.vecmath.Point3d;
 
 /**
  * This class encapsulates an image stack and provides various methods for

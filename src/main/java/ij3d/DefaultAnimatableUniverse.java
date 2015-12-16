@@ -1,11 +1,6 @@
 
 package ij3d;
 
-import ij.IJ;
-import ij.ImagePlus;
-import ij.ImageStack;
-import ij.process.ImageProcessor;
-
 import org.scijava.java3d.Alpha;
 import org.scijava.java3d.BranchGroup;
 import org.scijava.java3d.RotationInterpolator;
@@ -15,6 +10,11 @@ import org.scijava.java3d.View;
 import org.scijava.vecmath.AxisAngle4d;
 import org.scijava.vecmath.Vector3d;
 import org.scijava.vecmath.Vector3f;
+
+import ij.IJ;
+import ij.ImagePlus;
+import ij.ImageStack;
+import ij.process.ImageProcessor;
 
 public abstract class DefaultAnimatableUniverse extends DefaultUniverse {
 

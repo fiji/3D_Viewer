@@ -1,8 +1,6 @@
 
 package ij3d;
 
-import ij.gui.GenericDialog;
-
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.io.File;
@@ -11,9 +9,12 @@ import java.io.FileOutputStream;
 import java.util.HashMap;
 import java.util.Properties;
 
-import org.scijava.java3d.View;
 import javax.swing.KeyStroke;
+
+import org.scijava.java3d.View;
 import org.scijava.vecmath.Color3f;
+
+import ij.gui.GenericDialog;
 
 public class UniverseSettings {
 

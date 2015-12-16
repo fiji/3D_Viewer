@@ -1,12 +1,6 @@
 
 package isosurface;
 
-import customnode.CustomTriangleMesh;
-import ij.IJ;
-import ij3d.Content;
-import ij3d.ContentInstant;
-import ij3d.ContentNode;
-
 import java.awt.Color;
 import java.util.List;
 
@@ -15,6 +9,11 @@ import org.scijava.vecmath.Color3f;
 import org.scijava.vecmath.Point3f;
 import org.scijava.vecmath.Tuple3d;
 
+import customnode.CustomTriangleMesh;
+import ij.IJ;
+import ij3d.Content;
+import ij3d.ContentInstant;
+import ij3d.ContentNode;
 import marchingcubes.MCTriangulator;
 
 public class MeshGroup extends ContentNode {

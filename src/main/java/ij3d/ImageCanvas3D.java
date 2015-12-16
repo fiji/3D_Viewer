@@ -1,13 +1,6 @@
 
 package ij3d;
 
-import org.scijava.java3d.utils.universe.SimpleUniverse;
-
-import ij.ImagePlus;
-import ij.gui.ImageCanvas;
-import ij.gui.Roi;
-import ij.process.ByteProcessor;
-
 import java.awt.Dimension;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
@@ -24,7 +17,13 @@ import java.util.concurrent.Executors;
 import org.scijava.java3d.Background;
 import org.scijava.java3d.Canvas3D;
 import org.scijava.java3d.J3DGraphics2D;
+import org.scijava.java3d.utils.universe.SimpleUniverse;
 import org.scijava.vecmath.Color3f;
+
+import ij.ImagePlus;
+import ij.gui.ImageCanvas;
+import ij.gui.Roi;
+import ij.process.ByteProcessor;
 
 public class ImageCanvas3D extends Canvas3D implements KeyListener {
 

@@ -1,10 +1,6 @@
 
 package ij3d.pointlist;
 
-import org.scijava.java3d.utils.geometry.Primitive;
-import org.scijava.java3d.utils.geometry.Sphere;
-import org.scijava.java3d.utils.geometry.Text2D;
-
 import java.awt.Font;
 
 import org.scijava.java3d.Alpha;
@@ -21,6 +17,9 @@ import org.scijava.java3d.ScaleInterpolator;
 import org.scijava.java3d.Shape3D;
 import org.scijava.java3d.Transform3D;
 import org.scijava.java3d.TransformGroup;
+import org.scijava.java3d.utils.geometry.Primitive;
+import org.scijava.java3d.utils.geometry.Sphere;
+import org.scijava.java3d.utils.geometry.Text2D;
 import org.scijava.vecmath.Color3f;
 import org.scijava.vecmath.Point3d;
 import org.scijava.vecmath.Point3f;

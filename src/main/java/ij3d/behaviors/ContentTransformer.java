@@ -1,10 +1,6 @@
 
 package ij3d.behaviors;
 
-import ij3d.Content;
-import ij3d.DefaultUniverse;
-import ij3d.ImageCanvas3D;
-
 import java.awt.event.MouseEvent;
 
 import org.scijava.java3d.Transform3D;
@@ -12,6 +8,10 @@ import org.scijava.java3d.TransformGroup;
 import org.scijava.vecmath.AxisAngle4d;
 import org.scijava.vecmath.Point3d;
 import org.scijava.vecmath.Vector3d;
+
+import ij3d.Content;
+import ij3d.DefaultUniverse;
+import ij3d.ImageCanvas3D;
 
 /**
  * This class is a helper class which transforms MouseEvents to an appropriate

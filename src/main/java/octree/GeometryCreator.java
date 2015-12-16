@@ -1,10 +1,10 @@
 
 package octree;
 
-import ij3d.AxisConstants;
-
 import org.scijava.java3d.GeometryArray;
 import org.scijava.java3d.QuadArray;
+
+import ij3d.AxisConstants;
 
 public class GeometryCreator implements AxisConstants {
 

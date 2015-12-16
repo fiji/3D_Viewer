@@ -1,13 +1,13 @@
 
 package ij3d;
 
-import ij.ImagePlus;
-import ij.ImageStack;
-import ij.process.ByteProcessor;
-
 import java.awt.image.IndexColorModel;
 
 import org.scijava.vecmath.Color3f;
+
+import ij.ImagePlus;
+import ij.ImageStack;
+import ij.process.ByteProcessor;
 
 public class ColorTable {
 

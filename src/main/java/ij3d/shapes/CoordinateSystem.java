@@ -1,8 +1,6 @@
 
 package ij3d.shapes;
 
-import org.scijava.java3d.utils.geometry.Text2D;
-
 import java.awt.Font;
 
 import org.scijava.java3d.Appearance;
@@ -16,6 +14,7 @@ import org.scijava.java3d.PolygonAttributes;
 import org.scijava.java3d.Shape3D;
 import org.scijava.java3d.Transform3D;
 import org.scijava.java3d.TransformGroup;
+import org.scijava.java3d.utils.geometry.Text2D;
 import org.scijava.vecmath.Color3f;
 import org.scijava.vecmath.Point3f;
 import org.scijava.vecmath.Vector3f;

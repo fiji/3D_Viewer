@@ -1,14 +1,6 @@
 
 package customnode.u3d;
 
-import customnode.CustomMeshNode;
-import customnode.CustomTriangleMesh;
-import ij3d.Content;
-import ij3d.ContentNode;
-import ij3d.Image3DUniverse;
-import ij3d.ImageCanvas3D;
-import isosurface.MeshGroup;
-
 import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -26,6 +18,14 @@ import org.scijava.vecmath.Color3f;
 import org.scijava.vecmath.Color4f;
 import org.scijava.vecmath.Point3f;
 import org.scijava.vecmath.Vector3f;
+
+import customnode.CustomMeshNode;
+import customnode.CustomTriangleMesh;
+import ij3d.Content;
+import ij3d.ContentNode;
+import ij3d.Image3DUniverse;
+import ij3d.ImageCanvas3D;
+import isosurface.MeshGroup;
 
 /**
  * Some links:

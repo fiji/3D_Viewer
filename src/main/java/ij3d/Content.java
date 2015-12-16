@@ -1,13 +1,6 @@
 
 package ij3d;
 
-import ij.IJ;
-import ij.ImagePlus;
-import ij.io.FileInfo;
-import ij.io.OpenDialog;
-import ij.io.SaveDialog;
-import ij3d.pointlist.PointListDialog;
-
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -30,6 +23,12 @@ import org.scijava.vecmath.Color3f;
 import org.scijava.vecmath.Point3d;
 import org.scijava.vecmath.Vector3f;
 
+import ij.IJ;
+import ij.ImagePlus;
+import ij.io.FileInfo;
+import ij.io.OpenDialog;
+import ij.io.SaveDialog;
+import ij3d.pointlist.PointListDialog;
 import vib.PointList;
 
 public class Content extends BranchGroup implements UniverseListener,

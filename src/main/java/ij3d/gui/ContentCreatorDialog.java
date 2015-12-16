@@ -1,6 +1,15 @@
 
 package ij3d.gui;
 
+import java.awt.Choice;
+import java.awt.TextField;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.io.File;
+import java.util.Vector;
+
+import org.scijava.vecmath.Color3f;
+
 import ij.IJ;
 import ij.ImagePlus;
 import ij.WindowManager;
@@ -10,15 +19,6 @@ import ij3d.Content;
 import ij3d.ContentConstants;
 import ij3d.ContentCreator;
 import ij3d.Image3DUniverse;
-
-import java.awt.Choice;
-import java.awt.TextField;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.io.File;
-import java.util.Vector;
-
-import org.scijava.vecmath.Color3f;
 
 public class ContentCreatorDialog {
 

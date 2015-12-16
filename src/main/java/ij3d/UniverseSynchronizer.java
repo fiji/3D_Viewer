@@ -1,13 +1,12 @@
 
 package ij3d;
 
-import org.scijava.java3d.utils.universe.MultiTransformGroup;
-
-import ij3d.DefaultUniverse.GlobalTransform;
-
 import java.util.HashMap;
 
 import org.scijava.java3d.View;
+import org.scijava.java3d.utils.universe.MultiTransformGroup;
+
+import ij3d.DefaultUniverse.GlobalTransform;
 
 public class UniverseSynchronizer {
 

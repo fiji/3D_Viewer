@@ -5,13 +5,14 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Enumeration;
 
-import org.scijava.java3d.Group;
-import org.scijava.java3d.Node;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTree;
 import javax.swing.tree.TreeNode;
+
+import org.scijava.java3d.Group;
+import org.scijava.java3d.Node;
 
 public class ScenegraphDebugger {
 

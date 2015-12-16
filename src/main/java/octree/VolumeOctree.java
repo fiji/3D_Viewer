@@ -1,10 +1,6 @@
 
 package octree;
 
-import ij3d.AxisConstants;
-import ij3d.Content;
-import ij3d.UniverseListener;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.ArrayList;
@@ -23,6 +19,10 @@ import org.scijava.java3d.Transform3D;
 import org.scijava.java3d.View;
 import org.scijava.vecmath.Point3d;
 import org.scijava.vecmath.Vector3d;
+
+import ij3d.AxisConstants;
+import ij3d.Content;
+import ij3d.UniverseListener;
 
 public class VolumeOctree implements UniverseListener, AxisConstants {
 

@@ -1,9 +1,9 @@
 
 package isosurface;
 
-import ij.ImagePlus;
-
 import java.util.List;
+
+import ij.ImagePlus;
 
 public interface Triangulator {
 

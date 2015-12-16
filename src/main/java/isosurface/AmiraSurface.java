@@ -1,12 +1,6 @@
 
 package isosurface;
 
-import amira.AmiraParameters;
-import ij.IJ;
-import ij.io.OpenDialog;
-import ij.plugin.PlugIn;
-import ij3d.Image3DUniverse;
-
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -18,6 +12,12 @@ import java.util.Map;
 
 import org.scijava.vecmath.Color3f;
 import org.scijava.vecmath.Point3f;
+
+import amira.AmiraParameters;
+import ij.IJ;
+import ij.io.OpenDialog;
+import ij.plugin.PlugIn;
+import ij3d.Image3DUniverse;
 
 public class AmiraSurface implements PlugIn {
 

@@ -1,15 +1,6 @@
 
 package voltex;
 
-import ij.IJ;
-import ij.ImagePlus;
-import ij.gui.Roi;
-import ij.measure.Calibration;
-import ij.process.ImageProcessor;
-import ij3d.Content;
-import ij3d.ContentInstant;
-import ij3d.ContentNode;
-
 import java.awt.Polygon;
 
 import org.scijava.java3d.Canvas3D;
@@ -20,6 +11,14 @@ import org.scijava.vecmath.Point2d;
 import org.scijava.vecmath.Point3d;
 import org.scijava.vecmath.Tuple3d;
 
+import ij.IJ;
+import ij.ImagePlus;
+import ij.gui.Roi;
+import ij.measure.Calibration;
+import ij.process.ImageProcessor;
+import ij3d.Content;
+import ij3d.ContentInstant;
+import ij3d.ContentNode;
 import vib.NaiveResampler;
 
 /**

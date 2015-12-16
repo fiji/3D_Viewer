@@ -1,16 +1,6 @@
 
 package ij3d;
 
-import customnode.CustomMesh;
-import customnode.CustomMeshNode;
-import customnode.CustomMultiMesh;
-import customnode.MeshLoader;
-import customnode.WavefrontExporter;
-import ij.IJ;
-import ij.gui.GenericDialog;
-import ij.io.FileInfo;
-import ij.io.SaveDialog;
-
 import java.awt.Button;
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -33,6 +23,15 @@ import java.util.TreeMap;
 import org.scijava.java3d.Transform3D;
 import org.scijava.vecmath.Color3f;
 
+import customnode.CustomMesh;
+import customnode.CustomMeshNode;
+import customnode.CustomMultiMesh;
+import customnode.MeshLoader;
+import customnode.WavefrontExporter;
+import ij.IJ;
+import ij.gui.GenericDialog;
+import ij.io.FileInfo;
+import ij.io.SaveDialog;
 import orthoslice.OrthoGroup;
 import surfaceplot.SurfacePlotGroup;
 

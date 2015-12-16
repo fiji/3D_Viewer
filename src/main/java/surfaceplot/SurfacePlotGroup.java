@@ -1,13 +1,6 @@
 
 package surfaceplot;
 
-import ij.ImagePlus;
-import ij.gui.StackWindow;
-import ij3d.Content;
-import ij3d.ContentInstant;
-import ij3d.ContentNode;
-import ij3d.Volume;
-
 import java.awt.Component;
 import java.awt.Scrollbar;
 import java.awt.event.AdjustmentEvent;
@@ -18,6 +11,12 @@ import org.scijava.vecmath.Color3f;
 import org.scijava.vecmath.Point3d;
 import org.scijava.vecmath.Tuple3d;
 
+import ij.ImagePlus;
+import ij.gui.StackWindow;
+import ij3d.Content;
+import ij3d.ContentInstant;
+import ij3d.ContentNode;
+import ij3d.Volume;
 import vib.NaiveResampler;
 
 /**

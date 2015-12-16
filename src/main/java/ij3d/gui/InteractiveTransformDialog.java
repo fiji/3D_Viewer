@@ -1,8 +1,6 @@
 
 package ij3d.gui;
 
-import ij.gui.GenericDialog;
-
 import java.awt.Button;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -27,6 +25,7 @@ import org.scijava.vecmath.Point3f;
 import org.scijava.vecmath.Tuple3f;
 import org.scijava.vecmath.Vector3f;
 
+import ij.gui.GenericDialog;
 import math3d.TransformIO;
 
 @SuppressWarnings("serial")

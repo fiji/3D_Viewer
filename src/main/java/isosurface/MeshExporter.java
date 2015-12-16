@@ -2,17 +2,6 @@
 
 package isosurface;
 
-import customnode.CustomMesh;
-import customnode.CustomMeshNode;
-import customnode.CustomMultiMesh;
-import customnode.CustomQuadMesh;
-import customnode.CustomTriangleMesh;
-import customnode.WavefrontExporter;
-import ij.IJ;
-import ij3d.Content;
-import ij3d.ContentNode;
-import ij3d.Executer;
-
 import java.io.BufferedOutputStream;
 import java.io.DataOutputStream;
 import java.io.File;
@@ -31,6 +20,17 @@ import java.util.List;
 
 import org.scijava.vecmath.Color3f;
 import org.scijava.vecmath.Point3f;
+
+import customnode.CustomMesh;
+import customnode.CustomMeshNode;
+import customnode.CustomMultiMesh;
+import customnode.CustomQuadMesh;
+import customnode.CustomTriangleMesh;
+import customnode.WavefrontExporter;
+import ij.IJ;
+import ij3d.Content;
+import ij3d.ContentNode;
+import ij3d.Executer;
 
 public class MeshExporter {
 

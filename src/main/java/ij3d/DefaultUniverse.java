@@ -1,19 +1,6 @@
 
 package ij3d;
 
-import org.scijava.java3d.utils.universe.MultiTransformGroup;
-import org.scijava.java3d.utils.universe.SimpleUniverse;
-
-import ij.ImagePlus;
-import ij3d.behaviors.BehaviorCallback;
-import ij3d.behaviors.ContentTransformer;
-import ij3d.behaviors.InteractiveBehavior;
-import ij3d.behaviors.InteractiveViewPlatformTransformer;
-import ij3d.behaviors.Picker;
-import ij3d.behaviors.WaitForNextFrameBehavior;
-import ij3d.shapes.CoordinateSystem;
-import ij3d.shapes.Scalebar;
-
 import java.awt.Dimension;
 import java.awt.GraphicsConfigTemplate;
 import java.awt.GraphicsConfiguration;
@@ -45,8 +32,20 @@ import org.scijava.java3d.Screen3D;
 import org.scijava.java3d.Switch;
 import org.scijava.java3d.Transform3D;
 import org.scijava.java3d.TransformGroup;
+import org.scijava.java3d.utils.universe.MultiTransformGroup;
+import org.scijava.java3d.utils.universe.SimpleUniverse;
 import org.scijava.vecmath.Color3f;
 import org.scijava.vecmath.Point3d;
+
+import ij.ImagePlus;
+import ij3d.behaviors.BehaviorCallback;
+import ij3d.behaviors.ContentTransformer;
+import ij3d.behaviors.InteractiveBehavior;
+import ij3d.behaviors.InteractiveViewPlatformTransformer;
+import ij3d.behaviors.Picker;
+import ij3d.behaviors.WaitForNextFrameBehavior;
+import ij3d.shapes.CoordinateSystem;
+import ij3d.shapes.Scalebar;
 
 public abstract class DefaultUniverse extends SimpleUniverse implements
 	BehaviorCallback

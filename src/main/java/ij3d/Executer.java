@@ -1,33 +1,6 @@
 
 package ij3d;
 
-import customnode.CustomMesh;
-import customnode.CustomMeshNode;
-import customnode.CustomMultiMesh;
-import customnode.CustomTriangleMesh;
-import customnode.u3d.U3DExporter;
-import ij.IJ;
-import ij.ImagePlus;
-import ij.WindowManager;
-import ij.gui.GenericDialog;
-import ij.gui.YesNoCancelDialog;
-import ij.io.DirectoryChooser;
-import ij.io.OpenDialog;
-import ij.io.SaveDialog;
-import ij.plugin.frame.Recorder;
-import ij.text.TextWindow;
-import ij3d.gui.ContentCreatorDialog;
-import ij3d.gui.InteractiveMeshDecimation;
-import ij3d.gui.InteractiveTransformDialog;
-import ij3d.gui.LUTDialog;
-import ij3d.gui.PrimitiveDialogs;
-import ij3d.shapes.Scalebar;
-import ij3d.shortcuts.ShortCutDialog;
-import isosurface.MeshEditor;
-import isosurface.MeshExporter;
-import isosurface.MeshGroup;
-import isosurface.SmoothControl;
-
 import java.awt.Button;
 import java.awt.Checkbox;
 import java.awt.Cursor;
@@ -55,12 +28,12 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import javax.swing.JFileChooser;
+
 import org.scijava.java3d.Background;
 import org.scijava.java3d.PointLight;
 import org.scijava.java3d.Transform3D;
 import org.scijava.java3d.VirtualUniverse;
-
-import javax.swing.JFileChooser;
 import org.scijava.vecmath.Color3f;
 import org.scijava.vecmath.Matrix4d;
 import org.scijava.vecmath.Matrix4f;
@@ -68,6 +41,32 @@ import org.scijava.vecmath.Point3d;
 import org.scijava.vecmath.Point3f;
 import org.scijava.vecmath.Vector3f;
 
+import customnode.CustomMesh;
+import customnode.CustomMeshNode;
+import customnode.CustomMultiMesh;
+import customnode.CustomTriangleMesh;
+import customnode.u3d.U3DExporter;
+import ij.IJ;
+import ij.ImagePlus;
+import ij.WindowManager;
+import ij.gui.GenericDialog;
+import ij.gui.YesNoCancelDialog;
+import ij.io.DirectoryChooser;
+import ij.io.OpenDialog;
+import ij.io.SaveDialog;
+import ij.plugin.frame.Recorder;
+import ij.text.TextWindow;
+import ij3d.gui.ContentCreatorDialog;
+import ij3d.gui.InteractiveMeshDecimation;
+import ij3d.gui.InteractiveTransformDialog;
+import ij3d.gui.LUTDialog;
+import ij3d.gui.PrimitiveDialogs;
+import ij3d.shapes.Scalebar;
+import ij3d.shortcuts.ShortCutDialog;
+import isosurface.MeshEditor;
+import isosurface.MeshExporter;
+import isosurface.MeshGroup;
+import isosurface.SmoothControl;
 import math3d.TransformIO;
 import orthoslice.MultiOrthoGroup;
 import orthoslice.OrthoGroup;

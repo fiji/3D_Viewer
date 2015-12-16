@@ -1,9 +1,6 @@
 
 package voltex;
 
-import ij3d.AxisConstants;
-import ij3d.Volume;
-
 import org.scijava.java3d.Appearance;
 import org.scijava.java3d.ColoringAttributes;
 import org.scijava.java3d.ImageComponent2D;
@@ -18,6 +15,9 @@ import org.scijava.java3d.TextureUnitState;
 import org.scijava.java3d.TransparencyAttributes;
 import org.scijava.vecmath.Color3f;
 import org.scijava.vecmath.Vector4f;
+
+import ij3d.AxisConstants;
+import ij3d.Volume;
 
 /**
  * This class is a helper class whose main task is to create Appearance objects

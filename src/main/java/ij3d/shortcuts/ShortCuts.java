@@ -1,8 +1,6 @@
 
 package ij3d.shortcuts;
 
-import ij3d.UniverseSettings;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,6 +9,8 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
+
+import ij3d.UniverseSettings;
 
 public class ShortCuts {
 

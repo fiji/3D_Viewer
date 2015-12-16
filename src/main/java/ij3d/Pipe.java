@@ -60,15 +60,6 @@
 
 package ij3d;
 
-import ij.IJ;
-import ij.ImagePlus;
-import ij.ImageStack;
-import ij.measure.Calibration;
-import ij.process.ByteProcessor;
-import ij.process.ColorProcessor;
-import ij.process.FloatProcessor;
-import ij.process.ShortProcessor;
-
 import java.awt.Color;
 import java.awt.image.IndexColorModel;
 import java.util.ArrayList;
@@ -77,6 +68,15 @@ import java.util.List;
 
 import org.scijava.vecmath.Color3f;
 import org.scijava.vecmath.Point3f;
+
+import ij.IJ;
+import ij.ImagePlus;
+import ij.ImageStack;
+import ij.measure.Calibration;
+import ij.process.ByteProcessor;
+import ij.process.ColorProcessor;
+import ij.process.FloatProcessor;
+import ij.process.ShortProcessor;
 
 public class Pipe {
 

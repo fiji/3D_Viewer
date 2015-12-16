@@ -1,11 +1,6 @@
 
 package customnode;
 
-import org.scijava.java3d.utils.geometry.GeometryInfo;
-import org.scijava.java3d.utils.geometry.NormalGenerator;
-
-import isosurface.MeshProperties;
-
 import java.awt.Polygon;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,10 +11,14 @@ import org.scijava.java3d.Geometry;
 import org.scijava.java3d.GeometryArray;
 import org.scijava.java3d.Transform3D;
 import org.scijava.java3d.TriangleArray;
+import org.scijava.java3d.utils.geometry.GeometryInfo;
+import org.scijava.java3d.utils.geometry.NormalGenerator;
 import org.scijava.vecmath.Color3f;
 import org.scijava.vecmath.Point2d;
 import org.scijava.vecmath.Point3d;
 import org.scijava.vecmath.Point3f;
+
+import isosurface.MeshProperties;
 
 public class CustomTriangleMesh extends CustomMesh {
 
