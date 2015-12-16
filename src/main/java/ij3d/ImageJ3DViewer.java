@@ -19,9 +19,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.media.j3d.Transform3D;
-import javax.vecmath.Color3f;
-import javax.vecmath.Point3f;
+import org.scijava.java3d.Transform3D;
+import org.scijava.vecmath.Color3f;
+import org.scijava.vecmath.Point3f;
 
 import orthoslice.OrthoGroup;
 import voltex.VoltexGroup;

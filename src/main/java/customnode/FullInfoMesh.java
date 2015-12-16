@@ -8,8 +8,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-import javax.vecmath.Point3f;
-import javax.vecmath.Vector3f;
+import org.scijava.vecmath.Point3f;
+import org.scijava.vecmath.Vector3f;
 
 public class FullInfoMesh {
 

@@ -6,10 +6,10 @@ import ij3d.AxisConstants;
 import java.io.File;
 import java.util.List;
 
-import javax.media.j3d.Canvas3D;
-import javax.media.j3d.Transform3D;
-import javax.vecmath.Point2d;
-import javax.vecmath.Point3d;
+import org.scijava.java3d.Canvas3D;
+import org.scijava.java3d.Transform3D;
+import org.scijava.vecmath.Point2d;
+import org.scijava.vecmath.Point3d;
 
 public class Cube implements AxisConstants, Comparable<Cube> {
 

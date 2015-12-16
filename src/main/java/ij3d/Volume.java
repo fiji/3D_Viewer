@@ -8,7 +8,7 @@ import ij.measure.Calibration;
 
 import java.awt.image.IndexColorModel;
 
-import javax.vecmath.Point3d;
+import org.scijava.vecmath.Point3d;
 
 /**
  * This class encapsulates an image stack and provides various methods for

@@ -1,7 +1,7 @@
 
 package ij3d;
 
-import javax.media.j3d.View;
+import org.scijava.java3d.View;
 
 public interface UniverseListener {
 

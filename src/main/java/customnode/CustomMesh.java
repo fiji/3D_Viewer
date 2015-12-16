@@ -1,8 +1,8 @@
 
 package customnode;
 
-import com.sun.j3d.utils.geometry.GeometryInfo;
-import com.sun.j3d.utils.geometry.NormalGenerator;
+import org.scijava.java3d.utils.geometry.GeometryInfo;
+import org.scijava.java3d.utils.geometry.NormalGenerator;
 
 import ij.ImagePlus;
 import ij.measure.Calibration;
@@ -14,16 +14,16 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.media.j3d.Appearance;
-import javax.media.j3d.ColoringAttributes;
-import javax.media.j3d.GeometryArray;
-import javax.media.j3d.GeometryStripArray;
-import javax.media.j3d.Material;
-import javax.media.j3d.PolygonAttributes;
-import javax.media.j3d.Shape3D;
-import javax.media.j3d.TransparencyAttributes;
-import javax.vecmath.Color3f;
-import javax.vecmath.Point3f;
+import org.scijava.java3d.Appearance;
+import org.scijava.java3d.ColoringAttributes;
+import org.scijava.java3d.GeometryArray;
+import org.scijava.java3d.GeometryStripArray;
+import org.scijava.java3d.Material;
+import org.scijava.java3d.PolygonAttributes;
+import org.scijava.java3d.Shape3D;
+import org.scijava.java3d.TransparencyAttributes;
+import org.scijava.vecmath.Color3f;
+import org.scijava.vecmath.Point3f;
 
 import vib.InterpolatedImage;
 

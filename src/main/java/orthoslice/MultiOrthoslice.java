@@ -6,14 +6,14 @@ import ij.ImagePlus;
 import java.util.Arrays;
 import java.util.BitSet;
 
-import javax.media.j3d.Appearance;
-import javax.media.j3d.BranchGroup;
-import javax.media.j3d.GeometryArray;
-import javax.media.j3d.Group;
-import javax.media.j3d.Shape3D;
-import javax.media.j3d.Switch;
-import javax.media.j3d.View;
-import javax.vecmath.Color3f;
+import org.scijava.java3d.Appearance;
+import org.scijava.java3d.BranchGroup;
+import org.scijava.java3d.GeometryArray;
+import org.scijava.java3d.Group;
+import org.scijava.java3d.Shape3D;
+import org.scijava.java3d.Switch;
+import org.scijava.java3d.View;
+import org.scijava.vecmath.Color3f;
 
 import voltex.VolumeRenderer;
 

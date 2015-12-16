@@ -10,8 +10,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 
-import javax.media.j3d.TexCoordGeneration;
-import javax.vecmath.Vector4f;
+import org.scijava.java3d.TexCoordGeneration;
+import org.scijava.vecmath.Vector4f;
 
 public class CubeData implements AxisConstants {
 

@@ -1,30 +1,30 @@
 
 package ij3d.pointlist;
 
-import com.sun.j3d.utils.geometry.Primitive;
-import com.sun.j3d.utils.geometry.Sphere;
-import com.sun.j3d.utils.geometry.Text2D;
+import org.scijava.java3d.utils.geometry.Primitive;
+import org.scijava.java3d.utils.geometry.Sphere;
+import org.scijava.java3d.utils.geometry.Text2D;
 
 import java.awt.Font;
 
-import javax.media.j3d.Alpha;
-import javax.media.j3d.Appearance;
-import javax.media.j3d.BoundingSphere;
-import javax.media.j3d.BranchGroup;
-import javax.media.j3d.ColoringAttributes;
-import javax.media.j3d.Geometry;
-import javax.media.j3d.Group;
-import javax.media.j3d.Material;
-import javax.media.j3d.OrientedShape3D;
-import javax.media.j3d.RenderingAttributes;
-import javax.media.j3d.ScaleInterpolator;
-import javax.media.j3d.Shape3D;
-import javax.media.j3d.Transform3D;
-import javax.media.j3d.TransformGroup;
-import javax.vecmath.Color3f;
-import javax.vecmath.Point3d;
-import javax.vecmath.Point3f;
-import javax.vecmath.Vector3f;
+import org.scijava.java3d.Alpha;
+import org.scijava.java3d.Appearance;
+import org.scijava.java3d.BoundingSphere;
+import org.scijava.java3d.BranchGroup;
+import org.scijava.java3d.ColoringAttributes;
+import org.scijava.java3d.Geometry;
+import org.scijava.java3d.Group;
+import org.scijava.java3d.Material;
+import org.scijava.java3d.OrientedShape3D;
+import org.scijava.java3d.RenderingAttributes;
+import org.scijava.java3d.ScaleInterpolator;
+import org.scijava.java3d.Shape3D;
+import org.scijava.java3d.Transform3D;
+import org.scijava.java3d.TransformGroup;
+import org.scijava.vecmath.Color3f;
+import org.scijava.vecmath.Point3d;
+import org.scijava.vecmath.Point3f;
+import org.scijava.vecmath.Vector3f;
 
 import vib.BenesNamedPoint;
 import vib.PointList;

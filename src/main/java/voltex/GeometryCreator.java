@@ -3,9 +3,9 @@ package voltex;
 
 import ij3d.AxisConstants;
 
-import javax.media.j3d.Geometry;
-import javax.media.j3d.GeometryArray;
-import javax.media.j3d.QuadArray;
+import org.scijava.java3d.Geometry;
+import org.scijava.java3d.GeometryArray;
+import org.scijava.java3d.QuadArray;
 
 /**
  * This class is a helper class whose main task is to create Geometry objects

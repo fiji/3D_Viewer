@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.vecmath.Point3f;
+import org.scijava.vecmath.Point3f;
 
 public final class MCCube {
 

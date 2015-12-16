@@ -18,7 +18,7 @@ import java.awt.event.ItemListener;
 import java.io.File;
 import java.util.Vector;
 
-import javax.vecmath.Color3f;
+import org.scijava.vecmath.Color3f;
 
 public class ContentCreatorDialog {
 

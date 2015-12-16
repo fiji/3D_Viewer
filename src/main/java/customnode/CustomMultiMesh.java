@@ -6,12 +6,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.media.j3d.BranchGroup;
-import javax.media.j3d.Group;
-import javax.media.j3d.View;
-import javax.vecmath.Color3f;
-import javax.vecmath.Point3f;
-import javax.vecmath.Tuple3d;
+import org.scijava.java3d.BranchGroup;
+import org.scijava.java3d.Group;
+import org.scijava.java3d.View;
+import org.scijava.vecmath.Color3f;
+import org.scijava.vecmath.Point3f;
+import org.scijava.vecmath.Tuple3d;
 
 public class CustomMultiMesh extends CustomMeshNode {
 

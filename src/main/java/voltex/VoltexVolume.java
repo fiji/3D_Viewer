@@ -17,9 +17,9 @@ import java.awt.image.Raster;
 import java.awt.image.SampleModel;
 import java.awt.image.WritableRaster;
 
-import javax.media.j3d.ImageComponent;
-import javax.media.j3d.ImageComponent2D;
-import javax.vecmath.Point3d;
+import org.scijava.java3d.ImageComponent;
+import org.scijava.java3d.ImageComponent2D;
+import org.scijava.vecmath.Point3d;
 
 /**
  * This class encapsulates an image stack and provides various methods for

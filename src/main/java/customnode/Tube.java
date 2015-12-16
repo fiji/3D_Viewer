@@ -3,9 +3,9 @@ package customnode;
 
 import java.util.List;
 
-import javax.vecmath.Matrix4f;
-import javax.vecmath.Point3f;
-import javax.vecmath.Vector3f;
+import org.scijava.vecmath.Matrix4f;
+import org.scijava.vecmath.Point3f;
+import org.scijava.vecmath.Vector3f;
 
 public class Tube extends Primitive {
 

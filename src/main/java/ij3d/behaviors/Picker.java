@@ -1,8 +1,8 @@
 
 package ij3d.behaviors;
 
-import com.sun.j3d.utils.pickfast.PickCanvas;
-import com.sun.j3d.utils.pickfast.PickTool;
+import org.scijava.java3d.utils.pickfast.PickCanvas;
+import org.scijava.java3d.utils.pickfast.PickTool;
 
 import ij.IJ;
 import ij3d.Content;
@@ -16,11 +16,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import javax.media.j3d.BranchGroup;
-import javax.media.j3d.PickInfo;
-import javax.media.j3d.SceneGraphPath;
-import javax.vecmath.Point3d;
-import javax.vecmath.Vector3d;
+import org.scijava.java3d.BranchGroup;
+import org.scijava.java3d.PickInfo;
+import org.scijava.java3d.SceneGraphPath;
+import org.scijava.vecmath.Point3d;
+import org.scijava.vecmath.Vector3d;
 
 import vib.BenesNamedPoint;
 import vib.PointList;

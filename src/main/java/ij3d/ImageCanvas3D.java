@@ -1,7 +1,7 @@
 
 package ij3d;
 
-import com.sun.j3d.utils.universe.SimpleUniverse;
+import org.scijava.java3d.utils.universe.SimpleUniverse;
 
 import ij.ImagePlus;
 import ij.gui.ImageCanvas;
@@ -21,10 +21,10 @@ import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import javax.media.j3d.Background;
-import javax.media.j3d.Canvas3D;
-import javax.media.j3d.J3DGraphics2D;
-import javax.vecmath.Color3f;
+import org.scijava.java3d.Background;
+import org.scijava.java3d.Canvas3D;
+import org.scijava.java3d.J3DGraphics2D;
+import org.scijava.vecmath.Color3f;
 
 public class ImageCanvas3D extends Canvas3D implements KeyListener {
 

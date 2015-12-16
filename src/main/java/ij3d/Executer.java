@@ -55,17 +55,18 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import javax.media.j3d.Background;
-import javax.media.j3d.PointLight;
-import javax.media.j3d.Transform3D;
-import javax.media.j3d.VirtualUniverse;
+import org.scijava.java3d.Background;
+import org.scijava.java3d.PointLight;
+import org.scijava.java3d.Transform3D;
+import org.scijava.java3d.VirtualUniverse;
+
 import javax.swing.JFileChooser;
-import javax.vecmath.Color3f;
-import javax.vecmath.Matrix4d;
-import javax.vecmath.Matrix4f;
-import javax.vecmath.Point3d;
-import javax.vecmath.Point3f;
-import javax.vecmath.Vector3f;
+import org.scijava.vecmath.Color3f;
+import org.scijava.vecmath.Matrix4d;
+import org.scijava.vecmath.Matrix4f;
+import org.scijava.vecmath.Point3d;
+import org.scijava.vecmath.Point3f;
+import org.scijava.vecmath.Vector3f;
 
 import math3d.TransformIO;
 import orthoslice.MultiOrthoGroup;

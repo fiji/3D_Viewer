@@ -7,7 +7,7 @@ import ij.process.ByteProcessor;
 
 import java.awt.image.IndexColorModel;
 
-import javax.vecmath.Color3f;
+import org.scijava.vecmath.Color3f;
 
 public class ColorTable {
 

@@ -5,8 +5,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Enumeration;
 
-import javax.media.j3d.Group;
-import javax.media.j3d.Node;
+import org.scijava.java3d.Group;
+import org.scijava.java3d.Node;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;

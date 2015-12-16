@@ -1,17 +1,17 @@
 
 package customnode;
 
-import com.sun.j3d.utils.geometry.GeometryInfo;
-import com.sun.j3d.utils.geometry.NormalGenerator;
+import org.scijava.java3d.utils.geometry.GeometryInfo;
+import org.scijava.java3d.utils.geometry.NormalGenerator;
 
 import java.util.Arrays;
 import java.util.List;
 
-import javax.media.j3d.Geometry;
-import javax.media.j3d.GeometryArray;
-import javax.media.j3d.QuadArray;
-import javax.vecmath.Color3f;
-import javax.vecmath.Point3f;
+import org.scijava.java3d.Geometry;
+import org.scijava.java3d.GeometryArray;
+import org.scijava.java3d.QuadArray;
+import org.scijava.vecmath.Color3f;
+import org.scijava.vecmath.Point3f;
 
 public class CustomQuadMesh extends CustomTriangleMesh {
 

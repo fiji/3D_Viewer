@@ -15,8 +15,8 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-import javax.media.j3d.Transform3D;
-import javax.media.j3d.View;
+import org.scijava.java3d.Transform3D;
+import org.scijava.java3d.View;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;

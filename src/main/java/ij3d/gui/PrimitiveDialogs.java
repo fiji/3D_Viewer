@@ -26,7 +26,7 @@ import java.util.Vector;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.vecmath.Point3f;
+import org.scijava.vecmath.Point3f;
 
 public class PrimitiveDialogs {
 

@@ -1,7 +1,7 @@
 
 package ij3d.behaviors;
 
-import javax.media.j3d.Transform3D;
+import org.scijava.java3d.Transform3D;
 
 /**
  * @author Benjamin Schmid

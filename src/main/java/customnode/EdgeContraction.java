@@ -14,8 +14,8 @@ import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import javax.vecmath.Point3f;
-import javax.vecmath.Vector3f;
+import org.scijava.vecmath.Point3f;
+import org.scijava.vecmath.Vector3f;
 
 public class EdgeContraction {
 

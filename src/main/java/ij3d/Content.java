@@ -19,16 +19,16 @@ import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.media.j3d.BranchGroup;
-import javax.media.j3d.Group;
-import javax.media.j3d.Node;
-import javax.media.j3d.Switch;
-import javax.media.j3d.Transform3D;
-import javax.media.j3d.TransformGroup;
-import javax.media.j3d.View;
-import javax.vecmath.Color3f;
-import javax.vecmath.Point3d;
-import javax.vecmath.Vector3f;
+import org.scijava.java3d.BranchGroup;
+import org.scijava.java3d.Group;
+import org.scijava.java3d.Node;
+import org.scijava.java3d.Switch;
+import org.scijava.java3d.Transform3D;
+import org.scijava.java3d.TransformGroup;
+import org.scijava.java3d.View;
+import org.scijava.vecmath.Color3f;
+import org.scijava.vecmath.Point3d;
+import org.scijava.vecmath.Vector3f;
 
 import vib.PointList;
 

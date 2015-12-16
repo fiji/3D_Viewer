@@ -18,14 +18,14 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.Vector;
 
-import javax.media.j3d.BranchGroup;
-import javax.media.j3d.Canvas3D;
-import javax.media.j3d.TextureAttributes;
-import javax.media.j3d.Transform3D;
-import javax.vecmath.Color4f;
-import javax.vecmath.Point2d;
-import javax.vecmath.Point3d;
-import javax.vecmath.Point3i;
+import org.scijava.java3d.BranchGroup;
+import org.scijava.java3d.Canvas3D;
+import org.scijava.java3d.TextureAttributes;
+import org.scijava.java3d.Transform3D;
+import org.scijava.vecmath.Color4f;
+import org.scijava.vecmath.Point2d;
+import org.scijava.vecmath.Point3d;
+import org.scijava.vecmath.Point3i;
 
 public class Mask extends VoltexVolume {
 
