@@ -107,6 +107,10 @@
 		<tag>HEAD</tag>
 		<url>https://github.com/fiji/3D_Viewer</url>
 	</scm>
+	<issueManagement>
+		<system>GitHub Issues</system>
+		<url>https://github.com/fiji/3D_Viewer/issues</url>
+	</issueManagement>
 	<ciManagement>
 		<system>Jenkins</system>
 		<url>http://jenkins.imagej.net/job/3D_Viewer/</url>
