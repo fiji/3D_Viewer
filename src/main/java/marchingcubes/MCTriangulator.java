@@ -1,10 +1,14 @@
 
 package marchingcubes;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
+import org.scijava.Context;
 import org.scijava.vecmath.Point3f;
 
+import ij.IJ;
 import ij.ImagePlus;
 import ij.ImageStack;
 import ij.measure.Calibration;
@@ -14,7 +18,21 @@ import ij.process.ImageProcessor;
 import ij3d.AreaListVolume;
 import ij3d.Volume;
 import isosurface.Triangulator;
+import net.imagej.ops.OpService;
+import net.imagej.ops.geom.geom3d.DefaultMarchingCubes;
+import net.imagej.ops.geom.geom3d.mesh.DefaultMesh;
 import vib.NaiveResampler;
+import net.imagej.ops.geom.geom3d.mesh.Facet;
+import net.imagej.ops.geom.geom3d.mesh.Mesh;
+import net.imagej.ops.geom.geom3d.mesh.TriangularFacet;
+import net.imglib2.RandomAccessibleInterval;
+import net.imglib2.img.Img;
+import net.imglib2.img.imageplus.ImagePlusImg;
+import net.imglib2.type.logic.BitType;
+import net.imglib2.type.numeric.NumericType;
+import net.imglib2.type.numeric.integer.ByteType;
+import net.imglib2.type.numeric.integer.IntType;
+import net.imglib2.type.numeric.integer.UnsignedByteType;
 
 public class MCTriangulator implements Triangulator {
 
@@ -33,12 +51,57 @@ public class MCTriangulator implements Triangulator {
 		volume.setAverage(true);
 
 		// get triangles
-		final List l = MCCube.getTriangles(volume, threshold);
+		final List l = MCCube.getTriangles(volume, threshold);		
+		
+		return l;
+	}
+		
+	static public Point3f convertVector3DtoPoint3f( Vector3D v ) {
+		return new Point3f( (float) v.getX(), (float) v.getY(), (float) v.getZ() );
+	}
+	
+	public List getTrianglesOps(ImagePlus imp, final int threshold,
+		final boolean[] channels, final int resamplingF)
+	{
+
+		if (resamplingF != 1) imp = NaiveResampler.resample(imp, resamplingF);
+		// There is no need to zero pad any more. MCCube automatically
+		// scans one pixel more in each direction, assuming a value
+		// of zero outside the image.
+		// zeroPad(image);
+		// create Volume
+		//final Volume volume = new Volume(image, channels);
+		//volume.setAverage(true);
+
+		// get triangles
+		//final List l = MCCube.getTriangles(volume, threshold);
+		DefaultMarchingCubes dmc = new net.imagej.ops.geom.geom3d.DefaultMarchingCubes();
+		
+		Context context = (Context) IJ.runPlugIn("org.scijava.Context", "");
+		OpService ops = context.service( OpService.class );
+		
+		Img<UnsignedByteType> img = net.imglib2.img.ImagePlusAdapter.wrap(imp);
+				
+		Img<BitType> bitImg = (Img<BitType>) ops.threshold().apply( img, new UnsignedByteType( threshold ) );
+								
+		Mesh mesh = ops.geom().marchingcubes( (RandomAccessibleInterval<BitType>) bitImg );
+		
+		List<Point3f> l = new ArrayList<Point3f>(); 
+		
+		for( Facet facet : mesh.getFacets() ) {
+			TriangularFacet tfacet = (TriangularFacet) facet;
+			l.add( convertVector3DtoPoint3f( tfacet.getP0() ) );
+			l.add( convertVector3DtoPoint3f( tfacet.getP1() ) );
+			l.add( convertVector3DtoPoint3f( tfacet.getP2() ) );
+		}
+		
+		System.out.println( "Number of vertices in triangulator: " + l.size() + " Number of faces from ops-mc: " + mesh.getFacets().size() + " Sum intensity(img): " + ops.stats().sum(img) + " Sum intensity(bitImg): " + ops.stats().sum(bitImg) );
+		
 		return l;
 	}
 
 	/**
-	 * Triangulates the specifified volume.
+	 * Triangulates the specified volume.
 	 *
 	 * @param volume the volume to triangulate
 	 * @return the triangles
