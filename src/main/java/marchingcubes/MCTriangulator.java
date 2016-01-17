@@ -4,6 +4,8 @@ package marchingcubes;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.text.View;
+
 import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
 import org.scijava.Context;
 import org.scijava.vecmath.Point3f;
@@ -25,14 +27,29 @@ import vib.NaiveResampler;
 import net.imagej.ops.geom.geom3d.mesh.Facet;
 import net.imagej.ops.geom.geom3d.mesh.Mesh;
 import net.imagej.ops.geom.geom3d.mesh.TriangularFacet;
+import net.imglib2.AbstractInterval;
+import net.imglib2.AbstractRealInterval;
+import net.imglib2.FinalInterval;
+import net.imglib2.Interval;
+import net.imglib2.RandomAccessible;
 import net.imglib2.RandomAccessibleInterval;
+import net.imglib2.RealInterval;
+import net.imglib2.RealRandomAccessible;
 import net.imglib2.img.Img;
 import net.imglib2.img.imageplus.ImagePlusImg;
+import net.imglib2.interpolation.randomaccess.LanczosInterpolatorFactory;
+import net.imglib2.interpolation.randomaccess.NLinearInterpolatorFactory;
+import net.imglib2.interpolation.randomaccess.NearestNeighborInterpolatorFactory;
 import net.imglib2.type.logic.BitType;
 import net.imglib2.type.numeric.NumericType;
 import net.imglib2.type.numeric.integer.ByteType;
 import net.imglib2.type.numeric.integer.IntType;
 import net.imglib2.type.numeric.integer.UnsignedByteType;
+import net.imglib2.view.Views;
+import net.imglib2.realtransform.AbstractScale;
+import net.imglib2.realtransform.AffineTransform;
+import net.imglib2.realtransform.RealViews;
+import net.imglib2.realtransform.Scale3D;
 
 public class MCTriangulator implements Triangulator {
 
@@ -52,6 +69,8 @@ public class MCTriangulator implements Triangulator {
 
 		// get triangles
 		final List l = MCCube.getTriangles(volume, threshold);		
+		
+		System.out.println( "3DViewer: Number of vertices in triangulator: " + l.size() );
 		
 		return l;
 	}
@@ -81,10 +100,49 @@ public class MCTriangulator implements Triangulator {
 		OpService ops = context.service( OpService.class );
 		
 		Img<UnsignedByteType> img = net.imglib2.img.ImagePlusAdapter.wrap(imp);
-				
+		
+		Calibration cal = imp.getCalibration();
+		AbstractScale tform = new Scale3D( cal.pixelWidth, cal.pixelHeight, cal.pixelDepth );
+		
+		//final RealRandomAccessible< UnsignedByteType > interpolated = Views.interpolate( img, new NearestNeighborInterpolatorFactory< UnsignedByteType >() );
+		final RealRandomAccessible< UnsignedByteType > interpolated = Views.interpolate( img, new NLinearInterpolatorFactory< UnsignedByteType >() );
+		//final RealRandomAccessible< UnsignedByteType > interpolated = Views.interpolate( Views.extendZero( img ), new LanczosInterpolatorFactory< UnsignedByteType >() );
+		final RealRandomAccessible< UnsignedByteType > transformed = RealViews.affine( interpolated, tform ); 			
+		
+		/* Threshold then interpolate == bad
 		Img<BitType> bitImg = (Img<BitType>) ops.threshold().apply( img, new UnsignedByteType( threshold ) );
-								
-		Mesh mesh = ops.geom().marchingcubes( (RandomAccessibleInterval<BitType>) bitImg );
+						
+		Calibration cal = imp.getCalibration();
+		
+		AbstractScale tform = new Scale3D( cal.pixelWidth, cal.pixelHeight, cal.pixelDepth );
+		
+		final RealRandomAccessible< BitType > interpolated = Views.interpolate( bitImg, new NearestNeighborInterpolatorFactory< BitType >() );
+		final RealRandomAccessible< BitType > transformed = RealViews.affine( interpolated, tform ); */
+		
+		long[] minPos = new long[3];
+		long[] maxPos = new long[3];
+		img.min( minPos );
+		img.max( maxPos );
+		double[] dMinPos = new double[3]; dMinPos[0] = minPos[0]; dMinPos[1] = minPos[1]; dMinPos[2] = minPos[2]; 
+		double[] dMaxPos = new double[3]; dMaxPos[0] = maxPos[0]; dMaxPos[1] = maxPos[1]; dMaxPos[2] = maxPos[2];
+		double[] tformMinPos = new double[3];
+		double[] tformMaxPos = new double[3];		
+		tform.apply( dMinPos, tformMinPos );
+		tform.apply( dMaxPos, tformMaxPos );
+		//RealInterval tinterval = new AbstractRealInterval( tformMinPos, tformMaxPos ); 
+		
+		long[] lTformMinPos = new long[3]; for( int k = 0; k < tformMinPos.length; k++ ) lTformMinPos[k] = (long) tformMinPos[k];
+		long[] lTformMaxPos = new long[3]; for( int k = 0; k < tformMaxPos.length; k++ ) lTformMaxPos[k] = (long) tformMaxPos[k];
+		Interval tinterval = new FinalInterval( lTformMinPos, lTformMaxPos ); 
+		
+		//Img<BitType> bitImg = (Img<BitType>) ops.threshold().apply( Views.interval( Views.raster( transformed ), tinterval ), new UnsignedByteType( threshold ) );
+		Img<BitType> bitImg = (Img<BitType>) ops.threshold().apply( Views.interval( Views.raster( transformed ), tinterval ), new UnsignedByteType( threshold ) );		
+		
+		
+		//Mesh mesh = ops.geom().marchingcubes( Views.interval( Views.raster( transformed ), (Interval) tinterval ) );
+		Mesh mesh = ops.geom().marchingcubes( bitImg );
+		
+		
 		
 		List<Point3f> l = new ArrayList<Point3f>(); 
 		
@@ -95,7 +153,9 @@ public class MCTriangulator implements Triangulator {
 			l.add( convertVector3DtoPoint3f( tfacet.getP2() ) );
 		}
 		
-		System.out.println( "Number of vertices in triangulator: " + l.size() + " Number of faces from ops-mc: " + mesh.getFacets().size() + " Sum intensity(img): " + ops.stats().sum(img) + " Sum intensity(bitImg): " + ops.stats().sum(bitImg) );
+		System.out.println( "Ops: Number of vertices in triangulator: " + l.size() );
+		
+		//System.out.println( "Number of vertices in triangulator: " + l.size() + " Number of faces from ops-mc: " + mesh.getFacets().size() + " Sum intensity(img): " + ops.stats().sum(img) + " Sum intensity(bitImg): " + ops.stats().sum(bitImg) );
 		
 		return l;
 	}

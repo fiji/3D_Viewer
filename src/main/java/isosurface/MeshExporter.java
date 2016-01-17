@@ -255,6 +255,9 @@ public class MeshExporter {
 			else if (node instanceof MeshGroup) {
 				meshes.put(mob.getName(), ((MeshGroup) node).getMesh());
 			}
+			else if (node instanceof MeshGroupOps) {
+				meshes.put(mob.getName(), ((MeshGroupOps) node).getMesh());
+			}
 			else {
 				IJ.log("Ignoring " + mob.getName() + " with node of class " +
 					node.getClass());
