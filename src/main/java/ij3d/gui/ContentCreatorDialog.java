@@ -64,9 +64,9 @@ public class ContentCreatorDialog {
 		else name = imp == null ? images[0] : imp.getTitle();
 		final String[] types =
 			new String[] { "Volume", "Orthoslice", "Surface", "Surface Plot 2D",
-				"Multiorthoslices" };
+				"Multiorthoslices", "Surface (ops)" };
 		type = type < 0 ? 0 : type;
-		threshold = type == ContentConstants.SURFACE ? 50 : 0;
+		threshold = ( ( ( type == ContentConstants.SURFACE ) || ( type == ContentConstants.SURFACE_OPS ) ) ? 50 : 0 );
 		resamplingFactor = 2;
 
 		// create dialog
@@ -89,7 +89,7 @@ public class ContentCreatorDialog {
 
 			@Override
 			public void itemStateChanged(final ItemEvent e) {
-				if (di.getSelectedIndex() == ContentConstants.SURFACE) th
+				if ( (di.getSelectedIndex() == ContentConstants.SURFACE) || (di.getSelectedIndex() == ContentConstants.SURFACE_OPS) ) th
 					.setText(Integer.toString(50));
 				else th.setText(Integer.toString(0));
 			}

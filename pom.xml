@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>sc.fiji</groupId>
 		<artifactId>pom-fiji</artifactId>
-		<version>17.0.0</version>
+		<version>21.1.0</version>
 		<relativePath />
 	</parent>
 
@@ -109,7 +109,8 @@
 	</ciManagement>
 
 	<properties>
-		<scijava.jvm.version>1.7</scijava.jvm.version>
+		<scijava.jvm.version>1.8</scijava.jvm.version>
+    <javadoc.skip>true</javadoc.skip>
 	</properties>
 
 	<repositories>
@@ -121,6 +122,16 @@
 	</repositories>
 
 	<dependencies>
+		<!-- ImgLib2 dependencies -->
+		<dependency>
+			<groupId>net.imglib2</groupId>
+			<artifactId>imglib2</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>net.imglib2</groupId>
+			<artifactId>imglib2-ij</artifactId>
+		</dependency>
+
 		<!-- Fiji dependencies -->
 		<dependency>
 			<groupId>sc.fiji</groupId>
@@ -131,6 +142,10 @@
 		<dependency>
 			<groupId>net.imagej</groupId>
 			<artifactId>ij</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>net.imagej</groupId>
+			<artifactId>imagej-ops</artifactId>
 		</dependency>
 
 		<!-- Third party dependencies -->

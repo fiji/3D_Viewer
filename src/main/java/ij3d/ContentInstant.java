@@ -33,6 +33,7 @@ import ij3d.pointlist.PointListShape;
 import ij3d.shapes.BoundingBox;
 import ij3d.shapes.CoordinateSystem;
 import isosurface.MeshGroup;
+import isosurface.MeshGroupOps;
 import orthoslice.MultiOrthoGroup;
 import orthoslice.OrthoGroup;
 import surfaceplot.SurfacePlotGroup;
@@ -142,6 +143,9 @@ public class ContentInstant extends BranchGroup implements UniverseListener,
 				break;
 			case MULTIORTHO:
 				contentNode = new MultiOrthoGroup(this);
+				break;
+			case SURFACE_OPS:
+				contentNode = new MeshGroupOps(this);
 				break;
 			default:
 				throw new IllegalArgumentException(
