@@ -29,7 +29,7 @@ public class ContextMenu implements ActionListener, ItemListener,
 	private Content content;
 
 	private final JMenuItem slices, updateVol, fill, smoothMesh, smoothAllMeshes,
-			smoothDialog, colorSurface, decimateMesh;
+			smoothDialog, colorSurface, decimateMesh, voxelizeMesh;
 	private final JCheckBoxMenuItem shaded, saturated;
 
 	public ContextMenu(final Image3DUniverse univ) {
@@ -82,6 +82,10 @@ public class ContextMenu implements ActionListener, ItemListener,
 		colorSurface.addActionListener(this);
 		popup.add(colorSurface);
 
+	    this.voxelizeMesh = new JMenuItem("Voxelize mesh");
+	    this.voxelizeMesh.addActionListener(this);
+	    this.popup.add(this.voxelizeMesh);
+		
 	}
 
 	public void showPopup(final MouseEvent e) {
@@ -112,6 +116,7 @@ public class ContextMenu implements ActionListener, ItemListener,
 		else if (src == smoothAllMeshes) executer.smoothAllMeshes();
 		else if (src == smoothDialog) executer.smoothControl();
 		else if (src == decimateMesh) executer.decimateMesh();
+		else if (src == voxelizeMesh) executer.voxelizeMesh();
 		else if (src == colorSurface) executer.applySurfaceColors(content);
 	}
 }

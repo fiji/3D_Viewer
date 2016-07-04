@@ -58,6 +58,7 @@ import ij.plugin.frame.Recorder;
 import ij.text.TextWindow;
 import ij3d.gui.ContentCreatorDialog;
 import ij3d.gui.InteractiveMeshDecimation;
+import ij3d.gui.InteractiveMeshVoxelization;
 import ij3d.gui.InteractiveTransformDialog;
 import ij3d.gui.LUTDialog;
 import ij3d.gui.PrimitiveDialogs;
@@ -670,6 +671,32 @@ public class Executer {
 		new InteractiveMeshDecimation().run(ctm);
 	}
 
+	public void voxelizeMesh()
+	  {
+	    Content c = this.univ.getSelected();
+	    if (c == null) {
+	      return;
+	    }
+	    ContentNode n = c.getContent();
+	    CustomTriangleMesh ctm;
+	    if ((n instanceof CustomMeshNode))
+	    {
+	      
+	      if ((((CustomMeshNode)n).getMesh() instanceof CustomTriangleMesh)) {
+	        ctm = 
+	          (CustomTriangleMesh)((CustomMeshNode)n).getMesh();
+	      } else
+	    	  return;
+	    }
+	    else if ((n instanceof MeshGroup)) {
+	        ctm = ((MeshGroup)n).getMesh();
+	    } else {
+	        return;
+	      }
+	    
+	    new InteractiveMeshVoxelization().run(ctm);
+	  }
+	
 	/* ----------------------------------------------------------
 	 * Display As submenu
 	 * --------------------------------------------------------*/
