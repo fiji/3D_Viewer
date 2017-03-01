@@ -12,7 +12,7 @@
 	<artifactId>3D_Viewer</artifactId>
 	<version>4.0.2-SNAPSHOT</version>
 
-	<name>plugins/3D_Viewer.jar</name>
+	<name>3D Viewer</name>
 	<description>3D Viewer for visualizing image stacks three-dimensionally.</description>
 	<url>https://imagej.net/3D_Viewer</url>
 	<inceptionYear>2010</inceptionYear>
