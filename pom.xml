@@ -116,8 +116,8 @@
 		<url>https://github.com/fiji/3D_Viewer/issues</url>
 	</issueManagement>
 	<ciManagement>
-		<system>Jenkins</system>
-		<url>https://jenkins.imagej.net/job/3D_Viewer/</url>
+		<system>Travis CI</system>
+		<url>https://travis-ci.org/fiji/3D_Viewer</url>
 	</ciManagement>
 
 	<properties>
