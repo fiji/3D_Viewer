@@ -214,7 +214,8 @@ public class Picker {
 	 * position.
 	 * 
 	 * @param c
-	 * @param e
+	 * @param x
+	 * @param y
 	 * @return
 	 */
 	public Point3d

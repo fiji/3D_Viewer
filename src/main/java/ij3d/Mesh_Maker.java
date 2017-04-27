@@ -30,6 +30,7 @@
 package ij3d;
 
 /**
- * @Deprecated Use customnode.Mesh_Maker instead.
+ * @deprecated Use {@link customnode.Mesh_Maker} instead.
  */
+@Deprecated
 public class Mesh_Maker extends customnode.Mesh_Maker {}

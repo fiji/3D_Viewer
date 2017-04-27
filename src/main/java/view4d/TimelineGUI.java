@@ -79,7 +79,7 @@ public class TimelineGUI implements ActionListener, KeyListener {
 	 * Initializes a new Viewer4DController; opens a new new window with the
 	 * control buttons for the 4D viewer.
 	 * 
-	 * @param viewer
+	 * @param tl
 	 */
 	public TimelineGUI(final Timeline tl) {
 		this.timeline = tl;

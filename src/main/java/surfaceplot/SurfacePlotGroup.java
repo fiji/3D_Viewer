@@ -132,7 +132,7 @@ public class SurfacePlotGroup extends ContentNode implements AdjustmentListener
 	}
 
 	/**
-	 * @see ContentNode#getMax(Tupe3d) getMax
+	 * @see ContentNode#getMax getMax
 	 */
 	@Override
 	public void getMax(final Tuple3d max) {
@@ -140,7 +140,7 @@ public class SurfacePlotGroup extends ContentNode implements AdjustmentListener
 	}
 
 	/**
-	 * @see ContentNode#getMin(Tupe3d) getMin
+	 * @see ContentNode#getMin getMin
 	 */
 	@Override
 	public void getMin(final Tuple3d min) {
@@ -148,7 +148,7 @@ public class SurfacePlotGroup extends ContentNode implements AdjustmentListener
 	}
 
 	/**
-	 * @see ContentNode#getCenter(Tupe3d) getCenter
+	 * @see ContentNode#getCenter getCenter
 	 */
 	@Override
 	public void getCenter(final Tuple3d center) {
@@ -164,7 +164,7 @@ public class SurfacePlotGroup extends ContentNode implements AdjustmentListener
 	}
 
 	/**
-	 * @see ContentNode#thresholdUpdated(Tupe3d) thresholdUpdated
+	 * @see ContentNode#thresholdUpdated thresholdUpdated
 	 */
 	@Override
 	public void thresholdUpdated(final int threshold) {
@@ -182,7 +182,7 @@ public class SurfacePlotGroup extends ContentNode implements AdjustmentListener
 	}
 
 	/**
-	 * @see ContentNode#channelsUpdated(Tupe3d) channelsUpdated
+	 * @see ContentNode#channelsUpdated channelsUpdated
 	 */
 	@Override
 	public void channelsUpdated(final boolean[] channels) {
@@ -200,7 +200,7 @@ public class SurfacePlotGroup extends ContentNode implements AdjustmentListener
 	}
 
 	/**
-	 * @see ContentNode#colorUpdated() colorUpdated
+	 * @see ContentNode#colorUpdated colorUpdated
 	 */
 	@Override
 	public void colorUpdated(final Color3f color) {
@@ -208,7 +208,7 @@ public class SurfacePlotGroup extends ContentNode implements AdjustmentListener
 	}
 
 	/**
-	 * @see ContentNode#transparencyUpdated() transparencyUpdated
+	 * @see ContentNode#transparencyUpdated transparencyUpdated
 	 */
 	@Override
 	public void transparencyUpdated(final float transparency) {
@@ -216,7 +216,7 @@ public class SurfacePlotGroup extends ContentNode implements AdjustmentListener
 	}
 
 	/**
-	 * @see ContentNode#shadeUpdated() shadeUpdated
+	 * @see ContentNode#shadeUpdated shadeUpdated
 	 */
 	@Override
 	public void shadeUpdated(final boolean shaded) {

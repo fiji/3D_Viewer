@@ -187,7 +187,7 @@ public class VoltexGroup extends ContentNode {
 	}
 
 	/**
-	 * @see ContentNode#channelsUpdated() channelsUpdated
+	 * @see ContentNode#channelsUpdated channelsUpdated
 	 */
 	@Override
 	public void channelsUpdated(final boolean[] channels) {
@@ -195,7 +195,7 @@ public class VoltexGroup extends ContentNode {
 	}
 
 	/**
-	 * @see ContentNode#lutUpdated() lutUpdated
+	 * @see ContentNode#lutUpdated lutUpdated
 	 */
 	@Override
 	public void lutUpdated(final int[] r, final int[] g, final int[] b,
@@ -205,7 +205,7 @@ public class VoltexGroup extends ContentNode {
 	}
 
 	/**
-	 * @see ContentNode#shadeUpdated() shadeUpdated
+	 * @see ContentNode#shadeUpdated shadeUpdated
 	 */
 	@Override
 	public void shadeUpdated(final boolean shaded) {
@@ -213,7 +213,7 @@ public class VoltexGroup extends ContentNode {
 	}
 
 	/**
-	 * @see ContentNode#colorUpdated() colorUpdated
+	 * @see ContentNode#colorUpdated colorUpdated
 	 */
 	@Override
 	public void colorUpdated(final Color3f color) {
@@ -221,7 +221,7 @@ public class VoltexGroup extends ContentNode {
 	}
 
 	/**
-	 * @see ContentNode#transparencyUpdated() transparencyUpdated
+	 * @see ContentNode#transparencyUpdated transparencyUpdated
 	 */
 	@Override
 	public void transparencyUpdated(final float transparency) {
@@ -245,7 +245,8 @@ public class VoltexGroup extends ContentNode {
 	 * nothing if the given ROI is null. Works not only on the internally created
 	 * image (the resampled one), but also on the original image.
 	 * 
-	 * @param universe
+	 * @param canvas
+	 * @param roi
 	 * @param fillValue
 	 */
 	public void

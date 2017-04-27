@@ -23,6 +23,7 @@
 package ij3d;
 
 /**
- * @Deprecated use customnode.MeshMaker instead.
+ * @deprecated Use {@link customnode.MeshMaker} instead.
  */
+@Deprecated
 public class MeshMaker extends customnode.MeshMaker {}

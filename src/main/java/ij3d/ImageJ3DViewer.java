@@ -256,7 +256,7 @@ public class ImageJ3DViewer implements PlugIn {
 	}
 
 	/** auxiliary list of points to add to the current tube */
-	private static final List<Point3f> pts = new ArrayList<Point3f>();
+	private static final List<Point3f> pts = new ArrayList<>();
 	
 	/**
 	 * Add a point to the list that will conform a tube into the current 
@@ -275,7 +275,7 @@ public class ImageJ3DViewer implements PlugIn {
 	 * Add a tube into the current 3D universe
 	 * @param name content name for the tube
 	 * @param radius string containing the radius of the tube
-	 * @param points strings containing the coordinates of the last point to add to the tube
+	 * @param point string containing the coordinates of the last point to add to the tube
 	 */
 	public static void finishTube( 
 			final String name,

@@ -75,9 +75,7 @@ public class MeshExporter {
 		return meshes;
 	}
 
-	/**
-	 * @Deprecated
-	 */
+	@Deprecated
 	static public void saveAsWaveFront(final Collection contents_) {
 		final File obj_file =
 			Executer.promptForFile("Save WaveFront", "untitled", ".obj");
@@ -132,9 +130,7 @@ public class MeshExporter {
 		}
 	}
 
-	/**
-	 * @Deprecated
-	 */
+	@Deprecated
 	static public void saveAsDXF(final Collection contents_) {
 		final File dxf_file =
 			Executer.promptForFile("Save as DXF", "untitled", ".dxf");
@@ -199,9 +195,7 @@ public class MeshExporter {
 		w.append("0\nENDSEC\n0\nEOF\n"); // TRAILER of the file
 	}
 
-	/**
-	 * @Deprecated
-	 */
+	@Deprecated
 	static public void saveAsSTL(final Collection contents_, final int filetype) {
 		final String title =
 			"Save as STL (" + ((filetype == ASCII) ? "ASCII" : "binary") + ")";

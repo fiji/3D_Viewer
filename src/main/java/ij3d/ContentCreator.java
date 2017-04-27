@@ -175,7 +175,7 @@ public class ContentCreator {
 	 * directory, all the files in it are sorted alphabetically and then loaded,
 	 * failing silently if an image can not be opened by IJ.openImage().
 	 * 
-	 * @param dir
+	 * @param file
 	 * @return
 	 */
 	public static ImagePlus[] getImages(final File file) {

@@ -265,7 +265,7 @@ public class PointListPanel extends Panel implements ActionListener,
 	 * ******************************************************************/
 
 	/**
-	 * @see PointList.PointListListener#added(BenesNamedPoint)
+	 * @see PointList.PointListListener#added
 	 */
 	@Override
 	public void added(final BenesNamedPoint p) {
@@ -280,7 +280,7 @@ public class PointListPanel extends Panel implements ActionListener,
 	}
 
 	/**
-	 * @see PointList.PointListListener#removed(BenesNamedPoint)
+	 * @see PointList.PointListListener#removed
 	 */
 	@Override
 	public void removed(final BenesNamedPoint p) {
@@ -288,7 +288,7 @@ public class PointListPanel extends Panel implements ActionListener,
 	}
 
 	/**
-	 * @see PointList.PointListListener#renamed(BenesNamedPoint)
+	 * @see PointList.PointListListener#renamed
 	 */
 	@Override
 	public void renamed(final BenesNamedPoint p) {
@@ -296,13 +296,13 @@ public class PointListPanel extends Panel implements ActionListener,
 	}
 
 	/**
-	 * @see PointList.PointListListener#highlighted(BenesNamedPoint)
+	 * @see PointList.PointListListener#highlighted
 	 */
 	@Override
 	public void highlighted(final BenesNamedPoint p) {}
 
 	/**
-	 * @see PointList.PointListListener#reordered(BenesNamedPoint)
+	 * @see PointList.PointListListener#reordered
 	 */
 	@Override
 	public void reordered() {
@@ -310,7 +310,7 @@ public class PointListPanel extends Panel implements ActionListener,
 	}
 
 	/**
-	 * @see PointList.PointListListener#moved(BenesNamedPoint)
+	 * @see PointList.PointListListener#moved
 	 */
 	@Override
 	public void moved(final BenesNamedPoint p) {

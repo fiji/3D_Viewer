@@ -159,7 +159,7 @@ public class AppearanceCreator implements AxisConstants {
 	/**
 	 * This flag indicates whether textures are opaque or not. This changes
 	 * effectively the texture mode, (depending on whether RGB or 8-bit textures
-	 * are used) between RGB <-> RGBA, or LUMINANCE <-> INTENSITY. This only
+	 * are used) between RGB and RGBA, or LUMINANCE and INTENSITY. This only
 	 * effects newly loaded textures. Opaque textures are for example needed for
 	 * the orthoslices.
 	 */
@@ -238,7 +238,7 @@ public class AppearanceCreator implements AxisConstants {
 	 * Set the color for all the textures that were loaded by this
 	 * AppearanceCreator. Pixel values below the threshold are not rendered.
 	 * 
-	 * @param f
+	 * @param c
 	 */
 	public void setColor(final Color3f c) {
 		colAttr.setColor(c);
@@ -299,10 +299,9 @@ public class AppearanceCreator implements AxisConstants {
 	}
 
 	/**
-	 * Get the TextureGeneration of the specified direction
+	 * Get the TextureGeneration of the specified direction.
 	 * 
 	 * @param direction
-	 * @param index
 	 * @return
 	 */
 	public TexCoordGeneration getTg(final int direction) {

@@ -233,19 +233,19 @@ public class Image3DUniverse extends DefaultAnimatableUniverse {
 	}
 
 	/**
-	 * It is assumed that the
+	 * Initializes a 3D window.
 	 * 
-	 * @param window already displays the {@link Canvas3D} as obtained from
-	 *          calling {@link Image3DUniverse#getCanvas()}. If the
+	 * @param window 3D window to initialize. It is assumed that the window
+	 *          already displays the {@link Canvas3D} as obtained from calling
+	 *          {@link Image3DUniverse#getCanvas()}. If the
 	 *          {@link DefaultUniverse} obtained from
 	 *          {@link ImageWindow3D#getUniverse()} is not exactly this universe,
 	 *          a {@link RuntimeException} is thrown. This method acts as an
 	 *          initialization of the ImageWindow3D, by adding the menubar to it
 	 *          as well as initializing the {@link PointListDialog} and adding a
-	 *          {@link WindowAdapter} to the
-	 * @param window that does cleanup. The
-	 * @param window is not shown, that is, {@link ImageWindow3D#pack()} and
-	 *          {@link ImageWindow3D#setVisible()} are not called.
+	 *          {@link WindowAdapter} to the window that does cleanup. The window
+	 *          is not shown; that is, {@link ImageWindow3D#pack()} and
+	 *          {@link ImageWindow3D#setVisible(boolean)} are not called.
 	 */
 	public void init(final ImageWindow3D window) {
 		if (window.getUniverse() != this) {
@@ -973,7 +973,7 @@ public class Image3DUniverse extends DefaultAnimatableUniverse {
 	 * @param image the image to display
 	 * @param color the color in which this volume rendering is displayed.
 	 * @param name the name of the displayed Content.
-	 * @param threshold the threshold used for the displayed volume rendering
+	 * @param thresh the threshold used for the displayed volume rendering
 	 * @param channels the displayed color channels, must be a boolean array of
 	 *          length 3
 	 * @param resamplingF a resampling factor.
@@ -1033,7 +1033,7 @@ public class Image3DUniverse extends DefaultAnimatableUniverse {
 	 * @param image the image to display
 	 * @param color the color in which these orthoslices are displayed.
 	 * @param name the name of the displayed Content.
-	 * @param threshold the threshold used for the displayed orthoslices
+	 * @param thresh the threshold used for the displayed orthoslices
 	 * @param channels the displayed color channels, must be a boolean array of
 	 *          length 3
 	 * @param resamplingF a resampling factor.
@@ -1093,7 +1093,7 @@ public class Image3DUniverse extends DefaultAnimatableUniverse {
 	 * @param image the image to display
 	 * @param color the color in which this surface plot is displayed.
 	 * @param name the name of the displayed Content.
-	 * @param threshold the threshold used for the displayed surface plot
+	 * @param thresh the threshold used for the displayed surface plot
 	 * @param channels the displayed color channels, must be a boolean array of
 	 *          length 3
 	 * @param resamplingF a resampling factor.
@@ -1120,7 +1120,7 @@ public class Image3DUniverse extends DefaultAnimatableUniverse {
 	 * Content.getDefaultResamplingFactor()</li>
 	 * </ul>
 	 *
-	 * @param image the image to display
+	 * @param img the image to display
 	 * @return the Content which was added, null if any error occurred.
 	 */
 	public Content addMesh(final ImagePlus img) {
@@ -1138,7 +1138,8 @@ public class Image3DUniverse extends DefaultAnimatableUniverse {
 	 * <li>channels: all color channels r, g, b
 	 * </ul>
 	 *
-	 * @param image the image to display
+	 * @param img the image to display
+	 * @param res
 	 * @return the Content which was added, null if any error occurred.
 	 */
 	public Content addMesh(final ImagePlus img, final int res) {
@@ -1299,7 +1300,7 @@ public class Image3DUniverse extends DefaultAnimatableUniverse {
 	{
 		final List<Point3f> ico =
 			customnode.MeshMaker.createIcosahedron(subdivisions, radius);
-		final List<Point3f> mesh = new ArrayList<Point3f>();
+		final List<Point3f> mesh = new ArrayList<>();
 		for (final Point3f p : points) {
 			mesh.addAll(customnode.MeshMaker.copyTranslated(ico, p.x, p.y, p.z));
 		}
@@ -1805,7 +1806,7 @@ public class Image3DUniverse extends DefaultAnimatableUniverse {
 	 * the specified Content is constructed correctly. The Content is added
 	 * asynchronously, and this method returns immediately.
 	 * 
-	 * @param c The Collection of Content to add
+	 * @param cc The Collection of Content to add
 	 * @return a Collection of Future objects, each holding an added Content. The
 	 *         returned Collection is never null, but its Future objects may
 	 *         return null on calling get() on them if an error ocurred when

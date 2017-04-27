@@ -60,14 +60,14 @@ public abstract class ContentNode extends BranchGroup {
 	/**
 	 * Stores the maximum coordinate of this ContentNode in the specified Tuple3d
 	 * 
-	 * @param min
+	 * @param max
 	 */
 	public abstract void getMax(Tuple3d max);
 
 	/**
 	 * Stores the center coordinate of this ContentNode in the specified Tuple3d
 	 * 
-	 * @param min
+	 * @param center
 	 */
 	public abstract void getCenter(Tuple3d center);
 
