@@ -9,8 +9,9 @@
 		<relativePath />
 	</parent>
 
+	<groupId>sc.fiji</groupId>
 	<artifactId>3D_Viewer</artifactId>
-	<version>4.0.3-SNAPSHOT</version>
+	<version>4.0.2-SNAPSHOT</version>
 
 	<name>3D Viewer</name>
 	<description>3D Viewer for visualizing image stacks three-dimensionally.</description>
