@@ -47,7 +47,13 @@ public class UniverseSynchronizer {
 
 			@Override
 			public void universeClosed() {
-				removeUniverse(u);
+				//removeUniverse(u);
+				// Do not call removeUniverse(u)
+				// as this will remove this adapter from the list of universe listeners
+				// (i.e. u.removeUniverseListener(l))
+				// so modifying the current list of listeners on which universeClosed()
+				// is currently being invoked by the closing universe.
+				universes.remove(u);
 			}
 		};
 		u.addUniverseListener(l);
