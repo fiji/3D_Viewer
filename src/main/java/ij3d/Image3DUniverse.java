@@ -333,6 +333,7 @@ public class Image3DUniverse extends DefaultAnimatableUniverse {
 	 */
 	@Override
 	public void cleanup() {
+		sync(false);
 		timeline.pause();
 		removeAllContents();
 		contents.clear();
