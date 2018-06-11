@@ -33,13 +33,15 @@ import javax.swing.KeyStroke;
 
 import ij3d.UniverseSettings;
 
-public class ShortCuts {
+public class ShortCuts
+{
 
 	private final List<String> commands;
 	private final HashMap<String, JMenuItem> items;
 	private final HashMap<String, String> shortcuts;
 
-	public ShortCuts(final JMenuBar menubar) {
+	public ShortCuts(final JMenuBar menubar)
+	{
 		commands = new ArrayList<String>();
 		items = new HashMap<String, JMenuItem>();
 		shortcuts = UniverseSettings.shortcuts;
@@ -47,60 +49,80 @@ public class ShortCuts {
 		for (int i = 0; i < menubar.getMenuCount(); i++)
 			scan(menubar.getMenu(i), "");
 
-		for (final String command : commands) {
+		for (final String command : commands)
+		{
 			final String shortcut = shortcuts.get(command);
-			if (shortcut != null) setShortCut(command, shortcut);
+			if (shortcut != null)
+				setShortCut(command, shortcut);
 		}
 	}
 
-	public void save() {
+	public void save()
+	{
 		UniverseSettings.save();
 	}
 
-	public void reload() {
+	public void reload()
+	{
 		UniverseSettings.load();
 	}
 
-	public Iterable<String> getCommands() {
+	public Iterable<String> getCommands()
+	{
 		return commands;
 	}
 
-	public String getShortCut(final String command) {
+	public String getShortCut(final String command)
+	{
 		return shortcuts.get(command);
 	}
 
-	public void setShortCut(final String command, final String shortcut) {
-		if (shortcut.trim().length() == 0) {
+	public void setShortCut(final String command, final String shortcut)
+	{
+		if (shortcut.trim().length() == 0)
+		{
 			clearShortCut(command);
 			return;
 		}
 		shortcuts.put(command, shortcut);
 		final KeyStroke stroke = KeyStroke.getKeyStroke(shortcut);
-		items.get(command).setAccelerator(stroke);
+		JMenuItem o = items.get(command);
+		if (o != null)
+			o.setAccelerator(stroke);
 	}
 
-	public void clearShortCut(final String command) {
-		items.get(command).setAccelerator(null);
+	public void clearShortCut(final String command)
+	{
+		JMenuItem o = items.get(command);
+		if (o != null)
+			o.setAccelerator(null);
 		shortcuts.remove(command);
 	}
 
-	public int getNumberOfCommands() {
+	public int getNumberOfCommands()
+	{
 		return commands.size();
 	}
 
-	public String getCommand(final int i) {
+	public String getCommand(final int i)
+	{
 		return commands.get(i);
 	}
 
-	private void scan(final JMenu menu, String prefix) {
+	private void scan(final JMenu menu, String prefix)
+	{
 		prefix += menu.getText() + " > ";
-		for (int i = 0; i < menu.getItemCount(); i++) {
+		for (int i = 0; i < menu.getItemCount(); i++)
+		{
 			final JMenuItem mi = menu.getItem(i);
-			if (mi == null) continue;
-			if (mi instanceof JMenu) {
+			if (mi == null)
+				continue;
+			if (mi instanceof JMenu)
+			{
 				scan((JMenu) mi, prefix);
 			}
-			else {
+			else
+			{
 				final String c = prefix + mi.getText();
 				commands.add(c);
 				items.put(c, mi);
