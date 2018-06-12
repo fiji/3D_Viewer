@@ -81,6 +81,7 @@ public class UniverseSynchronizer {
 		final int num = group.getNumTransforms();
 		for (int i = 0; i < num; i++)
 			group.getTransformGroup(i).setTransform(transform.transforms[i]);
+		u.getViewPlatformTransformer().updateFrontBackClip();
 		u.fireTransformationUpdated();
 	}
 
