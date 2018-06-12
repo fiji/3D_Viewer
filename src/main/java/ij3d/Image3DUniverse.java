@@ -210,11 +210,16 @@ public class Image3DUniverse extends DefaultAnimatableUniverse {
 
 			@Override
 			public void mousePressed(final MouseEvent e) {
-				contextmenu.showPopup(e);
+				// Remove redundant call to show pop-up.
+				// Pop-up is shown on mouse release allowing the mouse 
+				// to be moved over content and the menu will be 
+				// for the correct selected content
+				//contextmenu.showPopup(e);
 			}
 
 			@Override
 			public void mouseReleased(final MouseEvent e) {
+				if (e.isConsumed()) return;
 				contextmenu.showPopup(e);
 			}
 		});
