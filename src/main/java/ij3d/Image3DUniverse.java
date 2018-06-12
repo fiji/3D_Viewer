@@ -648,8 +648,8 @@ public class Image3DUniverse extends DefaultAnimatableUniverse {
 		final Point3d min = new Point3d();
 		final Point3d max = new Point3d();
 
-		final Iterator it = contents();
-		Content c = (Content) it.next();
+		final Iterator<Content> it = contents();
+		Content c = it.next();
 		c.getMin(min);
 		c.getMax(max);
 		globalMin.set(min);
@@ -1425,7 +1425,7 @@ public class Image3DUniverse extends DefaultAnimatableUniverse {
 	 * universe.
 	 */
 	@Override
-	public Iterator contents() {
+	public Iterator<Content> contents() {
 		return contents.values().iterator();
 	}
 
@@ -1435,7 +1435,7 @@ public class Image3DUniverse extends DefaultAnimatableUniverse {
 	 * 
 	 * @return
 	 */
-	public Collection getContents() {
+	public Collection<Content> getContents() {
 		if (contents == null) return null;
 		return contents.values();
 	}
@@ -1496,7 +1496,7 @@ public class Image3DUniverse extends DefaultAnimatableUniverse {
 	public void resetView() {
 		fireTransformationStarted();
 
-		// rotate so that y shows downwards
+		// rotate so that y shows downwards, z-axis away from the viewer
 		final Transform3D t = new Transform3D();
 		final AxisAngle4d aa = new AxisAngle4d(1, 0, 0, Math.PI);
 		t.set(aa);
@@ -1522,72 +1522,84 @@ public class Image3DUniverse extends DefaultAnimatableUniverse {
 	 * @param angle The angle in radians.
 	 */
 	public void rotateUniverse(final Vector3d axis, final double angle) {
-		viewTransformer.rotate(axis, angle);
-	}
-
-	/**
-	 * Rotate the univere so that the user looks in the negative direction of the
-	 * z-axis.
-	 */
-	public void rotateToNegativeXY() {
 		fireTransformationStarted();
-		getRotationTG().setTransform(new Transform3D());
+		viewTransformer.rotate(axis, angle);
+		fireTransformationUpdated();
 		fireTransformationFinished();
 	}
 
 	/**
-	 * Rotate the univere so that the user looks in the positive direction of the
+	 * Resets the rotation transform. This is used to provide specific view orientations.
+	 *
+	 * @param aa2 the new rotation transform (applied to the reset rotation)
+	 */
+	private void resetRotationTransform(AxisAngle4d aa2) {
+		fireTransformationStarted();
+		// rotate so that y shows downwards, z-axis away from the viewer
+		// (i.e. reset the rotation). This is equivalent to rotateToPositiveXY.
+		final Transform3D t = new Transform3D();
+		final AxisAngle4d aa = new AxisAngle4d(1, 0, 0, Math.PI);
+		t.set(aa);
+		if (aa2 != null)
+		{
+			final Transform3D t2 = new Transform3D();
+			t2.set(aa2);
+			t.mul(t2);
+		}
+		getRotationTG().setTransform(t);
+		// TODO - The bounding box and coordinate system are not refreshed.
+		fireTransformationUpdated();
+		fireTransformationFinished();
+	}
+	
+	// The methods below rotate the default view to look along a given axis
+	
+	/**
+	 * Rotate the universe so that the user looks in the negative direction of the
 	 * z-axis.
 	 */
-	public void rotateToPositiveXY() {
-		fireTransformationStarted();
-		getRotationTG().setTransform(new Transform3D());
-		waitForNextFrame();
-		rotateUniverse(new Vector3d(0, 1, 0), Math.PI);
+	public void rotateToNegativeXY() {
+		resetRotationTransform(new AxisAngle4d(0, 1, 0, Math.PI));
 	}
 
 	/**
-	 * Rotate the univere so that the user looks in the negative direction of the
+	 * Rotate the universe so that the user looks in the positive direction of the
+	 * z-axis. This is the default view.
+	 */
+	public void rotateToPositiveXY() {
+		resetRotationTransform(null);
+	}
+
+	/**
+	 * Rotate the universe so that the user looks in the negative direction of the
 	 * y-axis.
 	 */
 	public void rotateToNegativeXZ() {
-		fireTransformationStarted();
-		getRotationTG().setTransform(new Transform3D());
-		waitForNextFrame();
-		rotateUniverse(new Vector3d(1, 0, 0), Math.PI / 2);
+		resetRotationTransform(new AxisAngle4d(1, 0, 0, Math.PI / 2));
 	}
 
 	/**
-	 * Rotate the univere so that the user looks in the positive direction of the
+	 * Rotate the universe so that the user looks in the positive direction of the
 	 * y-axis.
 	 */
 	public void rotateToPositiveXZ() {
-		fireTransformationStarted();
-		getRotationTG().setTransform(new Transform3D());
-		waitForNextFrame();
-		rotateUniverse(new Vector3d(0, 1, 0), -Math.PI / 2);
+		resetRotationTransform(new AxisAngle4d(1, 0, 0, -Math.PI / 2));
 	}
 
 	/**
-	 * Rotate the univere so that the user looks in the negative direction of the
+	 * Rotate the universe so that the user looks in the negative direction of the
 	 * x-axis.
 	 */
 	public void rotateToNegativeYZ() {
-		fireTransformationStarted();
-		getRotationTG().setTransform(new Transform3D());
-		waitForNextFrame();
-		rotateUniverse(new Vector3d(0, 1, 0), Math.PI / 2);
+		resetRotationTransform(new AxisAngle4d(0, 1, 0, Math.PI / 2));
 	}
 
 	/**
-	 * Rotate the univere so that the user looks in the positive direction of the
+	 * Rotate the universe so that the user looks in the positive direction of the
 	 * x-axis.
 	 */
 	public void rotateToPositiveYZ() {
-		fireTransformationStarted();
-		getRotationTG().setTransform(new Transform3D());
-		waitForNextFrame();
-		rotateUniverse(new Vector3d(1, 0, 0), -Math.PI / 2);
+		resetRotationTransform(new AxisAngle4d(0, 1, 0, -Math.PI / 2));
 	}
 
 	/**
