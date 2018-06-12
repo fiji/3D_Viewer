@@ -450,6 +450,16 @@ public class Image3DUniverse extends DefaultAnimatableUniverse {
 	public ShortCuts getShortcuts() {
 		return shortcuts;
 	}
+	
+	/**
+	 * Refresh the shortcuts using the menubar. This should be called if the standard 
+	 * menubar for the ImageJ3DWindow has been modified.
+	 * 
+	 * @see #getMenuBar() 
+	 */
+	public void refreshShortcuts() {
+		shortcuts = new ShortCuts(menubar);
+	}
 
 	/**
 	 * Returns a reference to the universe's context menu.
