@@ -129,6 +129,7 @@ public class Image3DUniverse extends DefaultAnimatableUniverse {
 	/** A reference to the universe's shortcuts */
 	private ShortCuts shortcuts;
 
+	/** A reference to the universe's context menu */
 	private ContextMenu contextmenu;
 
 	/**
@@ -450,6 +451,13 @@ public class Image3DUniverse extends DefaultAnimatableUniverse {
 		return shortcuts;
 	}
 
+	/**
+	 * Returns a reference to the universe's context menu.
+	 */
+	public ContextMenu getContextmenu()	{
+		return contextmenu;
+	}
+	
 	/**
 	 * Returns a reference to the PointListDialog used by this universe
 	 */
