@@ -49,6 +49,10 @@ public class CoordinateSystem extends BranchGroup {
 		this.length = length;
 		this.color = color;
 		setCapability(BranchGroup.ALLOW_DETACH);
+		
+		// No coordinate system
+		if (length <= 0)
+			return;
 
 		final Shape3D lines = new Shape3D();
 		lines.setGeometry(createGeometry());
