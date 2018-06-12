@@ -126,6 +126,17 @@ public class ShortCuts
 				final String c = prefix + mi.getText();
 				commands.add(c);
 				items.put(c, mi);
+				// Detect accelerators in menu items if not in the current settings.
+				// This is relevant when the standard menubar has been changed with 
+				// extra items.
+				if (!shortcuts.containsKey(c)) 
+				{
+    				KeyStroke ks = mi.getAccelerator();
+    				if (ks != null)
+    				{
+    					shortcuts.put(c, ks.toString());
+    				}
+				}
 			}
 		}
 	}
