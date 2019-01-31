@@ -801,49 +801,6 @@ public class Image3DUniverse extends DefaultAnimatableUniverse {
 		return octree;
 	}
 
-	/**
-	 * @deprecated The octree methods will be outsourced into a different plugin.
-	 */
-	/*
-	 * Requires an empty directory.
-	 */
-// 	public VolumeOctree createAndAddOctree(
-// 			String imagePath, String dir, String name) {
-// 		File outdir = new File(dir);
-// 		if(!outdir.exists())
-// 			outdir.mkdir();
-// 		if(!outdir.isDirectory()) {
-// 			throw new RuntimeException("Not a directory");
-// 		}
-// 		try {
-// 			new FilePreparer(imagePath, VolumeOctree.SIZE, dir).createFiles();
-// 			return addOctree(dir, name);
-// 		} catch(Exception e) {
-// 			e.printStackTrace();
-// 			throw new RuntimeException(e);
-// 		}
-// 	}
-
-	/**
-	 * @deprecated The octree methods will be outsourced into a different plugin.
-	 */
-// 	public octree.VolumeOctree createAndAddOctree(
-// 			ImagePlus image, String dir, String name) {
-// 		File outdir = new File(dir);
-// 		if(!outdir.exists())
-// 			outdir.mkdir();
-// 		if(!outdir.isDirectory()) {
-// 			throw new RuntimeException("Not a directory");
-// 		}
-// 		try {
-// 			new FilePreparer(image, VolumeOctree.SIZE, dir).createFiles();
-// 			return addOctree(dir, name);
-// 		} catch(Exception e) {
-// 			e.printStackTrace();
-// 			throw new RuntimeException(e);
-// 		}
-// 	}
-
 	/* *************************************************************
 	 * Adding and removing Contents
 	 * *************************************************************/
