@@ -317,7 +317,6 @@ public class ContentInstant extends BranchGroup implements UniverseListener,
 	}
 
 	public void restoreDisplayedData() {
-		System.out.println("restoreDisplayedData " + getName());
 		if (available) {
 			System.out.println("not restoring because it is not swapped");
 			return;

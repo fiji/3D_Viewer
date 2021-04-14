@@ -280,7 +280,6 @@ public class ContentCreator {
 			nChannels = image.getNChannels();
 			nSlices = image.getNSlices();
 			nFrames = image.getNFrames();
-			System.out.println("nFrames = " + nFrames);
 			w = image.getWidth();
 			h = image.getHeight();
 		}
