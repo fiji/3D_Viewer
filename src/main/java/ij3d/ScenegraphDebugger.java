@@ -42,7 +42,6 @@ public class ScenegraphDebugger {
 	}
 
 	private static void displayTree(final Node node, final String indent) {
-		System.out.println(indent + node);
 		if (node instanceof Group) {
 			final Enumeration ch = ((Group) node).getAllChildren();
 			while (ch.hasMoreElements())

@@ -175,7 +175,6 @@ public class VolumeOctree implements UniverseListener, AxisConstants {
 		}
 		rootBranchGroup.addChild(axisSwitch);
 		setWhichChild(axisIndex[curAxis][curDir]);
-		System.out.println("# shapes: " + countInitialShapes());
 	}
 
 	final void removeAllCubes() {

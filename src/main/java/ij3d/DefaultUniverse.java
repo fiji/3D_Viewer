@@ -657,7 +657,6 @@ public abstract class DefaultUniverse extends SimpleUniverse implements
 				GraphicsEnvironment.getLocalGraphicsEnvironment()
 					.getDefaultScreenDevice().getBestConfiguration(templ);
 			offCanvas = new Canvas3D(gc, true);
-			System.out.println("construct canvas");
 		}
 		final Screen3D sOn = onCanvas.getScreen3D();
 		final Screen3D sOff = offCanvas.getScreen3D();
