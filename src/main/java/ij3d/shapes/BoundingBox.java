@@ -89,6 +89,9 @@ public class BoundingBox extends BranchGroup {
 		final float ly = max.y - min.y;
 		final float lz = max.z - min.z;
 		final float max = Math.max(lx, Math.max(ly, lz));
+		if (max <= 0)
+			// No bounding box
+			return;
 		float min = Math.min(lx, Math.min(ly, lz));
 		if (min == 0 || max / min > 100) min = max;
 		double tmp = 0.00001f;
@@ -198,12 +201,17 @@ public class BoundingBox extends BranchGroup {
 
 	private Geometry makeLine(final Point3f start, final Point3f end,
 		final Color3f color, final float tickDistance, final float first,
-		final float tickSize, final boolean noTicks)
+		final float tickSize, boolean noTicks)
 	{
 		final float lineLength = start.distance(end);
 		final int nTicks =
 			(int) Math.floor((lineLength - first) / tickDistance) + 1;
 
+		// Avoid negative array size. This occurs when the (lineLength - first)
+		// is negative. 
+		if (nTicks < 1)
+			noTicks = true;
+		
 		final int n = noTicks ? 2 : nTicks * 6 + 2;
 
 		final Point3f[] coords = new Point3f[n];

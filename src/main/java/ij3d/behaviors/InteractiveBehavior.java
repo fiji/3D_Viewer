@@ -323,7 +323,12 @@ public class InteractiveBehavior extends Behavior {
 					case KeyEvent.VK_PAGE_DOWN:
 						viewTransformer.zoom(-1);
 						return;
-
+					case KeyEvent.VK_COMMA:
+						viewTransformer.rotateZ(TWO_RAD);
+						return;
+					case KeyEvent.VK_PERIOD:
+						viewTransformer.rotateZ(-TWO_RAD);
+						return;
 				}
 			}
 			// If we arrive here, the event was not handled.

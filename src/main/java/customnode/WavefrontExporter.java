@@ -160,13 +160,13 @@ public class WavefrontExporter {
 			objWriter.write(mat.name);
 			objWriter.write('\n');
 			// print faces
-			if (cmesh.getClass() == CustomTriangleMesh.class) writeTriangleFaces(
-				index, objWriter, name);
-			else if (cmesh.getClass() == CustomQuadMesh.class) writeQuadFaces(index,
+			if (cmesh instanceof CustomTriangleMesh) 
+				writeTriangleFaces(index, objWriter, name);
+			else if (cmesh instanceof CustomQuadMesh) writeQuadFaces(index,
 				objWriter, name);
-			else if (cmesh.getClass() == CustomPointMesh.class) writePointFaces(
+			else if (cmesh instanceof CustomPointMesh) writePointFaces(
 				index, objWriter, name);
-			else if (cmesh.getClass() == CustomLineMesh.class) {
+			else if (cmesh instanceof CustomLineMesh) {
 				final CustomLineMesh clm = (CustomLineMesh) cmesh;
 				switch (clm.getMode()) {
 					case CustomLineMesh.PAIRWISE:
