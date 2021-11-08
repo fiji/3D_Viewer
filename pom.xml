@@ -106,7 +106,7 @@
 	</mailingLists>
 
 	<scm>
-		<connection>scm:git:git://github.com/fiji/3D_Viewer</connection>
+		<connection>scm:git:https://github.com/fiji/3D_Viewer</connection>
 		<developerConnection>scm:git:git@github.com:fiji/3D_Viewer</developerConnection>
 		<tag>HEAD</tag>
 		<url>https://github.com/fiji/3D_Viewer</url>
