@@ -122,6 +122,7 @@
 
 	<properties>
 		<automatic-module-name>sc.fiji.ij3d</automatic-module-name>
+		<main-class>ij3d.ImageJ3DViewer</main-class>
 
 		<license.licenseName>gpl_v3</license.licenseName>
 		<license.copyrightOwners>Fiji developers.</license.copyrightOwners>
