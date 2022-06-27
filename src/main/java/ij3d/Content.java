@@ -122,7 +122,7 @@ public class Content extends BranchGroup implements UniverseListener,
 	public void addInstant(final ContentInstant ci) {
 		final int timepoint = ci.timepoint;
 		contents.put(timepoint, ci);
-		if (!contents.containsKey(timepoint)) {
+		if (!timepointToSwitchIndex.containsKey(timepoint)) {
 			timepointToSwitchIndex.put(timepoint, contentSwitch.numChildren());
 			contentSwitch.addChild(ci);
 		}

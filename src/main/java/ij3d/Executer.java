@@ -359,7 +359,7 @@ public class Executer {
 	}
 
 	public void loadView() {
-		final OpenDialog sd = new OpenDialog("Open view...", "", ".view");
+		final OpenDialog sd = new OpenDialog("Open view...", OpenDialog.getDefaultDirectory(), ".view");
 		final String dir = sd.getDirectory();
 		final String name = sd.getFileName();
 		if (dir == null || name == null) return;
@@ -386,7 +386,7 @@ public class Executer {
 
 	public void loadSession() {
 		final OpenDialog sd =
-			new OpenDialog("Open session...", "session", ".scene");
+			new OpenDialog("Open session...", OpenDialog.getDefaultDirectory(), ".scene");
 		final String dir = sd.getDirectory();
 		final String name = sd.getFileName();
 		if (dir == null || name == null) return;

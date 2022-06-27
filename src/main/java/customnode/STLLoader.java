@@ -209,7 +209,6 @@ public class STLLoader {
 		cm = new CustomTriangleMesh(vertices);
 		cm.loadedFromName = name;
 		cm.changed = false;
-		cm.changed = false;
 		return cm;
 	}
 
