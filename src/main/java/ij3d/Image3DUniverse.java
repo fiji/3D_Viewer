@@ -83,6 +83,7 @@ import view4d.TimelineGUI;
 
 public class Image3DUniverse extends DefaultAnimatableUniverse {
 
+	public static final String NO_CONTENT_MESSAGE = "Cannot adjust view as there is no content in this universe.";
 	public static ArrayList<Image3DUniverse> universes =
 		new ArrayList<Image3DUniverse>();
 
@@ -1581,6 +1582,7 @@ public class Image3DUniverse extends DefaultAnimatableUniverse {
 	 *          ViewAdjuster.ADJUST_VERTICAL or ViewAdjuster.ADJUST_BOTH
 	 */
 	public void adjustView(final int dir) {
+		if (contents.isEmpty()) return;
 		final ViewAdjuster adj = new ViewAdjuster(this, dir);
 		adj.addCenterOf(contents.values());
 		for (final Content c : contents.values())
@@ -1592,6 +1594,7 @@ public class Image3DUniverse extends DefaultAnimatableUniverse {
 	 * Fit the specified contents optimally into the canvas.
 	 */
 	public void adjustView(final Iterable<Content> contents) {
+		if (!contents.iterator().hasNext()) return;
 		adjustView(contents, ViewAdjuster.ADJUST_BOTH);
 	}
 

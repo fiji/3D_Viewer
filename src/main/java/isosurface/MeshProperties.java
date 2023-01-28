@@ -141,7 +141,7 @@ public class MeshProperties {
 		if (mesh == null) return;
 
 		min.x = min.y = min.z = Double.MAX_VALUE;
-		max.x = max.y = max.z = Double.MIN_VALUE;
+		max.x = max.y = max.z = -Double.MAX_VALUE;
 		for (int i = 0; i < mesh.size(); i++) {
 			final Point3f p = (Point3f) mesh.get(i);
 			if (p.x < min.x) min.x = p.x;
