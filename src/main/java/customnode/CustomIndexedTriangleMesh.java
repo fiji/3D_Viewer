@@ -138,7 +138,7 @@ public class CustomIndexedTriangleMesh extends CustomMesh {
 		}
 
 		min.x = min.y = min.z = Float.MAX_VALUE;
-		max.x = max.y = max.z = Float.MIN_VALUE;
+		max.x = max.y = max.z = -Float.MAX_VALUE;
 		for (int i = 0; i < nVertices; i++) {
 			final Point3f p = vertices[i];
 			if (p.x < min.x) min.x = p.x;

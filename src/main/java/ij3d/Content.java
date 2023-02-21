@@ -646,7 +646,7 @@ public class Content extends BranchGroup implements UniverseListener,
 	}
 
 	public void getMax(final Point3d max) {
-		max.set(Double.MIN_VALUE, Double.MIN_VALUE, Double.MIN_VALUE);
+		max.set(-Double.MAX_VALUE, -Double.MAX_VALUE, -Double.MAX_VALUE);
 		final Point3d tmp = new Point3d();
 		for (final ContentInstant c : contents.values()) {
 			c.getContent().getMax(tmp);
