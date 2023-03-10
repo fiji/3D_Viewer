@@ -584,7 +584,7 @@ public class SaveSession {
 		for (final CustomMesh cm : meshes) {
 			String name = cm.getName();
 			if (name == null) name = c.getName();
-			name.replaceAll(" ", "_").replaceAll("#", "--");
+			name = name.replaceAll(" ", "_").replaceAll("#", "--");
 			ret += "%%%" + cm.getFile() + "%%%" + name;
 		}
 		return ret.substring(3, ret.length());
