@@ -22,13 +22,13 @@
 
 package ij3d.behaviors;
 
-import org.scijava.java3d.Transform3D;
-import org.scijava.java3d.TransformGroup;
-import org.scijava.vecmath.AxisAngle4d;
-import org.scijava.vecmath.Point2d;
-import org.scijava.vecmath.Point3d;
-import org.scijava.vecmath.Tuple3d;
-import org.scijava.vecmath.Vector3d;
+import org.jogamp.java3d.Transform3D;
+import org.jogamp.java3d.TransformGroup;
+import org.jogamp.vecmath.AxisAngle4d;
+import org.jogamp.vecmath.Point2d;
+import org.jogamp.vecmath.Point3d;
+import org.jogamp.vecmath.Tuple3d;
+import org.jogamp.vecmath.Vector3d;
 
 import ij3d.DefaultUniverse;
 import ij3d.Image3DUniverse;

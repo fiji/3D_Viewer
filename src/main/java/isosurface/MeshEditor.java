@@ -32,7 +32,7 @@ import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
 
-import org.scijava.vecmath.Point3f;
+import org.jogamp.vecmath.Point3f;
 
 import customnode.CustomTriangleMesh;
 

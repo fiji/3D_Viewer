@@ -33,7 +33,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.SwingUtilities;
 
-import org.scijava.java3d.View;
+import org.jogamp.java3d.View;
 
 import ij.ImagePlus;
 

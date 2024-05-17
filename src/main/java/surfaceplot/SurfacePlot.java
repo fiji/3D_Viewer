@@ -24,20 +24,21 @@ package surfaceplot;
 
 import java.awt.Color;
 
-import org.scijava.java3d.Appearance;
-import org.scijava.java3d.ColoringAttributes;
-import org.scijava.java3d.Geometry;
-import org.scijava.java3d.GeometryArray;
-import org.scijava.java3d.IndexedQuadArray;
-import org.scijava.java3d.Material;
-import org.scijava.java3d.PolygonAttributes;
-import org.scijava.java3d.Shape3D;
-import org.scijava.java3d.TransparencyAttributes;
-import org.scijava.java3d.utils.geometry.GeometryInfo;
-import org.scijava.java3d.utils.geometry.NormalGenerator;
-import org.scijava.vecmath.Color3f;
-import org.scijava.vecmath.Point3d;
-import org.scijava.vecmath.Point3f;
+import ij3d.Utils;
+import org.jogamp.java3d.Appearance;
+import org.jogamp.java3d.ColoringAttributes;
+import org.jogamp.java3d.Geometry;
+import org.jogamp.java3d.GeometryArray;
+import org.jogamp.java3d.IndexedQuadArray;
+import org.jogamp.java3d.Material;
+import org.jogamp.java3d.PolygonAttributes;
+import org.jogamp.java3d.Shape3D;
+import org.jogamp.java3d.TransparencyAttributes;
+import org.jogamp.java3d.utils.geometry.GeometryInfo;
+import org.jogamp.java3d.utils.geometry.NormalGenerator;
+import org.jogamp.vecmath.Color3f;
+import org.jogamp.vecmath.Point3d;
+import org.jogamp.vecmath.Point3f;
 
 import ij.IJ;
 import ij3d.Volume;
@@ -191,9 +192,8 @@ public final class SurfacePlot extends Shape3D {
 			final Point3f coord = new Point3f();
 			for (int i = 0; i < N; i++) {
 				geometry[g].getCoordinate(i, coord);
-				colors[i] =
-					color != null ? color : new Color3f(Color.getHSBColor(coord.z / maxZ,
-						1, 1));
+				colors[i] = color != null ? color :
+					Utils.toColor3f(Color.getHSBColor(coord.z / maxZ, 1, 1));
 			}
 			geometry[g].setColors(0, colors);
 		}

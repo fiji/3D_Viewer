@@ -34,14 +34,14 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.Vector;
 
-import org.scijava.java3d.BranchGroup;
-import org.scijava.java3d.Canvas3D;
-import org.scijava.java3d.TextureAttributes;
-import org.scijava.java3d.Transform3D;
-import org.scijava.vecmath.Color4f;
-import org.scijava.vecmath.Point2d;
-import org.scijava.vecmath.Point3d;
-import org.scijava.vecmath.Point3i;
+import org.jogamp.java3d.BranchGroup;
+import org.jogamp.java3d.Canvas3D;
+import org.jogamp.java3d.TextureAttributes;
+import org.jogamp.java3d.Transform3D;
+import org.jogamp.vecmath.Color4f;
+import org.jogamp.vecmath.Point2d;
+import org.jogamp.vecmath.Point3d;
+import org.jogamp.vecmath.Point3i;
 
 import ij.IJ;
 import ij.ImagePlus;

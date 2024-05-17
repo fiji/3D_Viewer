@@ -27,17 +27,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.scijava.java3d.Canvas3D;
-import org.scijava.java3d.Geometry;
-import org.scijava.java3d.GeometryArray;
-import org.scijava.java3d.Transform3D;
-import org.scijava.java3d.TriangleArray;
-import org.scijava.java3d.utils.geometry.GeometryInfo;
-import org.scijava.java3d.utils.geometry.NormalGenerator;
-import org.scijava.vecmath.Color3f;
-import org.scijava.vecmath.Point2d;
-import org.scijava.vecmath.Point3d;
-import org.scijava.vecmath.Point3f;
+import org.jogamp.java3d.Canvas3D;
+import org.jogamp.java3d.Geometry;
+import org.jogamp.java3d.GeometryArray;
+import org.jogamp.java3d.Transform3D;
+import org.jogamp.java3d.TriangleArray;
+import org.jogamp.java3d.utils.geometry.GeometryInfo;
+import org.jogamp.java3d.utils.geometry.NormalGenerator;
+import org.jogamp.vecmath.Color3f;
+import org.jogamp.vecmath.Point2d;
+import org.jogamp.vecmath.Point3d;
+import org.jogamp.vecmath.Point3f;
 
 import isosurface.MeshProperties;
 

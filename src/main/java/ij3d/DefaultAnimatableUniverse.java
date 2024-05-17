@@ -22,20 +22,22 @@
 
 package ij3d;
 
-import org.scijava.java3d.Alpha;
-import org.scijava.java3d.BranchGroup;
-import org.scijava.java3d.RotationInterpolator;
-import org.scijava.java3d.Transform3D;
-import org.scijava.java3d.TransformGroup;
-import org.scijava.java3d.View;
-import org.scijava.vecmath.AxisAngle4d;
-import org.scijava.vecmath.Vector3d;
-import org.scijava.vecmath.Vector3f;
+import org.jogamp.java3d.Alpha;
+import org.jogamp.java3d.BranchGroup;
+import org.jogamp.java3d.RotationInterpolator;
+import org.jogamp.java3d.Transform3D;
+import org.jogamp.java3d.TransformGroup;
+import org.jogamp.java3d.View;
+import org.jogamp.vecmath.AxisAngle4d;
+import org.jogamp.vecmath.Vector3d;
+import org.jogamp.vecmath.Vector3f;
 
 import ij.IJ;
 import ij.ImagePlus;
 import ij.ImageStack;
 import ij.process.ImageProcessor;
+
+import java.util.Iterator;
 
 public abstract class DefaultAnimatableUniverse extends DefaultUniverse {
 
@@ -101,7 +103,7 @@ public abstract class DefaultAnimatableUniverse extends DefaultUniverse {
 		rotpol = new RotationInterpolator(animation, animationTG) {
 
 			@Override
-			public void processStimulus(final java.util.Enumeration e) {
+			public void processStimulus(final Iterator e) {
 				super.processStimulus(e);
 				if (!animation.isPaused()) {
 					fireTransformationUpdated();

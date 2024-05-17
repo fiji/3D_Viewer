@@ -28,7 +28,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.TreeMap;
 
-import org.scijava.vecmath.Color3f;
+import org.jogamp.vecmath.Color3f;
 
 import customnode.CustomMesh;
 import customnode.CustomMeshNode;

@@ -24,7 +24,7 @@ package ij3d;
 
 import java.awt.image.IndexColorModel;
 
-import org.scijava.vecmath.Point3d;
+import org.jogamp.vecmath.Point3d;
 
 import ij.IJ;
 import ij.ImagePlus;

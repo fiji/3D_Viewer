@@ -51,16 +51,16 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.swing.JFileChooser;
 
-import org.scijava.java3d.Background;
-import org.scijava.java3d.PointLight;
-import org.scijava.java3d.Transform3D;
-import org.scijava.java3d.VirtualUniverse;
-import org.scijava.vecmath.Color3f;
-import org.scijava.vecmath.Matrix4d;
-import org.scijava.vecmath.Matrix4f;
-import org.scijava.vecmath.Point3d;
-import org.scijava.vecmath.Point3f;
-import org.scijava.vecmath.Vector3f;
+import org.jogamp.java3d.Background;
+import org.jogamp.java3d.PointLight;
+import org.jogamp.java3d.Transform3D;
+import org.jogamp.java3d.VirtualUniverse;
+import org.jogamp.vecmath.Color3f;
+import org.jogamp.vecmath.Matrix4d;
+import org.jogamp.vecmath.Matrix4f;
+import org.jogamp.vecmath.Point3d;
+import org.jogamp.vecmath.Point3f;
+import org.jogamp.vecmath.Vector3f;
 
 import customnode.CustomMesh;
 import customnode.CustomMeshNode;
@@ -813,7 +813,7 @@ public class Executer {
 			@Override
 			public void colorChanged(final Color3f color) {
 				background.setColor(color);
-				status.setBackground(color.get());
+				status.setBackground(Utils.toColor(color));
 				((ImageCanvas3D) univ.getCanvas()).render();
 			}
 

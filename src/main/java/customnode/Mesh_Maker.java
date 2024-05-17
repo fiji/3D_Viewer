@@ -31,8 +31,9 @@ package customnode;
 
 import java.awt.Color;
 
-import org.scijava.java3d.Transform3D;
-import org.scijava.vecmath.Color3f;
+import ij3d.Utils;
+import org.jogamp.java3d.Transform3D;
+import org.jogamp.vecmath.Color3f;
 
 import ij.plugin.PlugIn;
 import ij3d.Content;
@@ -47,24 +48,24 @@ public class Mesh_Maker extends MeshMaker implements PlugIn {
 
 		// define two spheres: an X,Y,Z point with a radius
 		final double x1 = 10, y1 = 100, z1 = 150, r1 = 20;
-		final Color3f color1 = new Color3f(Color.pink);
+		final Color3f color1 = Utils.toColor3f(Color.pink);
 
 		final double x2 = 50, y2 = 200, z2 = 40, r2 = 35;
-		final Color3f color2 = new Color3f(Color.white);
+		final Color3f color2 = Utils.toColor3f(Color.white);
 
 		// define a tube as a polyline in space
 		final double[] px = new double[] { 100, 230, 320, 400 };
 		final double[] py = new double[] { 100, 120, 230, 400 };
 		final double[] pz = new double[] { 100, 200, 300, 400 };
 		final double[] pr = new double[] { 10, 15, 40, 110 };
-		final Color3f colort = new Color3f(Color.yellow);
+		final Color3f colort = Utils.toColor3f(Color.yellow);
 
 		// define a second tube as a curving spiral in space
 		final double[] px2 = new double[200];
 		final double[] py2 = new double[200];
 		final double[] pz2 = new double[200];
 		final double[] pr2 = new double[200];
-		final Color3f color_t2 = new Color3f(Color.magenta);
+		final Color3f color_t2 = Utils.toColor3f(Color.magenta);
 		for (int i = 0; i < px2.length; i++) {
 			final double angle = Math.toRadians(10 * i);
 			final double radius = 50 + i * 5;
@@ -87,8 +88,8 @@ public class Mesh_Maker extends MeshMaker implements PlugIn {
 			univ.addMesh(createTube(px2, py2, pz2, pr2, 12, false), color_t2,
 				"Tube spiral", 1);
 		final Content disc1 =
-			univ.addMesh(createDisc(100, 100, 50, 3, 3, 3, 50, 12), new Color3f(
-				Color.blue), "Disc 1", 1);
+			univ.addMesh(createDisc(100, 100, 50, 3, 3, 3, 50, 12),
+				Utils.toColor3f(Color.blue), "Disc 1", 1);
 
 		// Extra:
 		// Now modify some attributes:

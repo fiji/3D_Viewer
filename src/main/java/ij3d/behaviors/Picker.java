@@ -27,13 +27,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.scijava.java3d.BranchGroup;
-import org.scijava.java3d.PickInfo;
-import org.scijava.java3d.SceneGraphPath;
-import org.scijava.java3d.utils.pickfast.PickCanvas;
-import org.scijava.java3d.utils.pickfast.PickTool;
-import org.scijava.vecmath.Point3d;
-import org.scijava.vecmath.Vector3d;
+import org.jogamp.java3d.BranchGroup;
+import org.jogamp.java3d.PickInfo;
+import org.jogamp.java3d.SceneGraphPath;
+import org.jogamp.java3d.utils.pickfast.PickCanvas;
+import org.jogamp.java3d.utils.pickfast.PickTool;
+import org.jogamp.vecmath.Point3d;
+import org.jogamp.vecmath.Vector3d;
 
 import ij.IJ;
 import ij3d.Content;

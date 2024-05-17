@@ -26,19 +26,20 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.Enumeration;
+import java.util.Iterator;
 
-import org.scijava.java3d.BranchGroup;
-import org.scijava.java3d.Group;
-import org.scijava.java3d.Node;
-import org.scijava.java3d.OrderedGroup;
-import org.scijava.java3d.Switch;
-import org.scijava.java3d.Transform3D;
-import org.scijava.java3d.TransformGroup;
-import org.scijava.java3d.View;
-import org.scijava.vecmath.Color3f;
-import org.scijava.vecmath.Matrix3f;
-import org.scijava.vecmath.Point3d;
-import org.scijava.vecmath.Vector3d;
+import org.jogamp.java3d.BranchGroup;
+import org.jogamp.java3d.Group;
+import org.jogamp.java3d.Node;
+import org.jogamp.java3d.OrderedGroup;
+import org.jogamp.java3d.Switch;
+import org.jogamp.java3d.Transform3D;
+import org.jogamp.java3d.TransformGroup;
+import org.jogamp.java3d.View;
+import org.jogamp.vecmath.Color3f;
+import org.jogamp.vecmath.Matrix3f;
+import org.jogamp.vecmath.Point3d;
+import org.jogamp.vecmath.Vector3d;
 
 import customnode.CustomMesh;
 import customnode.CustomMeshNode;
@@ -217,10 +218,8 @@ public class ContentInstant extends BranchGroup implements UniverseListener,
 
 	public void display(final ContentNode node) {
 		// remove everything if possible
-		for (@SuppressWarnings("rawtypes")
-		final Enumeration e = ordered.getAllChildren(); e.hasMoreElements();)
-		{
-			final Switch s = (Switch) e.nextElement();
+		for (Iterator<Node> e = ordered.getAllChildren(); e.hasNext(); ) {
+			final Switch s = (Switch) e.next();
 			s.removeAllChildren();
 		}
 

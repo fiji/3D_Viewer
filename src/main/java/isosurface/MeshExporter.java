@@ -39,8 +39,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-import org.scijava.vecmath.Color3f;
-import org.scijava.vecmath.Point3f;
+import org.jogamp.vecmath.Color3f;
+import org.jogamp.vecmath.Point3f;
 
 import customnode.CustomMesh;
 import customnode.CustomMeshNode;

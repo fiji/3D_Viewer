@@ -27,8 +27,8 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.scijava.vecmath.Color3f;
-import org.scijava.vecmath.Point3f;
+import org.jogamp.vecmath.Color3f;
+import org.jogamp.vecmath.Point3f;
 
 import ij.ImagePlus;
 import ij.ImageStack;
@@ -59,14 +59,14 @@ public class Test_Single_Voxel implements PlugIn {
 		GUI.center(univ.getWindow());
 		final boolean[] channels = { true, true, true };
 		final Content c =
-			univ.addContent(i, new Color3f(Color.white),
+			univ.addContent(i, Utils.toColor3f(Color.white),
 				"Volume Rendering of a Single Voxel at (1,1,1)", 10, // threshold
 				channels, 1, // resampling factor
 				ContentConstants.VOLUME);
 		final List<Point3f> linePoints = new ArrayList<Point3f>();
 		linePoints.add(new Point3f(1, 1, 1));
 		linePoints.add(new Point3f(2, 2, 2));
-		univ.addLineMesh(linePoints, new Color3f(Color.red),
+		univ.addLineMesh(linePoints, Utils.toColor3f(Color.red),
 			"Line from (1,1,1) to (2,2,2)", false);
 		univ.resetView();
 	}

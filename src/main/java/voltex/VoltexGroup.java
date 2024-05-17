@@ -24,13 +24,13 @@ package voltex;
 
 import java.awt.Polygon;
 
-import org.scijava.java3d.Canvas3D;
-import org.scijava.java3d.Transform3D;
-import org.scijava.java3d.View;
-import org.scijava.vecmath.Color3f;
-import org.scijava.vecmath.Point2d;
-import org.scijava.vecmath.Point3d;
-import org.scijava.vecmath.Tuple3d;
+import org.jogamp.java3d.Canvas3D;
+import org.jogamp.java3d.Transform3D;
+import org.jogamp.java3d.View;
+import org.jogamp.vecmath.Color3f;
+import org.jogamp.vecmath.Point2d;
+import org.jogamp.vecmath.Point3d;
+import org.jogamp.vecmath.Tuple3d;
 
 import ij.IJ;
 import ij.ImagePlus;

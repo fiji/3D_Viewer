@@ -39,12 +39,12 @@ import java.awt.event.WindowEvent;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.scijava.vecmath.AxisAngle4f;
-import org.scijava.vecmath.Matrix3f;
-import org.scijava.vecmath.Matrix4f;
-import org.scijava.vecmath.Point3f;
-import org.scijava.vecmath.Tuple3f;
-import org.scijava.vecmath.Vector3f;
+import org.jogamp.vecmath.AxisAngle4f;
+import org.jogamp.vecmath.Matrix3f;
+import org.jogamp.vecmath.Matrix4f;
+import org.jogamp.vecmath.Point3f;
+import org.jogamp.vecmath.Tuple3f;
+import org.jogamp.vecmath.Vector3f;
 
 import ij.gui.GenericDialog;
 import math3d.TransformIO;

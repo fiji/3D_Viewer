@@ -26,19 +26,19 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.scijava.java3d.Appearance;
-import org.scijava.java3d.ColoringAttributes;
-import org.scijava.java3d.Geometry;
-import org.scijava.java3d.GeometryArray;
-import org.scijava.java3d.Material;
-import org.scijava.java3d.PolygonAttributes;
-import org.scijava.java3d.TransparencyAttributes;
-import org.scijava.java3d.TriangleArray;
-import org.scijava.java3d.utils.geometry.GeometryInfo;
-import org.scijava.java3d.utils.geometry.NormalGenerator;
-import org.scijava.vecmath.Color3f;
-import org.scijava.vecmath.Color4f;
-import org.scijava.vecmath.Point3f;
+import org.jogamp.java3d.Appearance;
+import org.jogamp.java3d.ColoringAttributes;
+import org.jogamp.java3d.Geometry;
+import org.jogamp.java3d.GeometryArray;
+import org.jogamp.java3d.Material;
+import org.jogamp.java3d.PolygonAttributes;
+import org.jogamp.java3d.TransparencyAttributes;
+import org.jogamp.java3d.TriangleArray;
+import org.jogamp.java3d.utils.geometry.GeometryInfo;
+import org.jogamp.java3d.utils.geometry.NormalGenerator;
+import org.jogamp.vecmath.Color3f;
+import org.jogamp.vecmath.Color4f;
+import org.jogamp.vecmath.Point3f;
 
 public class CustomTransparentTriangleMesh extends CustomTriangleMesh {
 

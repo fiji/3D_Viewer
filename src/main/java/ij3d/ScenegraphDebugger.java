@@ -25,6 +25,7 @@ package ij3d;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Enumeration;
+import java.util.Iterator;
 
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -32,8 +33,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTree;
 import javax.swing.tree.TreeNode;
 
-import org.scijava.java3d.Group;
-import org.scijava.java3d.Node;
+import org.jogamp.java3d.Group;
+import org.jogamp.java3d.Node;
 
 public class ScenegraphDebugger {
 
@@ -44,9 +45,9 @@ public class ScenegraphDebugger {
 	private static void displayTree(final Node node, final String indent) {
 		System.out.println(indent + node);
 		if (node instanceof Group) {
-			final Enumeration ch = ((Group) node).getAllChildren();
-			while (ch.hasMoreElements())
-				displayTree((Node) ch.nextElement(), indent + "   ");
+			final Iterator<Node> ch = ((Group) node).getAllChildren();
+			while (ch.hasNext())
+				displayTree(ch.next(), indent + "   ");
 		}
 	}
 

@@ -22,7 +22,7 @@
 
 package customnode;
 
-import org.scijava.vecmath.Point3f;
+import org.jogamp.vecmath.Point3f;
 
 public abstract class Primitive extends CustomIndexedTriangleMesh {
 

@@ -32,8 +32,8 @@ import java.util.Properties;
 
 import javax.swing.KeyStroke;
 
-import org.scijava.java3d.View;
-import org.scijava.vecmath.Color3f;
+import org.jogamp.java3d.View;
+import org.jogamp.vecmath.Color3f;
 
 import ij.gui.GenericDialog;
 

@@ -87,8 +87,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.scijava.vecmath.Color3f;
-import org.scijava.vecmath.Point3f;
+import org.jogamp.vecmath.Color3f;
+import org.jogamp.vecmath.Point3f;
 
 import ij.IJ;
 import ij.ImagePlus;
@@ -466,7 +466,7 @@ public class Pipe {
 						final ColorProcessor cp =
 							(ColorProcessor) stack.getProcessor(z + 1);
 						final Color c = cp.getColor(x, y);
-						result[i] = new Color3f(c);
+						result[i] = Utils.toColor3f(c);
 					}
 						break;
 					case ImagePlus.GRAY8: {

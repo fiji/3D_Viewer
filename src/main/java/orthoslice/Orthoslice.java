@@ -24,14 +24,14 @@ package orthoslice;
 
 import java.util.BitSet;
 
-import org.scijava.java3d.Group;
-import org.scijava.java3d.QuadArray;
-import org.scijava.java3d.Shape3D;
-import org.scijava.java3d.Switch;
-import org.scijava.java3d.TexCoordGeneration;
-import org.scijava.java3d.Texture2D;
-import org.scijava.java3d.View;
-import org.scijava.vecmath.Color3f;
+import org.jogamp.java3d.Group;
+import org.jogamp.java3d.QuadArray;
+import org.jogamp.java3d.Shape3D;
+import org.jogamp.java3d.Switch;
+import org.jogamp.java3d.TexCoordGeneration;
+import org.jogamp.java3d.Texture2D;
+import org.jogamp.java3d.View;
+import org.jogamp.vecmath.Color3f;
 
 import ij.ImagePlus;
 import voltex.VolumeRenderer;

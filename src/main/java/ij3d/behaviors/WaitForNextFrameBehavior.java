@@ -23,10 +23,11 @@
 package ij3d.behaviors;
 
 import java.util.Enumeration;
+import java.util.Iterator;
 
-import org.scijava.java3d.Behavior;
-import org.scijava.java3d.WakeupOnBehaviorPost;
-import org.scijava.java3d.WakeupOnElapsedFrames;
+import org.jogamp.java3d.Behavior;
+import org.jogamp.java3d.WakeupOnBehaviorPost;
+import org.jogamp.java3d.WakeupOnElapsedFrames;
 
 public class WaitForNextFrameBehavior extends Behavior {
 
@@ -47,9 +48,9 @@ public class WaitForNextFrameBehavior extends Behavior {
 	}
 
 	@Override
-	public void processStimulus(final Enumeration criteria) {
-		while (criteria.hasMoreElements()) {
-			final Object c = criteria.nextElement();
+	public void processStimulus(final Iterator criteria) {
+		while (criteria.hasNext()) {
+			final Object c = criteria.next();
 			if (c instanceof WakeupOnBehaviorPost) {
 				wakeupOn(frameCrit);
 			}

@@ -22,9 +22,9 @@
 
 package voltex;
 
-import org.scijava.java3d.Geometry;
-import org.scijava.java3d.GeometryArray;
-import org.scijava.java3d.QuadArray;
+import org.jogamp.java3d.Geometry;
+import org.jogamp.java3d.GeometryArray;
+import org.jogamp.java3d.QuadArray;
 
 import ij3d.AxisConstants;
 

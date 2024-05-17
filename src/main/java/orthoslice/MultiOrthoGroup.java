@@ -22,7 +22,7 @@
 
 package orthoslice;
 
-import org.scijava.java3d.View;
+import org.jogamp.java3d.View;
 
 import ij.ImagePlus;
 import ij3d.Content;

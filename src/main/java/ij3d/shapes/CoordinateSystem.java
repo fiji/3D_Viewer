@@ -24,21 +24,21 @@ package ij3d.shapes;
 
 import java.awt.Font;
 
-import org.scijava.java3d.Appearance;
-import org.scijava.java3d.BranchGroup;
-import org.scijava.java3d.ColoringAttributes;
-import org.scijava.java3d.Geometry;
-import org.scijava.java3d.GeometryArray;
-import org.scijava.java3d.LineArray;
-import org.scijava.java3d.OrientedShape3D;
-import org.scijava.java3d.PolygonAttributes;
-import org.scijava.java3d.Shape3D;
-import org.scijava.java3d.Transform3D;
-import org.scijava.java3d.TransformGroup;
-import org.scijava.java3d.utils.geometry.Text2D;
-import org.scijava.vecmath.Color3f;
-import org.scijava.vecmath.Point3f;
-import org.scijava.vecmath.Vector3f;
+import org.jogamp.java3d.Appearance;
+import org.jogamp.java3d.BranchGroup;
+import org.jogamp.java3d.ColoringAttributes;
+import org.jogamp.java3d.Geometry;
+import org.jogamp.java3d.GeometryArray;
+import org.jogamp.java3d.LineArray;
+import org.jogamp.java3d.OrientedShape3D;
+import org.jogamp.java3d.PolygonAttributes;
+import org.jogamp.java3d.Shape3D;
+import org.jogamp.java3d.Transform3D;
+import org.jogamp.java3d.TransformGroup;
+import org.jogamp.java3d.utils.geometry.Text2D;
+import org.jogamp.vecmath.Color3f;
+import org.jogamp.vecmath.Point3f;
+import org.jogamp.vecmath.Vector3f;
 
 public class CoordinateSystem extends BranchGroup {
 

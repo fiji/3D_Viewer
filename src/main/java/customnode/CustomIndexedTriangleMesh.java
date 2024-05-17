@@ -24,17 +24,17 @@ package customnode;
 
 import java.util.List;
 
-import org.scijava.java3d.Appearance;
-import org.scijava.java3d.ColoringAttributes;
-import org.scijava.java3d.Geometry;
-import org.scijava.java3d.GeometryArray;
-import org.scijava.java3d.IndexedTriangleArray;
-import org.scijava.java3d.Material;
-import org.scijava.java3d.PolygonAttributes;
-import org.scijava.java3d.TransparencyAttributes;
-import org.scijava.vecmath.Color3f;
-import org.scijava.vecmath.Point3f;
-import org.scijava.vecmath.Vector3f;
+import org.jogamp.java3d.Appearance;
+import org.jogamp.java3d.ColoringAttributes;
+import org.jogamp.java3d.Geometry;
+import org.jogamp.java3d.GeometryArray;
+import org.jogamp.java3d.IndexedTriangleArray;
+import org.jogamp.java3d.Material;
+import org.jogamp.java3d.PolygonAttributes;
+import org.jogamp.java3d.TransparencyAttributes;
+import org.jogamp.vecmath.Color3f;
+import org.jogamp.vecmath.Point3f;
+import org.jogamp.vecmath.Vector3f;
 
 import ij.ImagePlus;
 import ij.measure.Calibration;

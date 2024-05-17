@@ -34,9 +34,9 @@ import java.awt.image.Raster;
 import java.awt.image.SampleModel;
 import java.awt.image.WritableRaster;
 
-import org.scijava.java3d.ImageComponent;
-import org.scijava.java3d.ImageComponent2D;
-import org.scijava.vecmath.Point3d;
+import org.jogamp.java3d.ImageComponent;
+import org.jogamp.java3d.ImageComponent2D;
+import org.jogamp.vecmath.Point3d;
 
 import ij.IJ;
 import ij.ImagePlus;

@@ -37,15 +37,15 @@ import java.lang.reflect.Method;
 
 import javax.swing.JFrame;
 
-import org.scijava.java3d.Canvas3D;
-import org.scijava.java3d.GraphicsConfigTemplate3D;
-import org.scijava.java3d.ImageComponent;
-import org.scijava.java3d.ImageComponent2D;
-import org.scijava.java3d.RenderingError;
-import org.scijava.java3d.RenderingErrorListener;
-import org.scijava.java3d.Screen3D;
-import org.scijava.java3d.View;
-import org.scijava.java3d.utils.universe.SimpleUniverse;
+import org.jogamp.java3d.Canvas3D;
+import org.jogamp.java3d.GraphicsConfigTemplate3D;
+import org.jogamp.java3d.ImageComponent;
+import org.jogamp.java3d.ImageComponent2D;
+import org.jogamp.java3d.RenderingError;
+import org.jogamp.java3d.RenderingErrorListener;
+import org.jogamp.java3d.Screen3D;
+import org.jogamp.java3d.View;
+import org.jogamp.java3d.utils.universe.SimpleUniverse;
 
 import ij.ImagePlus;
 import ij.gui.ImageCanvas;

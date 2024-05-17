@@ -11,7 +11,7 @@
 
 	<groupId>sc.fiji</groupId>
 	<artifactId>3D_Viewer</artifactId>
-	<version>4.0.6-SNAPSHOT</version>
+	<version>5.0.0-SNAPSHOT</version>
 
 	<name>3D Viewer</name>
 	<description>3D Viewer for visualizing image stacks three-dimensionally.</description>
@@ -130,6 +130,11 @@
 
 		<!-- NB: Deploy releases to the SciJava Maven repository. -->
 		<releaseProfiles>sign,deploy-to-scijava</releaseProfiles>
+
+		<jogamp-java3d.version>1.7.2</jogamp-java3d.version>
+		<org.jogamp.java3d.java3d-core.version>${jogamp-java3d.version}</org.jogamp.java3d.java3d-core.version>
+		<org.jogamp.java3d.java3d-utils.version>${jogamp-java3d.version}</org.jogamp.java3d.java3d-utils.version>
+		<org.jogamp.java3d.vecmath.version>${jogamp-java3d.version}</org.jogamp.java3d.vecmath.version>
 	</properties>
 
 	<repositories>
@@ -160,16 +165,19 @@
 
 		<!-- Java 3D dependencies -->
 		<dependency>
-			<groupId>org.scijava</groupId>
-			<artifactId>j3dcore</artifactId>
+			<groupId>org.jogamp.java3d</groupId>
+			<artifactId>java3d-core</artifactId>
+			<version>${org.jogamp.java3d.java3d-core.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.scijava</groupId>
-			<artifactId>j3dutils</artifactId>
+			<groupId>org.jogamp.java3d</groupId>
+			<artifactId>java3d-utils</artifactId>
+			<version>${org.jogamp.java3d.java3d-utils.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.scijava</groupId>
+			<groupId>org.jogamp.java3d</groupId>
 			<artifactId>vecmath</artifactId>
+			<version>${org.jogamp.java3d.vecmath.version}</version>
 		</dependency>
 	</dependencies>
 </project>

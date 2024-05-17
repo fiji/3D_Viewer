@@ -24,8 +24,8 @@ package ij3d;
 
 import java.util.HashMap;
 
-import org.scijava.java3d.View;
-import org.scijava.java3d.utils.universe.MultiTransformGroup;
+import org.jogamp.java3d.View;
+import org.jogamp.java3d.utils.universe.MultiTransformGroup;
 
 import ij3d.DefaultUniverse.GlobalTransform;
 

@@ -28,12 +28,13 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
 import java.util.Enumeration;
+import java.util.Iterator;
 import java.util.List;
 
-import org.scijava.java3d.Behavior;
-import org.scijava.java3d.WakeupCondition;
-import org.scijava.java3d.WakeupOnAWTEvent;
-import org.scijava.java3d.WakeupOr;
+import org.jogamp.java3d.Behavior;
+import org.jogamp.java3d.WakeupCondition;
+import org.jogamp.java3d.WakeupOnAWTEvent;
+import org.jogamp.java3d.WakeupOr;
 
 import ij.IJ;
 import ij3d.AxisConstants;
@@ -120,10 +121,10 @@ public class InteractiveBehavior extends Behavior {
 	}
 
 	/**
-	 * @see Behavior#processStimulus(Enumeration) Behavior.processStimulus
+	 * @see Behavior#processStimulus(Iterator) Behavior.processStimulus
 	 */
 	@Override
-	public void processStimulus(final Enumeration criteria) {
+	public void processStimulus(final Iterator criteria) {
 		/*
 		if(!univ.ui.isHandTool() &&
 			!univ.ui.isMagnifierTool() &&
@@ -133,8 +134,8 @@ public class InteractiveBehavior extends Behavior {
 			return;
 		}
 		*/
-		while (criteria.hasMoreElements()) {
-			final WakeupOnAWTEvent wakeup = (WakeupOnAWTEvent) criteria.nextElement();
+		while (criteria.hasNext()) {
+			final WakeupOnAWTEvent wakeup = (WakeupOnAWTEvent) criteria.next();
 			final AWTEvent[] events = wakeup.getAWTEvent();
 			for (final AWTEvent evt : events) {
 				if (evt instanceof MouseEvent) doProcess((MouseEvent) evt);

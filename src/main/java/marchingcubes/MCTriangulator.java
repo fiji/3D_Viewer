@@ -24,7 +24,7 @@ package marchingcubes;
 
 import java.util.List;
 
-import org.scijava.vecmath.Point3f;
+import org.jogamp.vecmath.Point3f;
 
 import ij.ImagePlus;
 import ij.ImageStack;

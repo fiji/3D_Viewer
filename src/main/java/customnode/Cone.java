@@ -22,8 +22,8 @@
 
 package customnode;
 
-import org.scijava.vecmath.Matrix4f;
-import org.scijava.vecmath.Point3f;
+import org.jogamp.vecmath.Matrix4f;
+import org.jogamp.vecmath.Point3f;
 
 public class Cone extends Primitive {
 

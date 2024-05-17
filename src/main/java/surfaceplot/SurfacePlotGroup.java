@@ -27,10 +27,10 @@ import java.awt.Scrollbar;
 import java.awt.event.AdjustmentEvent;
 import java.awt.event.AdjustmentListener;
 
-import org.scijava.java3d.View;
-import org.scijava.vecmath.Color3f;
-import org.scijava.vecmath.Point3d;
-import org.scijava.vecmath.Tuple3d;
+import org.jogamp.java3d.View;
+import org.jogamp.vecmath.Color3f;
+import org.jogamp.vecmath.Point3d;
+import org.jogamp.vecmath.Tuple3d;
 
 import ij.ImagePlus;
 import ij.gui.StackWindow;

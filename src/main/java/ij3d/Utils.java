@@ -51,7 +51,13 @@
 
 package ij3d;
 
-class Utils {
+import org.jogamp.vecmath.Color3f;
+
+import java.awt.Color;
+
+public final class Utils {
+
+	private Utils() { }
 
 	/**
 	 * Will make a new double[] array, then fit in it as many points from the
@@ -64,5 +70,20 @@ class Utils {
 		final int len = a.length > new_length ? new_length : a.length;
 		System.arraycopy(a, 0, b, 0, len);
 		return b;
+	}
+
+	public static Color toColor(Color3f color3f) {
+		int r = Math.round(color3f.x * 255.0f);
+		int g = Math.round(color3f.y * 255.0f);
+		int b = Math.round(color3f.z * 255.0f);
+		return new Color(r, g, b);
+	}
+
+	public static Color3f toColor3f(Color color) {
+		return new Color3f(
+			(float)color.getRed() / 255.0f,
+			(float)color.getGreen() / 255.0f,
+			(float)color.getBlue() / 255.0f
+		);
 	}
 }

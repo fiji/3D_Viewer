@@ -22,7 +22,7 @@
 
 package ij3d;
 
-import org.scijava.java3d.View;
+import org.jogamp.java3d.View;
 
 public interface UniverseListener {
 

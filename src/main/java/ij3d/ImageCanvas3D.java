@@ -35,11 +35,11 @@ import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import org.scijava.java3d.Background;
-import org.scijava.java3d.Canvas3D;
-import org.scijava.java3d.J3DGraphics2D;
-import org.scijava.java3d.utils.universe.SimpleUniverse;
-import org.scijava.vecmath.Color3f;
+import org.jogamp.java3d.Background;
+import org.jogamp.java3d.Canvas3D;
+import org.jogamp.java3d.J3DGraphics2D;
+import org.jogamp.java3d.utils.universe.SimpleUniverse;
+import org.jogamp.vecmath.Color3f;
 
 import ij.ImagePlus;
 import ij.gui.ImageCanvas;

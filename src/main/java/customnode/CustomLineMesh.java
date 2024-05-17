@@ -25,18 +25,18 @@ package customnode;
 import java.util.Arrays;
 import java.util.List;
 
-import org.scijava.java3d.Appearance;
-import org.scijava.java3d.ColoringAttributes;
-import org.scijava.java3d.Geometry;
-import org.scijava.java3d.GeometryArray;
-import org.scijava.java3d.LineArray;
-import org.scijava.java3d.LineAttributes;
-import org.scijava.java3d.LineStripArray;
-import org.scijava.java3d.Material;
-import org.scijava.java3d.PolygonAttributes;
-import org.scijava.java3d.TransparencyAttributes;
-import org.scijava.vecmath.Color3f;
-import org.scijava.vecmath.Point3f;
+import org.jogamp.java3d.Appearance;
+import org.jogamp.java3d.ColoringAttributes;
+import org.jogamp.java3d.Geometry;
+import org.jogamp.java3d.GeometryArray;
+import org.jogamp.java3d.LineArray;
+import org.jogamp.java3d.LineAttributes;
+import org.jogamp.java3d.LineStripArray;
+import org.jogamp.java3d.Material;
+import org.jogamp.java3d.PolygonAttributes;
+import org.jogamp.java3d.TransparencyAttributes;
+import org.jogamp.vecmath.Color3f;
+import org.jogamp.vecmath.Point3f;
 
 public class CustomLineMesh extends CustomMesh {
 

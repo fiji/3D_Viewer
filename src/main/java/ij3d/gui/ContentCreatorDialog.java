@@ -29,7 +29,7 @@ import java.awt.event.ItemListener;
 import java.io.File;
 import java.util.Vector;
 
-import org.scijava.vecmath.Color3f;
+import org.jogamp.vecmath.Color3f;
 
 import ij.IJ;
 import ij.ImagePlus;

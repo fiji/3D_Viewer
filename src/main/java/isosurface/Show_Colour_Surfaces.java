@@ -51,7 +51,7 @@ package isosurface;
 import java.awt.image.IndexColorModel;
 import java.util.HashMap;
 
-import org.scijava.vecmath.Color3f;
+import org.jogamp.vecmath.Color3f;
 
 import ij.IJ;
 import ij.ImagePlus;

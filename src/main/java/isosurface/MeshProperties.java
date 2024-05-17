@@ -24,8 +24,8 @@ package isosurface;
 
 import java.util.List;
 
-import org.scijava.vecmath.Point3d;
-import org.scijava.vecmath.Point3f;
+import org.jogamp.vecmath.Point3d;
+import org.jogamp.vecmath.Point3f;
 
 /**
  * References. Brian Mirtich, 2006, "Fast and Accurate Computation of Polyhedral

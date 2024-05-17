@@ -34,11 +34,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.scijava.java3d.TriangleArray;
-import org.scijava.vecmath.Color3f;
-import org.scijava.vecmath.Color4f;
-import org.scijava.vecmath.Point3f;
-import org.scijava.vecmath.Vector3f;
+import org.jogamp.java3d.TriangleArray;
+import org.jogamp.vecmath.Color3f;
+import org.jogamp.vecmath.Color4f;
+import org.jogamp.vecmath.Point3f;
+import org.jogamp.vecmath.Vector3f;
 
 import customnode.CustomMeshNode;
 import customnode.CustomTriangleMesh;

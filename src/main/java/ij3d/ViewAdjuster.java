@@ -22,10 +22,10 @@
 
 package ij3d;
 
-import org.scijava.java3d.Canvas3D;
-import org.scijava.java3d.Transform3D;
-import org.scijava.vecmath.Point3d;
-import org.scijava.vecmath.Vector3d;
+import org.jogamp.java3d.Canvas3D;
+import org.jogamp.java3d.Transform3D;
+import org.jogamp.vecmath.Point3d;
+import org.jogamp.vecmath.Vector3d;
 
 /*
  * The idea of the adjuster is to translate the eye such that all added points

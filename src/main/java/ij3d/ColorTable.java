@@ -24,7 +24,7 @@ package ij3d;
 
 import java.awt.image.IndexColorModel;
 
-import org.scijava.vecmath.Color3f;
+import org.jogamp.vecmath.Color3f;
 
 import ij.ImagePlus;
 import ij.ImageStack;

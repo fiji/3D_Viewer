@@ -22,21 +22,21 @@
 
 package voltex;
 
-import org.scijava.java3d.Appearance;
-import org.scijava.java3d.BranchGroup;
-import org.scijava.java3d.Canvas3D;
-import org.scijava.java3d.GeometryArray;
-import org.scijava.java3d.Group;
-import org.scijava.java3d.Node;
-import org.scijava.java3d.OrderedGroup;
-import org.scijava.java3d.Shape3D;
-import org.scijava.java3d.Switch;
-import org.scijava.java3d.TextureUnitState;
-import org.scijava.java3d.Transform3D;
-import org.scijava.java3d.View;
-import org.scijava.vecmath.Color3f;
-import org.scijava.vecmath.Point3d;
-import org.scijava.vecmath.Vector3d;
+import org.jogamp.java3d.Appearance;
+import org.jogamp.java3d.BranchGroup;
+import org.jogamp.java3d.Canvas3D;
+import org.jogamp.java3d.GeometryArray;
+import org.jogamp.java3d.Group;
+import org.jogamp.java3d.Node;
+import org.jogamp.java3d.OrderedGroup;
+import org.jogamp.java3d.Shape3D;
+import org.jogamp.java3d.Switch;
+import org.jogamp.java3d.TextureUnitState;
+import org.jogamp.java3d.Transform3D;
+import org.jogamp.java3d.View;
+import org.jogamp.vecmath.Color3f;
+import org.jogamp.vecmath.Point3d;
+import org.jogamp.vecmath.Vector3d;
 
 import ij.IJ;
 import ij.ImagePlus;

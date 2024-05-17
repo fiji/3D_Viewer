@@ -41,8 +41,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
-import org.scijava.java3d.Transform3D;
-import org.scijava.vecmath.Color3f;
+import org.jogamp.java3d.Transform3D;
+import org.jogamp.vecmath.Color3f;
 
 import customnode.CustomMesh;
 import customnode.CustomMeshNode;
@@ -347,7 +347,7 @@ public class SaveSession {
 	void saveContentInstant(final PrintWriter out, final ContentInstant c) {
 		// color string
 		final String col =
-			c.color == null ? null : Integer.toString(c.color.get().getRGB());
+			c.color == null ? null : Integer.toString(Utils.toColor(c.color).getRGB());
 		// channel string
 		final String chan =
 			c.channels[0] + "%%%" + c.channels[1] + "%%%" + c.channels[2];
@@ -488,8 +488,9 @@ public class SaveSession {
 			c.display(createCustomNode(tmp));
 		}
 
-		if ((tmp = props.get("color")) != null) c.setColor(new Color3f(new Color(
-			i(tmp))));
+		if ((tmp = props.get("color")) != null) {
+			c.setColor(Utils.toColor3f(new Color(i(tmp))));
+		}
 		if ((tmp = props.get("transparency")) != null) c.setTransparency(f(tmp));
 		if ((tmp = props.get("threshold")) != null) c.setThreshold(i(tmp));
 		if ((tmp = props.get("shaded")) != null) c.setShaded(b(tmp));

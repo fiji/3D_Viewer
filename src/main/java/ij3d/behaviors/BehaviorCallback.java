@@ -22,7 +22,7 @@
 
 package ij3d.behaviors;
 
-import org.scijava.java3d.Transform3D;
+import org.jogamp.java3d.Transform3D;
 
 /**
  * @author Benjamin Schmid

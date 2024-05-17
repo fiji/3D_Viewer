@@ -37,8 +37,8 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
-import org.scijava.java3d.Transform3D;
-import org.scijava.java3d.View;
+import org.jogamp.java3d.Transform3D;
+import org.jogamp.java3d.View;
 
 import ij.IJ;
 import ij.gui.GenericDialog;

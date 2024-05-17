@@ -25,10 +25,11 @@ package isosurface;
 import java.awt.Color;
 import java.util.List;
 
-import org.scijava.java3d.View;
-import org.scijava.vecmath.Color3f;
-import org.scijava.vecmath.Point3f;
-import org.scijava.vecmath.Tuple3d;
+import ij3d.Utils;
+import org.jogamp.java3d.View;
+import org.jogamp.vecmath.Color3f;
+import org.jogamp.vecmath.Point3f;
+import org.jogamp.vecmath.Tuple3d;
 
 import customnode.CustomTriangleMesh;
 import ij.IJ;
@@ -58,7 +59,7 @@ public class MeshGroup extends ContentNode {
 		if (color == null) {
 			final int value =
 				c.getImage().getProcessor().getColorModel().getRGB(c.getThreshold());
-			color = new Color3f(new Color(value));
+			color = Utils.toColor3f(new Color(value));
 		}
 		mesh = new CustomTriangleMesh(tri, color, c.getTransparency());
 		calculateMinMaxCenterPoint();
@@ -147,7 +148,7 @@ public class MeshGroup extends ContentNode {
 		if (newColor == null) {
 			final int val =
 				c.getImage().getProcessor().getColorModel().getRGB(c.getThreshold());
-			newColor = new Color3f(new Color(val));
+			newColor = Utils.toColor3f(new Color(val));
 		}
 		mesh.setColor(newColor);
 	}
