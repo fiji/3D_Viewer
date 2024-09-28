@@ -130,11 +130,6 @@
 
 		<!-- NB: Deploy releases to the SciJava Maven repository. -->
 		<releaseProfiles>sign,deploy-to-scijava</releaseProfiles>
-
-		<jogamp-java3d.version>1.7.2</jogamp-java3d.version>
-		<org.jogamp.java3d.java3d-core.version>${jogamp-java3d.version}</org.jogamp.java3d.java3d-core.version>
-		<org.jogamp.java3d.java3d-utils.version>${jogamp-java3d.version}</org.jogamp.java3d.java3d-utils.version>
-		<org.jogamp.java3d.vecmath.version>${jogamp-java3d.version}</org.jogamp.java3d.vecmath.version>
 	</properties>
 
 	<repositories>
@@ -167,17 +162,14 @@
 		<dependency>
 			<groupId>org.jogamp.java3d</groupId>
 			<artifactId>java3d-core</artifactId>
-			<version>${org.jogamp.java3d.java3d-core.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jogamp.java3d</groupId>
 			<artifactId>java3d-utils</artifactId>
-			<version>${org.jogamp.java3d.java3d-utils.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jogamp.java3d</groupId>
 			<artifactId>vecmath</artifactId>
-			<version>${org.jogamp.java3d.vecmath.version}</version>
 		</dependency>
 	</dependencies>
 </project>
