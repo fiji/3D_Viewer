@@ -21,12 +21,6 @@
  */
 /* -*- mode: java; c-basic-offset: 8; indent-tabs-mode: t; tab-width: 8 -*- */
 
-/**
- * Example plugin on how to add spheres and tubes to the 3D Viewer.
- * Albert Cardona 2008-12-09
- * Released under the General Public License, latest version.
- */
-
 package customnode;
 
 import java.awt.Color;
@@ -39,6 +33,11 @@ import ij.plugin.PlugIn;
 import ij3d.Content;
 import ij3d.Image3DUniverse;
 
+/**
+ * Example plugin on how to add spheres and tubes to the 3D Viewer.
+ * Albert Cardona 2008-12-09
+ * Released under the General Public License, latest version.
+ */
 public class Mesh_Maker extends MeshMaker implements PlugIn {
 
 	@Override
