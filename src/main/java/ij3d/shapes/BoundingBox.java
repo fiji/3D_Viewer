@@ -198,11 +198,17 @@ public class BoundingBox extends BranchGroup {
 
 	private Geometry makeLine(final Point3f start, final Point3f end,
 		final Color3f color, final float tickDistance, final float first,
-		final float tickSize, final boolean noTicks)
+		final float tickSize, boolean noTicks)
 	{
 		final float lineLength = start.distance(end);
 		final int nTicks =
 			(int) Math.floor((lineLength - first) / tickDistance) + 1;
+
+		// Avoid negative array size. This occurs when the (lineLength - first)
+		// is negative.
+		if (nTicks < 1) {
+			noTicks = true;
+		}
 
 		final int n = noTicks ? 2 : nTicks * 6 + 2;
 
