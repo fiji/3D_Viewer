@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.scijava</groupId>
 		<artifactId>pom-scijava</artifactId>
-		<version>43.0.0</version>
+		<version>45.1.0</version>
 		<relativePath />
 	</parent>
 
@@ -121,6 +121,7 @@
 	</ciManagement>
 
 	<properties>
+		<scijava.jvm.version>8</scijava.jvm.version>
 		<automatic-module-name>sc.fiji.ij3d</automatic-module-name>
 		<main-class>ij3d.ImageJ3DViewer</main-class>
 
